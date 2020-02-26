@@ -3891,7 +3891,7 @@ eslint-loader@^3.0.0:
     object-hash "^2.0.1"
     schema-utils "^2.6.1"
 
-eslint-plugin-nuxt@>=0.4.2:
+eslint-plugin-nuxt@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-nuxt/-/eslint-plugin-nuxt-0.5.1.tgz#8d39bd727d2142a6fab04661b9c95e48856fa81c"
   integrity sha512-LkjznzUcJBzLiiYjcTTPtpN8yPmrGCsfr5CqFadViTJPpEr8TXum7K3cZ5MIiqokxTemG69joZGimG/tQGdIbg==

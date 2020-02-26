@@ -111,7 +111,7 @@ export default {
   },
   workbox: {
     dev: true,
-    importScripts: ['~/plugins/cache-sw.js'],
+    importScripts: ['cache-sw.js'],
   },
   typescript: {
     typeCheck: true,
