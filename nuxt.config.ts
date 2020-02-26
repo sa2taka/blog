@@ -1,7 +1,8 @@
-import colors from 'vuetify/es5/util/colors';
+import ja from 'vuetify/src/locale/ja';
+import values from './plugins/iconValues';
 
 export default {
-  mode: 'spa',
+  mode: 'universal',
   /*
    ** Headers of the page
    */
@@ -55,18 +56,37 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      options: {
+        customProperties: true,
+      },
       themes: {
+        light: {
+          primary: '#009688',
+          secondary: '#ff5722',
+          accent: '#00bcd4',
+          error: '#f44336',
+          warning: '#cddc39',
+          info: '#8bc34a',
+          success: '#2196f3',
+        },
         dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
+          primary: '#009688',
+          secondary: '#ff5722',
+          accent: '#00bcd4',
+          error: '#f44336',
+          warning: '#cddc39',
+          info: '#8bc34a',
+          success: '#2196f3',
         },
       },
+    },
+    lang: {
+      locales: { ja },
+      current: 'ja',
+    },
+    icons: {
+      iconfont: 'fa',
+      values,
     },
   },
   /*
@@ -77,6 +97,21 @@ export default {
      ** You can extend webpack config here
      */
     extend(_config: any, _coctx: any) {},
+  },
+  manifest: {
+    name: 'Engineer Garden',
+    lang: 'ja',
+    short_name: 'blog',
+    title: 'Engineer Garden',
+    'og:title': 'Engineer Garden',
+    description: 'sa2taka blog',
+    'og:description': 'sa2taka blog',
+    theme_color: '#009688',
+    background_color: '#2a2a2a',
+  },
+  workbox: {
+    dev: true,
+    importScripts: ['~/plugins/cache-sw.js'],
   },
   typescript: {
     typeCheck: true,
