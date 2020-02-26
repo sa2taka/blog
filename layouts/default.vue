@@ -1,8 +1,8 @@
 <template>
-  <v-app dark>
+  <v-app>
     <v-navigation-drawer v-model="drawer" fixed app> </v-navigation-drawer>
     <v-app-bar fixed app>
-      <webp-img name="icon" height="36" class="mr-3" />
+      <webp-img name="icon" height="36" class="title-icon-margin mr-3" />
       <v-toolbar-title>{{ title }}</v-toolbar-title>
     </v-app-bar>
     <v-content>
@@ -33,3 +33,13 @@ export default class Default extends Vue {
   title = process.env.BLOG_TITLE;
 }
 </script>
+
+<style>
+html {
+  overflow-y: auto !important;
+}
+.title-icon-margin {
+  margin-left: 4%;
+  height: 36px;
+}
+</style>
