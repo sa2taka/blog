@@ -76,7 +76,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(_config: any, _ctx: any) {},
+    extend(_config: any, _coctx: any) {},
   },
   typescript: {
     typeCheck: true,
