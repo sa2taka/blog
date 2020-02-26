@@ -98,6 +98,21 @@ export default {
      */
     extend(_config: any, _coctx: any) {},
   },
+  manifest: {
+    name: 'Engineer Garden',
+    lang: 'ja',
+    short_name: 'blog',
+    title: 'Engineer Garden',
+    'og:title': 'Engineer Garden',
+    description: 'sa2taka blog',
+    'og:description': 'sa2taka blog',
+    theme_color: '#009688',
+    background_color: '#2a2a2a',
+  },
+  workbox: {
+    dev: true,
+    importScripts: ['~/plugins/cache-sw.js'],
+  },
   typescript: {
     typeCheck: true,
     ignoreNotFoundWarnings: true,
