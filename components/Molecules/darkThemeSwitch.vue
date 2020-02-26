@@ -1,25 +1,32 @@
 <template>
-  <v-switch id="dark-mode-switch" v-model="isDark" class="center-switch" :dark="isDark" color="accent"></v-switch>
+  <div>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn v-if="isDark" icon v-on="on" @click="changeTheme(false)"><v-icon>fa-moon</v-icon></v-btn>
+        <v-btn v-else icon v-on="on" @click="changeTheme(true)"><v-icon>fa-sun</v-icon></v-btn>
+      </template>
+      <span>Dark/Light Switch</span>
+    </v-tooltip>
+  </div>
 </template>
 
 <script lang="ts">
-import { Component, Watch, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'nuxt-property-decorator';
 
 @Component
 export default class DarkThemeSwitch extends Vue {
-  private isDark: boolean = false;
-  public created() {
-    this.isDark = this.$vuetify.theme.dark;
-    this.$store.subscribe((mutation, _state) => {
-      if (mutation.type === 'theme/setTheme') {
-        this.isDark = mutation.payload === 'dark';
-      }
-    });
+  isDark: boolean = false;
+
+  created() {
+    if (process.client) {
+      this.isDark = this.$vuetify.theme.dark;
+    }
   }
 
-  @Watch('isDark')
-  public onChangeTheme(isDark: boolean) {
+  changeTheme(isDark: boolean) {
+    this.isDark = isDark;
     this.$vuetify.theme.dark = isDark;
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }
 }
 </script>

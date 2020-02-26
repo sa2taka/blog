@@ -4,6 +4,8 @@
     <v-app-bar fixed app>
       <webp-img name="icon" height="36" class="title-icon-margin mr-3" />
       <v-toolbar-title>{{ title }}</v-toolbar-title>
+      <v-spacer />
+      <dark-theme-switch class="mr-3" />
     </v-app-bar>
     <v-content>
       <v-container>
@@ -18,12 +20,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component } from 'nuxt-property-decorator';
 import WebpImg from '@/components/webpImg.vue';
+import DarkThemeSwitch from '@/components/Molecules/darkThemeSwitch.vue';
 
 @Component({
   components: {
     WebpImg,
+    DarkThemeSwitch,
   },
 })
 export default class Default extends Vue {
