@@ -1,7 +1,7 @@
 <template>
   <picture>
     <source :srcset="webpName" type="image/webp" />
-    <img :src="pngName" :width="width" :height="height" alt="Logo" />
+    <img :src="pngName" :width="width" :height="height" :alt="alt" />
   </picture>
 </template>
 
@@ -12,6 +12,9 @@ import { Vue, Prop, Component } from 'nuxt-property-decorator';
 export default class WebpImage extends Vue {
   @Prop({ required: true })
   name!: string;
+
+  @Prop({ required: true })
+  alt!: string;
 
   @Prop({ default: 'auto' })
   width!: string | number;
