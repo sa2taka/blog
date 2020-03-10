@@ -1,81 +1,68 @@
 <template>
-  <v-app dark>
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
-      <v-list>
-        <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title" />
+  <v-app>
+    <v-app-bar hide-on-scroll app absolute>
+      <div :to="{ name: 'index' }" class="d-flex title-link" @click="$router.push('/')">
+        <webp-img name="/icon" height="36" class="title-icon-margin mr-3" alt="logo" />
+        <h1 class="blog-title">{{ title }}</h1>
+      </div>
+
       <v-spacer />
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
+      <dark-theme-switch class="mr-3" />
     </v-app-bar>
+
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :fixed="fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+    <v-footer app>
+      <v-spacer />
+      <span>&copy; sa2taka </span>
     </v-footer>
   </v-app>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/',
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
-        },
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js',
-    };
+<script lang="ts">
+import { Vue, Component } from 'nuxt-property-decorator';
+import WebpImg from '@/components/webpImg.vue';
+import DarkThemeSwitch from '@/components/Molecules/darkThemeSwitch.vue';
+import CategoryMenu from '@/components/Organisms/categoryMenu.vue';
+
+@Component({
+  components: {
+    WebpImg,
+    DarkThemeSwitch,
+    CategoryMenu,
   },
-};
+})
+export default class Default extends Vue {
+  drawer = false;
+  isSmartphoneWidth = false;
+  smartphoneWidth = 600;
+  title: string = process.env.BLOG_TITLE as string;
+
+  mounted() {
+    this.isSmartphoneWidth = window.innerWidth > this.smartphoneWidth;
+  }
+}
 </script>
+
+<style>
+html {
+  overflow-y: auto !important;
+}
+.title-icon-margin {
+  margin-left: 4%;
+  height: 36px;
+}
+
+.blog-title {
+  font-size: 1.4em;
+  width: 200px;
+  margin-top: 1px;
+}
+
+.title-link {
+  cursor: pointer;
+}
+</style>

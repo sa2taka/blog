@@ -5,6 +5,7 @@
   "author": "sa2taka",
   "private": true,
   "scripts": {
+    "debug": "node --inspect-brk=9229 node_modules/@nuxt/typescript-runtime/bin/nuxt-ts",
     "dev": "nuxt-ts",
     "build": "nuxt-ts build",
     "start": "nuxt-ts start",
@@ -26,25 +27,31 @@
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
     "contentful": "^7.14.0",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "vuex": "^3.1.2"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^0.5.7",
     "@nuxt/typescript-runtime": "^0.3.9",
+    "@nuxtjs/eslint-config": "^2.0.2",
+    "@nuxtjs/eslint-config-typescript": "^1.0.2",
     "@nuxtjs/eslint-module": "^1.0.0",
     "@nuxtjs/vuetify": "^1.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.21.0",
+    "@typescript-eslint/parser": "^2.21.0",
     "@vue/test-utils": "^1.0.0-beta.27",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.1.0",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-nuxt": ">=0.4.2",
+    "eslint-plugin-nuxt": "^0.5.1",
     "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.0.0",
     "jest": "^24.1.0",
     "lint-staged": "^10.0.0",
+    "nuxt-property-decorator": "^8.4.0",
     "prettier": "^1.19.1",
     "vue-jest": "^4.0.0-0",
-    "vue-property-decorator": "^8.4.0"
+    "vuex-module-decorators": "^0.16.1"
   }
 }

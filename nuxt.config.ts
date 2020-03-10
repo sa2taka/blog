@@ -1,5 +1,5 @@
-import ja from 'vuetify/src/locale/ja';
-import values from './plugins/iconValues';
+require('dotenv').config();
+const config = process.env;
 
 export default {
   mode: 'universal',
@@ -31,7 +31,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~/plugins/vuetify.client.ts'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -44,51 +44,8 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    '@nuxtjs/pwa',
-    // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv',
-  ],
-  /*
-   ** vuetify module configuration
-   ** https://github.com/nuxt-community/vuetify-module
-   */
-  vuetify: {
-    customVariables: ['~/assets/variables.scss'],
-    theme: {
-      options: {
-        customProperties: true,
-      },
-      themes: {
-        light: {
-          primary: '#009688',
-          secondary: '#ff5722',
-          accent: '#00bcd4',
-          error: '#f44336',
-          warning: '#cddc39',
-          info: '#8bc34a',
-          success: '#2196f3',
-        },
-        dark: {
-          primary: '#009688',
-          secondary: '#ff5722',
-          accent: '#00bcd4',
-          error: '#f44336',
-          warning: '#cddc39',
-          info: '#8bc34a',
-          success: '#2196f3',
-        },
-      },
-    },
-    lang: {
-      locales: { ja },
-      current: 'ja',
-    },
-    icons: {
-      iconfont: 'fa',
-      values,
-    },
-  },
+  vuetify: {},
+  modules: ['@nuxtjs/pwa', '@nuxtjs/dotenv', '@nuxtjs/vuetify'],
   /*
    ** Build configuration
    */
@@ -97,6 +54,13 @@ export default {
      ** You can extend webpack config here
      */
     extend(_config: any, _coctx: any) {},
+  },
+  env: {
+    CTF_SPACE_ID: config.CTF_SPACE_ID,
+    CTF_CDA_ACCESS_TOKEN: config.CTF_CDA_ACCESS_TOKEN,
+    CTF_CTF_MAIN_AUTHOR_ID: config.CTF_PERSON_ID,
+    CTF_POST_ID: config.CTF_BLOG_POST_TYPE_ID,
+    CTF_CATEGORY_ID: config.CTF_CATEGORY_ID,
   },
   manifest: {
     name: 'Engineer Garden',
@@ -111,7 +75,7 @@ export default {
   },
   workbox: {
     dev: true,
-    importScripts: ['~/plugins/cache-sw.js'],
+    importScripts: ['cache-sw.js'],
   },
   typescript: {
     typeCheck: true,
