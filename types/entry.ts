@@ -2,6 +2,7 @@ export interface Category extends Base {
   fields: {
     name: string;
     slug: string;
+    sort: number;
   };
 }
 

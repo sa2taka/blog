@@ -1,11 +1,13 @@
 <template>
   <v-app>
-    <v-app-bar hide-on-scroll app>
-      <webp-img name="icon" height="36" class="title-icon-margin mr-3" alt="logo" />
+    <v-app-bar hide-on-scroll app absolute>
+      <nuxt-link :to="{ name: 'index' }">
+        <webp-img name="/icon" height="36" class="title-icon-margin mr-3" alt="logo" />
+      </nuxt-link>
+
       <v-spacer />
       <dark-theme-switch class="mr-3" />
     </v-app-bar>
-    <left-menu></left-menu>
 
     <v-content>
       <v-container>
@@ -23,13 +25,13 @@
 import { Vue, Component } from 'nuxt-property-decorator';
 import WebpImg from '@/components/webpImg.vue';
 import DarkThemeSwitch from '@/components/Molecules/darkThemeSwitch.vue';
-import LeftMenu from '@/components/Layout/leftMenu.vue';
+import CategoryMenu from '@/components/Organisms/categoryMenu.vue';
 
 @Component({
   components: {
     WebpImg,
     DarkThemeSwitch,
-    LeftMenu,
+    CategoryMenu,
   },
 })
 export default class Default extends Vue {
