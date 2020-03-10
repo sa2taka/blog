@@ -45,7 +45,7 @@ export default {
    ** Nuxt.js modules
    */
   vuetify: {},
-  modules: ['@nuxtjs/pwa', '@nuxtjs/dotenv', '@nuxtjs/vuetify'],
+  modules: ['@nuxtjs/pwa', '@nuxtjs/dotenv', '@nuxtjs/vuetify', 'nuxt-client-init-module'],
   /*
    ** Build configuration
    */

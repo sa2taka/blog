@@ -7107,6 +7107,11 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
+nuxt-client-init-module@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/nuxt-client-init-module/-/nuxt-client-init-module-0.1.8.tgz#6b8fabdf0ff4d5f2f4ec72df2dab553d9a331c92"
+  integrity sha512-pHswEnDSc2JxC57XsPK8dPPbUeHHe3u56zb/Lt2CihkVo5NsuLjGVPLFBbKMVaqRCIwvhbmik6wXHOSPJdpJbA==
+
 nuxt-property-decorator@^8.4.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/nuxt-property-decorator/-/nuxt-property-decorator-2.5.1.tgz#5fd2103993330930930ee78d80c6e67f254734f2"
