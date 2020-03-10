@@ -20,9 +20,7 @@ export default class SideMenu extends Vue {
   categories: Category['fields'][] = [];
 
   created() {
-    Categories.init().then(() => {
-      this.setCategories(Categories.categories);
-    });
+    this.setCategories(Categories.categories);
   }
 
   setCategories(categories: Category[]) {

@@ -1,9 +1,10 @@
 <template>
   <v-app>
     <v-app-bar hide-on-scroll app absolute>
-      <nuxt-link :to="{ name: 'index' }">
+      <div :to="{ name: 'index' }" class="d-flex title-link" @click="$router.push('/')">
         <webp-img name="/icon" height="36" class="title-icon-margin mr-3" alt="logo" />
-      </nuxt-link>
+        <h1 class="blog-title">{{ title }}</h1>
+      </div>
 
       <v-spacer />
       <dark-theme-switch class="mr-3" />
@@ -36,9 +37,9 @@ import CategoryMenu from '@/components/Organisms/categoryMenu.vue';
 })
 export default class Default extends Vue {
   drawer = false;
-  title = process.env.BLOG_TITLE;
   isSmartphoneWidth = false;
   smartphoneWidth = 600;
+  title: string = process.env.BLOG_TITLE as string;
 
   mounted() {
     this.isSmartphoneWidth = window.innerWidth > this.smartphoneWidth;
@@ -53,5 +54,15 @@ html {
 .title-icon-margin {
   margin-left: 4%;
   height: 36px;
+}
+
+.blog-title {
+  font-size: 1.4em;
+  width: 200px;
+  margin-top: 1px;
+}
+
+.title-link {
+  cursor: pointer;
 }
 </style>
