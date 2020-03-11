@@ -12,15 +12,15 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator';
-import Categories from '@/store/modules/categories';
 import { Category } from '@/types/entry';
+import { categoriesStore } from '@/libs/storeAccessor';
 
 @Component
 export default class SideMenu extends Vue {
   categories: Category['fields'][] = [];
 
   created() {
-    this.setCategories(Categories.categories);
+    this.setCategories(categoriesStore.categories);
   }
 
   setCategories(categories: Category[]) {
