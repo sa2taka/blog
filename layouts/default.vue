@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar hide-on-scroll app absolute>
       <div :to="{ name: 'index' }" class="d-flex title-link" @click="$router.push('/')">
-        <webp-img name="/icon" height="36" class="title-icon-margin mr-3" alt="logo" />
+        <webp-img webp-name="/icon.webp" img-name="/icon.png" height="36" class="title-icon-margin mr-3" alt="logo" />
         <h1 class="blog-title">{{ title }}</h1>
       </div>
 
@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator';
-import WebpImg from '@/components/webpImg.vue';
+import WebpImg from '@/components/Atom/webpImg.vue';
 import DarkThemeSwitch from '@/components/Molecules/darkThemeSwitch.vue';
 import CategoryMenu from '@/components/Organisms/categoryMenu.vue';
 

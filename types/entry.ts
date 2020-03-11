@@ -1,4 +1,4 @@
-export interface Category extends Base {
+export interface Category extends SingleItem {
   fields: {
     name: string;
     slug: string;
@@ -6,7 +6,7 @@ export interface Category extends Base {
   };
 }
 
-export interface Author extends Base {
+export interface Author extends SingleItem {
   fields: {
     name: string;
     icon: string;
@@ -14,7 +14,7 @@ export interface Author extends Base {
   };
 }
 
-export interface Blog extends Base {
+export interface Post extends SingleItem {
   fields: {
     title: string;
     description: string;
@@ -23,18 +23,50 @@ export interface Blog extends Base {
     category: Category;
     slug: string;
     tags: string[];
-    postImage: string;
+    postImage: Image;
     public: boolean;
     releaseDate: string;
   };
 }
 
-export interface Base {
+export interface Image extends SingleItem {
+  fields: {
+    title: string;
+    file: File;
+  };
+}
+
+export interface File {
+  url: string;
+  detail: any;
+  filename: string;
+  contentType: string;
+}
+
+export interface FileDetail {
+  size: number;
+  image?: {
+    width: number;
+    height: number;
+  };
+}
+
+export interface SingleItem {
   sys: Sys;
   fields: any;
 }
 
-interface Sys {
+export interface MultipleItem<T extends SingleItem> {
+  sys: {
+    type: string;
+  };
+  total: number;
+  skip: number;
+  limit: number;
+  items: T[];
+}
+
+export interface Sys {
   space: ChildSys;
   id: string;
   type: string;
