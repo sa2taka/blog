@@ -6,6 +6,29 @@ export interface Category extends Base {
   };
 }
 
+export interface Author extends Base {
+  fields: {
+    name: string;
+    icon: string;
+    at: string;
+  };
+}
+
+export interface Blog extends Base {
+  fields: {
+    title: string;
+    description: string;
+    body: string;
+    author: Author;
+    category: Category;
+    slug: string;
+    tags: string[];
+    postImage: string;
+    public: boolean;
+    releaseDate: string;
+  };
+}
+
 export interface Base {
   sys: Sys;
   fields: any;
