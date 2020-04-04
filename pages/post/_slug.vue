@@ -49,9 +49,19 @@ export default class PostSlug extends Vue {
 const setMarkedOptions = () => {
   const renderer = new marked.Renderer();
   renderer.code = (code, _lang) => {
-    const lang = _lang || 'plaintext';
+    let lang = '';
+    let filename = '';
+    if (_lang) {
+      [lang, filename] = _lang.split(':');
+    } else {
+      lang = 'plaintext';
+    }
     const value = hljs.highlightAuto(code, [lang]).value;
-    return `<code class="hljs ${lang}">${value}</code>`;
+    let fileElement = '';
+    if (filename !== '') {
+      fileElement = `<div class="filename">${filename}</div>`;
+    }
+    return `${fileElement}<code class="hljs ${lang} ${filename !== '' && 'padding-for-filename'}">${value}</code>`;
   };
 
   renderer.codespan = code => {
@@ -69,6 +79,20 @@ const setMarkedOptions = () => {
 <style>
 .post-title {
   font-size: 48px;
+}
+
+.padding-for-filename {
+  padding-top: 2.6em !important;
+}
+
+.filename {
+  color: #eee;
+  display: inline-block;
+  position: absolute;
+  background-color: #777;
+  padding: 2px 4px;
+  word-break: break-all;
+  border-radius: 0 0 5px 0;
 }
 
 /* HACK */
