@@ -40,7 +40,6 @@ export default class TopPagePosts extends Vue {
   }
 
   onLoad() {
-    console.log('load');
     this.loading = true;
   }
 }
