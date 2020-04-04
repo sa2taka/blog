@@ -77,6 +77,13 @@ const setMarkedOptions = () => {
 </script>
 
 <style>
+/* Do not set scoped */
+.post {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .post-title {
   font-size: 48px;
 }
@@ -95,6 +102,23 @@ const setMarkedOptions = () => {
   border-radius: 0 0 5px 0;
 }
 
+blockquote {
+  margin: 0;
+  padding: 1.1em 1em;
+  margin: 2em auto;
+  border-left: 3px solid rgba(128, 128, 128, 0.8);
+  color: #777;
+}
+
+/* 引用元名 */
+blockquote p.author {
+  text-align: right;
+}
+
+blockquote p.author::before {
+  content: '―― ';
+}
+
 /* HACK */
 .v-application code.hljs {
   display: block;
@@ -103,6 +127,10 @@ const setMarkedOptions = () => {
   color: #abb2bf;
   background: #282c34;
   margin: 0.5em 0;
+}
+
+blockquote p {
+  margin-bottom: 0px !important;
 }
 
 .v-application code.hljsspan {
