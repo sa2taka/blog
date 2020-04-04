@@ -1,17 +1,13 @@
-import { ActionTree } from 'vuex';
+import { ActionTree, Store } from 'vuex';
 import { ActionContext } from 'vuex/types';
 import { Context } from '@nuxt/types';
-import Categories from '@/store/modules/categories';
-
-export const state = () => ({});
-export type RootState = ReturnType<typeof state>;
+import { initialiseStores } from '~/libs/storeAccessor';
+const initializer = (store: Store<any>) => initialiseStores(store);
+export const plugins = [initializer];
+export * from '~/libs/storeAccessor';
 
 export const actions: ActionTree<any, any> = {
-  nuxtServerInit: (_context: ActionContext<RootState, RootState>, _server: Context) => {
-    return Categories.init();
-  },
-
-  nuxtClientInit: (_context: ActionContext<RootState, RootState>, _server: Context) => {
-    return Categories.init();
+  nuxtServerInit: async (context: ActionContext<any, any>, _server: Context) => {
+    await context.dispatch('categories/init');
   },
 };
