@@ -2,16 +2,7 @@
   <v-layout column justify-center align-center>
     <div v-if="posts.length !== 0">
       <article v-for="post in posts" :key="post.id">
-        <v-card :width="width">
-          <webp-img
-            :webp-name="generateWebp(post.fields.postImage.fields.file.url)"
-            :img-name="generateFormatedImg(post.fields.postImage.fields.file.url)"
-            :alt="post.fields.postImage.title"
-            :width="width"
-          />
-          <v-card-title>{{ post.fields.title }}</v-card-title>
-          <v-card-subtitle>{{ post.fields.description }}</v-card-subtitle>
-        </v-card>
+        <top-page-posts :post="post" />
       </article>
     </div>
     <div v-else>投稿が見つかりません</div>
@@ -23,12 +14,11 @@ import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
 import { fetchPosts } from '@/libs/contentful';
 import { Post, MultipleItem } from '@/types/entry';
-
-import WebpImg from '@/components/Atom/webpImg.vue';
+import TopPagePosts from '@/components/Organisms/topPagePosts.vue';
 
 @Component({
   components: {
-    WebpImg,
+    TopPagePosts,
   },
 })
 export default class IndexPage extends Vue {
@@ -50,14 +40,6 @@ export default class IndexPage extends Vue {
       page,
       posts,
     };
-  }
-
-  generateWebp(url: string) {
-    return url + `?fm=webp&w=${this.width}`;
-  }
-
-  generateFormatedImg(url: string) {
-    return url + `?w=${this.width}`;
   }
 }
 
