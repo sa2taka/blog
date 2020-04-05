@@ -1,7 +1,13 @@
 <template>
   <article class="post">
-    <h1 class="post-title">{{ post.fields.title }}</h1>
-    <div v-html="compiledMarkdownText" />
+    <div class="post-title-area" :style="{ 'background-image': `url(${post.fields.postImage.fields.file.url})` }">
+      <div class="post-title">
+        <p class="post-category secondary--text">{{ post.fields.category.fields.name }}</p>
+        <h1 class="post-title-name">{{ post.fields.title }}</h1>
+        <p class="post-author">by {{ post.fields.author.fields.name }}</p>
+      </div>
+    </div>
+    <div class="mt-8" v-html="compiledMarkdownText" />
   </article>
 </template>
 
@@ -21,6 +27,7 @@ export default class PostSlug extends Vue {
 
   async asyncData(context: Context) {
     const post: Post = await fetchPost(context.params.slug);
+
     return {
       post,
     };
@@ -85,7 +92,36 @@ const setMarkedOptions = () => {
 }
 
 .post-title {
-  font-size: 48px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 8px 12px;
+  margin-bottom: 0;
+  margin-top: auto;
+  min-width: 80%;
+  border-radius: 0 12px 0 10.5px;
+  color: white;
+}
+
+.post-title-name {
+  font-size: 24px;
+}
+
+.post-category {
+  margin-bottom: 0px !important;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.post-author {
+  margin-bottom: 0px !important;
+  font-size: 164x;
+  margin-left: 2em;
+}
+
+.post-title-area {
+  height: 240px;
+  background-size: cover;
+  display: flex;
+  border-radius: 12px;
 }
 
 .padding-for-filename {
