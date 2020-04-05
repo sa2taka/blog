@@ -1,12 +1,22 @@
 <template>
   <v-app>
     <v-app-bar hide-on-scroll app absolute>
-      <div :to="{ name: 'index' }" class="d-flex title-link" @click="$router.push('/')">
+      <div class="d-flex title-link" @click="$router.push('/')">
         <webp-img webp-name="/icon.webp" img-name="/icon.png" height="36" class="title-icon-margin mr-3" alt="logo" />
-        <h1 class="blog-title">{{ title }}</h1>
       </div>
 
       <v-spacer />
+
+      <nav class="mr-10 d-flex">
+        <div class="title-link animation-link ml-4" @click="$router.push('/')">
+          Home
+        </div>
+
+        <div class="title-link animation-link ml-4" @click="$router.push('/categories')">
+          Category
+        </div>
+      </nav>
+
       <dark-theme-switch class="mr-3" />
     </v-app-bar>
 
@@ -64,5 +74,25 @@ html {
 
 .title-link {
   cursor: pointer;
+}
+
+.animation-link {
+  position: relative;
+}
+
+.animation-link::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  content: '';
+  width: 0;
+  height: 1px;
+  background-color: #009688;
+  transition: 0.3s;
+  transform: translateX(-50%);
+}
+
+.animation-link:hover::after {
+  width: 100%;
 }
 </style>
