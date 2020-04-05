@@ -9,6 +9,7 @@
       :on-load="onLoad"
     />
     <v-skeleton-loader v-if="loading" :width="width" type="image" />
+    <div class="secondary--text top-post-category mt-4 mb-n3">{{ post.fields.category.fields.name }}</div>
     <v-card-title>{{ post.fields.title }}</v-card-title>
     <v-card-subtitle>{{ post.fields.description }}</v-card-subtitle>
   </v-card>
@@ -45,3 +46,11 @@ export default class TopPagePosts extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.top-post-category {
+  font-size: 14px;
+  font-weight: 600;
+  padding-left: 16px;
+}
+</style>
