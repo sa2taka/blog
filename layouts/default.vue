@@ -12,7 +12,7 @@
           Home
         </div>
 
-        <div class="title-link animation-link ml-4" @click="$router.push('/categories')">
+        <div class="title-link animation-link ml-4" @click="$router.push('/category')">
           Category
         </div>
       </nav>

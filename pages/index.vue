@@ -2,7 +2,7 @@
   <v-layout column justify-center align-center>
     <div v-if="posts.length !== 0">
       <article v-for="post in posts" :key="post.id">
-        <top-page-posts :post="post" />
+        <top-page-posts class="post" :post="post" />
       </article>
     </div>
     <div v-else>投稿が見つかりません</div>
@@ -41,6 +41,10 @@ export default class IndexPage extends Vue {
       posts,
     };
   }
+
+  handlePostClick(slug: string) {
+    this.$router.push({ name: 'post-slug', params: { slug } });
+  }
 }
 
 // page setting
@@ -63,3 +67,12 @@ const decidePage = (context: Context) => {
   return pageQueryNum - 1;
 };
 </script>
+
+<style scoped>
+.post {
+  cursor: pointer;
+}
+
+.post:hover {
+}
+</style>

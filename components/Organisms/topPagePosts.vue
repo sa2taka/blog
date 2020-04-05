@@ -1,13 +1,14 @@
 <template>
-  <v-card :width="width">
+  <v-card :width="width" hover :post="post" :to="{ name: 'post-slug', params: { slug: post.fields.slug } }">
     <webp-img
+      v-show="!loading"
       :webp-name="generateWebp(post.fields.postImage.fields.file.url)"
       :img-name="generateFormatedImg(post.fields.postImage.fields.file.url)"
       :alt="post.fields.postImage.title"
       :width="width"
       :on-load="onLoad"
     />
-    <v-skeleton-loader v-if="!loading" :width="width" type="image" />
+    <v-skeleton-loader v-if="loading" :width="width" type="image" />
     <v-card-title>{{ post.fields.title }}</v-card-title>
     <v-card-subtitle>{{ post.fields.description }}</v-card-subtitle>
   </v-card>
@@ -28,7 +29,7 @@ export default class TopPagePosts extends Vue {
   @Prop({ required: true })
   post!: Post;
 
-  loading = false;
+  loading = true;
   width = 320;
 
   generateWebp(url: string) {
@@ -40,7 +41,7 @@ export default class TopPagePosts extends Vue {
   }
 
   onLoad() {
-    this.loading = true;
+    this.loading = false;
   }
 }
 </script>
