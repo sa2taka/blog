@@ -49,6 +49,7 @@ export default class PostSlug extends Vue {
           src: 'highlight.js/styles/atom-one-dark.css',
         },
       ],
+      title: this.post.fields.title + ' - ',
     };
   }
 }

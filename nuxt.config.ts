@@ -7,8 +7,8 @@ export default {
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s - ' + '園児ニアの庭園',
-    title: '園児ニアの庭園' || '',
+    titleTemplate: '%s' + '園児ニアの庭園',
+    title: '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
