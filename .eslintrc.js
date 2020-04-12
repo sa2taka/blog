@@ -19,6 +19,7 @@ module.exports = {
   rules: {
     'nuxt/no-cjs-in-config': 'off',
     'import/no-mutable-exports': 'off',
+    'vue/no-v-html': 'off',
   },
   ignorePatterns: ['static/', 'node_modules/'],
 };
