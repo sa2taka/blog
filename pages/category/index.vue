@@ -47,7 +47,7 @@ export default class Category extends Vue {
 const fetchLastetPostsInCategory = (categories: ICategory[]) => {
   return Promise.all(
     categories.map(category => {
-      return fetchLatestPostInCategory(category.fields.name).then(
+      return fetchLatestPostInCategory(category.sys.id).then(
         (post: Post | undefined) => {
           if (!post) {
             return null;
