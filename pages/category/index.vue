@@ -29,9 +29,11 @@ export default class Category extends Vue {
 
   async asyncData(context: Context) {
     return {
-      categoryPosts: await fetchLastetPostsInCategory(
-        context.store.state.categories.categories
-      ),
+      categoryPosts: (
+        await fetchLastetPostsInCategory(
+          context.store.state.categories.categories
+        )
+      ).filter(e => e),
     };
   }
 
@@ -47,12 +49,15 @@ const fetchLastetPostsInCategory = (categories: ICategory[]) => {
     categories.map(category => {
       return fetchLatestPostInCategory(category.fields.name).then(
         (post: Post | undefined) => {
+          if (!post) {
+            return null;
+          }
           return {
             category,
             post,
           };
         }
-      ) as CategoryPost;
+      ) as CategoryPost | null;
     })
   );
 };
