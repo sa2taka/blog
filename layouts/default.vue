@@ -2,7 +2,13 @@
   <v-app>
     <v-app-bar hide-on-scroll app absolute>
       <div class="d-flex title-link" @click="$router.push('/')">
-        <webp-img webp-name="/icon.webp" img-name="/icon.png" height="36" class="title-icon-margin mr-3" alt="logo" />
+        <webp-img
+          webp-name="/icon.webp"
+          img-name="/icon.png"
+          height="36"
+          class="title-icon-margin mr-3"
+          alt="logo"
+        />
       </div>
 
       <v-spacer />
@@ -12,7 +18,10 @@
           Home
         </div>
 
-        <div class="title-link animation-link ml-4" @click="$router.push('/category')">
+        <div
+          class="title-link animation-link ml-4"
+          @click="$router.push('/category')"
+        >
           Category
         </div>
       </nav>

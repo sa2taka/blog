@@ -1,24 +1,37 @@
 <template>
-  <div>
+  <nav>
     <h1>カテゴリ</h1>
     <ul>
-      <li v-for="category in categories" :key="category.sys.id">{{ category.fields.name }}</li>
+      <li
+        v-for="categoryPost in categoryPosts"
+        :key="categoryPost.category.sys.id"
+      >
+        {{ categoryPost.category.fields.name }}
+      </li>
     </ul>
-  </div>
+  </nav>
 </template>
 
 <script lang="ts">
 import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
-import { Category as ICategory } from '@/types/entry';
+import { fetchLatestPostInCategory } from '../../libs/contentful';
+import { Post, Category as ICategory } from '@/types/entry';
+
+interface CategoryPost {
+  category: ICategory;
+  post: Post | undefined;
+}
 
 @Component
 export default class Category extends Vue {
-  categories: ICategory[] = this.$store.state.categories;
+  categoryPosts!: CategoryPost[];
 
-  asyncData(context: Context) {
+  async asyncData(context: Context) {
     return {
-      categories: context.store.state.categories.categories,
+      categoryPosts: await fetchLastetPostsInCategory(
+        context.store.state.categories.categories
+      ),
     };
   }
 
@@ -28,7 +41,25 @@ export default class Category extends Vue {
     };
   }
 }
+
+const fetchLastetPostsInCategory = (categories: ICategory[]) => {
+  return Promise.all(
+    categories.map(category => {
+      return fetchLatestPostInCategory(category.fields.name).then(
+        (post: Post | undefined) => {
+          return {
+            category,
+            post,
+          };
+        }
+      ) as CategoryPost;
+    })
+  );
+};
 </script>
 
-<style></style>
-a
+<style scoped>
+ul {
+  list-style: none;
+}
+</style>

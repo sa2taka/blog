@@ -35,7 +35,9 @@ export default class IndexPage extends Vue {
     const page = decidePage(context);
     const limit = 20; // hard code because "this" is not access
 
-    const posts: Post[] = await fetchPosts(page, limit).then((posts: MultipleItem<Post>) => posts.items);
+    const posts: Post[] = await fetchPosts(page, limit).then(
+      (posts: MultipleItem<Post>) => posts.items
+    );
     return {
       page,
       posts,

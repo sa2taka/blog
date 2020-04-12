@@ -4,7 +4,10 @@
 
     <v-list dense nav tag="nav">
       <v-list-item v-for="category in categories" :key="category.slug">
-        <nuxt-link :to="{ name: 'category-slug', params: { slug: category.slug } }">{{ category.name }}</nuxt-link>
+        <nuxt-link
+          :to="{ name: 'category-slug', params: { slug: category.slug } }"
+          >{{ category.name }}</nuxt-link
+        >
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
@@ -24,7 +27,9 @@ export default class SideMenu extends Vue {
   }
 
   setCategories(categories: Category[]) {
-    this.categories = categories.map(e => e.fields).sort((a, b) => a.sort - b.sort);
+    this.categories = categories
+      .map(e => e.fields)
+      .sort((a, b) => a.sort - b.sort);
   }
 }
 </script>

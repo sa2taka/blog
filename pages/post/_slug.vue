@@ -1,8 +1,15 @@
 <template>
   <article class="post">
-    <div class="post-title-area" :style="{ 'background-image': `url(${post.fields.postImage.fields.file.url})` }">
+    <div
+      class="post-title-area"
+      :style="{
+        'background-image': `url(${post.fields.postImage.fields.file.url})`,
+      }"
+    >
       <div class="post-title">
-        <p class="post-category secondary--text">{{ post.fields.category.fields.name }}</p>
+        <p class="post-category secondary--text">
+          {{ post.fields.category.fields.name }}
+        </p>
         <h1 class="post-title-name">{{ post.fields.title }}</h1>
         <p class="post-author">by {{ post.fields.author.fields.name }}</p>
       </div>
@@ -69,7 +76,8 @@ const setMarkedOptions = () => {
     if (filename !== '') {
       fileElement = `<div class="filename">${filename}</div>`;
     }
-    return `${fileElement}<code class="hljs ${lang} ${filename !== '' && 'padding-for-filename'}">${value}</code>`;
+    return `${fileElement}<code class="hljs ${lang} ${filename !== '' &&
+      'padding-for-filename'}">${value}</code>`;
   };
 
   renderer.codespan = code => {

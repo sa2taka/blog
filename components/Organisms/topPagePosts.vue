@@ -1,5 +1,10 @@
 <template>
-  <v-card :width="width" hover :post="post" :to="{ name: 'post-slug', params: { slug: post.fields.slug } }">
+  <v-card
+    :width="width"
+    hover
+    :post="post"
+    :to="{ name: 'post-slug', params: { slug: post.fields.slug } }"
+  >
     <webp-img
       v-show="!loading"
       :webp-name="generateWebp(post.fields.postImage.fields.file.url)"
@@ -9,7 +14,9 @@
       :on-load="onLoad"
     />
     <v-skeleton-loader v-if="loading" :width="width" type="image" />
-    <div class="secondary--text top-post-category mt-4 mb-n3">{{ post.fields.category.fields.name }}</div>
+    <div class="secondary--text top-post-category mt-4 mb-n3">
+      {{ post.fields.category.fields.name }}
+    </div>
     <v-card-title>{{ post.fields.title }}</v-card-title>
     <v-card-subtitle>{{ post.fields.description }}</v-card-subtitle>
   </v-card>

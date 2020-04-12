@@ -45,7 +45,12 @@ export default {
    ** Nuxt.js modules
    */
   vuetify: {},
-  modules: ['@nuxtjs/pwa', '@nuxtjs/dotenv', '@nuxtjs/vuetify', ['cookie-universal-nuxt', { parseJSON: false }]],
+  modules: [
+    '@nuxtjs/pwa',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/vuetify',
+    ['cookie-universal-nuxt', { parseJSON: false }],
+  ],
   /*
    ** Build configuration
    */
