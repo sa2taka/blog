@@ -1,12 +1,17 @@
 <template>
   <nav>
-    <h1>カテゴリ</h1>
-    <ul>
-      <li
-        v-for="categoryPost in categoryPosts"
-        :key="categoryPost.category.sys.id"
-      >
-        {{ categoryPost.category.fields.name }}
+    <h2 class="center-title">カテゴリ</h2>
+
+    <ul class="ml-10">
+      <li v-for="category in categories" :key="category.sys.id">
+        <v-btn
+          :to="{
+            name: 'category-slug',
+            params: { slug: category.fields.slug },
+          }"
+          outlined
+          >{{ category.fields.name }}</v-btn
+        >
       </li>
     </ul>
   </nav>
@@ -15,25 +20,23 @@
 <script lang="ts">
 import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
-import { fetchLatestPostInCategory } from '../../libs/contentful';
-import { Post, Category as ICategory } from '@/types/entry';
+import { confirmExistingCategory } from '../../libs/contentful';
+import { Category as ICategory } from '@/types/entry';
 
-interface CategoryPost {
+interface CategoryWithCount {
   category: ICategory;
-  post: Post | undefined;
+  count: number;
 }
 
 @Component
 export default class Category extends Vue {
-  categoryPosts!: CategoryPost[];
+  categories!: CategoryWithCount[];
 
   async asyncData(context: Context) {
     return {
-      categoryPosts: (
-        await fetchLastetPostsInCategory(
-          context.store.state.categories.categories
-        )
-      ).filter(e => e),
+      categories: await fetchCategoriesIfExist(
+        context.store.state.categories.categories
+      ),
     };
   }
 
@@ -44,27 +47,28 @@ export default class Category extends Vue {
   }
 }
 
-const fetchLastetPostsInCategory = (categories: ICategory[]) => {
+const fetchCategoriesIfExist = (categories: ICategory[]) => {
   return Promise.all(
     categories.map(category => {
-      return fetchLatestPostInCategory(category.sys.id).then(
-        (post: Post | undefined) => {
-          if (!post) {
-            return null;
-          }
-          return {
-            category,
-            post,
-          };
-        }
-      ) as CategoryPost | null;
+      return confirmExistingCategory(category.sys.id).then(isExist => {
+        return {
+          isExist,
+          category,
+        };
+      });
     })
-  );
+  ).then(categoriesWithExist => {
+    return categoriesWithExist.filter(e => e.isExist).map(e => e.category);
+  });
 };
 </script>
 
 <style scoped>
 ul {
   list-style: none;
+}
+
+.center-title {
+  text-align: center;
 }
 </style>

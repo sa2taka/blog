@@ -19,16 +19,16 @@ export function fetchPosts(page: number, limit: number) {
   });
 }
 
-export function fetchLatestPostInCategory(categoryId: string) {
-  console.log(categoryId);
-  return client
+export async function confirmExistingCategory(categoryId: string) {
+  const isExist = await client
     .getEntries({
       content_type: process.env.CTF_POST_ID,
       limit: 1,
       order: '-fields.releaseDate',
       'fields.category.sys.id': categoryId,
     })
-    .then((posts: MultipleItem<Post>) => posts.items[0]);
+    .then((posts: MultipleItem<Post>) => posts.items.length !== 0);
+  return isExist;
 }
 
 export function fetchPost(slug: string) {
