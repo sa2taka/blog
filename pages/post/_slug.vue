@@ -1,14 +1,17 @@
 <template>
-  <article class="post">
-    <div class="post-title-area" :style="{ 'background-image': `url(${post.fields.postImage.fields.file.url})` }">
-      <div class="post-title">
-        <p class="post-category secondary--text">{{ post.fields.category.fields.name }}</p>
-        <h1 class="post-title-name">{{ post.fields.title }}</h1>
-        <p class="post-author">by {{ post.fields.author.fields.name }}</p>
+  <div class="main">
+    <a class="back-button pb-8" href="javascript:history.back();">&lt;&lt; 戻る</a>
+    <article class="post">
+      <div class="post-title-area" :style="{ 'background-image': `url(${post.fields.postImage.fields.file.url})` }">
+        <div class="post-title">
+          <p class="post-category secondary--text">{{ post.fields.category.fields.name }}</p>
+          <h1 class="post-title-name">{{ post.fields.title }}</h1>
+          <p class="post-author">by {{ post.fields.author.fields.name }}</p>
+        </div>
       </div>
-    </div>
-    <div class="mt-8" v-html="compiledMarkdownText" />
-  </article>
+      <div class="mt-8" v-html="compiledMarkdownText" />
+    </article>
+  </div>
 </template>
 
 <script lang="ts">
@@ -90,6 +93,12 @@ const setMarkedOptions = () => {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 12px;
+}
+
+.back-button {
+  color: #777 !important;
+  text-decoration: none;
 }
 
 .post-title {
