@@ -37,10 +37,8 @@ export default class TopPagePosts extends Vue {
   @Prop({ required: true })
   post!: Post;
 
-  @Prop({ default: 320 })
-  width = 320;
-
   loading = true;
+  width = 320;
 
   generateWebp(url: string) {
     return url + `?fm=webp&w=${this.width}`;

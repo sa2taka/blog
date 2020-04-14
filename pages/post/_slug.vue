@@ -7,9 +7,15 @@
       }"
     >
       <div class="post-title">
-        <p class="post-category secondary--text">
+        <nuxt-link
+          class="post-category secondary--text animation-link"
+          :to="{
+            name: 'category-slug',
+            params: { slug: post.fields.category.fields.slug },
+          }"
+        >
           {{ post.fields.category.fields.name }}
-        </p>
+        </nuxt-link>
         <h1 class="post-title-name">{{ post.fields.title }}</h1>
         <p class="post-author">by {{ post.fields.author.fields.name }}</p>
       </div>
@@ -100,6 +106,26 @@ const setMarkedOptions = () => {
   margin-right: auto;
 }
 
+.animation-link {
+  position: relative;
+}
+
+.animation-link::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  content: '';
+  width: 0;
+  height: 1px;
+  background-color: #009688;
+  transition: 0.3s;
+  transform: translateX(-50%);
+}
+
+.animation-link:hover::after {
+  width: 100%;
+}
+
 .post-title {
   background-color: rgba(0, 0, 0, 0.8);
   padding: 8px 12px;
@@ -118,6 +144,7 @@ const setMarkedOptions = () => {
   margin-bottom: 0px !important;
   font-size: 16px;
   font-weight: 600;
+  text-decoration: none;
 }
 
 .post-author {
