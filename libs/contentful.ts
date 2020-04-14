@@ -2,6 +2,7 @@ import createClient from '@/plugins/contentful';
 import { MultipleItem, Post } from '@/types/entry';
 
 const client = createClient();
+const isProdcution = process.env.NODE_ENV === 'production';
 
 export function fetchCategories() {
   return client.getEntries({
@@ -20,15 +21,34 @@ export function fetchPosts(page: number, limit: number) {
 }
 
 export async function confirmExistingCategory(categoryId: string) {
+  const queries: Record<string, any> = {
+    content_type: process.env.CTF_POST_ID,
+    limit: 1,
+    order: '-fields.releaseDate',
+    'fields.category.sys.id': categoryId,
+  };
+  if (isProdcution) {
+    queries['sys.publishedAt[exists]'] = true;
+  }
   const isExist = await client
-    .getEntries({
-      content_type: process.env.CTF_POST_ID,
-      limit: 1,
-      order: '-fields.releaseDate',
-      'fields.category.sys.id': categoryId,
-    })
+    .getEntries(queries)
     .then((posts: MultipleItem<Post>) => posts.items.length !== 0);
   return isExist;
+}
+
+export function fetchPostInCategory(categoryId: string, limit: number) {
+  const queries: Record<string, any> = {
+    content_type: process.env.CTF_POST_ID,
+    limit,
+    order: '-fields.releaseDate',
+    'fields.category.sys.id': categoryId,
+  };
+  if (isProdcution) {
+    queries['sys.publishedAt[exists]'] = true;
+  }
+  return client
+    .getEntries(queries)
+    .then((posts: MultipleItem<Post>) => posts.items[0]);
 }
 
 export function fetchPost(slug: string) {
