@@ -2,7 +2,7 @@
   <nav>
     <h2 class="center-title">カテゴリ</h2>
 
-    <ul class="ml-10">
+    <ul class="ml-10 categories">
       <li v-for="category in categories" :key="category.sys.id">
         <v-btn
           :to="{

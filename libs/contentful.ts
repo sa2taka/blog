@@ -12,12 +12,18 @@ export function fetchCategories() {
 }
 
 export function fetchPosts(page: number, limit: number) {
-  return client.getEntries({
+  const queries: Record<string, any> = {
     content_type: process.env.CTF_POST_ID,
     order: '-fields.releaseDate',
     skip: page * limit,
     limit,
-  });
+  };
+
+  if (isProdcution) {
+    queries['sys.publishedAt[exists]'] = true;
+  }
+
+  return client.getEntries(queries);
 }
 
 export async function confirmExistingCategory(categoryId: string) {
@@ -27,28 +33,35 @@ export async function confirmExistingCategory(categoryId: string) {
     order: '-fields.releaseDate',
     'fields.category.sys.id': categoryId,
   };
+
   if (isProdcution) {
     queries['sys.publishedAt[exists]'] = true;
   }
+
   const isExist = await client
     .getEntries(queries)
     .then((posts: MultipleItem<Post>) => posts.items.length !== 0);
   return isExist;
 }
 
-export function fetchPostInCategory(categoryId: string, limit: number) {
+export function fetchPostInCategory(
+  categorySlug: string,
+  page: number,
+  limit: number
+) {
   const queries: Record<string, any> = {
     content_type: process.env.CTF_POST_ID,
     limit,
+    skip: page * limit,
     order: '-fields.releaseDate',
-    'fields.category.sys.id': categoryId,
+    'fields.slug[eq]': categorySlug,
   };
+
   if (isProdcution) {
     queries['sys.publishedAt[exists]'] = true;
   }
-  return client
-    .getEntries(queries)
-    .then((posts: MultipleItem<Post>) => posts.items[0]);
+
+  return client.getEntries(queries);
 }
 
 export function fetchPost(slug: string) {
