@@ -2,8 +2,12 @@
   <div>
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
-        <v-btn v-if="isDark" icon v-on="on" @click="changeTheme(false)"><v-icon>fa-moon</v-icon></v-btn>
-        <v-btn v-else icon v-on="on" @click="changeTheme(true)"><v-icon>fa-sun</v-icon></v-btn>
+        <v-btn v-if="isDark" icon v-on="on" @click="changeTheme(false)"
+          ><v-icon>fa-moon</v-icon></v-btn
+        >
+        <v-btn v-else icon v-on="on" @click="changeTheme(true)"
+          ><v-icon>fa-sun</v-icon></v-btn
+        >
       </template>
       <span>Dark/Light Switch</span>
     </v-tooltip>

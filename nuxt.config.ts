@@ -8,7 +8,7 @@ export default {
    */
   head: {
     titleTemplate: '%s' + '園児ニアの庭園',
-    title: '',
+    title: ' ',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -45,7 +45,12 @@ export default {
    ** Nuxt.js modules
    */
   vuetify: {},
-  modules: ['@nuxtjs/pwa', '@nuxtjs/dotenv', '@nuxtjs/vuetify', ['cookie-universal-nuxt', { parseJSON: false }]],
+  modules: [
+    '@nuxtjs/pwa',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/vuetify',
+    ['cookie-universal-nuxt', { parseJSON: false }],
+  ],
   /*
    ** Build configuration
    */

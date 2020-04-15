@@ -1,10 +1,25 @@
 <template>
   <div class="main">
-    <a class="back-button pb-8" href="javascript:history.back();">&lt;&lt; 戻る</a>
+    <a class="back-button animation-link" href="javascript:history.back();"
+      >&lt;&lt; 戻る</a
+    >
     <article class="post">
-      <div class="post-title-area" :style="{ 'background-image': `url(${post.fields.postImage.fields.file.url})` }">
+      <div
+        class="post-title-area"
+        :style="{
+          'background-image': `url(${post.fields.postImage.fields.file.url})`,
+        }"
+      >
         <div class="post-title">
-          <p class="post-category secondary--text">{{ post.fields.category.fields.name }}</p>
+          <nuxt-link
+            class="post-category secondary--text animation-link"
+            :to="{
+              name: 'category-slug',
+              params: { slug: post.fields.category.fields.slug },
+            }"
+          >
+            {{ post.fields.category.fields.name }}
+          </nuxt-link>
           <h1 class="post-title-name">{{ post.fields.title }}</h1>
           <p class="post-author">by {{ post.fields.author.fields.name }}</p>
         </div>
@@ -72,7 +87,8 @@ const setMarkedOptions = () => {
     if (filename !== '') {
       fileElement = `<div class="filename">${filename}</div>`;
     }
-    return `${fileElement}<code class="hljs ${lang} ${filename !== '' && 'padding-for-filename'}">${value}</code>`;
+    return `${fileElement}<code class="hljs ${lang} ${filename !== '' &&
+      'padding-for-filename'}">${value}</code>`;
   };
 
   renderer.codespan = code => {
@@ -101,6 +117,26 @@ const setMarkedOptions = () => {
   text-decoration: none;
 }
 
+.animation-link {
+  position: relative;
+}
+
+.animation-link::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  content: '';
+  width: 0;
+  height: 1px;
+  background-color: #009688;
+  transition: 0.3s;
+  transform: translateX(-50%);
+}
+
+.animation-link:hover::after {
+  width: 100%;
+}
+
 .post-title {
   background-color: rgba(0, 0, 0, 0.8);
   padding: 8px 12px;
@@ -119,6 +155,7 @@ const setMarkedOptions = () => {
   margin-bottom: 0px !important;
   font-size: 16px;
   font-weight: 600;
+  text-decoration: none;
 }
 
 .post-author {
