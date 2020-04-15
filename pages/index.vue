@@ -59,4 +59,8 @@ const decidePage = (context: Context) => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.blog-title {
+  font-size: 1.6em;
+}
+</style>
