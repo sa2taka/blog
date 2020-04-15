@@ -1,11 +1,6 @@
 <template>
   <v-layout column justify-center align-center>
-    <div v-if="posts.length !== 0">
-      <article v-for="post in posts" :key="post.id">
-        <top-page-posts class="post" :post="post" />
-      </article>
-    </div>
-    <div v-else>投稿が見つかりません</div>
+    <posts :posts="posts" />
   </v-layout>
 </template>
 
@@ -14,22 +9,19 @@ import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
 import { fetchPosts } from '@/libs/contentful';
 import { Post, MultipleItem } from '@/types/entry';
-import TopPagePosts from '@/components/Organisms/topPagePosts.vue';
+import Posts from '@/components/Organisms/posts.vue';
 
 @Component({
   components: {
-    TopPagePosts,
+    Posts,
   },
 })
 export default class IndexPage extends Vue {
   title: string = process.env.BLOG_TITLE as string;
   description: string = process.env.BLOG_DESCRIPTION as string;
 
-  limit = 20;
   page!: number;
-  posts: Post[] = [];
-
-  width = 320;
+  posts!: Post[];
 
   async asyncData(context: Context) {
     const page = decidePage(context);
@@ -38,14 +30,11 @@ export default class IndexPage extends Vue {
     const posts: Post[] = await fetchPosts(page, limit).then(
       (posts: MultipleItem<Post>) => posts.items
     );
+
     return {
       page,
       posts,
     };
-  }
-
-  handlePostClick(slug: string) {
-    this.$router.push({ name: 'post-slug', params: { slug } });
   }
 }
 
@@ -71,10 +60,7 @@ const decidePage = (context: Context) => {
 </script>
 
 <style scoped>
-.post {
-  cursor: pointer;
-}
-
-.post:hover {
+.blog-title {
+  font-size: 1.6em;
 }
 </style>

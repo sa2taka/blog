@@ -9,6 +9,7 @@
           class="title-icon-margin mr-3"
           alt="logo"
         />
+        <h1 class="navbar-blog-title">{{ title }}</h1>
       </div>
 
       <v-spacer />
@@ -75,10 +76,10 @@ html {
   height: 36px;
 }
 
-.blog-title {
-  font-size: 1.4em;
+.navbar-blog-title {
+  font-size: 1.2em;
   width: 200px;
-  margin-top: 1px;
+  margin-top: 4px;
 }
 
 .title-link {

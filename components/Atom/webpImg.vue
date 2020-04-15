@@ -1,5 +1,11 @@
 <template>
-  <picture onload="handleLoad()">
+  <picture
+    onload="handleLoad()"
+    :style="{
+      width: width ? width + 'px' : 'auto',
+      height: height ? height + 'px' : 'auto',
+    }"
+  >
     <source :srcset="webpName" type="image/webp" />
     <img :src="imgName" :width="width" :height="height" :alt="alt" />
   </picture>
