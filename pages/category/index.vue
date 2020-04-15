@@ -71,4 +71,9 @@ ul {
 .center-title {
   text-align: center;
 }
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+}
 </style>
