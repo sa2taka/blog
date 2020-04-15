@@ -1,11 +1,10 @@
 <template>
   <v-card
     class="post-card"
-    :width="width"
     hover
-    :post="post"
     :to="{ name: 'post-slug', params: { slug: post.fields.slug } }"
   >
+    <v-skeleton-loader v-if="loading" type="image" />
     <webp-img
       v-show="!loading"
       :webp-name="generateWebp(post.fields.postImage.fields.file.url)"
@@ -16,12 +15,7 @@
       :on-load="onLoad"
       class="post-img"
     />
-    <v-skeleton-loader
-      v-if="loading"
-      :width="width"
-      :height="imgHeight"
-      type="image"
-    />
+
     <div class="secondary--text top-post-category mt-4 mb-n3">
       {{ post.fields.category.fields.name }}
     </div>
@@ -46,7 +40,7 @@ export default class TopPagePosts extends Vue {
   post!: Post;
 
   loading = true;
-  imgHeight = 120;
+  imgHeight = 200;
   width = 320;
 
   mounted() {
@@ -65,7 +59,7 @@ export default class TopPagePosts extends Vue {
     this.loading = false;
   }
 
-  public setGridRow() {
+  setGridRow() {
     const height = this.$el.scrollHeight;
     this.$el.setAttribute(
       'style',
@@ -83,9 +77,7 @@ export default class TopPagePosts extends Vue {
 }
 
 .post-card {
-  position: relative;
   width: 320px;
-  display: block;
 }
 
 .post-img {

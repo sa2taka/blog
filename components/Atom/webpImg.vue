@@ -52,4 +52,10 @@ export default class WebpImage extends Vue {
 }
 </script>
 
-<style></style>
+<style scoped>
+picture,
+source,
+img {
+  object-fit: cover;
+}
+</style>
