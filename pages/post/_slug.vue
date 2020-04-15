@@ -4,6 +4,9 @@
       >&lt;&lt; 戻る</a
     >
     <article class="post">
+      <p class="mb-0 post-date">
+        {{ postDate }}
+      </p>
       <div
         class="post-title-area"
         :style="{
@@ -59,6 +62,12 @@ export default class PostSlug extends Vue {
     return marked(this.post.fields.body);
   }
 
+  get postDate() {
+    const rawDate = this.post.fields.releaseDate;
+
+    return formatDate(new Date(rawDate));
+  }
+
   head() {
     return {
       style: [
@@ -101,6 +110,20 @@ const setMarkedOptions = () => {
     renderer,
   });
 };
+
+const formatDate = (date: Date) => {
+  const fillBy0 = (num: number, length: number) => {
+    return ('0000' + num.toString()).slice(-length);
+  };
+  const year = date.getFullYear();
+  const month = fillBy0(date.getMonth() + 1, 2);
+  const day = fillBy0(date.getDate(), 2);
+  const hour = fillBy0(date.getHours(), 2);
+  const min = fillBy0(date.getMinutes(), 2);
+  const sec = fillBy0(date.getSeconds(), 2);
+  const week = ['日', '月', '火', '水', '木', '金', '土'][date.getDay()];
+  return `${year}/${month}/${day}(${week}) ${hour}:${min}:${sec}`;
+};
 </script>
 
 <style>
@@ -135,6 +158,11 @@ const setMarkedOptions = () => {
 
 .animation-link:hover::after {
   width: 100%;
+}
+
+.post-date {
+  text-align: right;
+  color: #777;
 }
 
 .post-title {
