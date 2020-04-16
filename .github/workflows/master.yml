@@ -15,10 +15,24 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - name: Run tests with ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
       - name: yarn install, build
         run: |
           yarn install
@@ -26,16 +40,16 @@ jobs:
       - name: GAE deploy
         env:
           GAE_SECRET: ${{ secrets.GAE_SECRET }}
+          ENV_YAML: ${{ secrets.ENV_YAML }}
         run: |
           echo "$GAE_SECRET" | base64 --decode > "$HOME"/gcloud.json
+          echo "$ENV_YAML" | base64 --decode > ./env.yaml
           sh -c "gcloud auth activate-service-account --key-file=$HOME/gcloud.json $*"
           gcloud app deploy app.yaml --project myblog-269402
-
-          env:
-            CI: true
       - name: clear up
         run: |
           rm "$HOME"/gcloud.json
+          rm env.yaml
 
       - name: collectNotification
         uses: rtCamp/action-slack-notify@master

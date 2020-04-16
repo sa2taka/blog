@@ -37,7 +37,7 @@
     </v-content>
     <v-footer app>
       <v-spacer />
-      <span>&copy; sa2taka </span>
+      <span>&copy; sa2taka</span>
     </v-footer>
   </v-app>
 </template>
@@ -47,6 +47,8 @@ import { Vue, Component } from 'nuxt-property-decorator';
 import WebpImg from '@/components/Atom/webpImg.vue';
 import DarkThemeSwitch from '@/components/Molecules/darkThemeSwitch.vue';
 import CategoryMenu from '@/components/Organisms/categoryMenu.vue';
+
+import { BLOG_TITLE } from '@/libs/const';
 
 @Component({
   components: {
@@ -59,7 +61,7 @@ export default class Default extends Vue {
   drawer = false;
   isSmartphoneWidth = false;
   smartphoneWidth = 600;
-  title: string = process.env.BLOG_TITLE as string;
+  title: string = BLOG_TITLE;
 
   mounted() {
     this.isSmartphoneWidth = window.innerWidth > this.smartphoneWidth;

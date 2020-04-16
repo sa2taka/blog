@@ -21,9 +21,6 @@ export default class Posts extends Vue {
   @Prop({ required: true })
   posts!: Post[];
 
-  title: string = process.env.BLOG_TITLE as string;
-  description: string = process.env.BLOG_DESCRIPTION as string;
-
   limit = 20;
 
   width = 320;

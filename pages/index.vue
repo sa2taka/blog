@@ -17,9 +17,6 @@ import Posts from '@/components/Organisms/posts.vue';
   },
 })
 export default class IndexPage extends Vue {
-  title: string = process.env.BLOG_TITLE as string;
-  description: string = process.env.BLOG_DESCRIPTION as string;
-
   page!: number;
   posts!: Post[];
 

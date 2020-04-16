@@ -25,13 +25,14 @@ env_variables:
   NUXT_HOST: '0.0.0.0'
   NUXT_PORT: '8080'
 
+default_expiration: '3d'
+
 automatic_scaling:
   min_instances: 0
-
-default_expiration: '1d'
-
-automatic_scaling:
   min_idle_instances: automatic
   max_idle_instances: 1
   min_pending_latency: 3000ms
   max_pending_latency: automatic
+
+includes:
+  - env.yaml
