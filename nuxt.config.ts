@@ -48,7 +48,6 @@ export default {
   modules: [
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
-    '@nuxtjs/vuetify',
     ['cookie-universal-nuxt', { parseJSON: false }],
   ],
   /*
