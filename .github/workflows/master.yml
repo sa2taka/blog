@@ -14,7 +14,7 @@ jobs:
         node-version: [10.20.0]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Run tests with ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -33,3 +33,6 @@ jobs:
 
           env:
             CI: true
+      - name: clear up
+        run: |
+          rm "$HOME"/gcloud.json
