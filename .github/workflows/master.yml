@@ -29,10 +29,31 @@ jobs:
         run: |
           echo "$GAE_SECRET" | base64 --decode > "$HOME"/gcloud.json
           sh -c "gcloud auth activate-service-account --key-file=$HOME/gcloud.json $*"
-          gcloud app deploy app.yaml --project {myblog-269402}
+          gcloud app deploy app.yaml --project myblog-269402
 
           env:
             CI: true
       - name: clear up
         run: |
           rm "$HOME"/gcloud.json
+
+      - name: collectNotification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_CHANNEL: ${{secrets.SLACK_CHANNEL}}
+          SLACK_COLOR: '#008000'
+          SLACK_TITLE: ':rocket::rocket::rocket: Finished distribute to deploygate! :rocket::rocket::rocket:'
+          SLACK_MESSAGE: 'Deploy Finished!'
+          SLACK_USERNAME: 'GitHub Actions'
+          SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
+
+      - name: errorNotification
+        if: failure()
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_CHANNEL: ${{secrets.SLACK_CHANNEL}}
+          SLACK_COLOR: '#ff0000'
+          SLACK_TITLE: ':fire::fire::fire: Build error! :fire::fire::fire:'
+          SLACK_MESSAGE: 'Build error! Please check github!'
+          SLACK_USERNAME: 'GitHub Actions'
+          SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
