@@ -1,8 +1,7 @@
-require('dotenv').config();
-
 const nodeExternals = require('webpack-node-externals');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
-const config = process.env;
+
+const config = require('./.contentful.json');
 
 export default {
   mode: 'universal',
@@ -41,7 +40,6 @@ export default {
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
-    '@nuxtjs/vuetify',
     '@nuxt/typescript-build',
   ],
   /*
@@ -73,7 +71,7 @@ export default {
   env: {
     CTF_CDA_ACCESS_TOKEN: config.CTF_CDA_ACCESS_TOKEN,
     CTF_CTF_MAIN_AUTHOR_ID: config.CTF_PERSON_ID,
-    CTF_CATEGORY_ID: config.CTF_CATEGORY_ID,
+    CTF_SPACE_ID: config.CTF_SPACE_ID,
   },
   manifest: {
     name: 'Engineer Garden',

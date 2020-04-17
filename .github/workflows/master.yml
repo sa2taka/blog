@@ -34,22 +34,24 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: yarn install, build
+        env:
+          CONTENTFUL_JSON: ${{ secrets.CONTENTFUL_JSON }}
         run: |
+          echo "$CONTENTFUL_JSON" | base64 --decode > ./.contentful.json
           yarn install
           NODE_ENV=production yarn run build
+
       - name: GAE deploy
         env:
           GAE_SECRET: ${{ secrets.GAE_SECRET }}
-          ENV_YAML: ${{ secrets.ENV_YAML }}
         run: |
           echo "$GAE_SECRET" | base64 --decode > "$HOME"/gcloud.json
-          echo "$ENV_YAML" | base64 --decode > ./env.yaml
           sh -c "gcloud auth activate-service-account --key-file=$HOME/gcloud.json $*"
           gcloud app deploy app.yaml --project myblog-269402
+
       - name: clear up
         run: |
           rm "$HOME"/gcloud.json
-          rm env.yaml
 
       - name: collectNotification
         uses: rtCamp/action-slack-notify@master

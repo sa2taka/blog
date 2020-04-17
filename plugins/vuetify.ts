@@ -15,6 +15,8 @@ if (storage?.getItem('theme') === 'light') {
   isDark = false;
 }
 
+Vue.use(Vuetify);
+
 export default (ctx: any) => {
   const vuetify = new Vuetify({
     customVariables: ['~/assets/variables.scss'],
