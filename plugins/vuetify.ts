@@ -4,7 +4,12 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import ja from 'vuetify/src/locale/ja';
 import values from './iconValues';
 
-const storage = localStorage;
+let storage;
+
+if (process.env.client) {
+  storage = localStorage;
+}
+
 let isDark = true;
 if (storage?.getItem('theme') === 'light') {
   isDark = false;

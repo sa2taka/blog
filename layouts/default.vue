@@ -32,7 +32,7 @@
 
     <v-content>
       <v-container>
-        <nuxt />
+        <nuxt v-cloak />
       </v-container>
     </v-content>
     <v-footer app>

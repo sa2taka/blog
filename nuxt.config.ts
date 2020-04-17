@@ -1,4 +1,7 @@
 require('dotenv').config();
+
+const nodeExternals = require('webpack-node-externals');
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 const config = process.env;
 
 export default {
@@ -23,7 +26,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: '#000' },
   /*
    ** Global CSS
    */
@@ -31,7 +34,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/vuetify.client.ts'],
+  plugins: ['@/plugins/vuetify'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -54,10 +57,18 @@ export default {
    ** Build configuration
    */
   build: {
-    /*
-     ** You can extend webpack config here
-     */
-    extend(_config: any, _coctx: any) {},
+    transpile: [/^vuetify/],
+    plugins: [new VuetifyLoaderPlugin()],
+    extractCSS: true,
+    extend(config: any, _ctx: any) {
+      if (process.server) {
+        config.externals = [
+          nodeExternals({
+            whitelist: [/^vuetify/],
+          }),
+        ];
+      }
+    },
   },
   env: {
     CTF_CDA_ACCESS_TOKEN: config.CTF_CDA_ACCESS_TOKEN,
