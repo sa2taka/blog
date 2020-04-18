@@ -39,6 +39,7 @@ import { Vue, Component } from 'nuxt-property-decorator';
 import { fetchPost } from '@/libs/contentful';
 import { Post } from '@/types/entry';
 import { PostIndex as IPostIndex } from '@/types/postIndex';
+import { BASE_URL } from '@/libs/const';
 
 import Markdown from '@/components/Organisms/markdown.vue';
 import PostIndex from '@/components/Molecules/postIndex.vue';
@@ -76,6 +77,10 @@ export default class PostSlug extends Vue {
     return generateIndexies(this.post.fields.body);
   }
 
+  get ogImage() {
+    return this.post.fields.postImage.fields.file.url + '?w=1200';
+  }
+
   head() {
     return {
       style: [
@@ -85,6 +90,30 @@ export default class PostSlug extends Vue {
         },
       ],
       title: this.post.fields.title + ' - ',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.post.fields.description,
+        },
+        {
+          hid: 'og:title',
+          name: 'og:title',
+          content: this.post.fields.title + ' - 園児ニアの庭園',
+        },
+        {
+          name: 'og:description',
+          content: this.post.fields.description,
+        },
+        {
+          name: 'og:image',
+          content: this.ogImage,
+        },
+        {
+          name: 'og:url',
+          content: BASE_URL + this.$route.path,
+        },
+      ],
     };
   }
 }
