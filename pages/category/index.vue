@@ -43,6 +43,7 @@ export default class Category extends Vue {
   head() {
     return {
       title: 'カテゴリ - ',
+      meta: [{ name: 'robots', content: 'noindex,nofollow' }],
     };
   }
 }

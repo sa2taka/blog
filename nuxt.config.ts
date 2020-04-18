@@ -1,3 +1,4 @@
+import { BASE_URL } from '@/libs/const';
 const nodeExternals = require('webpack-node-externals');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 
@@ -15,7 +16,6 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
-        hid: 'description',
         name: 'description',
         content: process.env.npm_package_description || '',
       },
@@ -25,11 +25,11 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#000' },
+  loading: { color: '#fff' },
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['@/assets/css/layout.css'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -58,7 +58,17 @@ export default {
     transpile: [/^vuetify/],
     plugins: [new VuetifyLoaderPlugin()],
     extractCSS: true,
-    extend(config: any, _ctx: any) {
+    extend(config: any, ctx: any) {
+      if (ctx.isDev && ctx.isClient) {
+        config.devtool = 'inline-cheap-module-source-map';
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/,
+        });
+      }
+
       if (process.server) {
         config.externals = [
           nodeExternals({
@@ -74,13 +84,14 @@ export default {
     CTF_SPACE_ID: config.CTF_SPACE_ID,
   },
   manifest: {
-    name: 'Engineer Garden',
+    name: '園児ニアの庭園',
     lang: 'ja',
     short_name: 'blog',
-    title: 'Engineer Garden',
-    'og:title': 'Engineer Garden',
+    title: '園児ニアの庭園',
+    'og:title': '園児ニアの庭園',
     description: 'sa2taka blog',
     'og:description': 'sa2taka blog',
+    'og:url': BASE_URL,
     theme_color: '#009688',
     background_color: '#2a2a2a',
   },

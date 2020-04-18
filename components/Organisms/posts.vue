@@ -1,7 +1,7 @@
 <template>
   <div v-if="posts.length !== 0">
     <article v-for="post in posts" :key="post.id" class="posts">
-      <card-post class="post" :post="post" />
+      <card-post :post="post" />
     </article>
   </div>
   <div v-else>投稿が見つかりません</div>
@@ -10,7 +10,7 @@
 <script lang="ts">
 import { Vue, Prop, Component } from 'nuxt-property-decorator';
 import { Post } from '@/types/entry';
-import CardPost from '@/components/Organisms/cardPost.vue';
+import CardPost from '@/components/Molecules/cardPost.vue';
 
 @Component({
   components: {
