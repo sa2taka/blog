@@ -71,6 +71,7 @@ export default {
   modules: [
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
+    ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 * 24 * 3 }],
     ['cookie-universal-nuxt', { parseJSON: false }],
   ],
   /*
