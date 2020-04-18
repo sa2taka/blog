@@ -9,7 +9,7 @@
       v-show="!loading"
       :webp-name="generateWebp(post.fields.postImage.fields.file.url)"
       :img-name="generateFormatedImg(post.fields.postImage.fields.file.url)"
-      :alt="post.fields.postImage.title"
+      :alt="altText"
       :width="width"
       :height="imgHeight"
       :on-load="onLoad"
@@ -65,6 +65,10 @@ export default class TopPagePosts extends Vue {
       'style',
       `grid-row: span ${Math.ceil(height / 20) + 1};height: ${height}px;`
     );
+  }
+
+  get altText() {
+    return `${this.post.fields.postImage.fields.title} - ${this.post.fields.title}のタイトル画像`;
   }
 }
 </script>

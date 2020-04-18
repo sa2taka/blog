@@ -1,7 +1,7 @@
 <template>
   <v-expansion-panels v-model="panel" accordion flat>
     <v-expansion-panel>
-      <v-expansion-panel-header class="py-0">目次</v-expansion-panel-header>
+      <v-expansion-panel-header class="py-2">目次</v-expansion-panel-header>
       <v-expansion-panel-content>
         <ol>
           <li
