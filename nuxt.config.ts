@@ -81,6 +81,13 @@ export default {
     transpile: [/^vuetify/],
     plugins: [new VuetifyLoaderPlugin()],
     extractCSS: true,
+    useForkTsChecker: true,
+    loaders: {
+      vueStyle: {
+        manualInject: true,
+      },
+    },
+
     extend(config: any, ctx: any) {
       if (ctx.isDev && ctx.isClient) {
         config.devtool = 'inline-cheap-module-source-map';
@@ -158,9 +165,9 @@ export default {
     ],
   },
   workbox: {
-    dev: true,
     importScripts: ['cache-sw.js'],
   },
+  icon: false,
   typescript: {
     typeCheck: true,
     ignoreNotFoundWarnings: true,

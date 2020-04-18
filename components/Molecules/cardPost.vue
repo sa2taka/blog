@@ -1,27 +1,29 @@
 <template>
-  <v-card
-    class="post-card"
-    hover
-    :to="{ name: 'post-slug', params: { slug: post.fields.slug } }"
-  >
-    <v-skeleton-loader v-if="loading" type="image" />
-    <webp-img
-      v-show="!loading"
-      :webp-name="generateWebp(post.fields.postImage.fields.file.url)"
-      :img-name="generateFormatedImg(post.fields.postImage.fields.file.url)"
-      :alt="altText"
-      :width="width"
-      :height="imgHeight"
-      :on-load="onLoad"
-      class="post-img"
-    />
+  <v-lazy v-model="isActive" min-height="320" transition="fade-transition">
+    <v-card
+      class="post-card"
+      hover
+      :to="{ name: 'post-slug', params: { slug: post.fields.slug } }"
+    >
+      <v-skeleton-loader v-if="loading" type="image" />
+      <webp-img
+        v-show="!loading"
+        :webp-name="generateWebp(post.fields.postImage.fields.file.url)"
+        :img-name="generateFormatedImg(post.fields.postImage.fields.file.url)"
+        :alt="altText"
+        :width="width"
+        :height="imgHeight"
+        :on-load="onLoad"
+        class="post-img"
+      />
 
-    <div class="secondary--text top-post-category mt-4 mb-n3">
-      {{ post.fields.category.fields.name }}
-    </div>
-    <v-card-title>{{ post.fields.title }}</v-card-title>
-    <v-card-subtitle>{{ post.fields.description }}</v-card-subtitle>
-  </v-card>
+      <div class="secondary--text top-post-category mt-4 mb-n3">
+        {{ post.fields.category.fields.name }}
+      </div>
+      <v-card-title>{{ post.fields.title }}</v-card-title>
+      <v-card-subtitle>{{ post.fields.description }}</v-card-subtitle>
+    </v-card>
+  </v-lazy>
 </template>
 
 <script lang="ts">
@@ -39,6 +41,7 @@ export default class TopPagePosts extends Vue {
   @Prop({ required: true })
   post!: Post;
 
+  isActive = false;
   loading = true;
   imgHeight = 200;
   width = 320;
