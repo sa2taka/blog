@@ -26,6 +26,7 @@
           <p class="post-author">by {{ post.fields.author.fields.name }}</p>
         </div>
       </div>
+      <post-index :index="postIndex" />
       <markdown class="mt-8" :markdown="post.fields.body" />
     </article>
   </div>
@@ -35,14 +36,17 @@
 import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
 
-import { fetchPost } from '../../libs/contentful';
-import { Post } from '../../types/entry';
+import { fetchPost } from '@/libs/contentful';
+import { Post } from '@/types/entry';
+import { PostIndex as IPostIndex } from '@/types/postIndex';
 
 import Markdown from '@/components/Organisms/markdown.vue';
+import PostIndex from '@/components/Molecules/postIndex.vue';
 
 @Component({
   components: {
     Markdown,
+    PostIndex,
   },
 })
 export default class PostSlug extends Vue {
@@ -68,6 +72,10 @@ export default class PostSlug extends Vue {
     return formatDate(new Date(rawDate));
   }
 
+  get postIndex() {
+    return generateIndexies(this.post.fields.body);
+  }
+
   head() {
     return {
       style: [
@@ -80,6 +88,31 @@ export default class PostSlug extends Vue {
     };
   }
 }
+
+const generateIndexies = (markdown: string) => {
+  const markdownWithoutCode = markdown
+    .replace(/```[\s\S]?```/g, '')
+    .replace(/`[\s\S]?`/g, '');
+  const matches = markdownWithoutCode.matchAll(
+    /^\s*(?<hash>#{1,3})\s*(?<title>.+)\s*$/gm
+  );
+
+  const postIndex: IPostIndex[] = [];
+
+  for (const match of matches) {
+    if (match?.groups) {
+      const level = match.groups.hash.length;
+      const title = match.groups.title;
+
+      postIndex.push({
+        level,
+        title,
+      });
+    }
+  }
+
+  return postIndex;
+};
 
 const formatDate = (date: Date) => {
   const fillBy0 = (num: number, length: number) => {

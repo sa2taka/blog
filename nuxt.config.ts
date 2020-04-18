@@ -58,7 +58,17 @@ export default {
     transpile: [/^vuetify/],
     plugins: [new VuetifyLoaderPlugin()],
     extractCSS: true,
-    extend(config: any, _ctx: any) {
+    extend(config: any, ctx: any) {
+      if (ctx.isDev && ctx.isClient) {
+        config.devtool = 'inline-cheap-module-source-map';
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/,
+        });
+      }
+
       if (process.server) {
         config.externals = [
           nodeExternals({
