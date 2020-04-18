@@ -10,7 +10,7 @@
 <script lang="ts">
 import { Vue, Prop, Component } from 'nuxt-property-decorator';
 import { Post } from '@/types/entry';
-import CardPost from '@/components/Organisms/cardPost.vue';
+import CardPost from '@/components/Molecules/cardPost.vue';
 
 @Component({
   components: {

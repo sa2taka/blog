@@ -4,9 +4,8 @@
       >&lt;&lt; 戻る</a
     >
     <article class="post">
-      <p class="mb-0 post-date">
-        {{ postDate }}
-      </p>
+      <p class="mb-0 post-date">作成日: {{ postDate }}</p>
+      <p class="mb-0 post-date">更新日: {{ updateDate }}</p>
       <div
         class="post-title-area"
         :style="{
@@ -63,7 +62,13 @@ export default class PostSlug extends Vue {
   }
 
   get postDate() {
-    const rawDate = this.post.fields.releaseDate;
+    const rawDate = this.post.sys.createdAt;
+
+    return formatDate(new Date(rawDate));
+  }
+
+  get updateDate() {
+    const rawDate = this.post.sys.updatedAt;
 
     return formatDate(new Date(rawDate));
   }
@@ -163,6 +168,7 @@ const formatDate = (date: Date) => {
 .post-date {
   text-align: right;
   color: #777;
+  font-size: 0.9em !important;
 }
 
 .post-title {
