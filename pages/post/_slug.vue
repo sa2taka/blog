@@ -122,13 +122,12 @@ const generateIndexies = (markdown: string) => {
   const markdownWithoutCode = markdown
     .replace(/```[\s\S]?```/g, '')
     .replace(/`[\s\S]?`/g, '');
-  const matches = markdownWithoutCode.matchAll(
-    /^\s*(?<hash>#{1,3})\s*(?<title>.+)\s*$/gm
-  );
+  const regexp = /^\s*(?<hash>#{1,3})\s*(?<title>.+)\s*$/gm;
 
   const postIndex: IPostIndex[] = [];
 
-  for (const match of matches) {
+  let match: RegExpMatchArray | null;
+  while ((match = regexp.exec(markdownWithoutCode))) {
     if (match?.groups) {
       const level = match.groups.hash.length;
       const title = match.groups.title;
