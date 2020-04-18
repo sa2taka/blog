@@ -26,7 +26,7 @@
           <p class="post-author">by {{ post.fields.author.fields.name }}</p>
         </div>
       </div>
-      <post-index :index="postIndex" />
+      <post-index :index="postIndex" class="mt-10" />
       <markdown class="mt-8" :markdown="post.fields.body" />
     </article>
   </div>

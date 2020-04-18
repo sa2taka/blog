@@ -1,31 +1,28 @@
 <template>
-  <div class="index">
-    <ol>
-      <li
-        v-for="indexNest1 in formatedPostIndex"
-        :key="indexNest1.title + indexNest1.level.toString()"
-      >
-        {{ indexNest1.title }}
-
-        <ul v-if="indexNest1.child.length !== 0">
+  <v-expansion-panels v-model="panel" accordion flat>
+    <v-expansion-panel>
+      <v-expansion-panel-header class="py-0">目次</v-expansion-panel-header>
+      <v-expansion-panel-content>
+        <ol>
           <li
-            v-for="indexNest2 in indexNest1.child"
-            :key="indexNest2.title + indexNest2.level.toString()"
+            v-for="indexNest1 in formatedPostIndex"
+            :key="indexNest1.title + indexNest1.level.toString()"
           >
-            {{ indexNest2.title }}
-            <ul v-if="indexNest2.child.length !== 0">
+            <a class="index-link">{{ indexNest1.title }}</a>
+
+            <ul v-if="indexNest1.child.length !== 0" class="ml-5">
               <li
-                v-for="indexNest3 in indexNest2.child"
-                :key="indexNest3.title + indexNest3.level.toString()"
+                v-for="indexNest2 in indexNest1.child"
+                :key="indexNest2.title + indexNest2.level.toString()"
               >
-                {{ indexNest3.title }}
+                <a class="index-link">{{ indexNest2.title }}</a>
               </li>
             </ul>
           </li>
-        </ul>
-      </li>
-    </ol>
-  </div>
+        </ol>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+  </v-expansion-panels>
 </template>
 
 <script lang="ts">
@@ -37,6 +34,8 @@ import { PostIndex as IPostIndex } from '@/types/postIndex';
 export default class PostIndex extends Vue {
   @Prop({ required: true })
   index!: IPostIndex[];
+
+  panel = 0;
 
   get formatedPostIndex() {
     return formatPostIndex(this.index);
@@ -57,7 +56,6 @@ const formatPostIndex = (postIndex: IPostIndex[]) => {
     append(elem, formated);
   });
 
-  console.log(formated);
   return formated;
 };
 
@@ -136,4 +134,69 @@ interface FormatedPostIndex {
 }
 </script>
 
-<style></style>
+<style scoped>
+ol {
+  list-style-type: none !important;
+}
+
+li {
+  position: relative;
+}
+
+ol,
+ul {
+  margin-top: 6px;
+}
+
+ol > li:before {
+  counter-increment: number;
+  content: counter(number);
+  color: var(--v-primary-base);
+  font-weight: 600;
+}
+
+ol > li:after {
+  position: absolute;
+  content: '' !important;
+  top: 0px;
+  right: auto;
+  left: 18px;
+  bottom: auto;
+  height: 1.5em;
+  width: 2px;
+  border-radius: 1px;
+  background-color: var(--v-primary-base);
+}
+
+ul > li:before {
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  content: '';
+  background-color: var(--v-primary-base);
+  border-radius: 50%;
+  left: -12px;
+  top: 0.5em;
+  margin: auto auto;
+}
+
+ul > li {
+  list-style: none;
+}
+
+ol > li > .index-link {
+  margin-left: 16px;
+}
+
+li > .index-link:hover {
+  text-decoration: underline;
+}
+
+.theme--dark li > .index-link {
+  color: white;
+}
+
+.theme--light li > .index-link {
+  color: black;
+}
+</style>
