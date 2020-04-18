@@ -188,6 +188,11 @@ ul > li {
   list-style: none;
 }
 
+.index-link {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
 ol > li > .index-link {
   margin-left: 16px;
 }

@@ -168,8 +168,15 @@ const formatDate = (date: Date) => {
 }
 
 .back-button {
-  color: #777 !important;
   text-decoration: none;
+}
+
+.theme--dark .back-button {
+  color: #aaa !important;
+}
+
+.theme--light .back-button {
+  color: #333 !important;
 }
 
 .animation-link {
