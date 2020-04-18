@@ -20,6 +20,7 @@ import Posts from '@/components/Organisms/posts.vue';
 export default class CategorySlug extends Vue {
   posts!: Post[];
   page!: number;
+  category!: Category;
 
   async asyncData(context: Context) {
     const page = decidePage(context);
@@ -33,10 +34,18 @@ export default class CategorySlug extends Vue {
       page,
       limit
     ).then((posts: MultipleItem<Post>) => posts.items);
+
     return {
       page,
       posts,
       category,
+    };
+  }
+
+  head() {
+    return {
+      title: this.category.fields.name + ' カテゴリ - ',
+      meta: [{ name: 'robots', content: 'noindex,nofollow' }],
     };
   }
 }
