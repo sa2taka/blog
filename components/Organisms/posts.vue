@@ -1,7 +1,7 @@
 <template>
   <div v-if="posts.length !== 0">
     <article v-for="post in posts" :key="post.id" class="posts">
-      <card-post class="post" :post="post" />
+      <card-post :post="post" />
     </article>
   </div>
   <div v-else>投稿が見つかりません</div>
