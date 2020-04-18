@@ -55,7 +55,11 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/vuetify.server', '@/plugins/vuetify.client'],
+  plugins: [
+    '@/plugins/vuetify.server',
+    '@/plugins/vuetify.client',
+    { src: '~plugins/ga.js', mode: 'client' },
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -63,6 +67,7 @@ export default {
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     '@nuxt/typescript-build',
+    '@nuxtjs/google-analytics',
   ],
   /*
    ** Nuxt.js modules
@@ -196,5 +201,8 @@ export default {
   typescript: {
     typeCheck: true,
     ignoreNotFoundWarnings: true,
+  },
+  googleAnalytics: {
+    id: 'UA-152417689-1',
   },
 };
