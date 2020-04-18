@@ -1,6 +1,6 @@
 workbox.routing.registerRoute(
   new RegExp('^https://blog.sa2taka.com/'),
-  workbox.strategies.cacheFirst({
+  workbox.strategies.staleWhileRevalidate({
     cacheName: 'page-cache',
     plugins: [
       new workbox.cacheableResponse.Plugin({
