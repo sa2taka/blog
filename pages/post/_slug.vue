@@ -9,7 +9,7 @@
       <div
         class="post-title-area"
         :style="{
-          'background-image': `url(${post.fields.postImage.fields.file.url})`,
+          'background-image': `url(${post.fields.postImage.fields.file.url}?fm=webp)`,
         }"
       >
         <div class="post-title">
@@ -168,8 +168,15 @@ const formatDate = (date: Date) => {
 }
 
 .back-button {
-  color: #777 !important;
   text-decoration: none;
+}
+
+.theme--dark .back-button {
+  color: #aaa !important;
+}
+
+.theme--light .back-button {
+  color: #333 !important;
 }
 
 .animation-link {
@@ -194,8 +201,15 @@ const formatDate = (date: Date) => {
 
 .post-date {
   text-align: right;
-  color: #777;
   font-size: 0.9em !important;
+}
+
+.theme--dark .post-date {
+  color: #aaa;
+}
+
+.theme--light .post-date {
+  color: #333;
 }
 
 .post-title {
