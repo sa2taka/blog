@@ -9,7 +9,11 @@
           class="title-icon-margin mr-3"
           alt="logo"
         />
-        <h1 class="navbar-blog-title">{{ title }}</h1>
+        <transition name="fade">
+          <h1 v-show="canDisplayTitle" class="navbar-blog-title">
+            {{ title }}
+          </h1>
+        </transition>
       </div>
 
       <v-spacer />
@@ -62,9 +66,18 @@ export default class Default extends Vue {
   isSmartphoneWidth = false;
   smartphoneWidth = 600;
   title: string = BLOG_TITLE;
+  canDisplayTitle = false;
 
   mounted() {
-    this.isSmartphoneWidth = window.innerWidth > this.smartphoneWidth;
+    this.isSmartphoneWidth = window.innerWidth < this.smartphoneWidth;
+    this.canDisplayTitle = !this.isSmartphoneWidth;
+
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  handleResize() {
+    this.isSmartphoneWidth = window.innerWidth < this.smartphoneWidth;
+    this.canDisplayTitle = !this.isSmartphoneWidth;
   }
 }
 </script>
@@ -73,6 +86,7 @@ export default class Default extends Vue {
 html {
   overflow-y: auto !important;
 }
+
 .title-icon-margin {
   margin-left: 4%;
   height: 36px;
@@ -106,5 +120,14 @@ html {
 
 .animation-link:hover::after {
   width: 100%;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

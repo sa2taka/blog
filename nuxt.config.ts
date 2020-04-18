@@ -163,9 +163,34 @@ export default {
         type: 'image/png',
       },
     ],
+    display: 'standalone',
   },
   workbox: {
-    importScripts: ['cache-sw.js'],
+    swDest: 'static/sw.js',
+    runtimeCaching: [
+      {
+        urlPattern: 'https://blog.sa2taka.com/*',
+        handler: 'staleWhileRevalidate',
+        method: 'GET',
+      },
+      {
+        urlPattern:
+          '^https://cdn.contentful.com/spaces/xw0ljpdch9v4/environments/master/*',
+        handler: 'staleWhileRevalidate',
+        method: 'GET',
+      },
+      {
+        urlPattern:
+          '^https?://images.ctfassets.net/xw0ljpdch9v4/.*.(png|jpg|webp)$',
+        handler: 'cacheFirst',
+        method: 'GET',
+      },
+      {
+        urlPattern: '^https://fonts.googleapis.com/',
+        handler: 'cacheFirst',
+        method: 'GET',
+      },
+    ],
   },
   icon: false,
   typescript: {

@@ -150,11 +150,8 @@ const formatDate = (date: Date) => {
   const year = date.getFullYear();
   const month = fillBy0(date.getMonth() + 1, 2);
   const day = fillBy0(date.getDate(), 2);
-  const hour = fillBy0(date.getHours(), 2);
-  const min = fillBy0(date.getMinutes(), 2);
-  const sec = fillBy0(date.getSeconds(), 2);
   const week = ['日', '月', '火', '水', '木', '金', '土'][date.getDay()];
-  return `${year}/${month}/${day}(${week}) ${hour}:${min}:${sec}`;
+  return `${year}/${month}/${day}(${week})`;
 };
 </script>
 
