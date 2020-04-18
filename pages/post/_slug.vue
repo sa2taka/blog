@@ -9,7 +9,7 @@
       <div
         class="post-title-area"
         :style="{
-          'background-image': `url(${post.fields.postImage.fields.file.url})`,
+          'background-image': `url(${post.fields.postImage.fields.file.url}?fm=webp)`,
         }"
       >
         <div class="post-title">

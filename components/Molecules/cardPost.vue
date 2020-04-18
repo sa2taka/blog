@@ -48,11 +48,11 @@ export default class TopPagePosts extends Vue {
   }
 
   generateWebp(url: string) {
-    return url + `?fm=webp`;
+    return url + '?fm=webp&w=320';
   }
 
   generateFormatedImg(url: string) {
-    return url;
+    return url + '?w=480';
   }
 
   onLoad() {
