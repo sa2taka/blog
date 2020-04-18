@@ -1,4 +1,4 @@
-import { BASE_URL } from '@/libs/const';
+import { BASE_URL } from './libs/const';
 const nodeExternals = require('webpack-node-externals');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 
