@@ -8,14 +8,18 @@
             v-for="indexNest1 in formatedPostIndex"
             :key="indexNest1.title + indexNest1.level.toString()"
           >
-            <a class="index-link">{{ indexNest1.title }}</a>
+            <a class="index-link" :href="`#${indexNest1.title}`">{{
+              indexNest1.title
+            }}</a>
 
             <ul v-if="indexNest1.child.length !== 0" class="ml-5">
               <li
                 v-for="indexNest2 in indexNest1.child"
                 :key="indexNest2.title + indexNest2.level.toString()"
               >
-                <a class="index-link">{{ indexNest2.title }}</a>
+                <a class="index-link" :href="`#${indexNest2.title}`">{{
+                  indexNest2.title
+                }}</a>
               </li>
             </ul>
           </li>

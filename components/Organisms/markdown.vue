@@ -24,22 +24,8 @@ export default class PostSlug extends Vue {
 
 const setMarkedOptions = () => {
   const renderer = new marked.Renderer();
-  renderer.code = (code, _lang) => {
-    let lang = '';
-    let filename = '';
-    if (_lang) {
-      [lang, filename] = _lang.split(':');
-    } else {
-      lang = 'plaintext';
-    }
-    const value = hljs.highlightAuto(code, [lang]).value;
-    let fileElement = '';
-    if (filename !== '') {
-      fileElement = `<div class="filename">${filename}</div>`;
-    }
-    return `${fileElement}<code class="hljs ${lang} ${filename !== '' &&
-      'padding-for-filename'}">${value}</code>`;
-  };
+  renderer.code = codeRenderer;
+  renderer.heading = headingRenderer;
 
   renderer.codespan = code => {
     const value = hljs.highlightAuto(code, ['plaintext']).value;
@@ -50,6 +36,27 @@ const setMarkedOptions = () => {
     langPrefix: '',
     renderer,
   });
+};
+
+const codeRenderer = (code: string, _lang: string | undefined) => {
+  let lang = '';
+  let filename = '';
+  if (_lang) {
+    [lang, filename] = _lang.split(':');
+  } else {
+    lang = 'plaintext';
+  }
+  const value = hljs.highlightAuto(code, [lang]).value;
+  let fileElement = '';
+  if (filename !== '') {
+    fileElement = `<div class="filename">${filename}</div>`;
+  }
+  return `${fileElement}<code class="hljs ${lang} ${filename !== '' &&
+    'padding-for-filename'}">${value}</code>`;
+};
+
+const headingRenderer = (text: string, level: 1 | 2 | 3 | 4 | 5 | 6) => {
+  return `<h${level} id="${text}">${text}</h${level}>\n`;
 };
 </script>
 
