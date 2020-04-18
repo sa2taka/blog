@@ -194,8 +194,15 @@ const formatDate = (date: Date) => {
 
 .post-date {
   text-align: right;
-  color: #777;
   font-size: 0.9em !important;
+}
+
+.theme--dark .post-date {
+  color: #aaa;
+}
+
+.theme--light .post-date {
+  color: #333;
 }
 
 .post-title {

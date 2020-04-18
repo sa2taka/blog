@@ -12,7 +12,7 @@
         >
         <v-btn
           v-else
-          icona
+          icon
           aria-label="ダークモードへ"
           v-on="on"
           @click="changeTheme(true)"
