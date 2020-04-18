@@ -5,7 +5,8 @@
 <script lang="ts">
 import { Vue, Prop, Component } from 'nuxt-property-decorator';
 import marked from 'marked';
-import hljs from 'highlight.js';
+
+import hljs from '@/libs/hljs';
 import 'highlight.js/styles/atom-one-dark.css';
 
 @Component
