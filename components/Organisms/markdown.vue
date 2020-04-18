@@ -5,7 +5,8 @@
 <script lang="ts">
 import { Vue, Prop, Component } from 'nuxt-property-decorator';
 import marked from 'marked';
-import hljs from 'highlight.js';
+
+import hljs from '@/libs/hljs';
 import 'highlight.js/styles/atom-one-dark.css';
 
 @Component
@@ -69,10 +70,12 @@ const headingRenderer = (text: string, level: 1 | 2 | 3 | 4 | 5 | 6) => {
   color: #eee;
   display: inline-block;
   position: absolute;
-  background-color: #777;
+  background-color: #444;
   padding: 2px 4px;
   word-break: break-all;
   border-radius: 0 0 5px 0;
+  font-size: 0.9em;
+  padding: 3px 6px;
 }
 
 blockquote {
@@ -80,7 +83,14 @@ blockquote {
   padding: 1.1em 1em;
   margin: 2em auto;
   border-left: 3px solid rgba(128, 128, 128, 0.8);
-  color: #777;
+}
+
+.theme--dark blockquote {
+  color: #aaa;
+}
+
+.theme--light blockquote {
+  color: #333;
 }
 
 /* 引用元名 */

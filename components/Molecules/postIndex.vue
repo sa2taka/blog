@@ -1,7 +1,7 @@
 <template>
   <v-expansion-panels v-model="panel" accordion flat>
     <v-expansion-panel>
-      <v-expansion-panel-header class="py-0">目次</v-expansion-panel-header>
+      <v-expansion-panel-header class="py-2">目次</v-expansion-panel-header>
       <v-expansion-panel-content>
         <ol>
           <li
@@ -186,6 +186,11 @@ ul > li:before {
 
 ul > li {
   list-style: none;
+}
+
+.index-link {
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 ol > li > .index-link {

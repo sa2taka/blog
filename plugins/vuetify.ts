@@ -1,23 +1,9 @@
-import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
 import '@fortawesome/fontawesome-free/css/all.css';
 import ja from 'vuetify/src/locale/ja';
 import values from './iconValues';
 
-let storage;
-
-if (process.env.client) {
-  storage = localStorage;
-}
-
-let isDark = true;
-if (storage?.getItem('theme') === 'light') {
-  isDark = false;
-}
-
-Vue.use(Vuetify);
-
-export default (ctx: any) => {
+export default (ctx: any, isDark: boolean) => {
   const vuetify = new Vuetify({
     customVariables: ['~/assets/variables.scss'],
     theme: {
@@ -58,9 +44,3 @@ export default (ctx: any) => {
   ctx.app.vuetify = vuetify;
   ctx.vuetify = vuetify.framework;
 };
-
-declare module 'vue/types/vue' {
-  interface Vue {
-    $vuetify: any;
-  }
-}

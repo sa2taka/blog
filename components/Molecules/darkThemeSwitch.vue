@@ -2,10 +2,20 @@
   <div>
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
-        <v-btn v-if="isDark" icon v-on="on" @click="changeTheme(false)"
+        <v-btn
+          v-if="isDark"
+          icon
+          aria-label="ライトモードへ"
+          v-on="on"
+          @click="changeTheme(false)"
           ><v-icon>fa-moon</v-icon></v-btn
         >
-        <v-btn v-else icon v-on="on" @click="changeTheme(true)"
+        <v-btn
+          v-else
+          icon
+          aria-label="ダークモードへ"
+          v-on="on"
+          @click="changeTheme(true)"
           ><v-icon>fa-sun</v-icon></v-btn
         >
       </template>

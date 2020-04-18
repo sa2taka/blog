@@ -1,4 +1,4 @@
-import { BASE_URL } from '@/libs/const';
+import { BASE_URL } from './libs/const';
 const nodeExternals = require('webpack-node-externals');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 
@@ -19,6 +19,28 @@ export default {
         name: 'description',
         content: process.env.npm_package_description || '',
       },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: "園児ニアの庭園 | sa2taka's blog",
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: 'sa2takanのブログ',
+      },
+      {
+        hid: 'og:url',
+        property: 'og:url',
+        content: BASE_URL,
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: BASE_URL + 'site-icon.jpg',
+      },
+      { property: 'og:site_name', content: '園児ニアの庭園' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
@@ -33,7 +55,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/vuetify'],
+  plugins: ['@/plugins/vuetify.server', '@/plugins/vuetify.client'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -49,6 +71,7 @@ export default {
   modules: [
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
+    ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 * 24 * 3 }],
     ['cookie-universal-nuxt', { parseJSON: false }],
   ],
   /*
@@ -58,6 +81,13 @@ export default {
     transpile: [/^vuetify/],
     plugins: [new VuetifyLoaderPlugin()],
     extractCSS: true,
+    useForkTsChecker: true,
+    loaders: {
+      vueStyle: {
+        manualInject: true,
+      },
+    },
+
     extend(config: any, ctx: any) {
       if (ctx.isDev && ctx.isClient) {
         config.devtool = 'inline-cheap-module-source-map';
@@ -84,21 +114,60 @@ export default {
     CTF_SPACE_ID: config.CTF_SPACE_ID,
   },
   manifest: {
-    name: '園児ニアの庭園',
+    name: "園児ニアの庭園 | sa2taka's blog",
     lang: 'ja',
-    short_name: 'blog',
-    title: '園児ニアの庭園',
-    'og:title': '園児ニアの庭園',
+    short_name: "sa2taka's blog",
     description: 'sa2taka blog',
-    'og:description': 'sa2taka blog',
-    'og:url': BASE_URL,
     theme_color: '#009688',
     background_color: '#2a2a2a',
+    start_url: '/',
+    icons: [
+      {
+        src: 'icons/icon-72x72.png',
+        sizes: '72x72',
+        type: 'image/png',
+      },
+      {
+        src: 'icons/icon-96x96.png',
+        sizes: '96x96',
+        type: 'image/png',
+      },
+      {
+        src: 'icons/icon-128x128.png',
+        sizes: '128x128',
+        type: 'image/png',
+      },
+      {
+        src: 'icons/icon-144x144.png',
+        sizes: '144x144',
+        type: 'image/png',
+      },
+      {
+        src: 'icons/icon-152x152.png',
+        sizes: '152x152',
+        type: 'image/png',
+      },
+      {
+        src: 'icons/icon-192x192.png',
+        sizes: '192x192',
+        type: 'image/png',
+      },
+      {
+        src: 'icons/icon-384x384.png',
+        sizes: '384x384',
+        type: 'image/png',
+      },
+      {
+        src: 'icons/icon-512x512.png',
+        sizes: '512x512',
+        type: 'image/png',
+      },
+    ],
   },
   workbox: {
-    dev: true,
     importScripts: ['cache-sw.js'],
   },
+  icon: false,
   typescript: {
     typeCheck: true,
     ignoreNotFoundWarnings: true,
