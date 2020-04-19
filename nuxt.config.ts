@@ -78,6 +78,7 @@ export default {
     '@nuxtjs/dotenv',
     ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 * 24 * 3 }],
     ['cookie-universal-nuxt', { parseJSON: false }],
+    'nuxt-purgecss',
   ],
   /*
    ** Build configuration
@@ -204,5 +205,28 @@ export default {
   },
   googleAnalytics: {
     id: 'UA-152417689-1',
+  },
+  vue: {
+    config: {
+      devtools: true,
+    },
+  },
+  purgeCSS: {
+    enabled: true,
+    paths: [
+      'components/**/*.vue',
+      'layouts/**/*.vue',
+      'pages/**/*.vue',
+      'plugins/**/*.js',
+      'node_modules/vuetify/dist/vuetify.js',
+    ],
+    styleExtensions: ['.css'],
+    whitelist: ['body', 'html', 'nuxt-progress'],
+    extractors: [
+      {
+        extractor: (content: any) => content.match(/[A-z0-9-:\\/]+/g) || [],
+        extensions: ['html', 'vue', 'js'],
+      },
+    ],
   },
 };
