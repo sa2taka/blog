@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`pages/index should render 1`] = `
+exports[`components/organisms/markdown should render 1`] = `
 <div>
   <h1 id="テストです">テストです</h1>
   <h2 id="テストです">テストです</h2>

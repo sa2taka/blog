@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`pages/index should render 1`] = `
+exports[`molecules/postIndex/index should render 1`] = `
 <v-expansion-panels accordion="" flat="">
   <v-expansion-panel>
     <v-expansion-panel-header class="py-2">目次</v-expansion-panel-header>
