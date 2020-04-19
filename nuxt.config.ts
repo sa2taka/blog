@@ -79,6 +79,7 @@ export default {
     ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 * 24 * 3 }],
     ['cookie-universal-nuxt', { parseJSON: false }],
     'nuxt-purgecss',
+    ['@nuxtjs/sitemap'],
   ],
   /*
    ** Build configuration
@@ -228,5 +229,23 @@ export default {
         extensions: ['html', 'vue', 'js'],
       },
     ],
+  },
+  sitemap: {
+    path: '/sitemap.xml',
+    hostname: 'https://blog.sa2taka.com',
+    exclude: ['/category'],
+    async routes() {
+      const contentful = require('contentful');
+      const client = contentful.createClient({
+        space: config.CTF_SPACE_ID,
+        accessToken: config.CTF_CDA_ACCESS_TOKEN,
+      });
+
+      const posts = await client.getEntries({
+        content_type: 'blogPost',
+        'fields.public': true,
+      });
+      return posts.items.map((item: any) => `posts/${item.fields.slug}`);
+    },
   },
 };
