@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/index should render 1`] = `
+<div>
+  <h1 id="テストです">テストです</h1>
+  <h2 id="テストです">テストです</h2>
+  <p>引用符</p>
+  <blockquote>
+    <ul>
+      <li>list1</li>
+    </ul>
+  </blockquote>
+  <ul>
+    <li>list2<ul>
+        <li>nested 2-1</li>
+        <li>nested 2-2<ul>
+            <li>nested 2-2-1</li>
+            <li>nested 2-2-2</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>list3</li>
+  </ul>
+  <ol>
+    <li>numberlist1</li>
+    <li>numberlist2<ol>
+        <li>nested number 2-1</li>
+        <li>nested number 2-2<ol>
+            <li>nested number 2-2-1</li>
+            <li>nestednumber 2-2-2</li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li>numberlist3</li>
+  </ol>
+  <p><a href="https://sa2taka.com" title="りんく">リンクテキスト</a></p>
+  <p><del>打消し戦</del></p>
+  <p><code class="hljsspan">code</code></p>
+  <div class="filename">hoge.rb</div><code class="hljs ruby padding-for-filename">import <span class="hljs-string">'foo'</span>
+
+puts <span class="hljs-string">'hoge'</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">Fuga</span></span>
+  foobar()
+<span class="hljs-keyword">end</span></code>
+  <hr>
+  <table>
+    <thead>
+      <tr>
+        <th>Header</th>
+        <th>Header</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cell</td>
+        <td>Cell</td>
+      </tr>
+      <tr>
+        <td>Cell</td>
+        <td>Cell</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
