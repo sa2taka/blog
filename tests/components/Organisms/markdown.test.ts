@@ -1,6 +1,7 @@
 import Vuetify from 'vuetify';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-import Index from '@/pages/index.vue';
+import { createLocalVue, mount } from '@vue/test-utils';
+import Markdown from '../../../components/Organisms/markdown.vue';
+import { posts } from '../../__mocks__/postData';
 
 const localVue = createLocalVue();
 
@@ -13,15 +14,22 @@ describe('pages/index', () => {
   beforeEach(() => {
     vuetify = new Vuetify();
   });
-  const mountWithVuetify = () => {
-    return shallowMount(Index, {
+
+  const mountWithVuetify = (options?: any) => {
+    return mount(Markdown, {
       localVue,
       vuetify,
+      ...options,
     });
   };
 
   test('should render', () => {
-    const wrapper = mountWithVuetify();
+    const markdown = posts[0].fields.body;
+    const wrapper = mountWithVuetify({
+      propsData: {
+        markdown,
+      },
+    });
     expect(wrapper.isVueInstance()).toBeTruthy();
     expect(wrapper).toMatchSnapshot();
   });
