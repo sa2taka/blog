@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/index should render 1`] = `
+<v-expansion-panels accordion="" flat="">
+  <v-expansion-panel>
+    <v-expansion-panel-header class="py-2">目次</v-expansion-panel-header>
+    <v-expansion-panel-content>
+      <ol>
+        <li><a href="#テストです" class="index-link">テストです</a>
+          <ul class="ml-5">
+            <li><a href="#テストです" class="index-link">テストです</a></li>
+          </ul>
+        </li>
+      </ol>
+    </v-expansion-panel-content>
+  </v-expansion-panel>
+</v-expansion-panels>
+`;

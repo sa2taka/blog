@@ -198,6 +198,7 @@ export default {
         method: 'GET',
       },
     ],
+    dev: false,
   },
   icon: false,
   typescript: {
