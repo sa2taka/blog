@@ -176,7 +176,7 @@ export default {
     swDest: 'static/sw.js',
     runtimeCaching: [
       {
-        urlPattern: 'https://blog.sa2taka.com/*',
+        urlPattern: '^https://blog.sa2taka.com/$',
         handler: 'staleWhileRevalidate',
         method: 'GET',
       },
@@ -184,6 +184,11 @@ export default {
         urlPattern:
           '^https://cdn.contentful.com/spaces/xw0ljpdch9v4/environments/master/*',
         handler: 'staleWhileRevalidate',
+        method: 'GET',
+      },
+      {
+        urlPattern: '^https://blog.sa2taka.com/post/*',
+        handler: 'cacheFirst',
         method: 'GET',
       },
       {
@@ -198,7 +203,6 @@ export default {
         method: 'GET',
       },
     ],
-    dev: false,
   },
   icon: false,
   typescript: {
