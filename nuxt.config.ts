@@ -3,6 +3,7 @@ const nodeExternals = require('webpack-node-externals');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 
 const config = require('./.contentful.json');
+const isDev = process.env.NODE_ENV === 'development';
 
 export default {
   mode: 'universal',
@@ -214,7 +215,7 @@ export default {
   },
   vue: {
     config: {
-      devtools: true,
+      devtools: isDev,
     },
   },
   purgeCSS: {
