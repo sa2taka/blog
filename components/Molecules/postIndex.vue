@@ -191,14 +191,15 @@ ul > li {
 .index-link {
   padding-top: 12px;
   padding-bottom: 12px;
+  text-decoration: none;
+}
+
+.index-link:hover {
+  text-decoration: underline;
 }
 
 ol > li > .index-link {
   margin-left: 16px;
-}
-
-li > .index-link:hover {
-  text-decoration: underline;
 }
 
 .theme--dark li > .index-link {
