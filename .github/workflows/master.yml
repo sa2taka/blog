@@ -33,12 +33,19 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: yarn install, build
+      - name: yarn install
         env:
           CONTENTFUL_JSON: ${{ secrets.CONTENTFUL_JSON }}
         run: |
           echo "$CONTENTFUL_JSON" | base64 --decode > ./.contentful.json
           yarn install
+
+      - name: yarn test
+        run: |
+          yarn test
+
+      - name: yarn build
+        run: |
           NODE_ENV=production yarn run build
 
       - name: GAE deploy

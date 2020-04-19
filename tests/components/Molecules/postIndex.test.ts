@@ -10,7 +10,7 @@ jest.mock('contentful', () => ({
   createClient: (_: any) => {},
 }));
 
-describe('pages/index', () => {
+describe('molecules/postIndex/index', () => {
   let vuetify: any;
   beforeEach(() => {
     vuetify = new Vuetify();

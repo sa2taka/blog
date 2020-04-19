@@ -9,7 +9,7 @@ jest.mock('contentful', () => ({
   createClient: (_: any) => {},
 }));
 
-describe('pages/index', () => {
+describe('components/organisms/markdown', () => {
   let vuetify: any;
   beforeEach(() => {
     vuetify = new Vuetify();
