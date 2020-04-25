@@ -104,6 +104,9 @@ export default {
           }),
         ];
       }
+      config.node = {
+        fs: 'empty',
+      };
     },
   },
   env: {
@@ -219,7 +222,9 @@ export default {
       'node_modules/vuetify/dist/vuetify.js',
     ],
     styleExtensions: ['.css'],
+    // hljs setting
     whitelist: ['body', 'html', 'nuxt-progress'],
+    whitelistPatternsChildren: [/^v-/, /^hljs/],
     extractors: [
       {
         extractor: (content: any) => content.match(/[A-z0-9-:\\/]+/g) || [],

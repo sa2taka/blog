@@ -141,10 +141,12 @@ interface FormatedPostIndex {
 <style scoped>
 ol {
   list-style-type: none !important;
+  counter-reset: number;
 }
 
 li {
   position: relative;
+  margin-top: 6px;
 }
 
 ol,
