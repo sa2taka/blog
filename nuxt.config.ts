@@ -96,17 +96,7 @@ export default {
       },
     },
 
-    extend(config: any, ctx: any) {
-      if (ctx.isDev && ctx.isClient) {
-        config.devtool = 'inline-cheap-module-source-map';
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/,
-        });
-      }
-
+    extend(config: any, _ctx: any) {
       if (process.server) {
         config.externals = [
           nodeExternals({
@@ -114,6 +104,9 @@ export default {
           }),
         ];
       }
+      config.node = {
+        fs: 'empty',
+      };
     },
   },
   env: {
@@ -204,6 +197,7 @@ export default {
         method: 'GET',
       },
     ],
+    dev: false,
   },
   icon: false,
   typescript: {
@@ -228,7 +222,9 @@ export default {
       'node_modules/vuetify/dist/vuetify.js',
     ],
     styleExtensions: ['.css'],
+    // hljs setting
     whitelist: ['body', 'html', 'nuxt-progress'],
+    whitelistPatternsChildren: [/^v-/, /^hljs/],
     extractors: [
       {
         extractor: (content: any) => content.match(/[A-z0-9-:\\/]+/g) || [],

@@ -1,8 +1,11 @@
 <template>
-  <div v-if="posts.length !== 0">
-    <article v-for="post in posts" :key="post.id" class="posts">
-      <card-post :post="post" />
-    </article>
+  <div v-if="posts.length !== 0" class="posts">
+    <card-post
+      v-for="post in posts"
+      :key="post.id"
+      :post="post"
+      class="post mt-6"
+    />
   </div>
   <div v-else>投稿が見つかりません</div>
 </template>
@@ -36,5 +39,8 @@ export default class Posts extends Vue {
   display: grid;
   grid-template-rows: 20px;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  width: 100%;
+  position: relative;
+  justify-content: space-between;
 }
 </style>
