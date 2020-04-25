@@ -1,6 +1,7 @@
 // import hljs from 'highlight.js'; はバンドルサイズがやばい
 // @ts-ignore
 import hljs from 'highlight.js/lib/highlight';
+import 'highlight.js/styles/atom-one-dark.css';
 
 // @ts-ignore
 import javascript from 'highlight.js/lib/languages/javascript';
