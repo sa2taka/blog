@@ -56,7 +56,8 @@ export function fetchPostInCategory(
     limit,
     skip: page * limit,
     order: '-fields.releaseDate',
-    'fields.slug[eq]': categorySlug,
+    'fields.category.sys.contentType.sys.id': CTF_CATEGORY_ID,
+    'fields.category.fields.slug': categorySlug,
   };
 
   if (isProdcution) {

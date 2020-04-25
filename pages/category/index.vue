@@ -10,6 +10,7 @@
             params: { slug: category.fields.slug },
           }"
           outlined
+          class="ml-2 mt-2"
           >{{ category.fields.name }}</v-btn
         >
       </li>
