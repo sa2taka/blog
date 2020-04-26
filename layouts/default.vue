@@ -39,7 +39,38 @@
         <nuxt v-cloak />
       </v-container>
     </v-content>
-    <v-footer app>
+
+    <v-footer class="main-footer">
+      <div class="d-flex flex-column align-center mx-auto">
+        <div
+          class="d-flex align-center animation-link"
+          @click="$router.push('/')"
+        >
+          <v-icon>fa-home</v-icon>
+          <span class="ml-2  mt-1">Home</span>
+        </div>
+        <div class="d-flex mt-4">
+          <div>
+            <v-icon v-html="'$vuetify.icons.twitter'" />
+            <a
+              href="https://twitter.com/t0p_l1ght"
+              class="animation-link footer-link ml-2  mt-1"
+              >筆者Twitterアカウント</a
+            >
+          </div>
+          <div class="ml-4">
+            <v-icon v-html="'$vuetify.icons.twitter'" />
+            <nuxt-link
+              :to="{ name: 'guide' }"
+              class="animation-link footer-link ml-2  mt-1"
+              >当サイト利用について</nuxt-link
+            >
+          </div>
+        </div>
+      </div>
+    </v-footer>
+
+    <v-footer app height="36">
       <v-spacer />
       <span>&copy; sa2taka</span>
     </v-footer>
@@ -104,6 +135,7 @@ html {
 
 .animation-link {
   position: relative;
+  cursor: pointer;
 }
 
 .animation-link::after {
@@ -129,5 +161,22 @@ html {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.main-footer {
+  position: relative;
+  top: -36px;
+}
+
+.footer-link {
+  text-decoration: none;
+}
+
+.theme--dark .footer-link {
+  color: white !important;
+}
+
+.theme--light .footer-link {
+  color: black !important;
 }
 </style>
