@@ -45,10 +45,11 @@ const myCodePlugin = (md: MarkdownIt) => {
     }
     const value = hljs.highlightAuto(code, [lang]).value;
     let fileElement = '';
-    if (filename !== '') {
+    if (filename && filename !== '') {
       fileElement = `<div class="filename">${filename}</div>`;
     }
-    return `${fileElement}<code class="hljs ${lang} ${filename !== '' &&
+    return `${fileElement}<code class="hljs ${lang} ${filename &&
+      filename !== '' &&
       'padding-for-filename'}">${value}</code>`;
   };
 };

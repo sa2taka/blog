@@ -4,7 +4,6 @@ export const generateIndexies = (markdown: string) => {
   const markdownWithoutCode = markdown
     .replace(/```[^`]+?```/g, '')
     .replace(/`[^`]+?`/g, '');
-  console.log(markdownWithoutCode);
   const regexp = /^\s*(?<hash>#{1,3})\s*(?<title>.+)\s*$/gm;
 
   const postIndex: PostIndex[] = [];

@@ -251,7 +251,7 @@ export default {
         content_type: 'blogPost',
         'fields.public': true,
       });
-      return posts.items.map((item: any) => `posts/${item.fields.slug}`);
+      return posts.items.map((item: any) => `post/${item.fields.slug}`);
     },
   },
 };
