@@ -192,6 +192,11 @@ export default {
         method: 'GET',
       },
       {
+        urlPattern: '^https?://i.imgur.com/.*.(png|jpg|webp)',
+        handler: 'cacheFirst',
+        method: 'GET',
+      },
+      {
         urlPattern: '^https://fonts.googleapis.com/',
         handler: 'cacheFirst',
         method: 'GET',
@@ -222,7 +227,6 @@ export default {
       'node_modules/vuetify/dist/vuetify.js',
     ],
     styleExtensions: ['.css'],
-    // hljs setting
     whitelist: ['body', 'html', 'nuxt-progress'],
     whitelistPatternsChildren: [/^v-/, /^hljs/],
     extractors: [
