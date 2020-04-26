@@ -47,22 +47,24 @@
           @click="$router.push('/')"
         >
           <v-icon>fa-home</v-icon>
-          <span class="ml-2  mt-1">Home</span>
+          <span class="ml-2 mt-1">Home</span>
         </div>
         <div class="d-flex mt-4">
           <div>
-            <v-icon v-html="'$vuetify.icons.twitter'" />
+            <v-icon
+              class=" mt-n1"
+              v-html="$vuetify.icons.values.twitter"
+            ></v-icon>
             <a
               href="https://twitter.com/t0p_l1ght"
-              class="animation-link footer-link ml-2  mt-1"
+              class="animation-link footer-link mt-2"
               >筆者Twitterアカウント</a
             >
           </div>
           <div class="ml-4">
-            <v-icon v-html="'$vuetify.icons.twitter'" />
             <nuxt-link
               :to="{ name: 'guide' }"
-              class="animation-link footer-link ml-2  mt-1"
+              class="animation-link footer-link ml-2 mt-2"
               >当サイト利用について</nuxt-link
             >
           </div>

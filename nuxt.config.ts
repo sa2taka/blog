@@ -228,7 +228,7 @@ export default {
     ],
     styleExtensions: ['.css'],
     whitelist: ['body', 'html', 'nuxt-progress'],
-    whitelistPatternsChildren: [/^v-/, /^hljs/],
+    whitelistPatternsChildren: [/^v-/, /^hljs/, /fab/, /^fa-/],
     extractors: [
       {
         extractor: (content: any) => content.match(/[A-z0-9-:\\/]+/g) || [],
