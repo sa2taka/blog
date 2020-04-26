@@ -1,11 +1,13 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
+import { Context } from '@nuxt/types';
 import setVuetify from '@/plugins/vuetify';
 
 Vue.use(Vuetify);
 
-export default (ctx: any) => {
-  setVuetify(ctx, true);
+export default (ctx: Context) => {
+  const isDark = ctx.req.headers.cookie?.match(/theme=dark/);
+  setVuetify(ctx, !!isDark);
 };
 
 declare module 'vue/types/vue' {

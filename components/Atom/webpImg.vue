@@ -2,8 +2,8 @@
   <picture
     onload="handleLoad()"
     :style="{
-      width: width ? width + 'px' : 'auto',
-      height: height ? height + 'px' : 'auto',
+      width: width || width !== 'auto' ? width + 'px' : 'auto',
+      height: height || height !== 'auto' ? height + 'px' : 'auto',
     }"
   >
     <source :srcset="webpName" type="image/webp" />
