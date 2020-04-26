@@ -1,9 +1,10 @@
 import Vuetify from 'vuetify/lib';
+import { Context } from '@nuxt/types';
 import '@fortawesome/fontawesome-free/css/all.css';
 import ja from 'vuetify/src/locale/ja';
 import values from './iconValues';
 
-export default (ctx: any, isDark: boolean) => {
+export default (ctx: Context, isDark: boolean) => {
   const vuetify = new Vuetify({
     customVariables: ['~/assets/variables.scss'],
     theme: {
@@ -42,5 +43,6 @@ export default (ctx: any, isDark: boolean) => {
     },
   });
   ctx.app.vuetify = vuetify;
+  // @ts-ignore
   ctx.vuetify = vuetify.framework;
 };

@@ -5,7 +5,8 @@ import setVuetify from '@/plugins/vuetify';
 Vue.use(Vuetify);
 
 export default (ctx: any) => {
-  setVuetify(ctx, true);
+  const isDark = localStorage.getItem('theme') === 'dark';
+  setVuetify(ctx, isDark);
 };
 
 declare module 'vue/types/vue' {
