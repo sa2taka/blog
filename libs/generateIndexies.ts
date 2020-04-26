@@ -2,8 +2,9 @@ import { PostIndex } from '@/types/postIndex';
 
 export const generateIndexies = (markdown: string) => {
   const markdownWithoutCode = markdown
-    .replace(/```[\s\S]?```/g, '')
-    .replace(/`[\s\S]?`/g, '');
+    .replace(/```[^`]+?```/g, '')
+    .replace(/`[^`]+?`/g, '');
+  console.log(markdownWithoutCode);
   const regexp = /^\s*(?<hash>#{1,3})\s*(?<title>.+)\s*$/gm;
 
   const postIndex: PostIndex[] = [];
