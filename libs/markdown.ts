@@ -13,7 +13,7 @@ const myHeaderPlugin = (md: MarkdownIt) => {
   md.renderer.rules.heading_open = (...[tokens, idx, options, _, self]) => {
     const tag = tokens[idx].tag;
     const content = tokens[idx + 1].content;
-    if (tag.match(/^h[123]$/)) {
+    if (tag.match(/^h[123456]$/)) {
       return `<${tag} id="${content}">`;
     } else {
       return self.renderToken(tokens, idx, options);
