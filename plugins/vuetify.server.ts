@@ -6,7 +6,7 @@ import setVuetify from '@/plugins/vuetify';
 Vue.use(Vuetify);
 
 export default (ctx: Context) => {
-  const isDark = ctx.req.headers.cookie?.match(/theme=dark/);
+  const isDark = !ctx.req.headers.cookie?.match(/theme=light/);
   setVuetify(ctx, !!isDark);
 };
 
