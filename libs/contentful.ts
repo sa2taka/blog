@@ -16,7 +16,7 @@ export function fetchCategories() {
 export function fetchPosts(page: number, limit: number) {
   const queries: Record<string, any> = {
     content_type: CTF_POST_ID,
-    order: '-fields.releaseDate',
+    order: '-sys.createdAt',
     skip: page * limit,
     limit,
   };
@@ -32,7 +32,7 @@ export async function confirmExistingCategory(categoryId: string) {
   const queries: Record<string, any> = {
     content_type: CTF_POST_ID,
     limit: 1,
-    order: '-fields.releaseDate',
+    order: '-sys.createdAt',
     'fields.category.sys.id': categoryId,
   };
 
@@ -55,7 +55,7 @@ export function fetchPostInCategory(
     content_type: CTF_POST_ID,
     limit,
     skip: page * limit,
-    order: '-fields.releaseDate',
+    order: '-sys.createdAt',
     'fields.category.sys.contentType.sys.id': CTF_CATEGORY_ID,
     'fields.category.fields.slug': categorySlug,
   };
