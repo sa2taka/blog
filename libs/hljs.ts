@@ -13,11 +13,20 @@ import ruby from 'highlight.js/lib/languages/ruby';
 import xml from 'highlight.js/lib/languages/xml';
 // @ts-ignore
 import css from 'highlight.js/lib/languages/css';
+// @ts-ignore
+import java from 'highlight.js/lib/languages/java';
+// @ts-ignore
+import scala from 'highlight.js/lib/languages/scala';
+// @ts-ignore
+import kotlin from 'highlight.js/lib/languages/kotlin';
 
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('typescript', typescript);
 hljs.registerLanguage('ruby', ruby);
 hljs.registerLanguage('xml', xml);
 hljs.registerLanguage('css', css);
+hljs.registerLanguage('java', java);
+hljs.registerLanguage('scala', scala);
+hljs.registerLanguage('kotlin', kotlin);
 
 export default hljs;

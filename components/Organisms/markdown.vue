@@ -87,7 +87,7 @@ export default class Markdown extends Vue {
 }
 
 .markdown-body h1 {
-  margin-top: 42px;
+  margin-top: 52px;
   margin-bottom: 18px;
 }
 
@@ -134,5 +134,13 @@ export default class Markdown extends Vue {
 .markdown-body hr.footnotes-sep {
   margin-top: 12px;
   margin-bottom: 16px;
+}
+
+.markdown-body code {
+  margin: 1.5em auto;
+}
+
+.markdown-body img {
+  margin: 1.5em auto;
 }
 </style>
