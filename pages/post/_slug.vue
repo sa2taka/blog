@@ -19,9 +19,8 @@
               name: 'category-slug',
               params: { slug: post.fields.category.fields.slug },
             }"
+            >{{ post.fields.category.fields.name }}</nuxt-link
           >
-            {{ post.fields.category.fields.name }}
-          </nuxt-link>
           <h1 class="post-title-name">{{ post.fields.title }}</h1>
           <p class="post-author">by {{ post.fields.author.fields.name }}</p>
         </div>
@@ -54,7 +53,18 @@ export default class PostSlug extends Vue {
   post!: Post;
 
   async asyncData(context: Context) {
+    if (!context.params.slug || context.params.slug === '') {
+      return context.error({
+        statusCode: 404,
+      });
+    }
     const post: Post = await fetchPost(context.params.slug);
+
+    if (!post) {
+      return context.error({
+        statusCode: 404,
+      });
+    }
 
     return {
       post,
