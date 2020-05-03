@@ -1,6 +1,6 @@
 <template>
   <v-lazy v-model="isActive" min-height="320" transition="fade-transition">
-    <article>
+    <article @mouseenter="addPrerener">
       <v-card
         class="post-card mx-auto"
         hover
@@ -70,6 +70,24 @@ export default class TopPagePosts extends Vue {
       'style',
       `grid-row: span ${Math.ceil(height / 20) + 1};height: ${height}px;`
     );
+  }
+
+  addPrerener() {
+    const elementId = 'prerendering-header';
+    const oldLink = document.getElementById(elementId);
+    const href = `/post/${this.post.fields.slug}`;
+
+    if (oldLink) {
+      const oldHref = oldLink.attributes.getNamedItem('href');
+      if (oldHref && oldHref.value === href) return;
+      oldLink.parentNode && oldLink.parentNode.removeChild(oldLink);
+    }
+
+    const link = document.createElement('link');
+    link.id = elementId;
+    link.rel = 'prerender';
+    link.href = href;
+    document.head && document.head.appendChild(link);
   }
 
   get altText() {
