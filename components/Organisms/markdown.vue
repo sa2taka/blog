@@ -27,11 +27,11 @@ export default class Markdown extends Vue {
   display: inline-block;
   position: absolute;
   background-color: #444;
-  padding: 2px 4px;
   word-break: break-all;
   border-radius: 0 0 5px 0;
   font-size: 0.9em;
   padding: 3px 6px;
+  margin-top: 5px;
 }
 
 .markdown-body {
