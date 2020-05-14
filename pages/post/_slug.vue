@@ -226,5 +226,6 @@ const formatDate = (date: Date) => {
   background-size: cover;
   display: flex;
   border-radius: 12px;
+  background-position: center;
 }
 </style>
