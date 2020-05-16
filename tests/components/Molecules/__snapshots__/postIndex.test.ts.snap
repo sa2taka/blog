@@ -6,9 +6,13 @@ exports[`molecules/postIndex/index should render 1`] = `
     <v-expansion-panel-header class="py-2">目次</v-expansion-panel-header>
     <v-expansion-panel-content>
       <ol>
-        <li><a href="#テストです" class="index-link">テストです</a>
+        <li><a href="#テストです" class="index-link">
+            テストです
+          </a>
           <ul class="ml-5">
-            <li><a href="#テストです" class="index-link">テストです</a></li>
+            <li><a href="#テストです" class="index-link">
+                テストです
+              </a></li>
           </ul>
         </li>
       </ol>

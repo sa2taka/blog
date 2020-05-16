@@ -8,18 +8,18 @@
             v-for="indexNest1 in formatedPostIndex"
             :key="indexNest1.title + indexNest1.level.toString()"
           >
-            <a class="index-link" :href="`#${indexNest1.title}`">{{
-              indexNest1.title
-            }}</a>
+            <a class="index-link" :href="`#${indexNest1.title}`">
+              {{ indexNest1.title }}
+            </a>
 
             <ul v-if="indexNest1.child.length !== 0" class="ml-5">
               <li
                 v-for="indexNest2 in indexNest1.child"
                 :key="indexNest2.title + indexNest2.level.toString()"
               >
-                <a class="index-link" :href="`#${indexNest2.title}`">{{
-                  indexNest2.title
-                }}</a>
+                <a class="index-link" :href="`#${indexNest2.title}`">
+                  {{ indexNest2.title }}
+                </a>
               </li>
             </ul>
           </li>
@@ -191,8 +191,8 @@ ul > li {
 }
 
 .index-link {
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 14px;
+  padding-bottom: 14px;
   text-decoration: none;
 }
 
