@@ -4,8 +4,6 @@
       >&lt;&lt; 戻る</a
     >
     <article class="post">
-      <p class="mb-0 post-date">作成日: {{ postDate }}</p>
-      <p class="mb-0 post-date">更新日: {{ updateDate }}</p>
       <div
         class="post-title-area"
         :style="{
@@ -24,6 +22,10 @@
           <h1 class="post-title-name">{{ post.fields.title }}</h1>
           <p class="post-author">by {{ post.fields.author.fields.name }}</p>
         </div>
+      </div>
+      <div class="date-area">
+        <p class="mb-0 post-date">作成日: {{ postDate }}</p>
+        <p class="mb-0 post-date">更新日: {{ updateDate }}</p>
       </div>
       <post-index :index="postIndex" class="mt-10" />
       <markdown class="mt-8" :markdown="post.fields.body" />
@@ -181,17 +183,23 @@ const formatDate = (date: Date) => {
   width: 100%;
 }
 
+.date-area {
+  margin: 4px auto;
+  display: flex;
+  align-items: flex-end;
+  flex-flow: column;
+}
+
 .post-date {
-  text-align: right;
   font-size: 0.9em !important;
 }
 
 .theme--dark .post-date {
-  color: #aaa;
+  color: #ccc;
 }
 
 .theme--light .post-date {
-  color: #333;
+  color: #222;
 }
 
 .post-title {
