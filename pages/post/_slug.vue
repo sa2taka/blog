@@ -195,7 +195,7 @@ const formatDate = (date: Date) => {
 }
 
 .post-title {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.92);
   padding: 8px 12px;
   margin-bottom: 0;
   margin-top: auto;
