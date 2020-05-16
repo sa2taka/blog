@@ -145,7 +145,7 @@ const formatDate = (date: Date) => {
 <style>
 /* Do not set scoped */
 .post {
-  width: 60%;
+  width: 80%;
   min-width: 300px;
   margin-left: auto;
   margin-right: auto;

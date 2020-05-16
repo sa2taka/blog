@@ -18,6 +18,9 @@ export default class Markdown extends Vue {
 </script>
 
 <style>
+.v-application .markdown-body * {
+  word-wrap: break-word;
+}
 .padding-for-filename {
   padding-top: 2.6em !important;
 }
@@ -40,9 +43,14 @@ export default class Markdown extends Vue {
 }
 
 .markdown-body blockquote {
-  margin: 0;
-  padding: 1.1em 1em;
+  padding: 0.6em 1em;
   margin: 2em auto;
+  border-left: 3px solid rgba(128, 128, 128, 0.8);
+}
+
+.markdown-body blockquote blockquote {
+  padding: 0.4em 1em;
+  margin: 1.2em auto 0.7em;
   border-left: 3px solid rgba(128, 128, 128, 0.8);
 }
 
@@ -102,14 +110,34 @@ export default class Markdown extends Vue {
   margin-top: 12px;
 }
 
+.markdown-body hr.footnotes-sep {
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+
+.v-application .markdown-body code {
+  margin: 1.5em auto;
+  word-wrap: normal;
+  white-space: pre;
+}
+
+.markdown-body img {
+  margin: 0.6em auto;
+}
+
+.theme--light .markdown-body a {
+  color: #006256;
+}
+
 /* HACK */
 .v-application code {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  color: #abb2bf;
+  color: #dddddd;
   background: #282c34;
   margin: 0.5em 0;
+  overflow-x: scroll;
 }
 
 .markdown-body blockquote p {
@@ -119,7 +147,7 @@ export default class Markdown extends Vue {
 .v-application code.hljsspan {
   display: inline;
   overflow-x: initial;
-  color: #abb2bf;
+  color: #dddddd;
   background: #282c34;
   padding: 0.1em 0.4em;
   margin-left: 4px;
@@ -129,18 +157,5 @@ export default class Markdown extends Vue {
 .v-application code::before,
 .v-application code::after {
   content: none;
-}
-
-.markdown-body hr.footnotes-sep {
-  margin-top: 12px;
-  margin-bottom: 16px;
-}
-
-.markdown-body code {
-  margin: 1.5em auto;
-}
-
-.markdown-body img {
-  margin: 1.5em auto;
 }
 </style>
