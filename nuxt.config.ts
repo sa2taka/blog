@@ -11,6 +11,9 @@ export default {
    ** Headers of the page
    */
   head: {
+    htmlAttrs: {
+      lang: 'ja',
+    },
     titleTemplate: '%s' + '園児ニアの庭園',
     title: ' ',
     meta: [
