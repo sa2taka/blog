@@ -137,7 +137,6 @@ export default class Markdown extends Vue {
   color: #dddddd;
   background: #282c34;
   margin: 0.5em 0;
-  overflow-x: scroll;
 }
 
 .markdown-body blockquote p {
