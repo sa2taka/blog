@@ -22,7 +22,7 @@ export default class IndexPage extends Vue {
 
   async asyncData(context: Context) {
     const page = decidePage(context);
-    const limit = 20; // hard code because "this" is not access
+    const limit = 20; // hard code because "this" is not accessable
 
     const posts: Post[] = await fetchPosts(page, limit).then(
       (posts: MultipleItem<Post>) => posts.items

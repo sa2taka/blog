@@ -34,7 +34,6 @@ export default class Markdown extends Vue {
   border-radius: 0 0 5px 0;
   font-size: 0.9em;
   padding: 3px 6px;
-  margin-top: 5px;
 }
 
 .markdown-body {
@@ -116,7 +115,7 @@ export default class Markdown extends Vue {
 }
 
 .v-application .markdown-body code {
-  margin: 1.5em auto;
+  margin: auto auto 1.5em;
   word-wrap: normal;
   white-space: pre;
 }
