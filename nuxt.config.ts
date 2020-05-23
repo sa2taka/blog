@@ -47,7 +47,7 @@ export default {
       {
         hid: 'twitter:card',
         property: 'twitter:card',
-        content: BASE_URL + '/logo-for-twitter.png',
+        content: 'summary',
       },
       {
         hid: 'twitter:image',
