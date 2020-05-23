@@ -19,6 +19,8 @@ import java from 'highlight.js/lib/languages/java';
 import scala from 'highlight.js/lib/languages/scala';
 // @ts-ignore
 import kotlin from 'highlight.js/lib/languages/kotlin';
+// @ts-ignore
+import json from 'highlight.js/lib/languages/json';
 
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('typescript', typescript);
@@ -28,5 +30,6 @@ hljs.registerLanguage('css', css);
 hljs.registerLanguage('java', java);
 hljs.registerLanguage('scala', scala);
 hljs.registerLanguage('kotlin', kotlin);
+hljs.registerLanguage('json', json);
 
 export default hljs;
