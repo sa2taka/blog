@@ -22,5 +22,5 @@ module.exports = {
     'vue/no-v-html': 'off',
     'prettier/prettier': 'error',
   },
-  ignorePatterns: ['static/', 'node_modules/'],
+  ignorePatterns: ['static/', 'node_modules/', 'plugins/main-sw.js'],
 };

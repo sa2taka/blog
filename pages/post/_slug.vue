@@ -232,7 +232,8 @@ const formatDate = (date: Date) => {
 
 .post-title-area {
   height: 240px;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   display: flex;
   border-radius: 12px;
   background-position: center;

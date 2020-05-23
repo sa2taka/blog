@@ -13,7 +13,6 @@
           :img-name="generateFormatedImg(post.fields.postImage.fields.file.url)"
           :alt="altText"
           :width="width"
-          :height="imgHeight"
           :on-load="onLoad"
           class="post-img"
         />
@@ -45,7 +44,7 @@ export default class TopPagePosts extends Vue {
 
   isActive = false;
   loading = true;
-  imgHeight = 200;
+  imgHeight = 'auto';
   width = 320;
 
   updated() {
