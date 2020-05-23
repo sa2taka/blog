@@ -45,9 +45,19 @@ export default {
         content: BASE_URL + '/logo-for-facebook.png',
       },
       {
+        hid: 'twitter:card',
+        property: 'twitter:card',
+        content: BASE_URL + '/logo-for-twitter.png',
+      },
+      {
         hid: 'twitter:image',
         property: 'twitter:image',
         content: BASE_URL + '/logo-for-twitter.png',
+      },
+      {
+        hid: 'twitter:site',
+        property: 'twitter:site',
+        content: '@t0p_l1ght',
       },
       { property: 'og:site_name', content: '園児ニアの庭園' },
     ],
