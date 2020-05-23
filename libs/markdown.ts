@@ -43,14 +43,24 @@ const myCodePlugin = (md: MarkdownIt) => {
     } else {
       lang = 'plaintext';
     }
-    const value = hljs.highlightAuto(code, [lang]).value;
+
+    let value: string = hljs.highlightAuto(code, [lang]).value;
+
+    // shellで使われるtoken($, #, (%))を選択させないように変更
+    if (lang === 'plaintext' || lang === '' || lang.includes('sh')) {
+      value = value.replace(
+        /^([$#&]\s*)/gm,
+        '<span class="shell-token">$1</span>'
+      );
+    }
+
     let fileElement = '';
     if (filename && filename !== '') {
       fileElement = `<div class="filename">${filename}</div>`;
     }
-    return `${fileElement}<code class="hljs ${lang} ${filename &&
-      filename !== '' &&
-      'padding-for-filename'}">${value}</code>`;
+    return `${fileElement}<code class="hljs ${lang} ${
+      filename && filename !== '' ? 'padding-for-filename' : ''
+    }">${value}</code>`;
   };
 };
 

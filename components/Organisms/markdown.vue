@@ -120,6 +120,11 @@ export default class Markdown extends Vue {
   white-space: pre;
 }
 
+.v-application .markdown-body code .shell-token {
+  user-select: none;
+  color: #777;
+}
+
 .markdown-body img {
   margin: 0.6em auto;
 }
@@ -133,7 +138,7 @@ export default class Markdown extends Vue {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  color: #dddddd;
+  color: #bbb;
   background: #282c34;
   margin: 0.5em 0;
 }
@@ -145,7 +150,7 @@ export default class Markdown extends Vue {
 .v-application code.hljsspan {
   display: inline;
   overflow-x: initial;
-  color: #dddddd;
+  color: #bbb;
   background: #282c34;
   padding: 0.1em 0.4em;
   margin-left: 4px;
