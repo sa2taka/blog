@@ -94,19 +94,19 @@ export default class Markdown extends Vue {
 }
 
 .markdown-body h1 {
-  margin-top: 52px;
-  margin-bottom: 18px;
+  margin-top: 64px;
+  margin-bottom: 24px;
 }
 
 .markdown-body h2 {
-  margin-top: 24px;
+  margin-top: 58px;
   margin-bottom: 18px;
 }
 
 .markdown-body h3,
 .markdown-body h4 {
+  margin-top: 52px;
   margin-bottom: 20px;
-  margin-top: 12px;
 }
 
 .markdown-body hr.footnotes-sep {
@@ -141,6 +141,7 @@ export default class Markdown extends Vue {
   color: #bbb;
   background: #282c34;
   margin: 0.5em 0;
+  font-weight: 500;
 }
 
 .markdown-body blockquote p {
