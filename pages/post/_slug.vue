@@ -114,14 +114,17 @@ export default class PostSlug extends Vue {
           content: this.post.fields.title + ' - 園児ニアの庭園',
         },
         {
+          hid: 'og:description',
           name: 'og:description',
           content: this.post.fields.description,
         },
         {
+          hid: 'og:image',
           name: 'og:image',
           content: this.ogImage,
         },
         {
+          hid: 'og:url',
           name: 'og:url',
           content: BASE_URL + this.$route.path,
         },
