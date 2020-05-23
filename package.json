@@ -15,7 +15,7 @@
     "format": "./node_modules/.bin/prettier -c '**/*.vue' '**/*.ts' '**/*.js' --ignore-path .gitignore & npm run lint"
   },
   "lint-staged": {
-    "*.{js,vue}": "yarn lint"
+    "*.{js,vue}": "yarn lint --ignore-path ./plugins/main-sw.js"
   },
   "husky": {
     "hooks": {

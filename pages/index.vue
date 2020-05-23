@@ -33,6 +33,15 @@ export default class IndexPage extends Vue {
       posts,
     };
   }
+
+  created() {
+    if (process.client) {
+      const updatesChannel = new BroadcastChannel('contentful');
+      updatesChannel.addEventListener('message', () => {
+        this.$forceUpdate();
+      });
+    }
+  }
 }
 
 // page setting
