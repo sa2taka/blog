@@ -1,6 +1,12 @@
 workbox.routing.registerRoute(
   new RegExp('^https://blog.sa2taka.com/$'),
-  new workbox.strategies.StaleWhileRevalidate({}),
+  workbox.strategies.staleWhileRevalidate({
+    plugins: [
+      new workbox.broadcastUpdate.Plugin({
+        channelName: 'top-page',
+      }),
+    ],
+  }),
   'GET'
 );
 workbox.routing.registerRoute(

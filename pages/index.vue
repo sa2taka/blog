@@ -37,14 +37,19 @@ export default class IndexPage extends Vue {
 
   created() {
     if (process.client) {
-      const updatesChannel = new BroadcastChannel('contentful');
-      updatesChannel.addEventListener('message', () => {
+      const contentfulChannel = new BroadcastChannel('contentful');
+      contentfulChannel.addEventListener('message', () => {
         fetchPosts(this.page, this.limit)
           .then((posts: MultipleItem<Post>) => posts.items)
           .then((posts: Post[]) => {
             this.posts = posts;
             this.$forceUpdate();
           });
+      });
+
+      const topPageChannel = new BroadcastChannel('top-page');
+      topPageChannel.addEventListener('message', () => {
+        location.reload();
       });
     }
   }
