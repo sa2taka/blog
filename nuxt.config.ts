@@ -187,7 +187,7 @@ export default {
   workbox: {
     swDest: 'static/sw.js',
     cachingExtensions: '@/plugins/main-sw.js',
-    dev: true,
+    dev: false,
   },
   icon: false,
   typescript: {

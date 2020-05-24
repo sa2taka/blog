@@ -49,10 +49,10 @@
           <v-icon>fa-home</v-icon>
           <span class="ml-2 mt-1">Home</span>
         </div>
-        <div class="d-flex mt-4">
-          <div>
+        <div class="d-flex justify-center flex-wrap mt-4">
+          <div class="mb-2">
             <v-icon
-              class=" mt-n1"
+              class="mt-n1"
               v-html="$vuetify.icons.values.twitter"
             ></v-icon>
             <a
