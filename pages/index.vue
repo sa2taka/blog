@@ -18,6 +18,7 @@ import Posts from '@/components/Organisms/posts.vue';
 })
 export default class IndexPage extends Vue {
   page!: number;
+  limit = 20;
   posts!: Post[];
 
   async asyncData(context: Context) {
@@ -38,7 +39,12 @@ export default class IndexPage extends Vue {
     if (process.client) {
       const updatesChannel = new BroadcastChannel('contentful');
       updatesChannel.addEventListener('message', () => {
-        this.$forceUpdate();
+        fetchPosts(this.page, this.limit)
+          .then((posts: MultipleItem<Post>) => posts.items)
+          .then((posts: Post[]) => {
+            this.posts = posts;
+            this.$forceUpdate();
+          });
       });
     }
   }
