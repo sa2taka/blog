@@ -3,6 +3,7 @@
     <a class="back-button animation-link" href="javascript:history.back();"
       >&lt;&lt; 戻る</a
     >
+    <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
     <article class="post">
       <div
         class="post-title-area"
@@ -41,14 +42,17 @@ import { fetchPost } from '@/libs/contentful';
 import { Post } from '@/types/entry';
 import { BASE_URL } from '@/libs/const';
 import { generateIndexies } from '@/libs/generateIndexies';
+import { generatePostBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 
 import Markdown from '@/components/Organisms/markdown.vue';
 import PostIndex from '@/components/Molecules/postIndex.vue';
+import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
 
 @Component({
   components: {
     Markdown,
     PostIndex,
+    Breadcrumbs,
   },
 })
 export default class PostSlug extends Vue {
@@ -91,6 +95,10 @@ export default class PostSlug extends Vue {
 
   get ogImage() {
     return this.post.fields.postImage.fields.file.url + '?w=1200';
+  }
+
+  get breadcrumbsList() {
+    return generatePostBreadcrumbsList(this.post);
   }
 
   head() {

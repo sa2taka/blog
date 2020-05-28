@@ -56,7 +56,7 @@ const formatPostIndex = (postIndex: IPostIndex[]) => {
   }
   formated.push(generateFirstIndex(first));
 
-  postIndex.forEach(elem => {
+  postIndex.forEach((elem) => {
     append(elem, formated);
   });
 

@@ -1,5 +1,6 @@
 <template>
   <v-layout column justify-center align-center>
+    <breadcrumbs :list="breadcrumbsList" class="breadcrumbs"></breadcrumbs>
     <div class="category-title">{{ category.fields.name }}</div>
     <posts :posts="posts" />
   </v-layout>
@@ -10,11 +11,15 @@ import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
 import { fetchPostInCategory } from '@/libs/contentful';
 import { Post, MultipleItem, Category } from '@/types/entry';
+import { generateCategoryBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
+
 import Posts from '@/components/Organisms/posts.vue';
+import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
 
 @Component({
   components: {
     Posts,
+    Breadcrumbs,
   },
 })
 export default class CategorySlug extends Vue {
@@ -40,6 +45,10 @@ export default class CategorySlug extends Vue {
       posts,
       category,
     };
+  }
+
+  get breadcrumbsList() {
+    return generateCategoryBreadcrumbsList(this.category);
   }
 
   head() {
@@ -71,8 +80,12 @@ const decidePage = (context: Context) => {
 };
 </script>
 
-<style>
+<style scoped>
 .category-title {
   font-size: 1.4em;
+}
+
+.breadcrumbs {
+  width: 100%;
 }
 </style>

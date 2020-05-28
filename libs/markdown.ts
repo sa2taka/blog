@@ -42,7 +42,7 @@ const myCodePlugin = (md: MarkdownIt) => {
     let lang = '';
     let filename = '';
     if (info) {
-      [lang, filename] = info.split(':').map(s => s.trim());
+      [lang, filename] = info.split(':').map((s) => s.trim());
     } else {
       lang = 'plaintext';
     }

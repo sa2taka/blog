@@ -1,35 +1,44 @@
 <template>
-  <nav>
+  <v-layout column justify-center align-center>
+    <breadcrumbs :list="breadcrumbsList" class="breadcrumbs"></breadcrumbs>
     <h2 class="center-title">カテゴリ</h2>
-
-    <ul class="ml-10 categories">
-      <li v-for="category in categories" :key="category.sys.id">
-        <v-btn
-          :to="{
-            name: 'category-slug',
-            params: { slug: category.fields.slug },
-          }"
-          outlined
-          class="ml-2 mt-2"
-          >{{ category.fields.name }}</v-btn
-        >
-      </li>
-    </ul>
-  </nav>
+    <nav>
+      <ul class="categories">
+        <li v-for="category in categories" :key="category.sys.id">
+          <v-btn
+            :to="{
+              name: 'category-slug',
+              params: { slug: category.fields.slug },
+            }"
+            outlined
+            class="ml-2 mt-2"
+            >{{ category.fields.name }}</v-btn
+          >
+        </li>
+      </ul>
+    </nav>
+  </v-layout>
 </template>
 
 <script lang="ts">
 import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
-import { confirmExistingCategory } from '../../libs/contentful';
+import { confirmExistingCategory } from '@/libs/contentful';
 import { Category as ICategory } from '@/types/entry';
+import { generateCategoriesBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
+
+import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
 
 interface CategoryWithCount {
   category: ICategory;
   count: number;
 }
 
-@Component
+@Component({
+  components: {
+    Breadcrumbs,
+  },
+})
 export default class Category extends Vue {
   categories!: CategoryWithCount[];
 
@@ -39,6 +48,10 @@ export default class Category extends Vue {
         context.store.state.categories.categories
       ),
     };
+  }
+
+  get breadcrumbsList() {
+    return generateCategoriesBreadcrumbsList();
   }
 
   head() {
@@ -51,21 +64,25 @@ export default class Category extends Vue {
 
 const fetchCategoriesIfExist = (categories: ICategory[]) => {
   return Promise.all(
-    categories.map(category => {
-      return confirmExistingCategory(category.sys.id).then(isExist => {
+    categories.map((category) => {
+      return confirmExistingCategory(category.sys.id).then((isExist) => {
         return {
           isExist,
           category,
         };
       });
     })
-  ).then(categoriesWithExist => {
-    return categoriesWithExist.filter(e => e.isExist).map(e => e.category);
+  ).then((categoriesWithExist) => {
+    return categoriesWithExist.filter((e) => e.isExist).map((e) => e.category);
   });
 };
 </script>
 
 <style scoped>
+.breadcrumbs {
+  width: 100%;
+}
+
 ul {
   list-style: none;
 }

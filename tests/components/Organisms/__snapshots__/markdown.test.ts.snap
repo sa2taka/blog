@@ -2,8 +2,8 @@
 
 exports[`components/organisms/markdown should render 1`] = `
 <div class="markdown-body">
-  <h1 id="テストです">テストです</h1>
   <h2 id="テストです">テストです</h2>
+  <h3 id="テストです">テストです</h3>
   <p>引用符</p>
   <blockquote>
     <ul>
