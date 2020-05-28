@@ -1,9 +1,9 @@
 <template>
-  <main>
+  <v-layout column justify-center align-center>
     <a class="back-button animation-link" href="javascript:history.back();"
       >&lt;&lt; 戻る</a
     >
-    <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
+    <breadcrumbs :list="breadcrumbsList" class="breadcrumbs"></breadcrumbs>
     <article class="post">
       <div
         class="post-title-area"
@@ -31,7 +31,7 @@
       <post-index :index="postIndex" class="mt-10" />
       <markdown class="mt-8" :markdown="post.fields.body" />
     </article>
-  </main>
+  </v-layout>
 </template>
 
 <script lang="ts">
@@ -248,5 +248,9 @@ const formatDate = (date: Date) => {
   display: flex;
   border-radius: 12px;
   background-position: center;
+}
+
+.breadcrumbs {
+  width: 100%;
 }
 </style>

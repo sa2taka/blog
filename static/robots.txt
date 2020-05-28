@@ -1,4 +1,3 @@
 User-agent: *
-Disallow: /category/
 
 Sitemap: https://blog.sa2taka.com/sitemap.xml
