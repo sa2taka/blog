@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar hide-on-scroll app absolute>
-      <div class="d-flex title-link" @click="$router.push('/')">
+      <nuxt-link class="d-flex title-link" :to="'/'">
         <webp-img
           webp-name="/icon.webp"
           img-name="/icon.png"
@@ -14,7 +14,7 @@
             {{ title }}
           </h1>
         </transition>
-      </div>
+      </nuxt-link>
 
       <v-spacer />
 
@@ -133,6 +133,11 @@ html {
 
 .title-link {
   cursor: pointer;
+}
+
+a.title-link {
+  color: white;
+  text-decoration: none;
 }
 
 .animation-link {
