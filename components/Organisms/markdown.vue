@@ -90,31 +90,31 @@ export default class Markdown extends Vue {
 }
 
 /* header */
-.markdown-body h1 {
+.markdown-body h2 {
   font-size: 2em;
 }
-.theme--dark .markdown-body h1,
-.theme--dark .markdown-body h2 {
+.theme--dark .markdown-body h2,
+.theme--dark .markdown-body h3 {
   border-bottom: 1px solid #222;
 }
 
-.theme--light .markdown-body h1,
-.theme--light .markdown-body h2 {
+.theme--light .markdown-body h2,
+.theme--light .markdown-body h3 {
   border-bottom: 1px solid #eee;
 }
 
-.markdown-body h1 {
+.markdown-body h2 {
   margin-top: 64px;
   margin-bottom: 24px;
 }
 
-.markdown-body h2 {
+.markdown-body h3 {
   margin-top: 58px;
   margin-bottom: 18px;
 }
 
-.markdown-body h3,
-.markdown-body h4 {
+.markdown-body h4,
+.markdown-body h5 {
   margin-top: 52px;
   margin-bottom: 20px;
 }
@@ -148,7 +148,7 @@ export default class Markdown extends Vue {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  color: #eee;
+  color: #ddd;
   background: #282c34;
   margin: 0.5em 0;
   font-weight: 500;
@@ -161,7 +161,7 @@ export default class Markdown extends Vue {
 .v-application code.hljsspan {
   display: inline;
   overflow-x: initial;
-  color: #eee;
+  color: #ddd;
   background: #282c34;
   padding: 0.1em 0.4em;
   margin-left: 4px;
