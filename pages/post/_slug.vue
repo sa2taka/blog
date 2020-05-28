@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <main>
     <a class="back-button animation-link" href="javascript:history.back();"
       >&lt;&lt; 戻る</a
     >
@@ -30,7 +30,7 @@
       <post-index :index="postIndex" class="mt-10" />
       <markdown class="mt-8" :markdown="post.fields.body" />
     </article>
-  </div>
+  </main>
 </template>
 
 <script lang="ts">

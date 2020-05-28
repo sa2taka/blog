@@ -41,6 +41,16 @@ export default class Markdown extends Vue {
   letter-spacing: 0.025em;
 }
 
+.theme--dark .markdown-body strong {
+  /* color: white; */
+  background: linear-gradient(transparent 75%, var(--v-secondary-base) 0%);
+}
+
+.theme--light .markdown-body strong {
+  /* color: black; */
+  background: linear-gradient(transparent 75%, var(--v-secondary-lighten1) 0%);
+}
+
 .markdown-body blockquote {
   padding: 0.6em 1em;
   margin: 2em auto;
@@ -138,7 +148,7 @@ export default class Markdown extends Vue {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  color: #bbb;
+  color: #eee;
   background: #282c34;
   margin: 0.5em 0;
   font-weight: 500;
@@ -151,7 +161,7 @@ export default class Markdown extends Vue {
 .v-application code.hljsspan {
   display: inline;
   overflow-x: initial;
-  color: #bbb;
+  color: #eee;
   background: #282c34;
   padding: 0.1em 0.4em;
   margin-left: 4px;
