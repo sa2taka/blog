@@ -48,22 +48,20 @@
 
     <v-footer class="main-footer">
       <div class="d-flex flex-column align-center mx-auto">
-        <div
-          class="d-flex align-center animation-link"
-          @click="$router.push('/')"
+        <nuxt-link
+          class="d-flex footer-link align-center animation-link"
+          :to="'/'"
         >
           <v-icon>fa-home</v-icon>
           <span class="ml-2 mt-1">Home</span>
-        </div>
+        </nuxt-link>
         <div class="d-flex justify-center flex-wrap mt-4">
-          <div class="mb-2">
+          <div class="mb-2 animation-link">
             <v-icon
               class="mt-n1"
               v-html="$vuetify.icons.values.twitter"
             ></v-icon>
-            <a
-              href="https://twitter.com/t0p_l1ght"
-              class="animation-link footer-link mt-2"
+            <a href="https://twitter.com/t0p_l1ght" class="footer-link mt-2"
               >筆者Twitterアカウント</a
             >
           </div>
