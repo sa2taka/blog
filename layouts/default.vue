@@ -36,6 +36,12 @@
 
     <v-content>
       <v-container>
+        <a
+          v-if="!isRoute"
+          class="back-button animation-link"
+          href="javascript:history.back();"
+          >&lt;&lt; 戻る</a
+        >
         <nuxt v-cloak />
       </v-container>
     </v-content>
@@ -111,6 +117,10 @@ export default class Default extends Vue {
   handleResize() {
     this.isSmartphoneWidth = window.innerWidth < this.smartphoneWidth;
     this.canDisplayTitle = !this.isSmartphoneWidth;
+  }
+
+  get isRoute() {
+    return this.$route.name === 'index';
   }
 }
 </script>

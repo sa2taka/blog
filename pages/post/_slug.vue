@@ -1,8 +1,5 @@
 <template>
   <v-layout column justify-center align-center>
-    <a class="back-button animation-link" href="javascript:history.back();"
-      >&lt;&lt; 戻る</a
-    >
     <breadcrumbs :list="breadcrumbsList" class="breadcrumbs"></breadcrumbs>
     <article class="post">
       <div
