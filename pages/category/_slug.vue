@@ -38,7 +38,12 @@ export default class CategorySlug extends Vue {
       context.route.params.slug,
       page,
       limit
-    ).then((posts: MultipleItem<Post>) => posts.items);
+    ).then((posts: MultipleItem<Post>) =>
+      posts.items.map((item) => {
+        item.fields.body = '';
+        return item;
+      })
+    );
 
     return {
       page,
