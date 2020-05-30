@@ -172,4 +172,8 @@ export default class Markdown extends Vue {
 .v-application code::after {
   content: none;
 }
+
+.v-application code .hljs-comment {
+  color: #acb3c0;
+}
 </style>

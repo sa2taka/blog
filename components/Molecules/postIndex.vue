@@ -37,6 +37,7 @@
         <v-btn
           icon
           :class="[{ 'post-index_turn': !isOpen }]"
+          aria-label="index close"
           @click="isOpen = !isOpen"
         >
           <v-icon>fa-chevron-up</v-icon>
