@@ -1,10 +1,20 @@
+import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
 import { Context } from '@nuxt/types';
 import '@fortawesome/fontawesome-free/css/all.css';
 import ja from 'vuetify/src/locale/ja';
 import values from './iconValues';
 
-export default (ctx: Context, isDark: boolean) => {
+Vue.use(Vuetify);
+
+export default (ctx: Context) => {
+  let isDark = true;
+  if (ctx.req) {
+    isDark = !ctx.req.headers.cookie?.match(/theme=light/);
+  } else {
+    isDark = localStorage.getItem('theme') !== 'light';
+  }
+
   const vuetify = new Vuetify({
     customVariables: ['~/assets/variables.scss'],
     theme: {
@@ -46,3 +56,9 @@ export default (ctx: Context, isDark: boolean) => {
   // @ts-ignore
   ctx.vuetify = vuetify.framework;
 };
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $vuetify: any;
+  }
+}
