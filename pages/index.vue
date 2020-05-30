@@ -27,7 +27,7 @@ export default class IndexPage extends Vue {
 
     const posts: Post[] = await fetchPosts(page, limit).then(
       (posts: MultipleItem<Post>) =>
-        posts.items.map(item => {
+        posts.items.map((item) => {
           item.fields.body = '';
           return item;
         })

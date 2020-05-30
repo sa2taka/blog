@@ -1,11 +1,5 @@
 <template>
-  <picture
-    onload="handleLoad()"
-    :style="{
-      width: width || width !== 'auto' ? width + 'px' : 'auto',
-      height: height || height !== 'auto' ? height + 'px' : 'auto',
-    }"
-  >
+  <picture onload="handleLoad()">
     <source :srcset="webpName" type="image/webp" />
     <img :src="imgName" :width="width" :height="height" :alt="alt" />
   </picture>
@@ -56,6 +50,6 @@ export default class WebpImage extends Vue {
 picture,
 source,
 img {
-  object-fit: cover;
+  object-fit: contain;
 }
 </style>

@@ -61,7 +61,6 @@ export default class PostIndex extends Vue {
 
   mounted() {
     const el = this.$el.getElementsByClassName('post-index_content')[0];
-    console.log(el);
 
     this.contentHeight = el.scrollHeight;
   }
@@ -81,7 +80,7 @@ const formatPostIndex = (postIndex: IPostIndex[]) => {
   }
   formated.push(generateFirstIndex(first));
 
-  postIndex.forEach(elem => {
+  postIndex.forEach((elem) => {
     append(elem, formated);
   });
 

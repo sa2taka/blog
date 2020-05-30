@@ -39,7 +39,7 @@ export default class CategorySlug extends Vue {
       page,
       limit
     ).then((posts: MultipleItem<Post>) =>
-      posts.items.map(item => {
+      posts.items.map((item) => {
         item.fields.body = '';
         return item;
       })
