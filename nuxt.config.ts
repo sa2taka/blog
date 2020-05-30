@@ -205,6 +205,8 @@ export default {
       'layouts/**/*.vue',
       'pages/**/*.vue',
       'plugins/**/*.js',
+      'plugins/**/*.ts',
+      'libs/**/*.ts',
       'node_modules/vuetify/dist/vuetify.js',
     ],
     styleExtensions: ['.css'],

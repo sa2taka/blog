@@ -31,7 +31,7 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
 import { Post } from '@/types/entry';
 
-import WebpImg from '@/components/Atom/webpImg.vue';
+const WebpImg = () => import('@/components/Atom/webpImg.vue');
 
 @Component({
   components: {

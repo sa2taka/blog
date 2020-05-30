@@ -8,7 +8,7 @@
 <script lang="ts">
 import { Vue, Prop, Component } from 'nuxt-property-decorator';
 import { Post } from '@/types/entry';
-import CardPost from '@/components/Molecules/cardPost.vue';
+const CardPost = () => import('@/components/Molecules/cardPost.vue');
 
 @Component({
   components: {
