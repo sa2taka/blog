@@ -64,16 +64,16 @@ export default class Category extends Vue {
 
 const fetchCategoriesIfExist = (categories: ICategory[]) => {
   return Promise.all(
-    categories.map((category) => {
-      return confirmExistingCategory(category.sys.id).then((isExist) => {
+    categories.map(category => {
+      return confirmExistingCategory(category.sys.id).then(isExist => {
         return {
           isExist,
           category,
         };
       });
     })
-  ).then((categoriesWithExist) => {
-    return categoriesWithExist.filter((e) => e.isExist).map((e) => e.category);
+  ).then(categoriesWithExist => {
+    return categoriesWithExist.filter(e => e.isExist).map(e => e.category);
   });
 };
 </script>

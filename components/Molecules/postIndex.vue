@@ -1,32 +1,49 @@
 <template>
-  <v-expansion-panels v-model="panel" accordion flat>
-    <v-expansion-panel>
-      <v-expansion-panel-header class="py-2">目次</v-expansion-panel-header>
-      <v-expansion-panel-content>
-        <ol>
-          <li
-            v-for="indexNest1 in formatedPostIndex"
-            :key="indexNest1.title + indexNest1.level.toString()"
-          >
-            <a class="index-link" :href="`#${indexNest1.title}`">
-              {{ indexNest1.title }}
-            </a>
+  <nav class="post-index">
+    <div class="post-index_header">
+      <span class="post-index_title">目次</span>
+    </div>
 
-            <ul v-if="indexNest1.child.length !== 0" class="ml-5">
-              <li
-                v-for="indexNest2 in indexNest1.child"
-                :key="indexNest2.title + indexNest2.level.toString()"
-              >
-                <a class="index-link" :href="`#${indexNest2.title}`">
-                  {{ indexNest2.title }}
-                </a>
-              </li>
-            </ul>
+    <ol
+      :class="['my-4', 'post-index_content']"
+      :style="{
+        height: contentHeight ? (isOpen ? `${contentHeight}px` : '0') : null,
+      }"
+    >
+      <li
+        v-for="indexNest1 in formatedPostIndex"
+        :key="indexNest1.title + indexNest1.level.toString()"
+      >
+        <a class="index-link" :href="`#${indexNest1.title}`">{{
+          indexNest1.title
+        }}</a>
+
+        <ul v-if="indexNest1.child.length !== 0" class="ml-5">
+          <li
+            v-for="indexNest2 in indexNest1.child"
+            :key="indexNest2.title + indexNest2.level.toString()"
+          >
+            <a class="index-link" :href="`#${indexNest2.title}`">{{
+              indexNest2.title
+            }}</a>
           </li>
-        </ol>
-      </v-expansion-panel-content>
-    </v-expansion-panel>
-  </v-expansion-panels>
+        </ul>
+      </li>
+    </ol>
+    <div class="post-index_footer">
+      <span
+        :class="['post-index_close-button', { 'post-index_move': !isOpen }]"
+      >
+        <v-btn
+          icon
+          :class="[{ 'post-index_turn': !isOpen }]"
+          @click="isOpen = !isOpen"
+        >
+          <v-icon>fa-chevron-up</v-icon>
+        </v-btn>
+      </span>
+    </div>
+  </nav>
 </template>
 
 <script lang="ts">
@@ -39,7 +56,15 @@ export default class PostIndex extends Vue {
   @Prop({ required: true })
   index!: IPostIndex[];
 
-  panel = 0;
+  isOpen = true;
+  contentHeight: number | null = null;
+
+  mounted() {
+    const el = this.$el.getElementsByClassName('post-index_content')[0];
+    console.log(el);
+
+    this.contentHeight = el.scrollHeight;
+  }
 
   get formatedPostIndex() {
     return formatPostIndex(this.index);
@@ -56,7 +81,7 @@ const formatPostIndex = (postIndex: IPostIndex[]) => {
   }
   formated.push(generateFirstIndex(first));
 
-  postIndex.forEach((elem) => {
+  postIndex.forEach(elem => {
     append(elem, formated);
   });
 
@@ -139,29 +164,89 @@ interface FormatedPostIndex {
 </script>
 
 <style scoped>
-ol {
+.post-index_title,
+.post-index_close-button {
+  display: flex;
+  align-items: center;
+}
+
+.post-index_title:before,
+.post-index_title:after,
+.post-index_close-button:before,
+.post-index_close-button:after {
+  border-top: 1px solid;
+  content: '';
+}
+
+.post-index_title:before {
+  margin-right: 1rem;
+  flex-grow: 1;
+}
+
+.post-index_title:after {
+  margin-left: 1rem;
+  flex-grow: 8;
+}
+
+.post-index_close-button:before {
+  margin-right: 1rem;
+  flex-grow: 8;
+}
+
+.post-index_close-button:after {
+  margin-left: 1rem;
+  flex-grow: 1;
+}
+
+.post-index_content {
+  transition: height 0.3s ease-in-out;
+  overflow-y: hidden;
+}
+
+.post-index_close-button:before,
+.post-index_close-button:after {
+  transition: flex-grow 0.3s cubic-bezier(0.52, -0.7, 0.92, 0.66);
+}
+
+.post-index_close-button {
+  transition: transform 0.3s ease;
+}
+
+.post-index_turn {
+  transform: rotate(180deg);
+}
+
+.post-index_close-button.post-index_move:before {
+  flex-grow: 1;
+}
+
+.post-index_close-button.post-index_move:after {
+  flex-grow: 8;
+}
+
+.post-index ol {
   list-style-type: none !important;
   counter-reset: number;
 }
 
-li {
+.post-index li {
   position: relative;
   margin-top: 6px;
 }
 
-ol,
-ul {
+.post-index ol,
+.post-index ul {
   margin-top: 6px;
 }
 
-ol > li:before {
+.post-index ol > li:before {
   counter-increment: number;
   content: counter(number);
   color: var(--v-primary-base);
   font-weight: 600;
 }
 
-ol > li:after {
+.post-index ol > li:after {
   position: absolute;
   content: '' !important;
   top: 0px;
@@ -174,7 +259,7 @@ ol > li:after {
   background-color: var(--v-primary-base);
 }
 
-ul > li:before {
+.post-index ul > li:before {
   width: 6px;
   height: 6px;
   position: absolute;
@@ -186,7 +271,7 @@ ul > li:before {
   margin: auto auto;
 }
 
-ul > li {
+.post-index ul > li {
   list-style: none;
 }
 
@@ -200,7 +285,7 @@ ul > li {
   text-decoration: underline;
 }
 
-ol > li > .index-link {
+.post-index ol > li > .index-link {
   margin-left: 16px;
 }
 

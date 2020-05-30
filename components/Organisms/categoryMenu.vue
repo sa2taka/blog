@@ -28,7 +28,7 @@ export default class SideMenu extends Vue {
 
   setCategories(categories: Category[]) {
     this.categories = categories
-      .map((e) => e.fields)
+      .map(e => e.fields)
       .sort((a, b) => a.sort - b.sort);
   }
 }
