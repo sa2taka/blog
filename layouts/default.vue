@@ -144,8 +144,15 @@ html {
 }
 
 a.title-link {
-  color: white;
   text-decoration: none;
+}
+
+.theme--dark a.title-link {
+  color: white;
+}
+
+.theme--light a.title-link {
+  color: black;
 }
 
 .animation-link {

@@ -32,7 +32,7 @@ export default {
       {
         hid: 'og:description',
         property: 'og:description',
-        content: 'sa2takanのブログ',
+        content: 'sa2takaのブログ',
       },
       {
         hid: 'og:url',

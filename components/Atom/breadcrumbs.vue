@@ -1,6 +1,6 @@
 <template>
   <nav v-show="!isSmartphoneWidth">
-    <v-breadcrumbs :items="list" class="breadcrumbs">
+    <v-breadcrumbs :items="list">
       <template v-slot:divider>
         <v-icon>fas fa-chevron-circle-right</v-icon>
       </template>
