@@ -1,6 +1,6 @@
 <template>
   <v-layout column justify-center align-center>
-    <breadcrumbs :list="breadcrumbsList" class="breadcrumbs"></breadcrumbs>
+    <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
     <article class="post">
       <div
         class="post-title-area"
@@ -245,9 +245,5 @@ const formatDate = (date: Date) => {
   display: flex;
   border-radius: 12px;
   background-position: center;
-}
-
-.breadcrumbs {
-  width: 100%;
 }
 </style>

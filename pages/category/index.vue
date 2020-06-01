@@ -1,6 +1,6 @@
 <template>
   <v-layout column justify-center align-center>
-    <breadcrumbs :list="breadcrumbsList" class="breadcrumbs"></breadcrumbs>
+    <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
     <h2 class="center-title">カテゴリ</h2>
     <nav>
       <ul class="categories">
@@ -79,10 +79,6 @@ const fetchCategoriesIfExist = (categories: ICategory[]) => {
 </script>
 
 <style scoped>
-.breadcrumbs {
-  width: 100%;
-}
-
 ul {
   list-style: none;
 }

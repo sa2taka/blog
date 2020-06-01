@@ -1,6 +1,6 @@
 <template>
   <v-layout column justify-center align-center>
-    <breadcrumbs :list="breadcrumbsList" class="breadcrumbs"></breadcrumbs>
+    <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
     <div class="category-title">{{ category.fields.name }}</div>
     <posts :posts="posts" />
   </v-layout>
@@ -88,9 +88,5 @@ const decidePage = (context: Context) => {
 <style scoped>
 .category-title {
   font-size: 1.4em;
-}
-
-.breadcrumbs {
-  width: 100%;
 }
 </style>
