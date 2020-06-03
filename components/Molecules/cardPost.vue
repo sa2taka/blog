@@ -1,29 +1,31 @@
 <template>
-  <article class="inline-block" @mouseenter="addPrerender">
-    <v-card
-      class="post-card mx-auto"
-      hover
-      :to="{ name: 'post-slug', params: { slug: post.fields.slug } }"
-    >
-      <v-skeleton-loader v-if="loading" type="image" />
-      <webp-img
-        v-show="!loading"
-        :webp-name="generateWebp(post.fields.postImage.fields.file.url)"
-        :img-name="generateFormatedImg(post.fields.postImage.fields.file.url)"
-        :alt="altText"
-        :width="width"
-        :height="imgHeight"
-        :on-load="onLoad"
-        class="post-img"
-      />
+  <v-lazy v-model="isActive" min-height="400" transition="fade-transition">
+    <article @mouseenter="addPrerender">
+      <v-card
+        class="post-card mx-auto"
+        hover
+        :to="{ name: 'post-slug', params: { slug: post.fields.slug } }"
+      >
+        <v-skeleton-loader v-if="loading" type="image" />
+        <webp-img
+          v-show="!loading"
+          :webp-name="generateWebp(post.fields.postImage.fields.file.url)"
+          :img-name="generateFormatedImg(post.fields.postImage.fields.file.url)"
+          :alt="altText"
+          :width="width"
+          :height="imgHeight"
+          :on-load="onLoad"
+          class="post-img"
+        />
 
-      <div class="secondary--text top-post-category mt-4 mb-n3">
-        {{ post.fields.category.fields.name }}
-      </div>
-      <v-card-title>{{ post.fields.title }}</v-card-title>
-      <v-card-subtitle>{{ post.fields.description }}</v-card-subtitle>
-    </v-card>
-  </article>
+        <div class="secondary--text top-post-category mt-4 mb-n3">
+          {{ post.fields.category.fields.name }}
+        </div>
+        <v-card-title>{{ post.fields.title }}</v-card-title>
+        <v-card-subtitle>{{ post.fields.description }}</v-card-subtitle>
+      </v-card>
+    </article>
+  </v-lazy>
 </template>
 
 <script lang="ts">
