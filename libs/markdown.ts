@@ -7,7 +7,7 @@ import footnote from 'markdown-it-footnote';
 
 import imsize from 'markdown-it-imsize';
 
-import hljs from '@/libs/hljs';
+import prism from '@/libs/prism';
 
 const myHeaderPlugin = (md: MarkdownIt) => {
   md.renderer.rules.heading_open = (...[tokens, idx, options, _, self]) => {
@@ -47,21 +47,30 @@ const myCodePlugin = (md: MarkdownIt) => {
       lang = 'plaintext';
     }
 
-    let value: string = hljs.highlightAuto(code, [lang]).value;
+    prism.languages.bash.prompt = /^[$#] /m;
 
-    // shellで使われるtoken($, #, (%))を選択させないように変更
-    if (lang === 'plaintext' || lang === '' || lang.includes('sh')) {
-      value = value.replace(
-        /^([$#&]\s*)/gm,
-        '<span class="shell-token">$1</span>'
-      );
+    let value: string;
+    if (prism.languages[lang]) {
+      value = prism.highlight(code, prism.languages[lang], lang);
+    } else {
+      value = code;
+      // shellで使われるtoken($, #, (%))を選択させないように変更
+      if (lang === 'plaintext' || lang === '' || lang.includes('sh')) {
+        value = value.replace(
+          /^([$#&]\s*)/gm,
+          '<span class="token prompt">$1</span>'
+        );
+      }
+      lang = '';
     }
 
     let fileElement = '';
     if (filename && filename !== '') {
       fileElement = `<div class="filename">${filename}</div>`;
     }
-    return `${fileElement}<code class="hljs ${lang} ${
+    return `${fileElement}<code class="${
+      lang !== '' ? `language-${lang}` : ''
+    } ${
       filename && filename !== '' ? 'padding-for-filename' : ''
     }">${value}</code>`;
   };

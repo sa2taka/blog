@@ -208,6 +208,7 @@ export default {
       'plugins/**/*.ts',
       'libs/**/*.ts',
       'node_modules/vuetify/dist/vuetify.js',
+      'node_modules/prismjs/**/*.js',
     ],
     styleExtensions: ['.css'],
     whitelist: ['body', 'html', 'nuxt-progress'],

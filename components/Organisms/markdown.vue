@@ -130,7 +130,7 @@ export default class Markdown extends Vue {
   white-space: pre;
 }
 
-.v-application .markdown-body code .shell-token {
+.v-application .markdown-body code .token.prompt {
   user-select: none;
   color: #777;
 }
