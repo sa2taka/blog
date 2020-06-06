@@ -1,6 +1,6 @@
 <template>
-  <v-lazy v-model="isActive" min-height="320" transition="fade-transition">
-    <article @mouseenter="addPrerener">
+  <v-lazy v-model="isActive" min-height="400" transition="fade-transition">
+    <article @mouseenter="addPrerender">
       <v-card
         class="post-card mx-auto"
         hover
@@ -72,7 +72,7 @@ export default class TopPagePosts extends Vue {
     );
   }
 
-  addPrerener() {
+  addPrerender() {
     const elementId = 'prerendering-header';
     const oldLink = document.getElementById(elementId);
     const href = `/post/${this.post.fields.slug}`;
