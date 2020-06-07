@@ -104,6 +104,7 @@ export default {
     plugins: [new VuetifyLoaderPlugin()],
     extractCSS: true,
     useForkTsChecker: true,
+    hardSource: true,
     loaders: {
       vueStyle: {
         manualInject: true,

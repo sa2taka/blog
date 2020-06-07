@@ -13,9 +13,8 @@
 pre[class*='language-'],
 code[class*='language-'] {
   color: #dddddd;
-  font-size: 13px;
+  font-size: 15px;
   text-shadow: none;
-  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   direction: ltr;
   text-align: left;
   white-space: pre;
