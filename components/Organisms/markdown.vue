@@ -57,6 +57,10 @@ export default class Markdown extends Vue {
   border-left: 3px solid rgba(128, 128, 128, 0.8);
 }
 
+.markdown-body p {
+  margin-bottom: 2.2em;
+}
+
 .markdown-body blockquote blockquote {
   padding: 0.4em 1em;
   margin: 1.2em auto 0.7em;

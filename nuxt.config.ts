@@ -1,4 +1,6 @@
 import { BASE_URL } from './libs/const';
+import TerserPlugin from 'terser-webpack-plugin';
+
 const nodeExternals = require('webpack-node-externals');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 
@@ -104,11 +106,19 @@ export default {
     plugins: [new VuetifyLoaderPlugin()],
     extractCSS: true,
     useForkTsChecker: true,
-    hardSource: true,
     loaders: {
       vueStyle: {
         manualInject: true,
       },
+    },
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          cache: true,
+          parallel: false,
+        }),
+      ],
     },
 
     extend(config: any, _ctx: any) {
@@ -188,8 +198,8 @@ export default {
   },
   icon: false,
   typescript: {
-    typeCheck: true,
     ignoreNotFoundWarnings: true,
+    typeCheck: { memoryLimit: 4096 },
   },
   googleAnalytics: {
     id: 'UA-152417689-1',
