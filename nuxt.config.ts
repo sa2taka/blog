@@ -1,5 +1,5 @@
-import { BASE_URL } from './libs/const';
 import TerserPlugin from 'terser-webpack-plugin';
+import { BASE_URL } from './libs/const';
 
 const nodeExternals = require('webpack-node-externals');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
