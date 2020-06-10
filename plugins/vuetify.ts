@@ -16,7 +16,6 @@ export default (ctx: Context) => {
   }
 
   const vuetify = new Vuetify({
-    customVariables: ['~/assets/variables.scss'],
     theme: {
       options: {
         customProperties: true,
