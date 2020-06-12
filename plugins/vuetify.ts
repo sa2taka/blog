@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Vuetify from 'vuetify/lib';
+import Vuetify, { VLayout, VApp, VCard } from 'vuetify/lib';
 import { Context } from '@nuxt/types';
 import '@fortawesome/fontawesome-free/css/all.css';
 import ja from 'vuetify/src/locale/ja';
@@ -49,6 +49,11 @@ export default (ctx: Context) => {
     icons: {
       iconfont: 'fa',
       values,
+    },
+    components: {
+      VLayout,
+      VApp,
+      VCard,
     },
   });
   ctx.app.vuetify = vuetify;
