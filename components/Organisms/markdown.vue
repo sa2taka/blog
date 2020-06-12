@@ -162,7 +162,7 @@ export default class Markdown extends Vue {
   margin-bottom: 0px !important;
 }
 
-.v-application code.hljsspan {
+.v-application .markdown-body code.hljsspan {
   display: inline;
   overflow-x: initial;
   color: #ddd;
@@ -170,6 +170,7 @@ export default class Markdown extends Vue {
   padding: 0.1em 0.4em;
   margin-left: 4px;
   margin-right: 4px;
+  white-space: normal;
 }
 
 .v-application code::before,
