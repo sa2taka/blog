@@ -154,33 +154,33 @@ pre[class*='language-'] > code[class*='language-'] {
 * regex
 */
 .token.language-regex {
-  color: #4d4d4d;
+  color: #ddd;
 }
 
-.token.quantifier.language-regex {
+.language-regex .token.quantifier {
   color: #58f;
 }
 
-.token.escape.language-regex,
-.token.special-escape.language-regex {
+.language-regex .token.escape,
+.language-regex .token.special-escape {
   color: #c0c;
 }
 
-.token.charclass.language-regex,
-.token.charset-punctuation.language-regex {
+.language-regex .token.charclass,
+.language-regex .token.charset-punctuation {
   color: #d70;
 }
 
-.token.anchor.language-regex {
+.language-regex .token.anchor {
   color: #840;
 }
 
-.token.group.language-regex {
+.language-regex .token.group {
   color: #0a0;
 }
 
-.token.backreference.language-regex,
-.token.alternation.language-regex {
+.language-regex .token.backreference,
+.language-regex .token.alternation {
   color: #0a0;
 }
 
