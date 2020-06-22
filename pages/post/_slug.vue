@@ -27,6 +27,9 @@
       </div>
       <post-index :index="postIndex" class="mt-10" />
       <markdown class="mt-8" :markdown="post.fields.body" />
+      <footer>
+        <share-buttons />
+      </footer>
     </article>
   </v-layout>
 </template>
@@ -44,12 +47,14 @@ import { generatePostBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 import Markdown from '@/components/Organisms/markdown.vue';
 import PostIndex from '@/components/Molecules/postIndex.vue';
 import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
+import ShareButtons from '@/components/Molecules/shareButtons.vue';
 
 @Component({
   components: {
     Markdown,
     PostIndex,
     Breadcrumbs,
+    ShareButtons,
   },
 })
 export default class PostSlug extends Vue {
