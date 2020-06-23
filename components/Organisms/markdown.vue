@@ -58,7 +58,7 @@ export default class Markdown extends Vue {
 }
 
 .markdown-body p {
-  margin-bottom: 2.2em;
+  margin-bottom: 1.8em;
 }
 
 .markdown-body blockquote blockquote {
@@ -76,7 +76,7 @@ export default class Markdown extends Vue {
 }
 
 .markdown-body ul {
-  margin-bottom: 16px;
+  margin-bottom: 1.8em;
 }
 
 /* 引用元名 */
