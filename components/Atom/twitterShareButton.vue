@@ -1,5 +1,5 @@
 <template>
-  <v-btn large :href="href" color="white" width="180">
+  <v-btn large :href="href" color="white" width="180" target="_blank">
     <v-icon color="#1DA1F2" v-html="$vuetify.icons.values.twitter" />
     <span class="ml-2 black--text">ツイートする</span>
   </v-btn>

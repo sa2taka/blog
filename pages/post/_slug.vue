@@ -28,7 +28,7 @@
       <post-index :index="postIndex" class="mt-10" />
       <markdown class="mt-8" :markdown="post.fields.body" />
       <footer>
-        <share-buttons />
+        <share-buttons :title="post.fields.title" />
       </footer>
     </article>
   </v-layout>

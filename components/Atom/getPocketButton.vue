@@ -1,5 +1,5 @@
 <template>
-  <v-btn large :href="href" color="white" width="180">
+  <v-btn large :href="href" color="white" width="180" target="_blank">
     <v-icon color="#ee4056" v-html="$vuetify.icons.values.pocket" />
     <span class="ml-2 black--text">後で読む</span>
   </v-btn>
