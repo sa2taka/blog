@@ -5,11 +5,8 @@
       class="post-card mx-auto"
       hover
       :to="{ name: 'post-slug', params: { slug: post.fields.slug } }"
-      style="width: 320px;"
     >
-      <v-skeleton-loader v-if="loading" type="image" class="post-img" />
       <webp-img
-        v-show="!loading"
         :webp-name="generateWebp(post.fields.postImage.fields.file.url)"
         :img-name="generateFormatedImg(post.fields.postImage.fields.file.url)"
         :alt="altText"
@@ -47,6 +44,10 @@ export default class TopPagePosts extends Vue {
   loading = true;
   imgHeight = 200;
   width = 320;
+
+  mounted() {
+    this.setGridRow();
+  }
 
   updated() {
     this.setGridRow();

@@ -59,6 +59,7 @@
           <div class="mb-2 animation-link">
             <v-icon
               class="mt-n1"
+              color="#1DA1F2"
               v-html="$vuetify.icons.values.twitter"
             ></v-icon>
             <a href="https://twitter.com/t0p_l1ght" class="footer-link mt-2"
