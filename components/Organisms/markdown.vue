@@ -132,6 +132,7 @@ export default class Markdown extends Vue {
   margin: auto auto 1.5em;
   word-wrap: normal;
   white-space: pre;
+  padding: 0.8em 0.6em;
 }
 
 .v-application .markdown-body code .token.prompt {
