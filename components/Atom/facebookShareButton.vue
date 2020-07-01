@@ -1,11 +1,17 @@
 <template>
-  <v-btn large :href="href" color="white" width="180" target="_blank">
+  <v-btn
+    large
+    :href="href"
+    color="white"
+    :width="isSmartphoneWidth ? 64 : 180"
+    target="_blank"
+  >
     <v-icon
       color="#1877f2"
       class="facebook-logo"
       v-html="$vuetify.icons.values.facebook"
     />
-    <span class="ml-2 black--text">シェアする</span>
+    <span v-if="!isSmartphoneWidth" class="ml-2 black--text">シェアする</span>
   </v-btn>
 </template>
 
@@ -16,6 +22,9 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator';
 export default class FacebookShareButton extends Vue {
   @Prop({ required: true })
   href!: string;
+
+  @Prop({ required: true })
+  isSmartphoneWidth!: boolean;
 }
 </script>
 

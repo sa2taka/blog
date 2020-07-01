@@ -27,7 +27,7 @@
       </div>
       <post-index :index="postIndex" class="mt-10" />
       <markdown class="mt-8" :markdown="post.fields.body" />
-      <footer>
+      <footer class="my-6">
         <share-buttons :title="post.fields.title" />
       </footer>
     </article>

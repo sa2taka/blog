@@ -1,7 +1,13 @@
 <template>
-  <v-btn large :href="href" color="white" width="180" target="_blank">
+  <v-btn
+    large
+    :href="href"
+    color="white"
+    :width="isSmartphoneWidth ? 64 : 180"
+    target="_blank"
+  >
     <v-icon color="#ee4056" v-html="$vuetify.icons.values.pocket" />
-    <span class="ml-2 black--text">後で読む</span>
+    <span v-if="!isSmartphoneWidth" class="ml-2 black--text">後で読む</span>
   </v-btn>
 </template>
 
@@ -12,5 +18,8 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator';
 export default class GetPocketButton extends Vue {
   @Prop({ required: true })
   href!: string;
+
+  @Prop({ required: true })
+  isSmartphoneWidth!: boolean;
 }
 </script>

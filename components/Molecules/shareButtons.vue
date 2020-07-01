@@ -1,8 +1,23 @@
 <template>
-  <div class="d-flex justify-center">
-    <twitter-share-button :href="twitterShareLink" />
-    <facebook-share-button :href="facebookShareLink" class="ml-4" />
-    <get-pocket-button :href="getPocketLink" class="ml-4" />
+  <div
+    v-resize="handleResize"
+    class="d-flex justify-center flex-wrap share-buttons"
+  >
+    <twitter-share-button
+      :href="twitterShareLink"
+      :is-smartphone-width="isSmartphoneWidth"
+      class="mx-3 my-3"
+    />
+    <facebook-share-button
+      :href="facebookShareLink"
+      :is-smartphone-width="isSmartphoneWidth"
+      class="mx-3 my-3"
+    />
+    <get-pocket-button
+      :href="getPocketLink"
+      :is-smartphone-width="isSmartphoneWidth"
+      class="mx-3 my-3"
+    />
   </div>
 </template>
 
@@ -19,8 +34,15 @@ import GetPocketButton from '@/components/Atom/getPocketButton.vue';
   components: { TwitterShareButton, FacebookShareButton, GetPocketButton },
 })
 export default class ShareButtons extends Vue {
+  isSmartphoneWidth = false;
+  smartphoneWidth = 600;
+
   @Prop({ required: true })
   title!: string;
+
+  mounted() {
+    this.handleResize();
+  }
 
   get twitterShareLink() {
     const base = 'http://twitter.com/share';
@@ -50,6 +72,10 @@ export default class ShareButtons extends Vue {
     });
 
     return `${base}?${query}`;
+  }
+
+  handleResize() {
+    this.isSmartphoneWidth = window.innerWidth < this.smartphoneWidth;
   }
 }
 </script>
