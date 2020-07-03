@@ -5,6 +5,7 @@
         <webp-img
           webp-name="/icon.webp"
           img-name="/icon.png"
+          width="auto"
           height="36"
           class="title-icon-margin mr-3"
           alt="logo"

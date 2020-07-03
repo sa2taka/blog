@@ -1,26 +1,49 @@
 <template>
   <article @mouseenter="addPrerender">
-    <!-- ハードコードしないとwidthが何故かね... -->
     <v-card
-      class="post-card mx-auto"
+      class="post-card mx-auto d-flex flex-column-reverse flex-sm-row"
       hover
       :to="{ name: 'post-slug', params: { slug: post.fields.slug } }"
+      :max-width="maxWidth"
     >
-      <webp-img
-        :webp-name="generateWebp(post.fields.postImage.fields.file.url)"
-        :img-name="generateFormatedImg(post.fields.postImage.fields.file.url)"
-        :alt="altText"
-        :width="width"
-        :height="imgHeight"
-        :on-load="onLoad"
-        class="post-img"
-      />
-
-      <div class="secondary--text top-post-category mt-4 mb-n3">
-        {{ post.fields.category.fields.name }}
+      <div class="flex-3 d-flex flex-column">
+        <div
+          class="secondary--text top-post-category mt-4 mb-n3 d-none d-sm-block"
+        >
+          {{ post.fields.category.fields.name }}
+        </div>
+        <v-card-title class="card-title">{{ post.fields.title }}</v-card-title>
+        <v-card-subtitle class="card-sub-title">{{
+          post.fields.description
+        }}</v-card-subtitle>
+        <v-spacer />
+        <v-card-text class="mb-0 py-0 post-date d-none d-sm-block"
+          >作成日：{{ postDate }}</v-card-text
+        >
+        <v-card-text class="mb-2 py-0 mt-0 post-date d-none d-sm-block"
+          >更新日：{{ updateDate }}</v-card-text
+        >
       </div>
-      <v-card-title>{{ post.fields.title }}</v-card-title>
-      <v-card-subtitle>{{ post.fields.description }}</v-card-subtitle>
+
+      <div class="d-flex flex-2 my-2 mx-auto">
+        <div class="my-auto flex-1 d-sm-none">
+          <v-card-text class="mb-2 py-0 mt-0 post-date">{{
+            updateDate
+          }}</v-card-text>
+          <v-spacer />
+          <div class="secondary--text top-post-category">
+            {{ post.fields.category.fields.name }}
+          </div>
+        </div>
+
+        <webp-img
+          :webp-name="generateWebp(post.fields.postImage.fields.file.url)"
+          :img-name="generateFormatedImg(post.fields.postImage.fields.file.url)"
+          :alt="altText"
+          :on-load="onLoad"
+          class="flex-1 mx-2"
+        />
+      </div>
     </v-card>
   </article>
 </template>
@@ -36,22 +59,14 @@ const WebpImg = () => import('@/components/Atom/webpImg.vue');
     WebpImg,
   },
 })
-export default class TopPagePosts extends Vue {
+export default class CardPost extends Vue {
   @Prop({ required: true })
   post!: Post;
 
   isActive = false;
   loading = true;
-  imgHeight = 200;
-  width = 320;
-
-  mounted() {
-    this.setGridRow();
-  }
-
-  updated() {
-    this.setGridRow();
-  }
+  maxWidth = 840;
+  height = '18em';
 
   generateWebp(url: string) {
     return url + '?fm=webp&w=320';
@@ -63,14 +78,6 @@ export default class TopPagePosts extends Vue {
 
   onLoad() {
     this.loading = false;
-  }
-
-  setGridRow() {
-    const height = this.$el.scrollHeight;
-    this.$el.setAttribute(
-      'style',
-      `grid-row: span ${Math.ceil(height / 20) + 1};height: ${height}px;`
-    );
   }
 
   addPrerender() {
@@ -94,23 +101,65 @@ export default class TopPagePosts extends Vue {
   get altText() {
     return `${this.post.fields.postImage.fields.title} - ${this.post.fields.title}のタイトル画像`;
   }
+
+  get postDate() {
+    const rawDate = this.post.sys.createdAt;
+
+    return formatDate(new Date(rawDate));
+  }
+
+  get updateDate() {
+    const rawDate = this.post.sys.updatedAt;
+
+    return formatDate(new Date(rawDate));
+  }
 }
+
+const formatDate = (date: Date) => {
+  const fillBy0 = (num: number, length: number) => {
+    return ('0000' + num.toString()).slice(-length);
+  };
+  const year = date.getFullYear();
+  const month = fillBy0(date.getMonth() + 1, 2);
+  const day = fillBy0(date.getDate(), 2);
+  const week = ['日', '月', '火', '水', '木', '金', '土'][date.getDay()];
+  return `${year}/${month}/${day}(${week})`;
+};
 </script>
 
 <style scoped>
 .top-post-category {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: z00;
   padding-left: 16px;
 }
+.flex-1 {
+  flex: 1;
+}
 
-.post-card {
-  min-width: 320px;
-  width: 320px;
+.flex-2 {
+  flex: 2;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.card-title {
+  font-weight: 600;
+}
+
+.theme--dark .post-date,
+.theme--dark .card-sub-title {
+  color: #ccc;
+}
+
+.theme--light .post-date,
+.theme--light .card-sub-title {
+  color: #222;
 }
 
 .post-img {
-  width: 320px;
-  height: 200px;
+  width: 50%;
 }
 </style>

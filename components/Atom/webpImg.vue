@@ -1,7 +1,13 @@
 <template>
   <picture onload="handleLoad()">
-    <source :srcset="webpName" type="image/webp" />
-    <img :src="imgName" :width="width" :height="height" :alt="alt" />
+    <source :srcset="webpName" type="image/webp" class="full-width my-auto" />
+    <img
+      :src="imgName"
+      :width="width"
+      :height="height"
+      :alt="alt"
+      class="full-width my-auto"
+    />
   </picture>
 </template>
 
@@ -22,7 +28,7 @@ export default class WebpImage extends Vue {
   @Prop({ default: 'auto' })
   width!: string | number;
 
-  @Prop({ default: 'auto' })
+  @Prop({ default: '100%' })
   height!: string | number;
 
   @Prop({ default: undefined })
@@ -51,5 +57,9 @@ picture,
 source,
 img {
   object-fit: contain;
+}
+
+.full-width {
+  width: 100%;
 }
 </style>
