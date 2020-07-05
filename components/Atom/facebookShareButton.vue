@@ -1,5 +1,13 @@
 <template>
-  <v-btn large :href="href" color="white" width="180" target="_blank">
+  <v-btn
+    large
+    :href="href"
+    color="white"
+    width="180"
+    target="_blank"
+    rel="noopener noreferrer"
+    `
+  >
     <v-icon
       color="#1877f2"
       class="facebook-logo"
