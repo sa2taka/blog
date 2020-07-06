@@ -76,6 +76,18 @@ const myCodePlugin = (md: MarkdownIt) => {
   };
 };
 
+const myImgPlugin = (md: MarkdownIt) => {
+  const defaultRender =
+    md.renderer.rules.image ||
+    function (tokens, idx, options, _, self) {
+      return self.renderToken(tokens, idx, options);
+    };
+  md.renderer.rules.image = (...[tokens, idx, options, env, self]) => {
+    tokens[idx].attrPush(['loading', 'lazy']);
+    return defaultRender(tokens, idx, options, env, self);
+  };
+};
+
 export const markdown = new MarkdownIt({
   html: true,
   linkify: true,
@@ -88,4 +100,5 @@ export const markdown = new MarkdownIt({
   .use(footnote)
   .use(imsize, { autofill: true })
   .use(myHeaderPlugin)
-  .use(myInlineCodePlugin);
+  .use(myInlineCodePlugin)
+  .use(myImgPlugin);
