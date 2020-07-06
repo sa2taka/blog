@@ -21,8 +21,6 @@ export default class Posts extends Vue {
 
   limit = 20;
 
-  width = 320;
-
   handlePostClick(slug: string) {
     this.$router.push({ name: 'post-slug', params: { slug } });
   }
@@ -31,10 +29,6 @@ export default class Posts extends Vue {
 
 <style scoped>
 .posts {
-  display: grid;
-  grid-template-rows: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  column-gap: 24px;
   width: 100%;
   position: relative;
   justify-content: space-between;

@@ -10,7 +10,7 @@
 /*********************************************************
 * General
 */
-/* purgecss start ignore */
+/*! purgecss start ignore */
 pre[class*='language-'],
 code[class*='language-'] {
   color: #dddddd;
@@ -188,4 +188,4 @@ pre[class*='language-'] > code[class*='language-'] {
 .token.regex-flags {
   color: #b7bcc0;
 }
-/* purgecss end ignore */
+/*! purgecss end ignore */

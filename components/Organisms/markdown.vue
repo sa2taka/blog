@@ -58,7 +58,7 @@ export default class Markdown extends Vue {
 }
 
 .markdown-body p {
-  margin-bottom: 2.2em;
+  margin-bottom: 1.8em;
 }
 
 .markdown-body blockquote blockquote {
@@ -76,7 +76,7 @@ export default class Markdown extends Vue {
 }
 
 .markdown-body ul {
-  margin-bottom: 16px;
+  margin-bottom: 1.8em;
 }
 
 /* 引用元名 */
@@ -90,7 +90,8 @@ export default class Markdown extends Vue {
 
 /* 画像 */
 .markdown-body img {
-  width: 100%;
+  display: block;
+  max-width: 100%;
 }
 
 /* header */
@@ -132,6 +133,7 @@ export default class Markdown extends Vue {
   margin: auto auto 1.5em;
   word-wrap: normal;
   white-space: pre;
+  padding: 0.8em 0.6em;
 }
 
 .v-application .markdown-body code .token.prompt {
