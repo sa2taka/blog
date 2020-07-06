@@ -5,6 +5,7 @@
     color="white"
     :width="isSmartphoneWidth ? 64 : 180"
     target="_blank"
+    rel="noopener noreferrer"
   >
     <v-icon color="#1DA1F2" v-html="$vuetify.icons.values.twitter" />
     <span v-if="!isSmartphoneWidth" class="ml-2 black--text">ツイートする</span>

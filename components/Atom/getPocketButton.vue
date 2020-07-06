@@ -5,6 +5,7 @@
     color="white"
     :width="isSmartphoneWidth ? 64 : 180"
     target="_blank"
+    rel="noopener noreferrer"
   >
     <v-icon color="#ee4056" v-html="$vuetify.icons.values.pocket" />
     <span v-if="!isSmartphoneWidth" class="ml-2 black--text">後で読む</span>

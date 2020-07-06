@@ -90,7 +90,8 @@ export default class Markdown extends Vue {
 
 /* 画像 */
 .markdown-body img {
-  width: 100%;
+  display: block;
+  max-width: 100%;
 }
 
 /* header */
