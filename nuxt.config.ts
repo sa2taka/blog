@@ -23,7 +23,8 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         name: 'description',
-        content: process.env.npm_package_description || '',
+        content:
+          'sa2taka/t0p_lightの独断と偏見が混じった、エンジニア、プログラマーのためのニッチな記事を残すブログです。',
       },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       {
