@@ -7,6 +7,7 @@
       :height="height"
       :alt="alt"
       class="full-width my-auto"
+      loading="lazy"
     />
   </picture>
 </template>

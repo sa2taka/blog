@@ -89,9 +89,12 @@ export default class Markdown extends Vue {
 }
 
 /* 画像 */
-.markdown-body img {
+.markdown-body img,
+.markdown-body picture,
+.markdown-body source[type='image/webp'] {
   display: block;
   max-width: 100%;
+  margin: 0.6em auto;
 }
 
 /* header */
@@ -139,10 +142,6 @@ export default class Markdown extends Vue {
 .v-application .markdown-body code .token.prompt {
   user-select: none;
   color: #777;
-}
-
-.markdown-body img {
-  margin: 0.6em auto;
 }
 
 .theme--light .markdown-body a {
