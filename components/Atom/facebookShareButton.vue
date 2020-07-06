@@ -4,9 +4,9 @@
     :href="href"
     color="white"
     :width="isSmartphoneWidth ? 64 : 180"
+    :min-width="64"
     target="_blank"
     rel="noopener noreferrer"
-    `
   >
     <v-icon
       color="#1877f2"
