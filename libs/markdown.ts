@@ -76,6 +76,43 @@ const myCodePlugin = (md: MarkdownIt) => {
   };
 };
 
+const myImgPlugin = (md: MarkdownIt) => {
+  const defaultRender =
+    md.renderer.rules.image ||
+    function (tokens, idx, options, _, self) {
+      return self.renderToken(tokens, idx, options);
+    };
+  md.renderer.rules.image = (...[tokens, idx, options, env, self]) => {
+    tokens[idx].attrPush(['loading', 'lazy']);
+    return defaultRender(tokens, idx, options, env, self);
+  };
+};
+
+const myWebpConvertPlugin = (md: MarkdownIt) => {
+  const imgRender =
+    md.renderer.rules.image ||
+    function (tokens, idx, options, _, self) {
+      return self.renderToken(tokens, idx, options);
+    };
+  md.renderer.rules.image = (...[tokens, idx, options, env, self]) => {
+    const src = tokens[idx].attrs?.filter((elm) => elm[0] === 'src')[0]?.[1];
+    if (!src) {
+      return imgRender(tokens, idx, options, env, self);
+    }
+
+    const m = src.match(/\/\/images\.ctfassets\.net/);
+    if (!m) {
+      return imgRender(tokens, idx, options, env, self);
+    }
+
+    const token = src.includes('?') ? '&' : '?';
+    const webp = `${src}${token}fm=webp`;
+    const imgTag = imgRender(tokens, idx, options, env, self);
+    const webpTag = `<source srcset="${webp}" type="image/webp"/>`;
+    return `<picture>${webpTag}${imgTag}</picture>`;
+  };
+};
+
 export const markdown = new MarkdownIt({
   html: true,
   linkify: true,
@@ -88,4 +125,6 @@ export const markdown = new MarkdownIt({
   .use(footnote)
   .use(imsize, { autofill: true })
   .use(myHeaderPlugin)
-  .use(myInlineCodePlugin);
+  .use(myInlineCodePlugin)
+  .use(myWebpConvertPlugin)
+  .use(myImgPlugin);

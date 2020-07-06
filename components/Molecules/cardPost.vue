@@ -7,11 +7,11 @@
       :max-width="maxWidth"
     >
       <div class="flex-3 d-flex flex-column">
-        <div
+        <v-card-text
           class="secondary--text top-post-category mt-4 mb-n3 d-none d-sm-block"
         >
           {{ post.fields.category.fields.name }}
-        </div>
+        </v-card-text>
         <v-card-title class="card-title">{{ post.fields.title }}</v-card-title>
         <v-card-subtitle class="card-sub-title">{{
           post.fields.description
@@ -69,7 +69,7 @@ export default class CardPost extends Vue {
   height = '18em';
 
   generateWebp(url: string) {
-    return url + '?fm=webp&w=320';
+    return url + '?fm=webp&w=480';
   }
 
   generateFormatedImg(url: string) {
