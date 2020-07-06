@@ -76,6 +76,7 @@ export default class ShareButtons extends Vue {
 
   handleResize() {
     this.isSmartphoneWidth = window.innerWidth < this.smartphoneWidth;
+    console.log(this.isSmartphoneWidth);
   }
 }
 </script>
