@@ -89,11 +89,11 @@ export default class Markdown extends Vue {
 }
 
 /* 画像 */
-.markdown-body img,
 .markdown-body picture,
+.markdown-body img,
 .markdown-body source[type='image/webp'] {
   display: block;
-  max-width: 100%;
+  max-width: min(100%, 640px);
   margin: 0.6em auto;
 }
 
