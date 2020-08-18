@@ -35,7 +35,7 @@
       <dark-theme-switch class="mr-3" />
     </v-app-bar>
 
-    <v-content>
+    <v-main>
       <v-container>
         <a
           v-if="!isRoute"
@@ -45,7 +45,7 @@
         >
         <nuxt v-cloak />
       </v-container>
-    </v-content>
+    </v-main>
 
     <v-footer class="main-footer">
       <div class="d-flex flex-column align-center mx-auto">
