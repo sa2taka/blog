@@ -13,13 +13,7 @@ workbox.routing.registerRoute(
   new RegExp(
     '^https://cdn.contentful.com/spaces/xw0ljpdch9v4/environments/master/*'
   ),
-  workbox.strategies.staleWhileRevalidate({
-    plugins: [
-      new workbox.broadcastUpdate.Plugin({
-        channelName: 'contentful',
-      }),
-    ],
-  }),
+  new workbox.strategies.NetworkFirst({}),
   'GET'
 );
 
