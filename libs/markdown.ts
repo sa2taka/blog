@@ -1,7 +1,5 @@
 import MarkdownIt from 'markdown-it';
 // @ts-ignore
-import sanitizer from 'markdown-it-sanitizer';
-// @ts-ignore
 import footnote from 'markdown-it-footnote';
 // @ts-ignore
 
@@ -121,7 +119,6 @@ export const markdown = new MarkdownIt({
   langPrefix: '',
 })
   .use(myCodePlugin)
-  .use(sanitizer)
   .use(footnote)
   .use(imsize, { autofill: true })
   .use(myHeaderPlugin)
