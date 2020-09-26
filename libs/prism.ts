@@ -13,4 +13,6 @@ import 'prismjs/components/prism-kotlin';
 import 'prismjs/components/prism-json';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-regex';
+import 'prismjs/components/prism-csharp';
+
 export default Prism;
