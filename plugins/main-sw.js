@@ -1,6 +1,6 @@
 workbox.routing.registerRoute(
   new RegExp('^https://blog.sa2taka.com/$'),
-  workbox.strategies.staleWhileRevalidate({
+  workbox.strategies.NetworkFirst({
     plugins: [
       new workbox.broadcastUpdate.Plugin({
         channelName: 'top-page',
@@ -19,7 +19,7 @@ workbox.routing.registerRoute(
 
 workbox.routing.registerRoute(
   new RegExp('^https://blog.sa2taka.com/post/*'),
-  new workbox.strategies.CacheFirst({}),
+  new workbox.strategies.NetworkFirst({}),
   'GET'
 );
 workbox.routing.registerRoute(
