@@ -31,6 +31,8 @@ export default ({ app }) => {
    ** 現在のページをセット
    */
   ga('create', 'UA-152417689-1', 'auto');
+  ga('config', 'G-3VKK45X498');
+  ga('js', new Date());
   /*
    ** ルートが変更されるたびに毎回実行（初期化も実行される）
    */
