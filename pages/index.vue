@@ -38,30 +38,6 @@ export default class IndexPage extends Vue {
       posts,
     };
   }
-
-  created() {
-    if (process.client) {
-      const contentfulChannel = new BroadcastChannel('contentful');
-      contentfulChannel.addEventListener('message', () => {
-        fetchPosts(this.page, this.limit)
-          .then((posts: MultipleItem<Post>) => posts.items)
-          .then((posts: Post[]) => {
-            this.posts = posts;
-            this.$forceUpdate();
-          });
-      });
-
-      const topPageChannel = new BroadcastChannel('top-page');
-      topPageChannel.addEventListener('message', () => {
-        fetchPosts(this.page, this.limit)
-          .then((posts: MultipleItem<Post>) => posts.items)
-          .then((posts: Post[]) => {
-            this.posts = posts;
-            this.$forceUpdate();
-          });
-      });
-    }
-  }
 }
 
 // page setting

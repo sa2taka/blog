@@ -194,7 +194,40 @@ export default {
   },
   workbox: {
     swDest: 'static/sw.js',
-    cachingExtensions: '@/plugins/main-sw.js',
+    runtimeCaching: [
+      {
+        urlPattern: '^https://blog.sa2taka.com/$',
+        handler: 'staleWhileRevalidate',
+        method: 'GET',
+      },
+      {
+        urlPattern:
+          '^https://cdn.contentful.com/spaces/xw0ljpdch9v4/environments/master/*',
+        handler: 'staleWhileRevalidate',
+        method: 'GET',
+      },
+      {
+        urlPattern: '^https://blog.sa2taka.com/post/*',
+        handler: 'cacheFirst',
+        method: 'GET',
+      },
+      {
+        urlPattern:
+          '^https?://images.ctfassets.net/xw0ljpdch9v4/.*.(png|jpg|webp)$',
+        handler: 'cacheFirst',
+        method: 'GET',
+      },
+      {
+        urlPattern: '^https?://i.imgur.com/.*.(png|jpg|webp)',
+        handler: 'cacheFirst',
+        method: 'GET',
+      },
+      {
+        urlPattern: '^https://fonts.googleapis.com/',
+        handler: 'cacheFirst',
+        method: 'GET',
+      },
+    ],
     dev: false,
   },
   icon: false,
