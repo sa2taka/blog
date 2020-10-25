@@ -26,6 +26,7 @@ export interface Post extends SingleItem {
     postImage: Image;
     public: boolean;
     releaseDate: string;
+    latex: boolean;
   };
 }
 
