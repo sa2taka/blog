@@ -26,7 +26,11 @@
         <p class="mb-0 post-date">更新日: {{ updateDate }}</p>
       </div>
       <post-index :index="postIndex" class="mt-10" />
-      <markdown class="mt-8" :markdown="post.fields.body" />
+      <markdown
+        class="mt-8"
+        :markdown="post.fields.body"
+        :latex="post.fields.latex"
+      />
       <footer class="my-6">
         <share-buttons :title="post.fields.title" />
       </footer>
@@ -48,6 +52,7 @@ import Markdown from '@/components/Organisms/markdown.vue';
 import PostIndex from '@/components/Molecules/postIndex.vue';
 import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
 import ShareButtons from '@/components/Molecules/shareButtons.vue';
+// import 'katex/dist/katex.min.css';
 
 @Component({
   components: {
@@ -59,7 +64,6 @@ import ShareButtons from '@/components/Molecules/shareButtons.vue';
 })
 export default class PostSlug extends Vue {
   post!: Post;
-
   async asyncData(context: Context) {
     if (!context.params.slug || context.params.slug === '') {
       return context.error({
@@ -104,6 +108,19 @@ export default class PostSlug extends Vue {
   }
 
   head() {
+    const link = [];
+    const script: any[] = [];
+    if (this.post.fields.latex) {
+      link.push({
+        rel: 'stylesheet',
+        href: 'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css',
+        type: 'text/css',
+        integrity:
+          'sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X',
+        crossorigin: 'anonymous',
+      });
+    }
+
     return {
       style: [
         {
@@ -139,6 +156,8 @@ export default class PostSlug extends Vue {
           content: BASE_URL + this.$route.path,
         },
       ],
+      link,
+      script,
     };
   }
 }

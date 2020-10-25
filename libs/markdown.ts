@@ -2,8 +2,9 @@ import MarkdownIt from 'markdown-it';
 // @ts-ignore
 import footnote from 'markdown-it-footnote';
 // @ts-ignore
-
 import imsize from 'markdown-it-imsize';
+// @ts-ignore
+import katex from '@iktakahiro/markdown-it-katex';
 
 import prism from '@/libs/prism';
 
@@ -110,7 +111,6 @@ const myWebpConvertPlugin = (md: MarkdownIt) => {
     return `<picture>${webpTag}${imgTag}</picture>`;
   };
 };
-
 export const markdown = new MarkdownIt({
   html: true,
   linkify: true,
@@ -125,3 +125,7 @@ export const markdown = new MarkdownIt({
   .use(myInlineCodePlugin)
   .use(myWebpConvertPlugin)
   .use(myImgPlugin);
+
+export function addKatex(md: MarkdownIt) {
+  return md.use(katex, { throwOnError: false, errorColor: ' #cc0000' });
+}
