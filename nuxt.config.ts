@@ -324,7 +324,7 @@ export default {
       },
       {
         urlPattern: '^https://blog.sa2taka.com/post/.*',
-        handler: 'networkFirst',
+        handler: 'staleWhileRevalidate',
         method: 'GET',
       },
       {
