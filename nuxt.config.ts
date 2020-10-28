@@ -313,7 +313,7 @@ export default {
     runtimeCaching: [
       {
         urlPattern: '^https://blog.sa2taka.com/$',
-        handler: 'networkFirst',
+        handler: 'staleWhileRevalidate',
         method: 'GET',
       },
       {
@@ -324,7 +324,7 @@ export default {
       },
       {
         urlPattern: '^https://blog.sa2taka.com/post/.*',
-        handler: 'networkFirst',
+        handler: 'staleWhileRevalidate',
         method: 'GET',
       },
       {
