@@ -27,20 +27,44 @@ export default ({ app }) => {
     'https://www.google-analytics.com/analytics.js',
     'ga'
   );
+
+
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    (i[r] =
+      i[r] ||
+      function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    'script',
+    'https://www.googletagmanager.com/gtag/js?id=G-3VKK45X498',
+    'ga2'
+  );
+
+
   /*
    ** 現在のページをセット
    */
   ga('create', 'UA-152417689-1', 'auto');
-  ga('config', 'G-3VKK45X498');
-  ga('js', new Date());
   /*
    ** ルートが変更されるたびに毎回実行（初期化も実行される）
    */
+  ga2('js', new Date());
+  ga2('config', 'G-3VKK45X498');
   app.router.afterEach((to, from) => {
     /*
      ** Google アナリティクスにページビューが追加されたことを伝える
      */
     ga('set', 'page', to.fullPath);
     ga('send', 'pageview');
+    ga2('config', 'G-3VKK45X498', {'page_path': to.path});
   });
 };
