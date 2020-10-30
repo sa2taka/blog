@@ -201,6 +201,7 @@ export default {
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     '@nuxt/typescript-build',
+    '@nuxtjs/google-analytics',
   ],
   /*
    ** Nuxt.js modules
@@ -354,6 +355,9 @@ export default {
   typescript: {
     ignoreNotFoundWarnings: true,
     typeCheck: { memoryLimit: 4096 },
+  },
+  googleAnalytics: {
+    id: 'UA-152417689-1',
   },
   vue: {
     config: {
