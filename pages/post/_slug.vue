@@ -243,10 +243,22 @@ const formatDate = (date: Date) => {
   min-width: 80%;
   border-radius: 0 12px 0 10.5px;
   color: white;
+  overflow-wrap: break-word;
 }
 
 .post-title-name {
   font-size: 24px;
+}
+
+@media (max-width: 600px) {
+  .post-title-name {
+    font-size: 20px;
+  }
+}
+@media (min-width: 601px) {
+  .post-title-name {
+    font-size: 24px;
+  }
 }
 
 .post-category {
