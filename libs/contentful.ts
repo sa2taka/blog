@@ -32,8 +32,8 @@ export function fetchPostsCount() {
   const queries: Record<string, any> = {
     content_type: CTF_POST_ID,
     order: '-sys.createdAt',
-    limit: '1000',
-    select: 'sys',
+    limit: 1000,
+    select: 'fields.public',
   };
 
   if (isProdcution) {
@@ -48,9 +48,10 @@ export function fetchPostsCount() {
 export async function confirmExistingCategory(categoryId: string) {
   const queries: Record<string, any> = {
     content_type: CTF_POST_ID,
-    limit: 1,
+    limit: 1000,
     order: '-sys.createdAt',
     'fields.category.sys.id': categoryId,
+    select: 'fields.public',
   };
 
   if (isProdcution) {
