@@ -1,9 +1,10 @@
 import { Module, VuexModule, Action, Mutation } from 'vuex-module-decorators';
 import { Category, MultipleItem } from '@/types/entry';
-import { fetchCategories } from '@/libs/contentful';
+import { fetchCategories, fetchPostsCountInCategory } from '@/libs/contentful';
 
+export type CategoryWithCount = { element: Category; count: number };
 export interface ICategories {
-  categories: Category[];
+  categories: CategoryWithCount[];
 }
 
 @Module({
@@ -12,17 +13,26 @@ export interface ICategories {
   stateFactory: true,
 })
 export default class Categories extends VuexModule implements ICategories {
-  categories: Category[] = [];
+  categories: CategoryWithCount[] = [];
 
   @Mutation
-  setCategories(category: Category[]) {
-    this.categories = category;
+  setCategories(categories: CategoryWithCount[]) {
+    this.categories = categories;
   }
 
   @Action
   init() {
     return fetchCategories().then((entries: MultipleItem<Category>) => {
-      this.setCategories(entries.items);
+      return Promise.all(
+        entries.items.map((e) => {
+          return fetchPostsCountInCategory(e.sys.id).then((count) => ({
+            element: e,
+            count,
+          }));
+        })
+      ).then((categoriesWithCount) => {
+        this.setCategories(categoriesWithCount);
+      });
     });
   }
 }

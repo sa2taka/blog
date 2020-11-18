@@ -1,8 +1,8 @@
 import { ActionTree, Store } from 'vuex';
 import { ActionContext } from 'vuex/types';
 import { Context } from '@nuxt/types';
-import { initialiseStores } from '~/libs/storeAccessor';
-const initializer = (store: Store<any>) => initialiseStores(store);
+import { initializeStores } from '~/libs/storeAccessor';
+const initializer = (store: Store<any>) => initializeStores(store);
 export const plugins = [initializer];
 export * from '~/libs/storeAccessor';
 
@@ -11,6 +11,9 @@ export const actions: ActionTree<any, any> = {
     context: ActionContext<any, any>,
     _server: Context
   ) => {
-    await context.dispatch('categories/init');
+    await Promise.all([
+      context.dispatch('categories/init'),
+      context.dispatch('postsCount/init'),
+    ]);
   },
 };

@@ -28,22 +28,40 @@ export function fetchPosts(page: number, limit: number) {
   return client.getEntries(queries);
 }
 
-export async function confirmExistingCategory(categoryId: string) {
+export function fetchPostsCount() {
   const queries: Record<string, any> = {
     content_type: CTF_POST_ID,
-    limit: 1,
     order: '-sys.createdAt',
-    'fields.category.sys.id': categoryId,
+    limit: 1000,
+    select: 'fields.public',
   };
 
   if (isProdcution) {
     queries['fields.public'] = true;
   }
 
-  const isExist = await client
+  return client
     .getEntries(queries)
-    .then((posts: MultipleItem<Post>) => posts.items.length !== 0);
-  return isExist;
+    .then((posts: MultipleItem<Post>) => posts.total);
+}
+
+export async function fetchPostsCountInCategory(categoryId: string) {
+  const queries: Record<string, any> = {
+    content_type: CTF_POST_ID,
+    limit: 1000,
+    order: '-sys.createdAt',
+    'fields.category.sys.id': categoryId,
+    select: 'fields.public',
+  };
+
+  if (isProdcution) {
+    queries['fields.public'] = true;
+  }
+
+  const count = await client
+    .getEntries(queries)
+    .then((posts: MultipleItem<Post>) => posts.items.length);
+  return count;
 }
 
 export function fetchPostInCategory(

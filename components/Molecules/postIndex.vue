@@ -276,8 +276,8 @@ interface FormatedPostIndex {
 }
 
 .index-link {
-  padding-top: 14px;
-  padding-bottom: 14px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   text-decoration: none;
 }
 
