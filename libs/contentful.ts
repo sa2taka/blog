@@ -28,6 +28,23 @@ export function fetchPosts(page: number, limit: number) {
   return client.getEntries(queries);
 }
 
+export function fetchPostsCount() {
+  const queries: Record<string, any> = {
+    content_type: CTF_POST_ID,
+    order: '-sys.createdAt',
+    limit: '1000',
+    select: 'sys',
+  };
+
+  if (isProdcution) {
+    queries['fields.public'] = true;
+  }
+
+  return client
+    .getEntries(queries)
+    .then((posts: MultipleItem<Post>) => posts.total);
+}
+
 export async function confirmExistingCategory(categoryId: string) {
   const queries: Record<string, any> = {
     content_type: CTF_POST_ID,
