@@ -1,7 +1,7 @@
 <template>
   <v-layout column justify-center align-center>
     <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
-    <div class="category-title">{{ category.fields.name }}</div>
+    <div class="category-title">{{ category.element.fields.name }}</div>
     <posts :posts="posts" />
   </v-layout>
 </template>
@@ -10,11 +10,12 @@
 import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
 import { fetchPostInCategory } from '@/libs/contentful';
-import { Post, MultipleItem, Category } from '@/types/entry';
+import { Post, MultipleItem } from '@/types/entry';
 import { generateCategoryBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 
 import Posts from '@/components/Organisms/posts.vue';
 import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
+import { CategoryWithCount } from '~/store/categories';
 
 @Component({
   components: {
@@ -25,13 +26,14 @@ import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
 export default class CategorySlug extends Vue {
   posts!: Post[];
   page!: number;
-  category!: Category;
+  category!: CategoryWithCount;
 
   async asyncData(context: Context) {
     const page = decidePage(context);
     const limit = 20; // hard code because "this" is not access
     const category = context.store.state.categories.categories.find(
-      (category: Category) => category.fields.slug === context.route.params.slug
+      (category: CategoryWithCount) =>
+        category.element.fields.slug === context.route.params.slug
     );
 
     const posts: Post[] = await fetchPostInCategory(
@@ -53,12 +55,12 @@ export default class CategorySlug extends Vue {
   }
 
   get breadcrumbsList() {
-    return generateCategoryBreadcrumbsList(this.category);
+    return generateCategoryBreadcrumbsList(this.category.element);
   }
 
   head() {
     return {
-      title: this.category.fields.name + ' カテゴリ - ',
+      title: this.category.element.fields.name + ' カテゴリ - ',
       meta: [{ name: 'robots', content: 'noindex,nofollow' }],
     };
   }

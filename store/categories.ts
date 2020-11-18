@@ -2,7 +2,7 @@ import { Module, VuexModule, Action, Mutation } from 'vuex-module-decorators';
 import { Category, MultipleItem } from '@/types/entry';
 import { fetchCategories, fetchPostsCountInCategory } from '@/libs/contentful';
 
-type CategoryWithCount = { element: Category; count: number };
+export type CategoryWithCount = { element: Category; count: number };
 export interface ICategories {
   categories: CategoryWithCount[];
 }
