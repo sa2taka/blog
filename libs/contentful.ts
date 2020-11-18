@@ -45,7 +45,7 @@ export function fetchPostsCount() {
     .then((posts: MultipleItem<Post>) => posts.total);
 }
 
-export async function confirmExistingCategory(categoryId: string) {
+export async function fetchPostsCountInCategory(categoryId: string) {
   const queries: Record<string, any> = {
     content_type: CTF_POST_ID,
     limit: 1000,
@@ -58,10 +58,10 @@ export async function confirmExistingCategory(categoryId: string) {
     queries['fields.public'] = true;
   }
 
-  const isExist = await client
+  const count = await client
     .getEntries(queries)
-    .then((posts: MultipleItem<Post>) => posts.items.length !== 0);
-  return isExist;
+    .then((posts: MultipleItem<Post>) => posts.items.length);
+  return count;
 }
 
 export function fetchPostInCategory(
