@@ -2,13 +2,14 @@
   <v-layout column justify-center align-center>
     <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
     <div class="category-title">{{ category.element.fields.name }}</div>
+    <pagination v-model="page" :limit="limit" :count="category.count" />
     <posts :posts="posts" />
   </v-layout>
 </template>
 
 <script lang="ts">
 import { Context } from '@nuxt/types';
-import { Vue, Component } from 'nuxt-property-decorator';
+import { Vue, Component, Watch } from 'nuxt-property-decorator';
 import { fetchPostInCategory } from '@/libs/contentful';
 import { Post, MultipleItem } from '@/types/entry';
 import { generateCategoryBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
@@ -38,7 +39,7 @@ export default class CategorySlug extends Vue {
 
     const posts: Post[] = await fetchPostInCategory(
       context.route.params.slug,
-      page,
+      page - 1,
       limit
     ).then((posts: MultipleItem<Post>) =>
       posts.items.map((item) => {
@@ -64,26 +65,34 @@ export default class CategorySlug extends Vue {
       meta: [{ name: 'robots', content: 'noindex,nofollow' }],
     };
   }
+
+  @Watch('page')
+  onChangePage() {
+    this.$router.push({
+      name: '/',
+      params: { page: this.page.toString() },
+    });
+  }
 }
 
 // page setting
 const decidePage = (context: Context) => {
   const pageQuery = context.query.page;
   if (typeof pageQuery !== 'string') {
-    return 0;
+    return 1;
   }
 
   if (pageQuery === '') {
-    return 0;
+    return 1;
   }
 
   const pageQueryNum = parseInt(pageQuery, 10);
 
-  if (isNaN(pageQueryNum) || pageQueryNum < 0) {
-    return 0;
+  if (isNaN(pageQueryNum) || pageQueryNum < 1) {
+    return 1;
   }
 
-  return pageQueryNum - 1;
+  return pageQueryNum;
 };
 </script>
 
