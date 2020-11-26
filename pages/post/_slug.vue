@@ -83,6 +83,12 @@ export default class PostSlug extends Vue {
     };
   }
 
+  mounted() {
+    const hash = this.$route.hash;
+    window.location.hash = '';
+    window.location.hash = hash;
+  }
+
   get postDate() {
     const rawDate = this.post.sys.createdAt;
 
