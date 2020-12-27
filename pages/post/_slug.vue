@@ -116,15 +116,15 @@ export default class PostSlug extends Vue {
   get seoStructureData() {
     return {
       '@context': 'https://schema.org',
-      '@type': 'NewsArticle',
+      '@type': 'BlogPosting',
       mainEntityOfPage: {
         '@type': 'WebPage',
         '@id': BASE_URL + this.$route.path,
       },
       headline: this.post.fields.title,
       image: [this.ogImage],
-      datePublished: this.postDate.toString(),
-      dateModified: this.updateDate.toString(),
+      datePublished: this.post.sys.createdAt.toString(),
+      dateModified: this.post.sys.updatedAt.toString(),
       author: {
         '@type': 'Person',
         name: this.post.fields.author.fields.name,
