@@ -23,6 +23,7 @@
 <script lang="ts">
 import { Vue, Prop, Component } from 'nuxt-property-decorator';
 import { BreadcrumbsList } from '@/libs/breadcrumbsGenerator';
+import { BASE_URL } from '@/libs/const';
 
 @Component
 export default class Breadcrumbs extends Vue {
@@ -40,6 +41,42 @@ export default class Breadcrumbs extends Vue {
 
   handleResize() {
     this.isSmartphoneWidth = window.innerWidth < this.smartphoneWidth;
+  }
+
+  head() {
+    const hid = 'breadcrumbs';
+
+    return {
+      script: [
+        {
+          hid,
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify(this.seoStructureData, null),
+        },
+      ],
+      __dangerouslyDisableSanitizersByTagID: {
+        [hid]: ['innerHTML'],
+      },
+    };
+  }
+
+  get seoStructureData() {
+    const items = this.list.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@id': item.to,
+        '@type': 'ListItem',
+        name: item.text,
+        item: `${BASE_URL}${item.to}`,
+      },
+    }));
+
+    return {
+      '@context': 'http://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: items,
+    };
   }
 }
 </script>
