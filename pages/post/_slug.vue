@@ -116,7 +116,7 @@ export default class PostSlug extends Vue {
   get seoStructureData() {
     return {
       '@context': 'https://schema.org',
-      '@type': 'NewsArticle',
+      '@type': 'BlogPosting',
       mainEntityOfPage: {
         '@type': 'WebPage',
         '@id': BASE_URL + this.$route.path,
