@@ -83,10 +83,24 @@ export default class PostSlug extends Vue {
     };
   }
 
-  mounted() {
-    const hash = this.$route.hash;
-    window.location.hash = '';
-    window.location.hash = hash;
+  created() {
+    if (process.client) {
+      window.addEventListener('load', this.replaceHash);
+    }
+  }
+
+  destroyed() {
+    if (process.client) {
+      window.removeEventListener('load', this.replaceHash);
+    }
+  }
+
+  replaceHash() {
+    const hash = decodeURI(this.$route.hash);
+    if (hash !== '') {
+      const ref = window.location.href;
+      window.location.replace(ref);
+    }
   }
 
   get postDate() {
@@ -226,7 +240,7 @@ const formatDate = (date: Date) => {
 }
 
 .post-width {
-  width: 1000px;
+  width: 816px;
 }
 
 @media (max-width: 1020px) and (min-width: 768px) {
