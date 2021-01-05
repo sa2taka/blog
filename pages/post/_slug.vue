@@ -1,7 +1,7 @@
 <template>
   <v-layout column justify-center align-center>
     <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
-    <article class="post">
+    <article class="post post-width">
       <div
         class="post-title-area"
         :style="{
@@ -219,11 +219,26 @@ const formatDate = (date: Date) => {
 <style>
 /* Do not set scoped */
 .post {
-  width: 80%;
   min-width: 300px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 12px;
+}
+
+.post-width {
+  width: 1000px;
+}
+
+@media (max-width: 1020px) and (min-width: 768px) {
+  .post-width {
+    width: 80%;
+  }
+}
+
+@media (max-width: 767px) {
+  .post-width {
+    width: 99%;
+  }
 }
 
 .back-button {
