@@ -113,9 +113,36 @@ export default class PostSlug extends Vue {
     return generatePostBreadcrumbsList(this.post);
   }
 
+  get seoStructureData() {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': BASE_URL + this.$route.path,
+      },
+      headline: this.post.fields.title,
+      image: [this.ogImage],
+      datePublished: this.post.sys.createdAt.toString(),
+      dateModified: this.post.sys.updatedAt.toString(),
+      author: {
+        '@type': 'Person',
+        name: this.post.fields.author.fields.name,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'sa2taka',
+        logo: {
+          '@type': 'ImageObject',
+          url: BASE_URL + '/logo-for-twitter.png',
+        },
+      },
+    };
+  }
+
   head() {
     const link = [];
-    const script: any[] = [];
+    const hid = 'article';
     if (this.post.fields.latex) {
       link.push({
         rel: 'stylesheet',
@@ -163,7 +190,16 @@ export default class PostSlug extends Vue {
         },
       ],
       link,
-      script,
+      script: [
+        {
+          hid,
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify(this.seoStructureData, null),
+        },
+      ],
+      __dangerouslyDisableSanitizersByTagID: {
+        [hid]: ['innerHTML'],
+      },
     };
   }
 }
