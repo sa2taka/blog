@@ -189,4 +189,78 @@ export default class Markdown extends Vue {
 .v-application code .hljs-comment {
   color: #acb3c0;
 }
+
+.markdown-body .message {
+  padding: 1.2rem 0.8rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid #2196f3;
+  background: #f4f8fa;
+  position: relative;
+}
+
+.theme--dark .markdown-body .message {
+  background: #161624;
+}
+
+.markdown-body .message.message__success {
+  background: #f1f9f1;
+  border-left: 4px solid #4caf50;
+}
+
+.theme--dark .markdown-body .message.message__success {
+  background: #162416;
+}
+
+.markdown-body .message.message__error {
+  background: #fdf7f7;
+  border-left: 4px solid #f44336;
+}
+
+.theme--dark .markdown-body .message.message__error {
+  background: #241616;
+}
+
+.markdown-body .message.message__warning {
+  background: #fcf8f2;
+  border-left: 4px solid #ff9800;
+}
+
+.theme--dark .markdown-body .message.message__warning {
+  background: #322416;
+}
+
+.markdown-body .message .message__icon {
+  position: absolute;
+  top: 12px;
+  left: -16px;
+  width: 28px;
+  height: 28px;
+  padding: 4px;
+  background-color: #2196f3;
+  border-radius: 50% 50%;
+}
+
+.markdown-body .message.message__success .message__icon {
+  background-color: #4caf50;
+}
+
+.markdown-body .message.message__error .message__icon {
+  background-color: #f44336;
+}
+
+.markdown-body .message.message__warning .message__icon {
+  background-color: #ff9800;
+}
+
+.markdown-body .message .message__icon svg {
+  fill: white;
+}
+
+.markdown-body .message .alert__content {
+  margin-left: 1rem;
+}
+
+.markdown-body .message .alert__content p:last-child {
+  margin-bottom: 0;
+}
 </style>
