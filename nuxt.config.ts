@@ -120,7 +120,7 @@ const katexCss = [
   'vlistspanspan',
 ];
 export default {
-  mode: 'universal',
+  ssr: true,
   /*
    ** Headers of the page
    */
