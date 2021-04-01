@@ -203,12 +203,12 @@ export default class Markdown extends Vue {
 }
 
 .markdown-body .message.message__success {
-  background: #f1f9f1;
-  border-left: 4px solid #4caf50;
+  background: #f4f8fa;
+  border-left: 4px solid #2196f3;
 }
 
 .theme--dark .markdown-body .message.message__success {
-  background: #162416;
+  background: #161624;
 }
 
 .markdown-body .message.message__error {
@@ -226,12 +226,12 @@ export default class Markdown extends Vue {
 }
 
 .theme--dark .markdown-body .message.message__warning {
-  background: #322416;
+  background: #201612dd;
 }
 
 .markdown-body .message .message__icon {
   position: absolute;
-  top: 12px;
+  top: 1rem;
   left: -16px;
   width: 28px;
   height: 28px;
