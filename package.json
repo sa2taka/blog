@@ -12,15 +12,8 @@
     "generate": "nuxt generate",
     "lint": "eslint --fix --ext .ts,.js,.vue --ignore-path .gitignore .",
     "test": "jest",
-    "format": "./node_modules/.bin/prettier -c '**/*.vue' '**/*.ts' '**/*.js' --ignore-path .gitignore & npm run lint"
-  },
-  "lint-staged": {
-    "*.{js,vue}": "yarn lint"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "format": "./node_modules/.bin/prettier -c '**/*.vue' '**/*.ts' '**/*.js' --ignore-path .gitignore & npm run lint",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.1",
