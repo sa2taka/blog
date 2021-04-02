@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-tooltip bottom>
-      <template v-slot:activator="{ on }">
+      <template #activator="{ on }">
         <v-btn
           v-if="isDark"
           icon
