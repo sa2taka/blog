@@ -1,8 +1,8 @@
 import Vuetify from 'vuetify';
 import { createLocalVue, mount } from '@vue/test-utils';
+import { generateIndexies } from '@/libs/generateIndexies';
 import PostIndex from '../../../components/Molecules/postIndex.vue';
 import { posts } from '../../__mocks__/postData';
-import { generateIndexies } from '@/libs/generateIndexies';
 
 const localVue = createLocalVue();
 
