@@ -25,6 +25,7 @@ export default class Markdown extends Vue {
 </script>
 
 <style>
+/*! purgecss start ignore */
 .v-application .markdown-body * {
   word-wrap: break-word;
 }
@@ -231,7 +232,7 @@ export default class Markdown extends Vue {
 
 .markdown-body .message .message__icon {
   position: absolute;
-  top: 1rem;
+  top: 1.2rem;
   left: -16px;
   width: 28px;
   height: 28px;
@@ -263,4 +264,5 @@ export default class Markdown extends Vue {
 .markdown-body .message .alert__content p:last-child {
   margin-bottom: 0;
 }
+/*! purgecss end ignore */
 </style>
