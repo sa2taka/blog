@@ -174,6 +174,7 @@ export default class Markdown extends Vue {
 .v-application .markdown-body code.hljsspan {
   display: inline;
   overflow-x: initial;
+  overflow-wrap: break-word;
   color: #ddd;
   background: #282c34;
   padding: 0.1em 0.4em;
