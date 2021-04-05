@@ -1,4 +1,3 @@
-import TerserPlugin from 'terser-webpack-plugin';
 import { BASE_URL } from './libs/const';
 
 const nodeExternals = require('webpack-node-externals');
@@ -120,7 +119,7 @@ const katexCss = [
   'vlistspanspan',
 ];
 export default {
-  mode: 'universal',
+  ssr: true,
   /*
    ** Headers of the page
    */
@@ -226,12 +225,6 @@ export default {
     },
     optimization: {
       minimize: true,
-      minimizer: [
-        new TerserPlugin({
-          cache: true,
-          parallel: false,
-        }),
-      ],
     },
 
     extend(config: any, _ctx: any) {
@@ -350,7 +343,6 @@ export default {
   icon: false,
   typescript: {
     ignoreNotFoundWarnings: true,
-    typeCheck: { memoryLimit: 4096 },
   },
   googleAnalytics: {
     id: 'UA-152417689-1',

@@ -52,6 +52,12 @@ import { Vue, Prop, Component } from 'nuxt-property-decorator';
 
 import { PostIndex as IPostIndex } from '@/types/postIndex';
 
+interface FormatedPostIndex {
+  title?: string;
+  child: FormatedPostIndex[];
+  level: number;
+}
+
 @Component
 export default class PostIndex extends Vue {
   @Prop({ required: true })
@@ -155,12 +161,6 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
     level: 1,
   };
 };
-
-interface FormatedPostIndex {
-  title?: string;
-  child: FormatedPostIndex[];
-  level: number;
-}
 </script>
 
 <style scoped>

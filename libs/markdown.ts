@@ -5,6 +5,8 @@ import footnote from 'markdown-it-footnote';
 import imsize from 'markdown-it-imsize';
 // @ts-ignore
 import katex from '@iktakahiro/markdown-it-katex';
+// @ts-ignore
+import markdownItContainer from 'markdown-it-container';
 
 import prism from '@/libs/prism';
 
@@ -111,6 +113,47 @@ const myWebpConvertPlugin = (md: MarkdownIt) => {
     return `<picture>${webpTag}${imgTag}</picture>`;
   };
 };
+
+const containerRender = {
+  validate: (params: any) => {
+    return params.trim().match(/^(.*)$/);
+  },
+
+  render: (tokens: any, idx: any) => {
+    const m = tokens[idx].info.trim().match(/^(.*)$/);
+    const escapeHtml = (str: string) => {
+      if (typeof str !== 'string') {
+        return str;
+      }
+      return str.replace(
+        /[&'`"<>]/g,
+        (match) =>
+          // @ts-ignore
+          ({
+            '&': '&amp;',
+            "'": '&#x27;',
+            '`': '&#x60;',
+            '"': '&quot;',
+            '<': '&lt;',
+            '>': '&gt;',
+          }[match] || '')
+      );
+    };
+
+    // HACK: vuetifyのクラスを直書きで記載している
+    const svg =
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M 11,4L 13,4L 13,15L 11,15L 11,4 Z M 13,18L 13,20L 11,20L 11,18L 13,18 Z"></path></svg>';
+
+    if (tokens[idx].nesting === 1) {
+      return `<div role="alert" class="message message__${escapeHtml(
+        m[1]
+      )}"><span aria-hidden="true" class="message__icon">${svg}</span><div class="alert__content">`;
+    } else {
+      return '</div></div>';
+    }
+  },
+};
+
 export const markdown = new MarkdownIt({
   html: true,
   linkify: true,
@@ -124,7 +167,8 @@ export const markdown = new MarkdownIt({
   .use(myHeaderPlugin)
   .use(myInlineCodePlugin)
   .use(myWebpConvertPlugin)
-  .use(myImgPlugin);
+  .use(myImgPlugin)
+  .use(markdownItContainer, '', containerRender);
 
 export function addKatex(md: MarkdownIt) {
   return md.use(katex, { throwOnError: false, errorColor: ' #cc0000' });

@@ -1,7 +1,7 @@
 <template>
   <v-layout column justify-center align-center>
     <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
-    <article class="post">
+    <article class="post post-width">
       <div
         class="post-title-area"
         :style="{
@@ -83,6 +83,26 @@ export default class PostSlug extends Vue {
     };
   }
 
+  created() {
+    if (process.client) {
+      window.addEventListener('load', this.replaceHash);
+    }
+  }
+
+  destroyed() {
+    if (process.client) {
+      window.removeEventListener('load', this.replaceHash);
+    }
+  }
+
+  replaceHash() {
+    const hash = decodeURI(this.$route.hash);
+    if (hash !== '') {
+      const ref = window.location.href;
+      window.location.replace(ref);
+    }
+  }
+
   get postDate() {
     const rawDate = this.post.sys.createdAt;
 
@@ -107,9 +127,36 @@ export default class PostSlug extends Vue {
     return generatePostBreadcrumbsList(this.post);
   }
 
+  get seoStructureData() {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': BASE_URL + this.$route.path,
+      },
+      headline: this.post.fields.title,
+      image: [this.ogImage],
+      datePublished: this.post.sys.createdAt.toString(),
+      dateModified: this.post.sys.updatedAt.toString(),
+      author: {
+        '@type': 'Person',
+        name: this.post.fields.author.fields.name,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'sa2taka',
+        logo: {
+          '@type': 'ImageObject',
+          url: BASE_URL + '/logo-for-twitter.png',
+        },
+      },
+    };
+  }
+
   head() {
     const link = [];
-    const script: any[] = [];
+    const hid = 'article';
     if (this.post.fields.latex) {
       link.push({
         rel: 'stylesheet',
@@ -157,7 +204,16 @@ export default class PostSlug extends Vue {
         },
       ],
       link,
-      script,
+      script: [
+        {
+          hid,
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify(this.seoStructureData, null),
+        },
+      ],
+      __dangerouslyDisableSanitizersByTagID: {
+        [hid]: ['innerHTML'],
+      },
     };
   }
 }
@@ -177,11 +233,26 @@ const formatDate = (date: Date) => {
 <style>
 /* Do not set scoped */
 .post {
-  width: 80%;
   min-width: 300px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 12px;
+}
+
+.post-width {
+  width: 816px;
+}
+
+@media (max-width: 1020px) and (min-width: 768px) {
+  .post-width {
+    width: 80%;
+  }
+}
+
+@media (max-width: 767px) {
+  .post-width {
+    width: 99%;
+  }
 }
 
 .back-button {
