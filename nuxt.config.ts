@@ -188,7 +188,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/vuetify', '@/plugins/katex'],
+  plugins: ['@/plugins/vuetify'],
   /*
    ** Nuxt.js dev-modules
    */
