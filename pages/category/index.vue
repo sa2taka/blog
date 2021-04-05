@@ -4,15 +4,15 @@
     <h2 class="center-title">カテゴリ</h2>
     <nav>
       <ul class="categories">
-        <li v-for="category in categories" :key="category.sys.id">
+        <li v-for="category in categories" :key="category.element.sys.id">
           <v-btn
             :to="{
               name: 'category-slug',
-              params: { slug: category.fields.slug },
+              params: { slug: category.element.fields.slug },
             }"
             outlined
             class="ml-2 mt-2"
-            >{{ category.fields.name }}</v-btn
+            >{{ category.element.fields.name }}({{ category.count }})</v-btn
           >
         </li>
       </ul>
@@ -23,7 +23,6 @@
 <script lang="ts">
 import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
-import { confirmExistingCategory } from '@/libs/contentful';
 import { Category as ICategory } from '@/types/entry';
 import { generateCategoriesBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 
@@ -42,10 +41,10 @@ interface CategoryWithCount {
 export default class Category extends Vue {
   categories!: CategoryWithCount[];
 
-  async asyncData(context: Context) {
+  asyncData(context: Context) {
     return {
-      categories: await fetchCategoriesIfExist(
-        context.store.state.categories.categories
+      categories: context.store.state.categories.categories.filter(
+        (categoryWithCount: any) => categoryWithCount.count > 0
       ),
     };
   }
@@ -61,21 +60,6 @@ export default class Category extends Vue {
     };
   }
 }
-
-const fetchCategoriesIfExist = (categories: ICategory[]) => {
-  return Promise.all(
-    categories.map((category) => {
-      return confirmExistingCategory(category.sys.id).then((isExist) => {
-        return {
-          isExist,
-          category,
-        };
-      });
-    })
-  ).then((categoriesWithExist) => {
-    return categoriesWithExist.filter((e) => e.isExist).map((e) => e.category);
-  });
-};
 </script>
 
 <style scoped>

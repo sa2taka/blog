@@ -130,7 +130,7 @@ const formatDate = (date: Date) => {
 <style scoped>
 .top-post-category {
   font-size: 14px;
-  font-weight: z00;
+  font-weight: 600;
   padding-left: 16px;
 }
 .flex-1 {

@@ -13,8 +13,8 @@ handlers:
     secure: always
 
   - url: /sw.js
-    static_files: .nuxt/static/sw.js
-    upload: .nuxt/static/sw.js
+    static_files: static/sw.js
+    upload: static/sw.js
     secure: always
 
   - url: /.*
