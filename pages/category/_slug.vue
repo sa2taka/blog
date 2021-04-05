@@ -3,7 +3,8 @@
     <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
     <div class="category-title">{{ category.element.fields.name }}</div>
     <pagination v-model="page" :limit="limit" :count="category.count" />
-    <posts :posts="posts" />
+    <posts v-if="!isLoading" :posts="posts" />
+    <skelton-pages v-else />
   </v-layout>
 </template>
 
@@ -30,6 +31,7 @@ export default class CategorySlug extends Vue {
   category!: CategoryWithCount;
   slug!: string;
   limit = 20;
+  isLoading = false;
 
   async asyncData(context: Context) {
     const page = decidePage(context);
@@ -76,8 +78,10 @@ export default class CategorySlug extends Vue {
       query: { slug: this.page.toString() },
     });
 
+    this.isLoading = true;
     fetchPostInCategory(this.slug, this.page - 1, this.limit).then(
       (posts: MultipleItem<Post>) => {
+        this.isLoading = false;
         this.posts = posts.items.map((item) => {
           item.fields.body = '';
           return item;

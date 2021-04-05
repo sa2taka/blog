@@ -1,7 +1,8 @@
 <template>
   <v-layout column justify-center align-center>
     <pagination v-model="page" :limit="limit" :count="count" />
-    <posts :posts="posts" />
+    <posts v-if="!isLoading" :posts="posts" />
+    <skelton-pages v-else />
   </v-layout>
 </template>
 
@@ -14,17 +15,20 @@ import { Post, MultipleItem } from '@/types/entry';
 
 import Posts from '@/components/Organisms/posts.vue';
 import Pagination from '@/components/Molecules/pagination.vue';
+import SkeltonPages from '~/components/Organisms/skeltonPosts.vue';
 
 @Component({
   components: {
     Posts,
     Pagination,
+    SkeltonPages,
   },
 })
 export default class IndexPage extends Vue {
   page!: number;
   limit = 20;
   posts!: Post[];
+  isLoading = false;
 
   async asyncData(context: Context) {
     const page = decidePage(context);
@@ -58,7 +62,9 @@ export default class IndexPage extends Vue {
     if (!this.page || this.page < 1) {
       this.page = 1;
     }
+    this.isLoading = true;
     fetchPosts(this.page - 1, this.limit).then((posts: MultipleItem<Post>) => {
+      this.isLoading = false;
       this.posts = posts.items.map((item) => {
         item.fields.body = '';
         return item;
