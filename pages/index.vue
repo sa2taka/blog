@@ -28,7 +28,7 @@ export default class IndexPage extends Vue {
 
   async asyncData(context: Context) {
     const page = decidePage(context);
-    const limit = 20; // hard code because "this" is not accessable
+    const limit = 20;
 
     const posts: Post[] = await fetchPosts(page - 1, limit).then(
       (posts: MultipleItem<Post>) =>
@@ -51,13 +51,22 @@ export default class IndexPage extends Vue {
   @Watch('page')
   onChangePage() {
     this.$router.push({
-      name: '/',
-      params: { page: this.page.toString() },
+      name: 'index',
+      query: { page: this.page.toString() },
+    });
+
+    if (!this.page || this.page < 1) {
+      this.page = 1;
+    }
+    fetchPosts(this.page - 1, this.limit).then((posts: MultipleItem<Post>) => {
+      this.posts = posts.items.map((item) => {
+        item.fields.body = '';
+        return item;
+      });
     });
   }
 }
 
-// page setting
 const decidePage = (context: Context) => {
   const pageQuery = context.query.page;
   if (typeof pageQuery !== 'string') {
@@ -73,8 +82,7 @@ const decidePage = (context: Context) => {
   if (isNaN(pageQueryNum) || pageQueryNum < 1) {
     return 1;
   }
-
-  return pageQueryNum - 1;
+  return pageQueryNum;
 };
 </script>
 

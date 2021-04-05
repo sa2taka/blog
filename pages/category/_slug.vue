@@ -28,10 +28,12 @@ export default class CategorySlug extends Vue {
   posts!: Post[];
   page!: number;
   category!: CategoryWithCount;
+  slug!: string;
+  limit = 20;
 
   async asyncData(context: Context) {
     const page = decidePage(context);
-    const limit = 20; // hard code because "this" is not access
+    const limit = 20;
     const category = context.store.state.categories.categories.find(
       (category: CategoryWithCount) =>
         category.element.fields.slug === context.route.params.slug
@@ -52,6 +54,7 @@ export default class CategorySlug extends Vue {
       page,
       posts,
       category,
+      slug: context.route.params.slug,
     };
   }
 
@@ -69,13 +72,21 @@ export default class CategorySlug extends Vue {
   @Watch('page')
   onChangePage() {
     this.$router.push({
-      name: '/',
-      params: { page: this.page.toString() },
+      name: 'category',
+      query: { slug: this.page.toString() },
     });
+
+    fetchPostInCategory(this.slug, this.page - 1, this.limit).then(
+      (posts: MultipleItem<Post>) => {
+        this.posts = posts.items.map((item) => {
+          item.fields.body = '';
+          return item;
+        });
+      }
+    );
   }
 }
 
-// page setting
 const decidePage = (context: Context) => {
   const pageQuery = context.query.page;
   if (typeof pageQuery !== 'string') {

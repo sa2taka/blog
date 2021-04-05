@@ -4,12 +4,12 @@
     :value="value"
     :length="Math.ceil(count / limit)"
     circle
-    @input="value = $event"
+    @input="input($event)"
   />
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator';
+import { Vue, Component, Prop, Emit } from 'nuxt-property-decorator';
 
 @Component
 export default class Pagination extends Vue {
@@ -21,6 +21,9 @@ export default class Pagination extends Vue {
 
   @Prop({ required: true })
   limit!: number;
+
+  @Emit()
+  input(_: Event) {}
 }
 </script>
 
