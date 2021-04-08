@@ -3,7 +3,12 @@ import { BASE_URL } from './libs/const';
 const nodeExternals = require('webpack-node-externals');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 
-const config = require('./.contentful.json');
+const config = {
+  CTF_MAIN_AUTHOR_ID: process.env.CTF_MAIN_AUTHOR_ID,
+  CTF_SPACE_ID: process.env.CTF_SPACE_ID,
+  CTF_CDA_ACCESS_TOKEN: process.env.CTF_CDA_ACCESS_TOKEN,
+};
+
 const isDev = process.env.NODE_ENV === 'development';
 const katexCss = [
   'accent',
@@ -244,7 +249,7 @@ export default {
   },
   env: {
     CTF_CDA_ACCESS_TOKEN: config.CTF_CDA_ACCESS_TOKEN,
-    CTF_CTF_MAIN_AUTHOR_ID: config.CTF_PERSON_ID,
+    CTF_CTF_MAIN_AUTHOR_ID: config.CTF_MAIN_AUTHOR_ID,
     CTF_SPACE_ID: config.CTF_SPACE_ID,
   },
   manifest: {
