@@ -45,6 +45,10 @@ jobs:
           yarn test
 
       - name: yarn generate
+        env:
+          CTF_CDA_ACCESS_TOKEN: ${{ secrets.CTF_CDA_ACCESS_TOKEN }}
+          CTF_MAIN_AUTHOR_ID: ${{ secrets.CTF_MAIN_AUTHOR_ID }}
+          CTF_SPACE_ID: ${{ secrets.CTF_SPACE_ID }}
         run: |
           NODE_ENV=production yarn run generate
 
