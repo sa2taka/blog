@@ -44,9 +44,9 @@ jobs:
         run: |
           yarn test
 
-      - name: yarn build
+      - name: yarn generate
         run: |
-          NODE_ENV=production yarn run build
+          NODE_ENV=production yarn run generate
 
       - name: GAE deploy
         env:
