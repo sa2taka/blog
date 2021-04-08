@@ -3,7 +3,12 @@ import { BASE_URL } from './libs/const';
 const nodeExternals = require('webpack-node-externals');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 
-const config = require('./.contentful.json');
+const config = {
+  CTF_MAIN_AUTHOR_ID: process.env.CTF_MAIN_AUTHOR_ID,
+  CTF_SPACE_ID: process.env.CTF_SPACE_ID,
+  CTF_CDA_ACCESS_TOKEN: process.env.CTF_CDA_ACCESS_TOKEN,
+};
+
 const isDev = process.env.NODE_ENV === 'development';
 const katexCss = [
   'accent',
@@ -120,6 +125,7 @@ const katexCss = [
 ];
 export default {
   ssr: true,
+  target: 'static',
   /*
    ** Headers of the page
    */
@@ -194,6 +200,7 @@ export default {
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
+    'nuxt-purgecss',
     '@nuxtjs/eslint-module',
     '@nuxt/typescript-build',
     '@nuxtjs/google-analytics',
@@ -242,7 +249,7 @@ export default {
   },
   env: {
     CTF_CDA_ACCESS_TOKEN: config.CTF_CDA_ACCESS_TOKEN,
-    CTF_CTF_MAIN_AUTHOR_ID: config.CTF_PERSON_ID,
+    CTF_CTF_MAIN_AUTHOR_ID: config.CTF_MAIN_AUTHOR_ID,
     CTF_SPACE_ID: config.CTF_SPACE_ID,
   },
   manifest: {
@@ -360,12 +367,11 @@ export default {
       'pages/**/*.vue',
       'plugins/**/*.js',
       'plugins/**/*.ts',
-      'libs/**/*.ts',
       'node_modules/vuetify/dist/vuetify.js',
     ],
     styleExtensions: ['.css'],
     whitelist: ['body', 'html', 'nuxt-progress'].concat(katexCss),
-    whitelistPatternsChildren: [/^v-/, /^hljs/, /fab/, /^fa-/, /^katex-/],
+    whitelistPatternsChildren: [/^hljs/, /fab/, /^fa-/, /^katex-/],
     extractors: [
       {
         extractor: (content: any) => content.match(/[A-z0-9-:\\/]+/g) || [],

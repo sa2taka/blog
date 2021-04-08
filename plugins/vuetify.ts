@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuetify, { VLayout, VApp, VCard } from 'vuetify/lib';
 import { Context } from '@nuxt/types';
-import '@fortawesome/fontawesome-free/css/all.css';
 import ja from 'vuetify/src/locale/ja';
 import values from './iconValues';
 
@@ -11,7 +10,7 @@ export default (ctx: Context) => {
   let isDark = true;
   if (ctx.req) {
     isDark = !ctx.req.headers.cookie?.match(/theme=light/);
-  } else {
+  } else if (process.client) {
     isDark = localStorage.getItem('theme') !== 'light';
   }
 
