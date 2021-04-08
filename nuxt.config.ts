@@ -120,6 +120,7 @@ const katexCss = [
 ];
 export default {
   ssr: true,
+  target: 'static',
   /*
    ** Headers of the page
    */
@@ -194,6 +195,7 @@ export default {
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
+    'nuxt-purgecss',
     '@nuxtjs/eslint-module',
     '@nuxt/typescript-build',
     '@nuxtjs/google-analytics',
@@ -360,12 +362,11 @@ export default {
       'pages/**/*.vue',
       'plugins/**/*.js',
       'plugins/**/*.ts',
-      'libs/**/*.ts',
       'node_modules/vuetify/dist/vuetify.js',
     ],
     styleExtensions: ['.css'],
     whitelist: ['body', 'html', 'nuxt-progress'].concat(katexCss),
-    whitelistPatternsChildren: [/^v-/, /^hljs/, /fab/, /^fa-/, /^katex-/],
+    whitelistPatternsChildren: [/^hljs/, /fab/, /^fa-/, /^katex-/],
     extractors: [
       {
         extractor: (content: any) => content.match(/[A-z0-9-:\\/]+/g) || [],
