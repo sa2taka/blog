@@ -11,7 +11,7 @@ export default (ctx: Context) => {
   let isDark = true;
   if (ctx.req) {
     isDark = !ctx.req.headers.cookie?.match(/theme=light/);
-  } else {
+  } else if (process.client) {
     isDark = localStorage.getItem('theme') !== 'light';
   }
 
