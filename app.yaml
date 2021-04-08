@@ -4,7 +4,7 @@ instance_class: F2
 
 handlers:
   - url: /_nuxt
-    static_dir: .nuxt/dist/client
+    static_dir: dist/_nuxt
     secure: always
 
   - url: /(.*\.(gif|png|jpg|ico|txt))$
@@ -13,8 +13,7 @@ handlers:
     secure: always
 
   - url: /sw.js
-    static_files: static/sw.js
-    upload: static/sw.js
+    static_files: dist/sw.js
     secure: always
 
   - url: /.*
