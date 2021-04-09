@@ -4,7 +4,7 @@
       :page="page"
       :limit="limit"
       :count="count"
-      :base-url="'page/'"
+      :base-url="'/page/'"
       :posts="posts"
     />
   </v-layout>

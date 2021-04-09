@@ -7,7 +7,7 @@
       :page="page"
       :limit="limit"
       :count="category.count"
-      base-url=""
+      base-url="/category/${category.element.fields.slug}/page/"
       :posts="posts"
     />
   </v-layout>
