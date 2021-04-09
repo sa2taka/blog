@@ -3,16 +3,17 @@
     <ul class="pagenation">
       <li>
         <v-btn v-if="isFirstPage(page)" icon disabled aria-label="前のページ">
-          <v-icon>fa-chevron-left</v-icon>
+          <v-icon x-small>fa-chevron-left</v-icon>
         </v-btn>
         <v-btn
           v-else
           aria-label="前のページ"
           :to="generatePageLink(page - 1)"
           nuxt
-          icon
+          fab
+          x-small
         >
-          <v-icon>fa-chevron-left</v-icon>
+          <v-icon x-small>fa-chevron-left</v-icon>
         </v-btn>
       </li>
       <li v-for="i in maxPage" :key="i">
@@ -20,24 +21,28 @@
           :aria-label="
             i === page ? `現在のページ ${i}ページ目` : `${i}ページへ移動する`
           "
+          :disabled="i === page"
           :to="generatePageLink(i)"
           nuxt
-          icon
+          fab
+          x-small
+          class="page-number-button"
         >
           {{ i }}
         </v-btn>
       </li>
       <li>
         <v-btn v-if="isLastPage(page)" disabled aria-label="後ろのページ" icon>
-          <v-icon>fa-chevron-right</v-icon>
+          <v-icon x-small>fa-chevron-right</v-icon>
         </v-btn>
         <v-btn
           v-else
           aria-label="後ろのページ"
           :to="generatePageLink(page + 1)"
           nuxt
-          icon
-          ><v-icon>fa-chevron-right</v-icon>
+          fab
+          x-small
+          ><v-icon x-small>fa-chevron-right</v-icon>
         </v-btn>
       </li>
     </ul>
@@ -92,5 +97,14 @@ export default class Pagination extends Vue {
   margin: 0;
   max-width: 100%;
   width: 100%;
+  padding: 0;
+}
+
+.pagenation > li {
+  margin: 0 4px;
+}
+
+.pagenation > li > .page-number-button {
+  font-size: 0.8rem !important;
 }
 </style>
