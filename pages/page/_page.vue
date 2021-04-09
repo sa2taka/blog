@@ -51,6 +51,16 @@ export default class PageSettedPage extends Vue {
   get count() {
     return postsCountStore.count;
   }
+
+  head() {
+    if (this.page === 1) {
+      return {
+        meta: [{ name: 'robots', content: 'noindex,nofollow' }],
+      };
+    } else {
+      return {};
+    }
+  }
 }
 
 const decidePage = (context: Context) => {
