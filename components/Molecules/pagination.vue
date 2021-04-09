@@ -97,6 +97,7 @@ export default class Pagination extends Vue {
   margin: 0;
   max-width: 100%;
   width: 100%;
+  padding: 0;
 }
 
 .pagenation > li {
