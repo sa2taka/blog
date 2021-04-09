@@ -2,27 +2,32 @@
   <v-layout column justify-center align-center>
     <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
     <div class="category-title">{{ category.element.fields.name }}</div>
-    <pagination v-model="page" :limit="limit" :count="category.count" />
-    <posts v-if="!isLoading" :posts="posts" />
-    <skelton-pages v-else />
+
+    <posts-with-pagenation
+      :page="page"
+      :limit="limit"
+      :count="category.count"
+      :base-url="`${category.element.fields.slug}/page/`"
+      :posts="posts"
+    />
   </v-layout>
 </template>
 
 <script lang="ts">
 import { Context } from '@nuxt/types';
-import { Vue, Component, Watch } from 'nuxt-property-decorator';
+import { Vue, Component } from 'nuxt-property-decorator';
 import { fetchPostInCategory } from '@/libs/contentful';
 import { Post, MultipleItem } from '@/types/entry';
 import { generateCategoryBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 
-import Posts from '@/components/Organisms/posts.vue';
 import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
+import PostsWithPagenation from '@/components/Organisms/postsWithPagenation.vue';
 import { CategoryWithCount } from '~/store/categories';
 
 @Component({
   components: {
-    Posts,
     Breadcrumbs,
+    PostsWithPagenation,
   },
 })
 export default class CategorySlug extends Vue {
@@ -31,10 +36,9 @@ export default class CategorySlug extends Vue {
   category!: CategoryWithCount;
   slug!: string;
   limit = 20;
-  isLoading = false;
 
   async asyncData(context: Context) {
-    const page = decidePage(context);
+    const page = 1;
     const limit = 20;
     const category = context.store.state.categories.categories.find(
       (category: CategoryWithCount) =>
@@ -70,45 +74,7 @@ export default class CategorySlug extends Vue {
       meta: [{ name: 'robots', content: 'noindex,nofollow' }],
     };
   }
-
-  @Watch('page')
-  onChangePage() {
-    this.$router.push({
-      name: 'category',
-      query: { slug: this.page.toString() },
-    });
-
-    this.isLoading = true;
-    fetchPostInCategory(this.slug, this.page - 1, this.limit).then(
-      (posts: MultipleItem<Post>) => {
-        this.isLoading = false;
-        this.posts = posts.items.map((item) => {
-          item.fields.body = '';
-          return item;
-        });
-      }
-    );
-  }
 }
-
-const decidePage = (context: Context) => {
-  const pageQuery = context.query.page;
-  if (typeof pageQuery !== 'string') {
-    return 1;
-  }
-
-  if (pageQuery === '') {
-    return 1;
-  }
-
-  const pageQueryNum = parseInt(pageQuery, 10);
-
-  if (isNaN(pageQueryNum) || pageQueryNum < 1) {
-    return 1;
-  }
-
-  return pageQueryNum;
-};
 </script>
 
 <style scoped>
