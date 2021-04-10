@@ -4,7 +4,7 @@
       :page="page"
       :limit="limit"
       :count="count"
-      :base-url="'/page/'"
+      base-url="/page/"
       :posts="posts"
     />
   </v-layout>
@@ -24,13 +24,14 @@ import PostsWithPagenation from '@/components/Organisms/postsWithPagenation.vue'
     PostsWithPagenation,
   },
 })
-export default class IndexPage extends Vue {
+export default class PageSettedPage extends Vue {
   page!: number;
   limit = 20;
   posts!: Post[];
+  isLoading = false;
 
-  async asyncData(_context: Context) {
-    const page = 1;
+  async asyncData(context: Context) {
+    const page = decidePage(context);
     const limit = 20;
 
     const posts: Post[] = await fetchPosts(page - 1, limit).then(
@@ -50,7 +51,35 @@ export default class IndexPage extends Vue {
   get count() {
     return postsCountStore.count;
   }
+
+  head() {
+    if (this.page === 1) {
+      return {
+        meta: [{ name: 'robots', content: 'noindex,nofollow' }],
+      };
+    } else {
+      return {};
+    }
+  }
 }
+
+const decidePage = (context: Context) => {
+  const pageParam = context.route.params.page;
+  if (typeof pageParam !== 'string') {
+    return 1;
+  }
+
+  if (pageParam === '') {
+    return 1;
+  }
+
+  const pageParamNum = parseInt(pageParam, 10);
+
+  if (isNaN(pageParamNum) || pageParamNum < 1) {
+    return 1;
+  }
+  return pageParamNum;
+};
 </script>
 
 <style scoped>
