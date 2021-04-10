@@ -37,7 +37,6 @@ jobs:
         env:
           CONTENTFUL_JSON: ${{ secrets.CONTENTFUL_JSON }}
         run: |
-          echo "$CONTENTFUL_JSON" | base64 --decode > ./.contentful.json
           yarn install
 
       - name: yarn test
@@ -57,10 +56,6 @@ jobs:
           GAE_SECRET: ${{ secrets.GAE_SECRET }}
         run: |
           yarn deploy --token=${{ secrets.FIREBASE_TOKEN }}
-
-      - name: clear up
-        run: |
-          rm "$HOME"/gcloud.json
 
       - name: collectNotification
         uses: rtCamp/action-slack-notify@master
