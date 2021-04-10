@@ -12,6 +12,7 @@
         >
           <v-icon x-small>icon-chevron-left</v-icon>
         </v-btn>
+        <div v-else class="paging-padding"></div>
       </li>
       <li v-for="i in maxPage" :key="i">
         <v-btn
@@ -38,6 +39,7 @@
           x-small
           ><v-icon x-small>icon-chevron-right</v-icon>
         </v-btn>
+        <div v-else class="paging-padding"></div>
       </li>
     </ul>
   </nav>
@@ -100,5 +102,9 @@ export default class Pagination extends Vue {
 
 .pagenation > li > .page-number-button {
   font-size: 0.8rem !important;
+}
+
+.paging-padding {
+  width: 32px;
 }
 </style>
