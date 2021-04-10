@@ -13,6 +13,7 @@
       <li
         v-for="indexNest1 in formatedPostIndex"
         :key="indexNest1.title + indexNest1.level.toString()"
+        class="first-index"
       >
         <a class="index-link" :href="`#${indexNest1.title}`">{{
           indexNest1.title
@@ -22,6 +23,7 @@
           <li
             v-for="indexNest2 in indexNest1.child"
             :key="indexNest2.title + indexNest2.level.toString()"
+            class="second-index"
           >
             <a class="index-link" :href="`#${indexNest2.title}`">{{
               indexNest2.title
@@ -231,12 +233,6 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
 
 .post-index li {
   position: relative;
-  margin-top: 6px;
-}
-
-.post-index ol,
-.post-index ul {
-  margin-top: 6px;
 }
 
 .post-index ol > li:before {
@@ -249,7 +245,7 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
 .post-index ol > li:after {
   position: absolute;
   content: '' !important;
-  top: 0px;
+  top: 0;
   right: auto;
   left: 18px;
   bottom: auto;
@@ -263,11 +259,11 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
   width: 6px;
   height: 6px;
   position: absolute;
+  top: 0.5em;
   content: '';
   background-color: var(--v-primary-base);
   border-radius: 50%;
   left: -12px;
-  top: 0.5em;
   margin: auto auto;
 }
 
@@ -276,9 +272,17 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
 }
 
 .index-link {
-  padding-top: 20px;
-  padding-bottom: 20px;
   text-decoration: none;
+}
+
+.first-index {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.second-index {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .index-link:hover {
