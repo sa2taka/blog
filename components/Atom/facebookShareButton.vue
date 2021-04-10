@@ -7,6 +7,7 @@
     :min-width="64"
     target="_blank"
     rel="noopener noreferrer"
+    aria-label="Facebookを利用してシェアする"
   >
     <v-icon
       color="#1877f2"

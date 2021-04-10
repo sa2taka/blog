@@ -7,6 +7,7 @@
     :min-width="64"
     target="_blank"
     rel="noopener noreferrer"
+    aria-label="Pocketを利用して後で読む"
   >
     <v-icon color="#ee4056" v-html="$vuetify.icons.values.pocket" />
     <span v-if="!isSmartphoneWidth" class="ml-2 black--text">後で読む</span>
