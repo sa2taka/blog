@@ -52,13 +52,11 @@ jobs:
         run: |
           NODE_ENV=production yarn run generate
 
-      - name: GAE deploy
+      - name: Firebase Hosting Deploy
         env:
           GAE_SECRET: ${{ secrets.GAE_SECRET }}
         run: |
-          echo "$GAE_SECRET" | base64 --decode > "$HOME"/gcloud.json
-          sh -c "gcloud auth activate-service-account --key-file=$HOME/gcloud.json $*"
-          gcloud app deploy app.yaml --project myblog-269402
+          yarn deploy --token=${{ secrets.FIREBASE_TOKEN }}
 
       - name: clear up
         run: |
