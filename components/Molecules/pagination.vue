@@ -2,11 +2,8 @@
   <nav aria-label="ページネーションナビゲーション">
     <ul class="pagenation">
       <li>
-        <v-btn v-if="isFirstPage(page)" icon disabled aria-label="前のページ">
-          <v-icon x-small>icon-chevron-left</v-icon>
-        </v-btn>
         <v-btn
-          v-else
+          :disabled="isFirstPage(page)"
           aria-label="前のページ"
           :to="generatePageLink(page - 1)"
           nuxt
@@ -32,11 +29,8 @@
         </v-btn>
       </li>
       <li>
-        <v-btn v-if="isLastPage(page)" disabled aria-label="後ろのページ" icon>
-          <v-icon x-small>icon-chevron-right</v-icon>
-        </v-btn>
         <v-btn
-          v-else
+          :disabled="isLastPage(page)"
           aria-label="後ろのページ"
           :to="generatePageLink(page + 1)"
           nuxt
