@@ -3,7 +3,7 @@
     <ul class="pagenation">
       <li>
         <v-btn
-          :disabled="isFirstPage(page)"
+          v-if="!isFirstPage(page)"
           aria-label="前のページ"
           :to="generatePageLink(page - 1)"
           nuxt
@@ -30,7 +30,7 @@
       </li>
       <li>
         <v-btn
-          :disabled="isLastPage(page)"
+          v-if="!isLastPage(page)"
           aria-label="後ろのページ"
           :to="generatePageLink(page + 1)"
           nuxt

@@ -159,7 +159,8 @@ export default class PostSlug extends Vue {
     const hid = 'article';
     if (this.post.fields.latex) {
       link.push({
-        rel: 'stylesheet',
+        rel: 'preload',
+        as: 'style',
         href: 'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css',
         type: 'text/css',
         integrity:
