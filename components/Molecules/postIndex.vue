@@ -40,7 +40,7 @@
           aria-label="index close"
           @click="isOpen = !isOpen"
         >
-          <v-icon>fa-chevron-up</v-icon>
+          <v-icon>icon-chevron-up</v-icon>
         </v-btn>
       </span>
     </div>

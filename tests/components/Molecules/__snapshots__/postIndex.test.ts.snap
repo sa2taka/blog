@@ -10,6 +10,6 @@ exports[`molecules/postIndex/index should render 1`] = `
       </ul>
     </li>
   </ol>
-  <div class="post-index_footer"><span class="post-index_close-button"><v-btn icon="" aria-label="index close" class=""><v-icon>fa-chevron-up</v-icon></v-btn></span></div>
+  <div class="post-index_footer"><span class="post-index_close-button"><v-btn icon="" aria-label="index close" class=""><v-icon>icon-chevron-up</v-icon></v-btn></span></div>
 </nav>
 `;

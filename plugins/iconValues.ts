@@ -1,7 +1,7 @@
 const values = {
-  twitter: 'fab fa-twitter',
-  facebook: 'fab fa-facebook',
-  pocket: 'fab fa-get-pocket',
+  twitter: 'icon-twitter',
+  facebook: 'icon-facebook',
+  pocket: 'icon-get-pocket',
 };
 
 export default values;

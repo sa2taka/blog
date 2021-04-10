@@ -13,7 +13,7 @@
           :key="`${index}-divider`"
           class="breadcrumbs_divider"
         >
-          <v-icon small class="mx-3 mb-1">fas fa-chevron-circle-right</v-icon>
+          <v-icon small class="mx-3 mb-1">icon-chevron-circle-right</v-icon>
         </li>
       </template>
     </ul>

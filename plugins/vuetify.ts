@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuetify, { VLayout, VApp, VCard } from 'vuetify/lib';
 import { Context } from '@nuxt/types';
-import '@fortawesome/fontawesome-free/css/all.css';
+import '@/assets/icomoon/style.css';
 import ja from 'vuetify/src/locale/ja';
 import values from './iconValues';
 

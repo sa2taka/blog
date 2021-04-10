@@ -8,7 +8,7 @@
           aria-label="ライトモードへ"
           v-on="on"
           @click="changeTheme(false)"
-          ><v-icon>fa-moon</v-icon></v-btn
+          ><v-icon>icon-moon</v-icon></v-btn
         >
         <v-btn
           v-else
@@ -16,7 +16,7 @@
           aria-label="ダークモードへ"
           v-on="on"
           @click="changeTheme(true)"
-          ><v-icon>fa-sun</v-icon></v-btn
+          ><v-icon>icon-sun</v-icon></v-btn
         >
       </template>
       <span>Dark/Light Switch</span>

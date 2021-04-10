@@ -3,7 +3,7 @@
     <ul class="pagenation">
       <li>
         <v-btn v-if="isFirstPage(page)" icon disabled aria-label="前のページ">
-          <v-icon x-small>fa-chevron-left</v-icon>
+          <v-icon x-small>icon-chevron-left</v-icon>
         </v-btn>
         <v-btn
           v-else
@@ -13,7 +13,7 @@
           fab
           x-small
         >
-          <v-icon x-small>fa-chevron-left</v-icon>
+          <v-icon x-small>icon-chevron-left</v-icon>
         </v-btn>
       </li>
       <li v-for="i in maxPage" :key="i">
@@ -33,7 +33,7 @@
       </li>
       <li>
         <v-btn v-if="isLastPage(page)" disabled aria-label="後ろのページ" icon>
-          <v-icon x-small>fa-chevron-right</v-icon>
+          <v-icon x-small>icon-chevron-right</v-icon>
         </v-btn>
         <v-btn
           v-else
@@ -42,7 +42,7 @@
           nuxt
           fab
           x-small
-          ><v-icon x-small>fa-chevron-right</v-icon>
+          ><v-icon x-small>icon-chevron-right</v-icon>
         </v-btn>
       </li>
     </ul>

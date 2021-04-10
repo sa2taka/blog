@@ -53,7 +53,7 @@
           class="d-flex footer-link align-center animation-link"
           :to="'/'"
         >
-          <v-icon>fa-home</v-icon>
+          <v-icon>icon-home</v-icon>
           <span class="ml-2 mt-1">Home</span>
         </nuxt-link>
         <div class="d-flex justify-center flex-wrap mt-4">
