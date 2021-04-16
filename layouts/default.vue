@@ -89,7 +89,7 @@
 import { Vue, Component } from 'nuxt-property-decorator';
 import WebpImg from '@/components/Atom/webpImg.vue';
 import DarkThemeSwitch from '@/components/Molecules/darkThemeSwitch.vue';
-import { BLOG_TITLE } from '@/libs/const';
+import { BLOG_TITLE, BASE_URL } from '@/libs/const';
 
 @Component({
   components: {
@@ -118,6 +118,21 @@ export default class Default extends Vue {
 
   get isRoute() {
     return this.$route.name === 'index';
+  }
+
+  head() {
+    return {
+      link: [
+        {
+          rel: 'canonical',
+          href: `${BASE_URL}/${this.currentPageForCanonical}`,
+        },
+      ],
+    };
+  }
+
+  get currentPageForCanonical() {
+    return this.$route.path.slice(1);
   }
 }
 </script>
