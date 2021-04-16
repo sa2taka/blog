@@ -124,15 +124,6 @@ const katexCss = [
   'vlistspanspan',
 ];
 
-const defaultStrategyPlugin = [
-  {
-    use: 'Expiration',
-    config: {
-      maxAgeSeconds: 60 * 60 * 24 * 30,
-    },
-  },
-];
-
 export default {
   ssr: true,
   target: 'static',
@@ -301,50 +292,42 @@ export default {
           '^https://cdn.contentful.com/spaces/xw0ljpdch9v4/environments/master/.*',
         handler: 'networkFirst',
         method: 'GET',
-        strategyPlugins: defaultStrategyPlugin,
       },
       {
         urlPattern: '^https://blog.sa2taka.com/post/.*',
         handler: 'staleWhileRevalidate',
         method: 'GET',
-        strategyPlugins: defaultStrategyPlugin,
       },
       {
         urlPattern:
           '^https?://images.ctfassets.net/xw0ljpdch9v4/.*.(gif|png|jpg|webp)$',
         handler: 'cacheFirst',
         method: 'GET',
-        strategyPlugins: defaultStrategyPlugin,
       },
       {
         urlPattern: '^https?://i.imgur.com/.*.(gif|png|jpg|webp)',
         handler: 'cacheFirst',
         method: 'GET',
-        strategyPlugins: defaultStrategyPlugin,
       },
       {
         urlPattern: '^https://fonts.googleapis.com/.*',
         handler: 'cacheFirst',
         method: 'GET',
-        strategyPlugins: defaultStrategyPlugin,
       },
       {
         utlPatter: '^https://cdnjs.cloudflare.com/.*',
         handler: 'cacheFirst',
         method: 'GET',
-        strategyPlugins: defaultStrategyPlugin,
       },
       {
         urlPattern: '\\.(css|js)$',
         handler: 'cacheFirst',
         method: 'GET',
-        strategyPlugins: defaultStrategyPlugin,
       },
       {
         urlPattern: '^https://blog.sa2taka.com/',
         handler: 'networkFirst',
         method: 'GET',
-        strategyPlugins: defaultStrategyPlugin,
       },
     ],
     dev: false,
