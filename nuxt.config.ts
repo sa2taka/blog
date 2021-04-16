@@ -320,13 +320,8 @@ export default {
         method: 'GET',
       },
       {
-        urlPattern: '\\.(css|js)$',
+        urlPattern: '\\.min\\.(css|js)$',
         handler: 'cacheFirst',
-        method: 'GET',
-      },
-      {
-        urlPattern: '^https://blog.sa2taka.com/',
-        handler: 'networkFirst',
         method: 'GET',
       },
     ],
