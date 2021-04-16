@@ -123,12 +123,19 @@ const katexCss = [
   'vlistspan',
   'vlistspanspan',
 ];
+
+const defaultStrategyPlugin = [
+  {
+    use: 'Expiration',
+    config: {
+      maxAgeSeconds: 60 * 60 * 24 * 30,
+    },
+  },
+];
+
 export default {
   ssr: true,
   target: 'static',
-  /*
-   ** Headers of the page
-   */
   head: {
     htmlAttrs: {
       lang: 'ja',
@@ -183,21 +190,9 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
-  /*
-   ** Customize the progress-bar color
-   */
   loading: { color: '#fff' },
-  /*
-   ** Global CSS
-   */
   css: ['@/assets/css/layout.css'],
-  /*
-   ** Plugins to load before mounting the App
-   */
   plugins: ['@/plugins/vuetify'],
-  /*
-   ** Nuxt.js dev-modules
-   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     'nuxt-purgecss',
@@ -205,9 +200,6 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/google-analytics',
   ],
-  /*
-   ** Nuxt.js modules
-   */
   vuetify: {},
   modules: [
     '@nuxtjs/pwa',
@@ -217,9 +209,6 @@ export default {
     'nuxt-purgecss',
     ['@nuxtjs/sitemap'],
   ],
-  /*
-   ** Build configuration
-   */
   build: {
     transpile: [/^vuetify/],
     plugins: [new VuetifyLoaderPlugin()],
@@ -306,7 +295,58 @@ export default {
   },
   workbox: {
     swDest: 'static/sw.js',
-    importScripts: ['cache-sw.js'],
+    runtimeCaching: [
+      {
+        urlPattern:
+          '^https://cdn.contentful.com/spaces/xw0ljpdch9v4/environments/master/.*',
+        handler: 'networkFirst',
+        method: 'GET',
+        strategyPlugins: defaultStrategyPlugin,
+      },
+      {
+        urlPattern: '^https://blog.sa2taka.com/post/.*',
+        handler: 'staleWhileRevalidate',
+        method: 'GET',
+        strategyPlugins: defaultStrategyPlugin,
+      },
+      {
+        urlPattern:
+          '^https?://images.ctfassets.net/xw0ljpdch9v4/.*.(gif|png|jpg|webp)$',
+        handler: 'cacheFirst',
+        method: 'GET',
+        strategyPlugins: defaultStrategyPlugin,
+      },
+      {
+        urlPattern: '^https?://i.imgur.com/.*.(gif|png|jpg|webp)',
+        handler: 'cacheFirst',
+        method: 'GET',
+        strategyPlugins: defaultStrategyPlugin,
+      },
+      {
+        urlPattern: '^https://fonts.googleapis.com/.*',
+        handler: 'cacheFirst',
+        method: 'GET',
+        strategyPlugins: defaultStrategyPlugin,
+      },
+      {
+        utlPatter: '^https://cdnjs.cloudflare.com/.*',
+        handler: 'cacheFirst',
+        method: 'GET',
+        strategyPlugins: defaultStrategyPlugin,
+      },
+      {
+        urlPattern: '\\.(css|js)$',
+        handler: 'cacheFirst',
+        method: 'GET',
+        strategyPlugins: defaultStrategyPlugin,
+      },
+      {
+        urlPattern: '^https://blog.sa2taka.com/',
+        handler: 'networkFirst',
+        method: 'GET',
+        strategyPlugins: defaultStrategyPlugin,
+      },
+    ],
     dev: false,
   },
   icon: false,
