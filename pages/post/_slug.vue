@@ -26,11 +26,7 @@
         <p class="mb-0 post-date">更新日: {{ updateDate }}</p>
       </div>
       <post-index :index="postIndex" class="mt-10" />
-      <markdown
-        class="mt-8"
-        :markdown="post.fields.body"
-        :latex="post.fields.latex"
-      />
+      <post-body class="mt-8" :raw-body-html="rawBodyHtml" />
       <footer class="my-6">
         <share-buttons :title="post.fields.title" />
       </footer>
@@ -48,15 +44,14 @@ import { BASE_URL } from '@/libs/const';
 import { generateIndexies } from '@/libs/generateIndexies';
 import { generatePostBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 
-import Markdown from '@/components/Organisms/markdown.vue';
+import PostBody from '@/components/Organisms/postBody.vue';
 import PostIndex from '@/components/Molecules/postIndex.vue';
 import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
 import ShareButtons from '@/components/Molecules/shareButtons.vue';
-// import 'katex/dist/katex.min.css';
 
 @Component({
   components: {
-    Markdown,
+    PostBody,
     PostIndex,
     Breadcrumbs,
     ShareButtons,
@@ -64,6 +59,9 @@ import ShareButtons from '@/components/Molecules/shareButtons.vue';
 })
 export default class PostSlug extends Vue {
   post!: Post;
+  rawBodyHtml!: String;
+  postIndex!: PostIndex[];
+
   async asyncData(context: Context) {
     if (!context.params.slug || context.params.slug === '') {
       return context.error({
@@ -78,8 +76,18 @@ export default class PostSlug extends Vue {
       });
     }
 
+    const { markdown } = await import('../../libs/markdown');
+    const rawBodyHtml = markdown.render(post.fields.body);
+    const postIndex = generateIndexies(post.fields.body);
+
+    // HACK: post.fields.body does not use after this process.
+    // Delete body to reduce traffic.
+    post.fields.body = '';
+
     return {
       post,
+      rawBodyHtml,
+      postIndex,
     };
   }
 
@@ -113,10 +121,6 @@ export default class PostSlug extends Vue {
     const rawDate = this.post.sys.updatedAt;
 
     return formatDate(new Date(rawDate));
-  }
-
-  get postIndex() {
-    return generateIndexies(this.post.fields.body);
   }
 
   get ogImage() {
@@ -159,8 +163,7 @@ export default class PostSlug extends Vue {
     const hid = 'article';
     if (this.post.fields.latex) {
       link.push({
-        rel: 'preload',
-        as: 'style',
+        rel: 'stylesheet',
         href: 'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css',
         type: 'text/css',
         integrity:

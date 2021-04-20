@@ -10,11 +10,9 @@
           class="title-icon-margin mr-3"
           alt="logo"
         />
-        <transition name="fade">
-          <h1 v-show="canDisplayTitle" class="navbar-blog-title">
-            {{ title }}
-          </h1>
-        </transition>
+        <h1 class="navbar-blog-title">
+          {{ title }}
+        </h1>
       </nuxt-link>
 
       <v-spacer />
@@ -98,23 +96,7 @@ import { BLOG_TITLE, BASE_URL } from '@/libs/const';
   },
 })
 export default class Default extends Vue {
-  drawer = false;
-  isSmartphoneWidth = false;
-  smartphoneWidth = 600;
   title: string = BLOG_TITLE;
-  canDisplayTitle = false;
-
-  mounted() {
-    this.isSmartphoneWidth = window.innerWidth < this.smartphoneWidth;
-    this.canDisplayTitle = !this.isSmartphoneWidth;
-
-    window.addEventListener('resize', this.handleResize);
-  }
-
-  handleResize() {
-    this.isSmartphoneWidth = window.innerWidth < this.smartphoneWidth;
-    this.canDisplayTitle = !this.isSmartphoneWidth;
-  }
 
   get isRoute() {
     return this.$route.name === 'index';
@@ -151,6 +133,12 @@ html {
   font-size: 1.2em;
   width: 200px;
   margin-top: 4px;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-blog-title {
+    display: none;
+  }
 }
 
 .title-link {

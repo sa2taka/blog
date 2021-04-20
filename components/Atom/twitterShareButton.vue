@@ -3,14 +3,13 @@
     large
     :href="href"
     color="white"
-    :width="isSmartphoneWidth ? 64 : 180"
-    :min-width="64"
+    class="twitter-btn-width"
     target="_blank"
     rel="noopener noreferrer"
     aria-label="ツイートを行う"
   >
     <v-icon color="#1DA1F2" v-html="$vuetify.icons.values.twitter" />
-    <span v-if="!isSmartphoneWidth" class="ml-2 black--text">ツイートする</span>
+    <span class="ml-2 black--text twitter-btn-label">ツイートする</span>
   </v-btn>
 </template>
 
@@ -21,8 +20,21 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator';
 export default class TwitterShareButton extends Vue {
   @Prop({ required: true })
   href!: string;
-
-  @Prop({ required: true })
-  isSmartphoneWidth!: boolean;
 }
 </script>
+
+<style scoped>
+.twitter-btn-width {
+  width: 180px;
+}
+
+@media screen and (max-width: 768px) {
+  .twitter-btn-width {
+    width: 64px;
+  }
+
+  .twitter-btn-label {
+    display: none;
+  }
+}
+</style>

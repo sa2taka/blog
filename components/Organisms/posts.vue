@@ -32,5 +32,6 @@ export default class Posts extends Vue {
   width: 100%;
   position: relative;
   justify-content: space-between;
+  margin-bottom: 48px;
 }
 </style>
