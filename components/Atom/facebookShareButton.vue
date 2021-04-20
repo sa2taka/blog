@@ -3,8 +3,7 @@
     large
     :href="href"
     color="white"
-    :width="isSmartphoneWidth ? 64 : 180"
-    :min-width="64"
+    class="facebook-btn-width"
     target="_blank"
     rel="noopener noreferrer"
     aria-label="Facebookを利用してシェアする"
@@ -14,7 +13,7 @@
       class="facebook-logo"
       v-html="$vuetify.icons.values.facebook"
     />
-    <span v-if="!isSmartphoneWidth" class="ml-2 black--text">シェアする</span>
+    <span class="ml-2 black--text facebook-btn-label">シェアする</span>
   </v-btn>
 </template>
 
@@ -25,14 +24,25 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator';
 export default class FacebookShareButton extends Vue {
   @Prop({ required: true })
   href!: string;
-
-  @Prop({ required: true })
-  isSmartphoneWidth!: boolean;
 }
 </script>
 
 <style scoped>
 .facebook-logo {
   font-size: 28px;
+}
+
+.facebook-btn-width {
+  width: 180px;
+}
+
+@media screen and (max-width: 768px) {
+  .facebook-btn-width {
+    width: 64px;
+  }
+
+  .facebook-btn-label {
+    display: none;
+  }
 }
 </style>

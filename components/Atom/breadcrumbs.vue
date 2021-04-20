@@ -1,5 +1,5 @@
 <template>
-  <nav v-show="!isSmartphoneWidth" class="breadcrumbs">
+  <nav class="breadcrumbs">
     <ul class="breadcrumbs_list">
       <template v-for="(item, index) in list">
         <li
@@ -30,18 +30,7 @@ export default class Breadcrumbs extends Vue {
   @Prop({ required: true })
   list!: BreadcrumbsList;
 
-  isSmartphoneWidth = false;
   smartphoneWidth = 600;
-
-  mounted() {
-    this.isSmartphoneWidth = window.innerWidth < this.smartphoneWidth;
-
-    window.addEventListener('resize', this.handleResize);
-  }
-
-  handleResize() {
-    this.isSmartphoneWidth = window.innerWidth < this.smartphoneWidth;
-  }
 
   head() {
     const hid = 'breadcrumbs';
@@ -84,6 +73,12 @@ export default class Breadcrumbs extends Vue {
 <style>
 .breadcrumbs {
   width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .breadcrumbs {
+    display: none;
+  }
 }
 
 .breadcrumbs_list {
