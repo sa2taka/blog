@@ -49,6 +49,8 @@ import PostIndex from '@/components/Molecules/postIndex.vue';
 import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
 import ShareButtons from '@/components/Molecules/shareButtons.vue';
 
+import '@/libs/prism-theme.css';
+
 @Component({
   components: {
     PostBody,
