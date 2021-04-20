@@ -1,32 +1,20 @@
 <template>
-  <div class="markdown-body" v-html="compiledMarkdownText" />
+  <div class="post-body" v-html="rawBodyHtml" />
 </template>
 
 <script lang="ts">
 import { Vue, Prop, Component } from 'nuxt-property-decorator';
-import { markdown, addKatex } from '@/libs/markdown';
 
 @Component
-export default class Markdown extends Vue {
+export default class PostBody extends Vue {
   @Prop({ required: true })
-  markdown!: string;
-
-  @Prop({ default: false })
-  latex!: boolean;
-
-  get compiledMarkdownText() {
-    let md = markdown;
-    if (this.latex) {
-      md = addKatex(markdown);
-    }
-    return md.render(this.markdown);
-  }
+  rawBodyHtml!: string;
 }
 </script>
 
 <style>
 /*! purgecss start ignore */
-.v-application .markdown-body * {
+.v-application .post-body * {
   word-wrap: break-word;
 }
 .padding-for-filename {
@@ -44,115 +32,115 @@ export default class Markdown extends Vue {
   padding: 3px 6px;
 }
 
-.markdown-body {
+.post-body {
   line-height: 1.5;
   letter-spacing: 0.025em;
 }
 
-.theme--dark .markdown-body strong {
+.theme--dark .post-body strong {
   /* color: white; */
   background: linear-gradient(transparent 75%, var(--v-secondary-base) 0%);
 }
 
-.theme--light .markdown-body strong {
+.theme--light .post-body strong {
   /* color: black; */
   background: linear-gradient(transparent 75%, var(--v-secondary-lighten1) 0%);
 }
 
-.markdown-body blockquote {
+.post-body blockquote {
   padding: 0.6em 1em;
   margin: 2em auto;
   border-left: 3px solid rgba(128, 128, 128, 0.8);
 }
 
-.markdown-body p {
+.post-body p {
   margin-bottom: 1.8em;
 }
 
-.markdown-body blockquote blockquote {
+.post-body blockquote blockquote {
   padding: 0.4em 1em;
   margin: 1.2em auto 0.7em;
   border-left: 3px solid rgba(128, 128, 128, 0.8);
 }
 
-.theme--dark .markdown-body blockquote {
+.theme--dark .post-body blockquote {
   color: #aaa;
 }
 
-.theme--light .markdown-body blockquote {
+.theme--light .post-body blockquote {
   color: #333;
 }
 
-.markdown-body ul {
+.post-body ul {
   margin-bottom: 1.8em;
 }
 
 /* 引用元名 */
-.markdown-body blockquote p.author {
+.post-body blockquote p.author {
   text-align: right;
 }
 
-.markdown-body blockquote p.author::before {
+.post-body blockquote p.author::before {
   content: '―― ';
 }
 
 /* 画像 */
-.markdown-body picture,
-.markdown-body img,
-.markdown-body source[type='image/webp'] {
+.post-body picture,
+.post-body img,
+.post-body source[type='image/webp'] {
   display: block;
   max-width: min(100%, 640px);
   margin: 0.6em auto;
 }
 
 /* header */
-.markdown-body h2 {
+.post-body h2 {
   font-size: 2em;
 }
-.theme--dark .markdown-body h2,
-.theme--dark .markdown-body h3 {
+.theme--dark .post-body h2,
+.theme--dark .post-body h3 {
   border-bottom: 1px solid #222;
 }
 
-.theme--light .markdown-body h2,
-.theme--light .markdown-body h3 {
+.theme--light .post-body h2,
+.theme--light .post-body h3 {
   border-bottom: 1px solid #eee;
 }
 
-.markdown-body h2 {
+.post-body h2 {
   margin-top: 64px;
   margin-bottom: 24px;
 }
 
-.markdown-body h3 {
+.post-body h3 {
   margin-top: 58px;
   margin-bottom: 18px;
 }
 
-.markdown-body h4,
-.markdown-body h5 {
+.post-body h4,
+.post-body h5 {
   margin-top: 52px;
   margin-bottom: 20px;
 }
 
-.markdown-body hr.footnotes-sep {
+.post-body hr.footnotes-sep {
   margin-top: 12px;
   margin-bottom: 16px;
 }
 
-.v-application .markdown-body code {
+.v-application .post-body code {
   margin: auto auto 1.5em;
   word-wrap: normal;
   white-space: pre;
   padding: 0.8em 0.6em;
 }
 
-.v-application .markdown-body code .token.prompt {
+.v-application .post-body code .token.prompt {
   user-select: none;
   color: #777;
 }
 
-.theme--light .markdown-body a {
+.theme--light .post-body a {
   color: #006256;
 }
 
@@ -167,11 +155,11 @@ export default class Markdown extends Vue {
   font-weight: 500;
 }
 
-.markdown-body blockquote p {
+.post-body blockquote p {
   margin-bottom: 0px !important;
 }
 
-.v-application .markdown-body code.hljsspan {
+.v-application .post-body code.hljsspan {
   display: inline;
   overflow-x: initial;
   overflow-wrap: break-word;
@@ -192,7 +180,7 @@ export default class Markdown extends Vue {
   color: #acb3c0;
 }
 
-.markdown-body .message {
+.post-body .message {
   padding: 1.2rem 0.8rem;
   margin: 1.5rem 0;
   border-left: 4px solid #2196f3;
@@ -200,38 +188,38 @@ export default class Markdown extends Vue {
   position: relative;
 }
 
-.theme--dark .markdown-body .message {
+.theme--dark .post-body .message {
   background: #161624;
 }
 
-.markdown-body .message.message__success {
+.post-body .message.message__success {
   background: #f4f8fa;
   border-left: 4px solid #2196f3;
 }
 
-.theme--dark .markdown-body .message.message__success {
+.theme--dark .post-body .message.message__success {
   background: #161624;
 }
 
-.markdown-body .message.message__error {
+.post-body .message.message__error {
   background: #fdf7f7;
   border-left: 4px solid #f44336;
 }
 
-.theme--dark .markdown-body .message.message__error {
+.theme--dark .post-body .message.message__error {
   background: #241616;
 }
 
-.markdown-body .message.message__warning {
+.post-body .message.message__warning {
   background: #fcf8f2;
   border-left: 4px solid #ff9800;
 }
 
-.theme--dark .markdown-body .message.message__warning {
+.theme--dark .post-body .message.message__warning {
   background: #201612dd;
 }
 
-.markdown-body .message .message__icon {
+.post-body .message .message__icon {
   position: absolute;
   top: 1.2rem;
   left: -16px;
@@ -242,27 +230,27 @@ export default class Markdown extends Vue {
   border-radius: 50% 50%;
 }
 
-.markdown-body .message.message__success .message__icon {
+.post-body .message.message__success .message__icon {
   background-color: #4caf50;
 }
 
-.markdown-body .message.message__error .message__icon {
+.post-body .message.message__error .message__icon {
   background-color: #f44336;
 }
 
-.markdown-body .message.message__warning .message__icon {
+.post-body .message.message__warning .message__icon {
   background-color: #ff9800;
 }
 
-.markdown-body .message .message__icon svg {
+.post-body .message .message__icon svg {
   fill: white;
 }
 
-.markdown-body .message .alert__content {
+.post-body .message .alert__content {
   margin-left: 1rem;
 }
 
-.markdown-body .message .alert__content p:last-child {
+.post-body .message .alert__content p:last-child {
   margin-bottom: 0;
 }
 /*! purgecss end ignore */

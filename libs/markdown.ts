@@ -161,6 +161,7 @@ export const markdown = new MarkdownIt({
   typographer: true,
   langPrefix: '',
 })
+  .use(katex, { throwOnError: false, errorColor: ' #cc0000' })
   .use(myCodePlugin)
   .use(footnote)
   .use(imsize, { autofill: true })
@@ -169,7 +170,3 @@ export const markdown = new MarkdownIt({
   .use(myWebpConvertPlugin)
   .use(myImgPlugin)
   .use(markdownItContainer, '', containerRender);
-
-export function addKatex(md: MarkdownIt) {
-  return md.use(katex, { throwOnError: false, errorColor: ' #cc0000' });
-}
