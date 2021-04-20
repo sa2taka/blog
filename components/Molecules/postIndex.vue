@@ -83,13 +83,13 @@ const formatPostIndex = (postIndex: IPostIndex[]) => {
   const formated: FormatedPostIndex[] = [];
 
   // First
-  const first = postIndex.shift();
+  const first = postIndex[0];
   if (!first) {
     return [];
   }
   formated.push(generateFirstIndex(first));
 
-  postIndex.forEach((elem) => {
+  postIndex.slice(1).forEach((elem) => {
     append(elem, formated);
   });
 
