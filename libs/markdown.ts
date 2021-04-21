@@ -51,6 +51,7 @@ const myCodePlugin = (md: MarkdownIt) => {
     prism.languages.bash.prompt = /^[$#] /m;
 
     let value: string;
+
     if (prism.languages[lang]) {
       value = prism.highlight(code, prism.languages[lang], lang);
     } else {
