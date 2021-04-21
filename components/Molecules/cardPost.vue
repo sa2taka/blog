@@ -1,43 +1,23 @@
 <template>
-  <article @mouseenter="addPrerender">
-    <v-card
-      class="post-card mx-auto d-flex flex-column-reverse flex-sm-row"
-      hover
+  <li class="post-list-element" @mouseenter="addPrerender">
+    <time class="mb-0 py-0 list-post-date" :datetime="postDateForDateTag">{{
+      postDate
+    }}</time>
+    <nuxt-link
       :to="{ name: 'post-slug', params: { slug: post.fields.slug } }"
-      :max-width="maxWidth"
+      class="list-post-title"
+      >{{ post.fields.title }}</nuxt-link
     >
-      <div class="flex-3 d-flex flex-column">
-        <v-card-text
-          class="secondary--text top-post-category mt-4 mb-n3 d-none d-sm-block"
-        >
-          {{ post.fields.category.fields.name }}
-        </v-card-text>
-        <v-card-title class="card-title">{{ post.fields.title }}</v-card-title>
-        <v-card-subtitle class="card-sub-title">{{
-          post.fields.description
-        }}</v-card-subtitle>
-        <v-spacer />
-        <v-card-text class="mb-0 py-0 post-date d-none d-sm-block"
-          >作成日：{{ postDate }}</v-card-text
-        >
-        <v-card-text class="mb-2 py-0 mt-0 post-date d-none d-sm-block"
-          >更新日：{{ updateDate }}</v-card-text
-        >
-      </div>
-
-      <div class="d-flex flex-2 my-2 mx-auto">
-        <div class="my-auto flex-1 d-sm-none">
-          <v-card-text class="mb-2 py-0 mt-0 post-date">{{
-            updateDate
-          }}</v-card-text>
-          <v-spacer />
-          <div class="secondary--text top-post-category">
-            {{ post.fields.category.fields.name }}
-          </div>
-        </div>
-      </div>
-    </v-card>
-  </article>
+    <nuxt-link
+      class="secondary--text list-post-category"
+      :to="{
+        name: 'category-slug',
+        params: { slug: post.fields.category.fields.slug },
+      }"
+    >
+      {{ post.fields.category.fields.name }}
+    </nuxt-link>
+  </li>
 </template>
 
 <script lang="ts">
@@ -101,6 +81,18 @@ export default class CardPost extends Vue {
 
     return formatDate(new Date(rawDate));
   }
+
+  get postDateForDateTag() {
+    const rawDate = this.post.sys.createdAt;
+
+    return formatDateForDateTag(new Date(rawDate));
+  }
+
+  get updateDateForDateTag() {
+    const rawDate = this.post.sys.updatedAt;
+
+    return formatDateForDateTag(new Date(rawDate));
+  }
 }
 
 const formatDate = (date: Date) => {
@@ -110,40 +102,43 @@ const formatDate = (date: Date) => {
   const year = date.getFullYear();
   const month = fillBy0(date.getMonth() + 1, 2);
   const day = fillBy0(date.getDate(), 2);
-  const week = ['日', '月', '火', '水', '木', '金', '土'][date.getDay()];
-  return `${year}/${month}/${day}(${week})`;
+  return `${year}/${month}/${day}`;
+};
+
+const formatDateForDateTag = (date: Date) => {
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 };
 </script>
 
 <style scoped>
-.top-post-category {
+.post-list-element {
+  list-style: none;
+}
+
+.list-post-title,
+.list-post-category {
+  text-decoration: none;
+}
+.list-post-category {
   font-size: 14px;
   font-weight: 600;
-  padding-left: 16px;
-}
-.flex-1 {
-  flex: 1;
+  margin-left: 8px;
 }
 
-.flex-2 {
-  flex: 2;
-}
-
-.flex-3 {
-  flex: 3;
-}
-
-.card-title {
+.list-post-title {
+  font-size: 1.1em;
   font-weight: 600;
 }
 
-.theme--dark .post-date,
-.theme--dark .card-sub-title {
+.list-post-date {
+  margin-right: 8px;
+}
+
+.theme--dark .list-post-date {
   color: #ccc;
 }
 
-.theme--light .post-date,
-.theme--light .card-sub-title {
+.theme--light .list-post-date {
   color: #222;
 }
 
