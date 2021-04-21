@@ -2,12 +2,7 @@
   <v-layout column justify-center align-center>
     <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
     <article class="post post-width">
-      <div
-        class="post-title-area"
-        :style="{
-          'background-image': `url(${post.fields.postImage.fields.file.url}?fm=webp)`,
-        }"
-      >
+      <div class="post-title-area">
         <div class="post-title">
           <nuxt-link
             class="post-category secondary--text animation-link"

@@ -35,14 +35,6 @@
             {{ post.fields.category.fields.name }}
           </div>
         </div>
-
-        <webp-img
-          :webp-name="generateWebp(post.fields.postImage.fields.file.url)"
-          :img-name="generateFormatedImg(post.fields.postImage.fields.file.url)"
-          :alt="altText"
-          :on-load="onLoad"
-          class="flex-1 mx-2"
-        />
       </div>
     </v-card>
   </article>
@@ -96,10 +88,6 @@ export default class CardPost extends Vue {
     link.rel = 'prerender';
     link.href = href;
     document.head && document.head.appendChild(link);
-  }
-
-  get altText() {
-    return `${this.post.fields.postImage.fields.title} - ${this.post.fields.title}のタイトル画像`;
   }
 
   get postDate() {
