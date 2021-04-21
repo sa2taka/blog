@@ -27,7 +27,6 @@
     "@nuxtjs/sitemap": "^2.2.0",
     "@nuxtjs/vuetify": "^1.0.0",
     "contentful": "^8.2.1",
-    "cookie-universal-nuxt": "^2.1.2",
     "global": "^4.4.0",
     "markdown-it": "^12.0.4",
     "markdown-it-container": "^3.0.0",

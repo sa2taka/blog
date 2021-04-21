@@ -36,8 +36,6 @@ export default class DarkThemeSwitch extends Vue {
   created() {
     if (process.client) {
       this.isDark = this.$vuetify.theme.dark;
-    } else {
-      this.isDark = this.$cookies.get('theme') === 'dark';
     }
   }
 
@@ -45,10 +43,6 @@ export default class DarkThemeSwitch extends Vue {
     this.isDark = isDark;
     this.$vuetify.theme.dark = isDark;
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    this.$cookies.set('theme', isDark ? 'dark' : 'light', {
-      path: '/',
-      maxAge: 60 * 60 * 24 * 7,
-    });
   }
 }
 </script>

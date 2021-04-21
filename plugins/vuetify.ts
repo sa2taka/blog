@@ -9,9 +9,8 @@ Vue.use(Vuetify);
 
 export default (ctx: Context) => {
   let isDark = true;
-  if (ctx.req) {
-    isDark = !ctx.req.headers.cookie?.match(/theme=light/);
-  } else if (process.client) {
+
+  if (process.client) {
     isDark = localStorage.getItem('theme') !== 'light';
   }
 
