@@ -1,6 +1,7 @@
 <template>
   <div class="post-wrapper">
     <pagination
+      v-if="count > limit"
       :page="page"
       :limit="limit"
       :count="count"
