@@ -93,26 +93,6 @@ export default class PostSlug extends Vue {
     };
   }
 
-  created() {
-    if (process.client) {
-      window.addEventListener('load', this.replaceHash);
-    }
-  }
-
-  destroyed() {
-    if (process.client) {
-      window.removeEventListener('load', this.replaceHash);
-    }
-  }
-
-  replaceHash() {
-    const hash = decodeURI(this.$route.hash);
-    if (hash !== '') {
-      const ref = window.location.href;
-      window.location.replace(ref);
-    }
-  }
-
   get postDate() {
     const rawDate = this.post.sys.createdAt;
 
