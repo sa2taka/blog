@@ -63,6 +63,7 @@ export default class PostSlug extends Vue {
   post!: Post;
   rawBodyHtml!: String;
   postIndex!: PostIndex[];
+  prevHash = '';
 
   async asyncData(context: Context) {
     if (!context.params.slug || context.params.slug === '') {
@@ -91,6 +92,101 @@ export default class PostSlug extends Vue {
       rawBodyHtml,
       postIndex,
     };
+  }
+
+  mounted() {
+    if (process.client) {
+      this.registerHashEvent();
+    }
+  }
+
+  beforeDestroy() {
+    if (process.client) {
+      this.removeHashEventListener();
+    }
+  }
+
+  registerHashEvent() {
+    this.indexes.forEach((element) => {
+      element.addEventListener('click', this.addHashToHistory);
+    });
+
+    this.footnoteRefs.forEach((element) => {
+      element.addEventListener('click', this.addHashToHistory);
+    });
+
+    this.backFootnoteRefs.forEach((element) => {
+      element.addEventListener('click', this.onClickBackfootRef);
+    });
+  }
+
+  removeHashEventListener() {
+    this.indexes.forEach((element) => {
+      element.removeEventListener('click', this.addHashToHistory);
+    });
+
+    this.footnoteRefs.forEach((element) => {
+      element.removeEventListener('click', this.addHashToHistory);
+    });
+
+    this.backFootnoteRefs.forEach((element) => {
+      element.removeEventListener('click', this.onClickBackfootRef);
+    });
+  }
+
+  addHashToHistory(event: Event) {
+    const target = event.currentTarget;
+    if (target && target instanceof HTMLAnchorElement) {
+      history.replaceState(
+        { hash: target.id },
+        document.title,
+        `#${target.id}`
+      );
+      this.prevHash = target.id;
+    }
+  }
+
+  onClickBackfootRef(event: Event) {
+    const target = event.currentTarget;
+    if (target && target instanceof HTMLAnchorElement) {
+      const refferId = new URL(target.href).hash.replace('#', '');
+
+      // if refferId is at last of hash history
+      if (refferId === this.prevHash) {
+        history.back();
+        event.preventDefault();
+      } else {
+        const re = /^#fnref(\d+)$/i;
+        const match = refferId.match(re);
+        if (!match || !match[1]) {
+          return;
+        }
+
+        const refferNumber = match[1];
+        const replacement = `fn${refferNumber}`;
+        history.replaceState(
+          { hash: replacement },
+          document.title,
+          `#${replacement}`
+        );
+      }
+    }
+  }
+
+  get indexes() {
+    return Array.from(document.querySelectorAll('.post-index .index-link'));
+  }
+
+  get footnoteRefs() {
+    return Array.from(
+      document.querySelectorAll('.post-body sup.footnote-ref > a')
+    );
+  }
+
+  get backFootnoteRefs() {
+    return Array.from(
+      document.querySelectorAll('.post-body a.footnote-backref')
+    );
   }
 
   get postDate() {
