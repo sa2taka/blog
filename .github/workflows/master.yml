@@ -39,10 +39,6 @@ jobs:
         run: |
           yarn install
 
-      - name: yarn test
-        run: |
-          yarn test
-
       - name: yarn generate
         env:
           CTF_CDA_ACCESS_TOKEN: ${{ secrets.CTF_CDA_ACCESS_TOKEN }}
