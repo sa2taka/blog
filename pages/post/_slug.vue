@@ -22,8 +22,14 @@
         </div>
       </div>
       <div class="date-area">
-        <p class="mb-0 post-date">作成日: {{ postDate }}</p>
-        <p class="mb-0 post-date">更新日: {{ updateDate }}</p>
+        <p class="mb-0 post-date">
+          作成日:
+          <time :datetime="postDateForDateTag">{{ postDate }}</time>
+        </p>
+        <p class="mb-0 post-date">
+          更新日:
+          <time :datetime="updateDateForDateTag">{{ updateDate }}</time>
+        </p>
       </div>
       <post-index :index="postIndex" class="mt-10" />
       <post-body class="mt-8" :raw-body-html="rawBodyHtml" />
@@ -199,6 +205,14 @@ export default class PostSlug extends Vue {
     const rawDate = this.post.sys.updatedAt;
 
     return formatDate(new Date(rawDate));
+  }
+
+  get postDateForDateTag() {
+    return this.post.sys.createdAt.substring(0, 10);
+  }
+
+  get updateDateForDateTag() {
+    return this.post.sys.updatedAt.substring(0, 10);
   }
 
   get ogImage() {
