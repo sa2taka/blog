@@ -11,23 +11,29 @@
       }"
     >
       <li
-        v-for="indexNest1 in formatedPostIndex"
+        v-for="(indexNest1, level1Index) in formatedPostIndex"
         :key="indexNest1.title + indexNest1.level.toString()"
         class="first-index"
       >
-        <a class="index-link" :href="`#${indexNest1.title}`">{{
-          indexNest1.title
-        }}</a>
+        <a
+          :id="`index-${level1Index}`"
+          class="index-link"
+          :href="`#${indexNest1.title}`"
+          >{{ indexNest1.title }}</a
+        >
 
         <ul v-if="indexNest1.child.length !== 0" class="ml-5">
           <li
-            v-for="indexNest2 in indexNest1.child"
+            v-for="(indexNest2, level2Index) in indexNest1.child"
             :key="indexNest2.title + indexNest2.level.toString()"
             class="second-index"
           >
-            <a class="index-link" :href="`#${indexNest2.title}`">{{
-              indexNest2.title
-            }}</a>
+            <a
+              :id="`index-${level1Index}-${level2Index}`"
+              class="index-link"
+              :href="`#${indexNest2.title}`"
+              >{{ indexNest2.title }}</a
+            >
           </li>
         </ul>
       </li>
