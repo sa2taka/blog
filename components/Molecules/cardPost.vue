@@ -1,51 +1,50 @@
 <template>
-  <article @mouseenter="addPrerender">
-    <v-card
-      class="post-card mx-auto d-flex flex-column-reverse flex-sm-row"
-      hover
-      :to="{ name: 'post-slug', params: { slug: post.fields.slug } }"
-      :max-width="maxWidth"
-    >
-      <div class="flex-3 d-flex flex-column">
-        <v-card-text
-          class="secondary--text top-post-category mt-4 mb-n3 d-none d-sm-block"
-        >
-          {{ post.fields.category.fields.name }}
-        </v-card-text>
-        <v-card-title class="card-title">{{ post.fields.title }}</v-card-title>
-        <v-card-subtitle class="card-sub-title">{{
-          post.fields.description
-        }}</v-card-subtitle>
+  <v-card
+    class="post-card mx-auto d-flex flex-column-reverse flex-sm-row"
+    hover
+    :to="{ name: 'post-slug', params: { slug: post.fields.slug } }"
+    :max-width="maxWidth"
+    @mouseenter="addPrerender"
+  >
+    <div class="flex-3 d-flex flex-column">
+      <h1
+        class="secondary--text top-post-category mt-4 mb-n3 d-none d-sm-block"
+      >
+        {{ post.fields.category.fields.name }}
+      </h1>
+      <v-card-title class="card-title">{{ post.fields.title }}</v-card-title>
+      <v-card-subtitle class="card-sub-title">{{
+        post.fields.description
+      }}</v-card-subtitle>
+      <v-spacer />
+      <v-card-text class="mb-0 py-0 post-date d-none d-sm-block"
+        >作成日：{{ postDate }}</v-card-text
+      >
+      <v-card-text class="mb-2 py-0 mt-0 post-date d-none d-sm-block"
+        >更新日：{{ updateDate }}</v-card-text
+      >
+    </div>
+
+    <div class="d-flex flex-2 my-2 mx-auto">
+      <div class="my-auto flex-1 d-sm-none">
+        <v-card-text class="mb-2 py-0 mt-0 post-date">{{
+          updateDate
+        }}</v-card-text>
         <v-spacer />
-        <v-card-text class="mb-0 py-0 post-date d-none d-sm-block"
-          >作成日：{{ postDate }}</v-card-text
-        >
-        <v-card-text class="mb-2 py-0 mt-0 post-date d-none d-sm-block"
-          >更新日：{{ updateDate }}</v-card-text
-        >
-      </div>
-
-      <div class="d-flex flex-2 my-2 mx-auto">
-        <div class="my-auto flex-1 d-sm-none">
-          <v-card-text class="mb-2 py-0 mt-0 post-date">{{
-            updateDate
-          }}</v-card-text>
-          <v-spacer />
-          <div class="secondary--text top-post-category">
-            {{ post.fields.category.fields.name }}
-          </div>
+        <div class="secondary--text top-post-category">
+          {{ post.fields.category.fields.name }}
         </div>
-
-        <webp-img
-          :webp-name="generateWebp(post.fields.postImage.fields.file.url)"
-          :img-name="generateFormatedImg(post.fields.postImage.fields.file.url)"
-          :alt="altText"
-          :on-load="onLoad"
-          class="flex-1 mx-2"
-        />
       </div>
-    </v-card>
-  </article>
+
+      <webp-img
+        :webp-name="generateWebp(post.fields.postImage.fields.file.url)"
+        :img-name="generateFormatedImg(post.fields.postImage.fields.file.url)"
+        :alt="altText"
+        :on-load="onLoad"
+        class="flex-1 mx-2"
+      />
+    </div>
+  </v-card>
 </template>
 
 <script lang="ts">
