@@ -23,6 +23,18 @@ const myHeaderPlugin = (md: MarkdownIt) => {
       return self.renderToken(tokens, idx, options);
     }
   };
+
+  md.renderer.rules.heading_close = (...[tokens, idx, options, _, self]) => {
+    const tag = tokens[idx].tag;
+    const m = tag.match(/^h([123456])$/);
+    if (m) {
+      const headerIndex = Number(m[1]);
+      const newIndex = headerIndex < 6 ? headerIndex + 1 : 6;
+      return `</h${newIndex}>`;
+    } else {
+      return self.renderToken(tokens, idx, options);
+    }
+  };
 };
 
 const myInlineCodePlugin = (md: MarkdownIt) => {
