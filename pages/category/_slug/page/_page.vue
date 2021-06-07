@@ -22,7 +22,8 @@ import { generateCategoryBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 
 import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
 import PostsWithPagenation from '@/components/Organisms/postsWithPagenation.vue';
-import { CategoryWithCount } from '~/store/categories';
+import { CategoryWithCount } from '@/store/categories';
+import { POSTS_LIMIT } from '@/libs/const';
 
 @Component({
   components: {
@@ -35,11 +36,11 @@ export default class CategorySlug extends Vue {
   page!: number;
   category!: CategoryWithCount;
   slug!: string;
-  limit = 20;
+  limit = POSTS_LIMIT;
 
   async asyncData(context: Context) {
     const page = decidePage(context);
-    const limit = 20;
+    const limit = POSTS_LIMIT;
     const category = context.store.state.categories.categories.find(
       (category: CategoryWithCount) =>
         category.element.fields.slug === context.route.params.slug

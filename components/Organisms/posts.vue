@@ -1,7 +1,7 @@
 <template>
-  <div v-if="posts.length !== 0" class="posts">
-    <card-post v-for="post in posts" :key="post.id" :post="post" class="mt-6" />
-  </div>
+  <v-container v-if="posts.length !== 0" class="posts" tag="ul">
+    <card-post v-for="post in posts" :key="post.id" :post="post" class="mt-4" />
+  </v-container>
   <div v-else>投稿が見つかりません</div>
 </template>
 
@@ -18,8 +18,6 @@ const CardPost = () => import('@/components/Molecules/cardPost.vue');
 export default class Posts extends Vue {
   @Prop({ required: true })
   posts!: Post[];
-
-  limit = 20;
 
   handlePostClick(slug: string) {
     this.$router.push({ name: 'post-slug', params: { slug } });

@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="post-wrapper">
     <pagination
+      v-if="count > limit"
       :page="page"
       :limit="limit"
       :count="count"
@@ -52,5 +53,9 @@ export default class postsWithPagenation extends Vue {
 <style scoped>
 .blog-title {
   font-size: 1.6em;
+}
+
+.post-wrapper {
+  width: 100%;
 }
 </style>
