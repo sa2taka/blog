@@ -21,7 +21,7 @@
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/component-cache": "^1.1.5",
     "@nuxtjs/dotenv": "^1.4.0",
-    "@nuxtjs/google-analytics": "^2.2.3",
+    "@nuxtjs/google-gtag": "^1.0.4",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "@nuxtjs/sitemap": "^2.2.0",
     "@nuxtjs/vuetify": "^1.11.3",

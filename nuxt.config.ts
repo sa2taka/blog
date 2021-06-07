@@ -189,7 +189,6 @@ export default {
     'nuxt-purgecss',
     '@nuxtjs/eslint-module',
     '@nuxt/typescript-build',
-    '@nuxtjs/google-analytics',
   ],
   vuetify: {},
   modules: [
@@ -198,6 +197,7 @@ export default {
     ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 * 24 * 3 }],
     'nuxt-purgecss',
     ['@nuxtjs/sitemap'],
+    '@nuxtjs/google-gtag',
   ],
   build: {
     transpile: [/^vuetify/],
@@ -335,7 +335,7 @@ export default {
   typescript: {
     ignoreNotFoundWarnings: true,
   },
-  googleAnalytics: {
+  'google-gtag': {
     id: 'UA-152417689-1',
   },
   vue: {
