@@ -226,6 +226,13 @@ export default {
       };
     },
   },
+  render: {
+    bundleRenderer: {
+      shouldPreload: (_: string, type: string) => {
+        return type === 'script' || type === 'style' || type === 'font';
+      },
+    },
+  },
   env: {
     CTF_CDA_ACCESS_TOKEN: config.CTF_CDA_ACCESS_TOKEN,
     CTF_CTF_MAIN_AUTHOR_ID: config.CTF_MAIN_AUTHOR_ID,
