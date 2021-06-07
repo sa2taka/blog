@@ -17,8 +17,14 @@
         </div>
       </div>
       <div class="date-area">
-        <p class="mb-0 post-date">作成日: {{ postDate }}</p>
-        <p class="mb-0 post-date">更新日: {{ updateDate }}</p>
+        <p class="mb-0 post-date">
+          作成日:
+          <time :datetime="postDateForDateTag">{{ postDate }}</time>
+        </p>
+        <p class="mb-0 post-date">
+          更新日:
+          <time :datetime="updateDateForDateTag">{{ updateDate }}</time>
+        </p>
       </div>
       <post-index :index="postIndex" class="mt-10" />
       <post-body class="mt-8" :raw-body-html="rawBodyHtml" />
@@ -58,6 +64,7 @@ export default class PostSlug extends Vue {
   post!: Post;
   rawBodyHtml!: String;
   postIndex!: PostIndex[];
+  prevHash = '';
 
   async asyncData(context: Context) {
     if (!context.params.slug || context.params.slug === '') {
@@ -88,24 +95,99 @@ export default class PostSlug extends Vue {
     };
   }
 
-  created() {
+  mounted() {
     if (process.client) {
-      window.addEventListener('load', this.replaceHash);
+      this.registerHashEvent();
     }
   }
 
-  destroyed() {
+  beforeDestroy() {
     if (process.client) {
-      window.removeEventListener('load', this.replaceHash);
+      this.removeHashEventListener();
     }
   }
 
-  replaceHash() {
-    const hash = decodeURI(this.$route.hash);
-    if (hash !== '') {
-      const ref = window.location.href;
-      window.location.replace(ref);
+  registerHashEvent() {
+    this.indexes.forEach((element) => {
+      element.addEventListener('click', this.addHashToHistory);
+    });
+
+    this.footnoteRefs.forEach((element) => {
+      element.addEventListener('click', this.addHashToHistory);
+    });
+
+    this.backFootnoteRefs.forEach((element) => {
+      element.addEventListener('click', this.onClickBackfootRef);
+    });
+  }
+
+  removeHashEventListener() {
+    this.indexes.forEach((element) => {
+      element.removeEventListener('click', this.addHashToHistory);
+    });
+
+    this.footnoteRefs.forEach((element) => {
+      element.removeEventListener('click', this.addHashToHistory);
+    });
+
+    this.backFootnoteRefs.forEach((element) => {
+      element.removeEventListener('click', this.onClickBackfootRef);
+    });
+  }
+
+  addHashToHistory(event: Event) {
+    const target = event.currentTarget;
+    if (target && target instanceof HTMLAnchorElement) {
+      history.replaceState(
+        { hash: target.id },
+        document.title,
+        `#${target.id}`
+      );
+      this.prevHash = target.id;
     }
+  }
+
+  onClickBackfootRef(event: Event) {
+    const target = event.currentTarget;
+    if (target && target instanceof HTMLAnchorElement) {
+      const refferId = new URL(target.href).hash.replace('#', '');
+
+      // if refferId is at last of hash history
+      if (refferId === this.prevHash) {
+        history.back();
+        event.preventDefault();
+      } else {
+        const re = /^#fnref(\d+)$/i;
+        const match = refferId.match(re);
+        if (!match || !match[1]) {
+          return;
+        }
+
+        const refferNumber = match[1];
+        const replacement = `fn${refferNumber}`;
+        history.replaceState(
+          { hash: replacement },
+          document.title,
+          `#${replacement}`
+        );
+      }
+    }
+  }
+
+  get indexes() {
+    return Array.from(document.querySelectorAll('.post-index .index-link'));
+  }
+
+  get footnoteRefs() {
+    return Array.from(
+      document.querySelectorAll('.post-body sup.footnote-ref > a')
+    );
+  }
+
+  get backFootnoteRefs() {
+    return Array.from(
+      document.querySelectorAll('.post-body a.footnote-backref')
+    );
   }
 
   get postDate() {
@@ -118,6 +200,14 @@ export default class PostSlug extends Vue {
     const rawDate = this.post.sys.updatedAt;
 
     return formatDate(new Date(rawDate));
+  }
+
+  get postDateForDateTag() {
+    return this.post.sys.createdAt.substring(0, 10);
+  }
+
+  get updateDateForDateTag() {
+    return this.post.sys.updatedAt.substring(0, 10);
   }
 
   get ogImage() {
