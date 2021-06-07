@@ -1,22 +1,28 @@
 <template>
   <li class="post-list-element" @mouseenter="addPrerender">
-    <time class="mb-0 py-0 list-post-date" :datetime="postDateForDateTag">{{
-      postDate
-    }}</time>
-    <nuxt-link
-      :to="{ name: 'post-slug', params: { slug: post.fields.slug } }"
-      class="list-post-title"
-      >{{ post.fields.title }}</nuxt-link
-    >
-    <nuxt-link
-      class="secondary--text list-post-category"
-      :to="{
-        name: 'category-slug',
-        params: { slug: post.fields.category.fields.slug },
-      }"
-    >
-      {{ post.fields.category.fields.name }}
-    </nuxt-link>
+    <div class="d-flex flex-column">
+      <span
+        ><nuxt-link
+          class="secondary--text list-post-category animation-link"
+          :to="{
+            name: 'category-slug',
+            params: { slug: post.fields.category.fields.slug },
+          }"
+        >
+          {{ post.fields.category.fields.name }}
+        </nuxt-link></span
+      >
+      <span>
+        <nuxt-link
+          :to="{ name: 'post-slug', params: { slug: post.fields.slug } }"
+          class="list-post-title animation-title-link"
+          >{{ post.fields.title }}</nuxt-link
+        >
+      </span>
+      <time class="pt-0 mb-n1 list-post-date" :datetime="postDateForDateTag">{{
+        postDate
+      }}</time>
+    </div>
   </li>
 </template>
 
@@ -120,9 +126,8 @@ const formatDateForDateTag = (date: Date) => {
   text-decoration: none;
 }
 .list-post-category {
-  font-size: 14px;
+  font-size: 0.9em;
   font-weight: 600;
-  margin-left: 8px;
 }
 
 .list-post-title {
@@ -130,19 +135,68 @@ const formatDateForDateTag = (date: Date) => {
   font-weight: 600;
 }
 
+.theme--dark .list-post-title {
+  color: #ddd;
+}
+
+.theme--light .list-post-title {
+  color: rgba(0, 0, 0, 0.87);
+}
+
 .list-post-date {
-  margin-right: 8px;
+  font-size: 0.9em;
 }
 
 .theme--dark .list-post-date {
-  color: #ccc;
+  color: #aaa;
 }
 
 .theme--light .list-post-date {
-  color: #222;
+  color: #444;
 }
 
 .post-img {
   width: 50%;
+}
+
+.animation-link {
+  position: relative;
+  cursor: pointer;
+}
+
+.animation-link::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  content: '';
+  width: 0;
+  height: 1px;
+  background-color: #009688;
+  transition: 0.3s;
+  transform: translateX(-50%);
+}
+
+.animation-link:hover::after {
+  width: 100%;
+}
+
+.animation-title-link {
+  position: relative;
+  cursor: pointer;
+}
+
+.animation-title-link::before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content: '';
+  width: 0;
+  height: 1px;
+  background-color: #009688;
+  transition: 0.3s;
+}
+
+.animation-title-link:hover::before {
+  width: 80px;
 }
 </style>
