@@ -19,8 +19,6 @@ export default class Posts extends Vue {
   @Prop({ required: true })
   posts!: Post[];
 
-  limit = 20;
-
   handlePostClick(slug: string) {
     this.$router.push({ name: 'post-slug', params: { slug } });
   }
