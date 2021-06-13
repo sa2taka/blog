@@ -9,7 +9,7 @@
           v-on="on"
           @click="changeTheme(false)"
         >
-          <v-icon>icon-moon-o</v-icon>
+          <the-icon icon="icon-moon-o" />
         </v-btn>
         <v-btn
           v-else
@@ -18,7 +18,7 @@
           v-on="on"
           @click="changeTheme(true)"
         >
-          <v-icon>icon-sun-o</v-icon>
+          <the-icon icon="icon-sun-o" />
         </v-btn>
       </template>
       <span>Dark/Light Switch</span>
@@ -28,8 +28,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
+import TheIcon from '../Atom/theIcon.vue';
 
-@Component
+@Component({
+  components: {
+    TheIcon,
+  },
+})
 export default class DarkThemeSwitch extends Vue {
   isDark: boolean = true;
 

@@ -9,12 +9,21 @@ body .v-application.theme--dark {
   color: #ddd;
 }
 
+/* flex */
 .d-flex {
   display: flex !important;
 }
 
 .flex-column {
   flex-direction: column !important;
+}
+
+.justify-center {
+  justify-content: center !important;
+}
+
+.flex-wrap {
+  flex-wrap: wrap !important;
 }
 
 /* theme */

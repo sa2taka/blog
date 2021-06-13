@@ -7,7 +7,7 @@
           img-name="/icon.png"
           width="auto"
           height="36"
-          class="title-icon-margin mr-3"
+          class="title-icon-margin"
           alt="logo"
         />
         <h1 class="navbar-blog-title">
@@ -17,20 +17,20 @@
 
       <v-spacer />
 
-      <nav class="mr-10 d-flex">
-        <div class="title-link animation-link ml-4" @click="$router.push('/')">
+      <nav class="d-flex navigation-links">
+        <div class="title-link animation-link" @click="$router.push('/')">
           Home
         </div>
 
         <div
-          class="title-link animation-link ml-4"
+          class="title-link animation-link"
           @click="$router.push('/category')"
         >
           Category
         </div>
       </nav>
 
-      <dark-theme-switch class="mr-3" />
+      <dark-theme-switch />
     </v-app-bar>
 
     <v-main>
@@ -51,27 +51,26 @@
           class="d-flex footer-link align-center animation-link"
           :to="'/'"
         >
-          <v-icon>icon-home</v-icon>
-          <span class="ml-2 mt-1">Home</span>
+          <the-icon icon="icon-home" />
+          <span>Home</span>
         </nuxt-link>
-        <div class="d-flex justify-center flex-wrap mt-4">
-          <div class="mb-2 animation-link">
-            <v-icon
-              class="mt-n1"
+        <div class="d-flex justify-center flex-wrap footer-between-margin">
+          <a
+            href="https://twitter.com/t0p_l1ght"
+            class="animation-link footer-link"
+          >
+            <the-icon
+              class="author-twitter-margin-adjust"
               color="#1DA1F2"
-              v-html="$vuetify.icons.values.twitter"
-            ></v-icon>
-            <a href="https://twitter.com/t0p_l1ght" class="footer-link mt-2"
-              >筆者Twitterアカウント</a
-            >
-          </div>
-          <div class="ml-4">
-            <nuxt-link
-              :to="{ name: 'guide' }"
-              class="animation-link footer-link ml-2 mt-2"
-              >当サイト利用について</nuxt-link
-            >
-          </div>
+              icon="icon-twitter"
+            />
+            <span>筆者Twitterアカウント</span>
+          </a>
+          <nuxt-link
+            :to="{ name: 'guide' }"
+            class="animation-link footer-link guide-link"
+            >当サイト利用について</nuxt-link
+          >
         </div>
       </div>
     </v-footer>
@@ -88,11 +87,13 @@ import { Vue, Component } from 'nuxt-property-decorator';
 import WebpImg from '@/components/Atom/webpImg.vue';
 import DarkThemeSwitch from '@/components/Molecules/darkThemeSwitch.vue';
 import { BLOG_TITLE, BASE_URL } from '@/libs/const';
+import TheIcon from '../components/Atom/theIcon.vue';
 
 @Component({
   components: {
     WebpImg,
     DarkThemeSwitch,
+    TheIcon,
   },
 })
 export default class Default extends Vue {
@@ -137,6 +138,7 @@ html {
 .title-icon-margin {
   margin-left: 4%;
   height: 36px;
+  margin-right: 16px;
 }
 
 .navbar-blog-title {
@@ -153,6 +155,7 @@ html {
 
 .title-link {
   cursor: pointer;
+  margin-left: 16px;
 }
 
 a.title-link {
@@ -203,6 +206,8 @@ a.title-link {
 }
 
 .footer-link {
+  margin-top: 8px;
+  margin-left: 8px;
   text-decoration: none;
 }
 
@@ -212,5 +217,21 @@ a.title-link {
 
 .theme--light .footer-link {
   color: black !important;
+}
+
+.author-twitter-margin-adjust {
+  margin-top: -4px;
+}
+
+.footer-between-margin {
+  margin-top: 16px;
+}
+
+.guide-link {
+  margin-left: 16px;
+}
+
+.navigation-links {
+  margin-right: 40px;
 }
 </style>

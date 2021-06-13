@@ -13,7 +13,11 @@
           :key="`${index}-divider`"
           class="breadcrumbs_divider"
         >
-          <v-icon small class="arrow-margin">icon-chevron-circle-right</v-icon>
+          <the-icon
+            small
+            class="arrow-margin"
+            icon="icon-chevron-circle-right"
+          />
         </li>
       </template>
     </ul>
@@ -24,8 +28,13 @@
 import { Vue, Prop, Component } from 'nuxt-property-decorator';
 import { BreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 import { BASE_URL } from '@/libs/const';
+import TheIcon from './theIcon.vue';
 
-@Component
+@Component({
+  components: {
+    TheIcon,
+  },
+})
 export default class Breadcrumbs extends Vue {
   @Prop({ required: true })
   list!: BreadcrumbsList;

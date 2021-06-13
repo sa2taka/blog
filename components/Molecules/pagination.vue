@@ -10,7 +10,7 @@
           fab
           x-small
         >
-          <v-icon x-small>icon-chevron-left</v-icon>
+          <the-icon x-small icon="icon-chevron-left" />
         </v-btn>
         <div v-else class="paging-padding"></div>
       </li>
@@ -47,8 +47,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
+import TheIcon from '../Atom/theIcon.vue';
 
-@Component
+@Component({
+  components: {
+    TheIcon,
+  },
+})
 export default class Pagination extends Vue {
   @Prop({ required: true })
   page!: number;

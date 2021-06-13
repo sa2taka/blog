@@ -11,7 +11,6 @@
 [class*=' icon-'] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
-  speak: never;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -22,7 +21,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-/*! purgecss end ignore */
 
 .icon-home:before {
   content: '\f015';
@@ -66,3 +64,5 @@
 .icon-get-pocket:before {
   content: '\f265';
 }
+
+/*! purgecss end ignore */

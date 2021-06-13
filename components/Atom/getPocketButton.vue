@@ -8,15 +8,20 @@
     rel="noopener noreferrer"
     aria-label="Pocketを利用して後で読む"
   >
-    <v-icon color="#ee4056" v-html="$vuetify.icons.values.pocket" />
+    <the-icon color="#ee4056" icon="icon-get-pocket" />
     <span class="black--text pocket-btn-label">後で読む</span>
   </v-btn>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
+import TheIcon from './theIcon.vue';
 
-@Component
+@Component({
+  components: {
+    TheIcon,
+  },
+})
 export default class GetPocketButton extends Vue {
   @Prop({ required: true })
   href!: string;

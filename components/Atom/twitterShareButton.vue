@@ -8,15 +8,20 @@
     rel="noopener noreferrer"
     aria-label="ツイートを行う"
   >
-    <v-icon color="#1DA1F2" v-html="$vuetify.icons.values.twitter" />
+    <the-icon color="#1DA1F2" icon="icon-twitter" />
     <span class="black--text twitter-btn-label">ツイートする</span>
   </v-btn>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
+import TheIcon from './theIcon.vue';
 
-@Component
+@Component({
+  components: {
+    TheIcon,
+  },
+})
 export default class TwitterShareButton extends Vue {
   @Prop({ required: true })
   href!: string;

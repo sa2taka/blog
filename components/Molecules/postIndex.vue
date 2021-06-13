@@ -48,7 +48,7 @@
           aria-label="index close"
           @click="isOpen = !isOpen"
         >
-          <v-icon>icon-chevron-up</v-icon>
+          <the-icon icon="icon-chevron-up" />
         </v-btn>
       </span>
     </div>
@@ -59,6 +59,7 @@
 import { Vue, Prop, Component } from 'nuxt-property-decorator';
 
 import { PostIndex as IPostIndex } from '@/types/postIndex';
+import TheIcon from '../Atom/theIcon.vue';
 
 interface FormatedPostIndex {
   title?: string;
@@ -66,7 +67,11 @@ interface FormatedPostIndex {
   level: number;
 }
 
-@Component
+@Component({
+  components: {
+    TheIcon,
+  },
+})
 export default class PostIndex extends Vue {
   @Prop({ required: true })
   index!: IPostIndex[];

@@ -383,6 +383,7 @@ const formatDate = (date: Date) => {
 .post-date {
   font-size: 0.9em !important;
   margin-bottom: 0;
+  margin-top: 0;
 }
 
 .theme--dark .post-date {

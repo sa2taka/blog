@@ -8,10 +8,10 @@
     rel="noopener noreferrer"
     aria-label="Facebookを利用してシェアする"
   >
-    <v-icon
+    <the-icon
       color="#1877f2"
       class="facebook-logo"
-      v-html="$vuetify.icons.values.facebook"
+      icon="icon-facebook-square"
     />
     <span class="black--text facebook-btn-label">シェアする</span>
   </v-btn>
@@ -19,8 +19,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
+import TheIcon from '~/components/Atom/theIcon.vue';
 
-@Component
+@Component({
+  components: {
+    TheIcon,
+  },
+})
 export default class FacebookShareButton extends Vue {
   @Prop({ required: true })
   href!: string;
