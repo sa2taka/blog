@@ -2,26 +2,16 @@
   <v-layout column justify-center align-center>
     <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
     <article class="post post-width">
-      <div
-        class="post-title-area"
-        :style="{
-          'background-image': `url(${post.fields.postImage.fields.file.url}?fm=webp)`,
-        }"
-      >
-        <div class="post-title">
-          <nuxt-link
-            class="post-category secondary--text animation-link"
-            :to="{
-              name: 'category-slug',
-              params: { slug: post.fields.category.fields.slug },
-            }"
-            >{{ post.fields.category.fields.name }}</nuxt-link
-          >
-          <h1 class="post-title-name">{{ post.fields.title }}</h1>
-          <p class="post-author">by {{ post.fields.author.fields.name }}</p>
-        </div>
-      </div>
-      <div class="date-area">
+      <div class="post-title d-flex align-center flex-column">
+        <nuxt-link
+          class="post-category secondary--text animation-link align-center"
+          :to="{
+            name: 'category-slug',
+            params: { slug: post.fields.category.fields.slug },
+          }"
+          >{{ post.fields.category.fields.name }}</nuxt-link
+        >
+        <h1 class="post-title-name">{{ post.fields.title }}</h1>
         <p class="mb-0 post-date">
           作成日:
           <time :datetime="postDateForDateTag">{{ postDate }}</time>
@@ -31,6 +21,7 @@
           <time :datetime="updateDateForDateTag">{{ updateDate }}</time>
         </p>
       </div>
+
       <post-index :index="postIndex" class="mt-10" />
       <post-body class="mt-8" :raw-body-html="rawBodyHtml" />
       <footer class="my-6">
@@ -262,6 +253,11 @@ export default class PostSlug extends Vue {
           'sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X',
         crossorigin: 'anonymous',
       });
+      link.push({
+        rel: 'preload',
+        as: 'font',
+        href: 'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/fonts/KaTeX_Main-Regular.woff2',
+      });
     }
 
     return {
@@ -383,13 +379,6 @@ const formatDate = (date: Date) => {
   width: 100%;
 }
 
-.date-area {
-  margin: 4px auto;
-  display: flex;
-  align-items: flex-end;
-  flex-flow: column;
-}
-
 .post-date {
   font-size: 0.9em !important;
 }
@@ -403,28 +392,26 @@ const formatDate = (date: Date) => {
 }
 
 .post-title {
-  background-color: rgba(0, 0, 0, 0.92);
   padding: 8px 12px;
   margin-bottom: 0;
   margin-top: auto;
   min-width: 80%;
-  border-radius: 0 12px 0 10.5px;
-  color: white;
   overflow-wrap: break-word;
 }
 
 .post-title-name {
-  font-size: 24px;
+  font-size: 2em;
+  text-align: center;
 }
 
 @media (max-width: 600px) {
   .post-title-name {
-    font-size: 20px;
+    font-size: 1.6em;
   }
 }
 @media (min-width: 601px) {
   .post-title-name {
-    font-size: 24px;
+    font-size: 2em;
   }
 }
 

@@ -189,7 +189,6 @@ export default {
     'nuxt-purgecss',
     '@nuxtjs/eslint-module',
     '@nuxt/typescript-build',
-    '@nuxtjs/google-analytics',
   ],
   vuetify: {},
   modules: [
@@ -198,6 +197,7 @@ export default {
     ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 * 24 * 3 }],
     'nuxt-purgecss',
     ['@nuxtjs/sitemap'],
+    '@nuxtjs/google-gtag',
   ],
   build: {
     transpile: [/^vuetify/],
@@ -224,6 +224,13 @@ export default {
       config.node = {
         fs: 'empty',
       };
+    },
+  },
+  render: {
+    bundleRenderer: {
+      shouldPreload: (_: string, type: string) => {
+        return type === 'script' || type === 'style' || type === 'font';
+      },
     },
   },
   env: {
@@ -287,6 +294,11 @@ export default {
     swDest: 'static/sw.js',
     runtimeCaching: [
       {
+        utlPattern: '^https://blog.sa2taka.com/?$',
+        handler: 'networkFirst',
+        method: 'GET',
+      },
+      {
         urlPattern:
           '^https://cdn.contentful.com/spaces/xw0ljpdch9v4/environments/master/.*',
         handler: 'networkFirst',
@@ -330,7 +342,7 @@ export default {
   typescript: {
     ignoreNotFoundWarnings: true,
   },
-  googleAnalytics: {
+  'google-gtag': {
     id: 'UA-152417689-1',
   },
   vue: {

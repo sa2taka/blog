@@ -18,6 +18,7 @@ import { postsCountStore } from '@/libs/storeAccessor';
 import { Post, MultipleItem } from '@/types/entry';
 
 import PostsWithPagenation from '@/components/Organisms/postsWithPagenation.vue';
+import { POSTS_LIMIT } from '@/libs/const';
 
 @Component({
   components: {
@@ -26,13 +27,13 @@ import PostsWithPagenation from '@/components/Organisms/postsWithPagenation.vue'
 })
 export default class PageSettedPage extends Vue {
   page!: number;
-  limit = 20;
+  limit = POSTS_LIMIT;
   posts!: Post[];
   isLoading = false;
 
   async asyncData(context: Context) {
     const page = decidePage(context);
-    const limit = 20;
+    const limit = POSTS_LIMIT;
 
     const posts: Post[] = await fetchPosts(page - 1, limit).then(
       (posts: MultipleItem<Post>) =>

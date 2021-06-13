@@ -109,6 +109,16 @@ export default class Default extends Vue {
           rel: 'canonical',
           href: `${BASE_URL}/${this.currentPageForCanonical}`,
         },
+        {
+          rel: 'preload',
+          as: 'image',
+          href: '/icon.webp',
+        },
+        {
+          rel: 'preload',
+          as: 'image',
+          href: '/icon.png',
+        },
       ],
     };
   }
