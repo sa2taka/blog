@@ -9,7 +9,7 @@
     aria-label="Pocketを利用して後で読む"
   >
     <v-icon color="#ee4056" v-html="$vuetify.icons.values.pocket" />
-    <span class="ml-2 black--text pocket-btn-label">後で読む</span>
+    <span class="black--text pocket-btn-label">後で読む</span>
   </v-btn>
 </template>
 
@@ -26,6 +26,10 @@ export default class GetPocketButton extends Vue {
 <style scoped>
 .pocket-btn-width {
   width: 180px;
+}
+
+.pocket-btn-label {
+  margin-left: 4px;
 }
 
 @media screen and (max-width: 768px) {

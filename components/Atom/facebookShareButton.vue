@@ -13,7 +13,7 @@
       class="facebook-logo"
       v-html="$vuetify.icons.values.facebook"
     />
-    <span class="ml-2 black--text facebook-btn-label">シェアする</span>
+    <span class="black--text facebook-btn-label">シェアする</span>
   </v-btn>
 </template>
 
@@ -34,6 +34,10 @@ export default class FacebookShareButton extends Vue {
 
 .facebook-btn-width {
   width: 180px;
+}
+
+.facebook-btn-label {
+  margin-left: 4px;
 }
 
 @media screen and (max-width: 768px) {

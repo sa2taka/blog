@@ -8,3 +8,25 @@ body .v-application {
 body .v-application.theme--dark {
   color: #ddd;
 }
+
+.d-flex {
+  display: flex !important;
+}
+
+.flex-column {
+  flex-direction: column !important;
+}
+
+/* theme */
+
+/* color */
+
+:root {
+  --v-primary-base: #009688;
+  --secondary-color: #ff5722;
+}
+
+.secondary--text {
+  color: var(--v-secondary-base) !important;
+  caret-color: var(--v-secondary-base) !important;
+}

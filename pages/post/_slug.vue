@@ -12,19 +12,19 @@
           >{{ post.fields.category.fields.name }}</nuxt-link
         >
         <h1 class="post-title-name">{{ post.fields.title }}</h1>
-        <p class="mb-0 post-date">
+        <p class="post-date">
           作成日:
           <time :datetime="postDateForDateTag">{{ postDate }}</time>
         </p>
-        <p class="mb-0 post-date">
+        <p class="post-date">
           更新日:
           <time :datetime="updateDateForDateTag">{{ updateDate }}</time>
         </p>
       </div>
 
-      <post-index :index="postIndex" class="mt-10" />
-      <post-body class="mt-8" :raw-body-html="rawBodyHtml" />
-      <footer class="my-6">
+      <post-index :index="postIndex" class="post-index-margin" />
+      <post-body class="post-body-margin" :raw-body-html="rawBodyHtml" />
+      <footer class="post-footer-margin">
         <share-buttons :title="post.fields.title" />
       </footer>
     </article>
@@ -256,7 +256,8 @@ export default class PostSlug extends Vue {
       link.push({
         rel: 'preload',
         as: 'font',
-        href: 'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/fonts/KaTeX_Main-Regular.woff2',
+        href:
+          'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/fonts/KaTeX_Main-Regular.woff2',
       });
     }
 
@@ -381,6 +382,7 @@ const formatDate = (date: Date) => {
 
 .post-date {
   font-size: 0.9em !important;
+  margin-bottom: 0;
 }
 
 .theme--dark .post-date {
@@ -435,5 +437,17 @@ const formatDate = (date: Date) => {
   display: flex;
   border-radius: 12px;
   background-position: center;
+}
+
+.post-index-margin {
+  margin-top: 40px;
+}
+
+.post-body-margin {
+  margin-top: 32px;
+}
+
+.post-footer-margin {
+  margin-top: 24px;
 }
 </style>

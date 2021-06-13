@@ -5,7 +5,7 @@
     </div>
 
     <ol
-      :class="['my-4', 'post-index_content']"
+      class="post-index_content"
       :style="{
         height: contentHeight ? (isOpen ? `${contentHeight}px` : '0') : null,
       }"
@@ -209,6 +209,8 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
 .post-index_content {
   transition: height 0.3s ease-in-out;
   overflow-y: hidden;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .post-index_close-button:before,

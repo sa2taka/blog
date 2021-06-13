@@ -19,7 +19,7 @@
           >{{ post.fields.title }}</nuxt-link
         >
       </span>
-      <time class="pt-0 mb-n1 list-post-date" :datetime="postDateForDateTag">{{
+      <time class="list-post-date" :datetime="postDateForDateTag">{{
         postDate
       }}</time>
     </div>

@@ -9,7 +9,7 @@
     aria-label="ツイートを行う"
   >
     <v-icon color="#1DA1F2" v-html="$vuetify.icons.values.twitter" />
-    <span class="ml-2 black--text twitter-btn-label">ツイートする</span>
+    <span class="black--text twitter-btn-label">ツイートする</span>
   </v-btn>
 </template>
 
@@ -26,6 +26,10 @@ export default class TwitterShareButton extends Vue {
 <style scoped>
 .twitter-btn-width {
   width: 180px;
+}
+
+.twitter-btn-label {
+  margin-left: 4px;
 }
 
 @media screen and (max-width: 768px) {

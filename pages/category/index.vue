@@ -10,8 +10,8 @@
               name: 'category-slug',
               params: { slug: category.element.fields.slug },
             }"
+            class="category-slug-button"
             outlined
-            class="ml-2 mt-2"
             >{{ category.element.fields.name }}({{ category.count }})</v-btn
           >
         </li>
@@ -74,5 +74,10 @@ ul {
 .categories {
   display: flex;
   flex-wrap: wrap;
+}
+
+.category-slug-button {
+  margin-left: 8px;
+  margin-right: 8px;
 }
 </style>
