@@ -48,7 +48,7 @@ export default class TheTooltip extends Vue {
     this.timeoutId = setTimeout(() => {
       const tootlTipContent = this.$el.querySelector('.the-tooltip_content');
       tootlTipContent?.classList.add('display');
-    }, 700);
+    }, 500);
   }
 
   removeTooltip() {
