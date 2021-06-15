@@ -33,7 +33,7 @@
       <dark-theme-switch />
     </v-app-bar>
 
-    <v-main>
+    <main class="padding-for-header main-content">
       <the-container>
         <a
           v-if="!isRoute"
@@ -43,7 +43,7 @@
         >
         <nuxt v-cloak />
       </the-container>
-    </v-main>
+    </main>
 
     <v-footer class="main-footer">
       <div class="d-flex flex-column align-center mx-auto">
@@ -239,5 +239,16 @@ a.title-link {
 
 .spacer {
   flex-grow: 1 !important;
+}
+
+.main-content {
+  display: flex;
+  flex: 1 0 auto;
+  max-width: 100%;
+  transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.padding-for-header {
+  padding-top: 64px;
+  padding-bottom: 64px;
 }
 </style>
