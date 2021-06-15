@@ -15,7 +15,7 @@
         </h1>
       </nuxt-link>
 
-      <v-spacer />
+      <div class="spacer"></div>
 
       <nav class="d-flex navigation-links">
         <div class="title-link animation-link" @click="$router.push('/')">
@@ -76,7 +76,7 @@
     </v-footer>
 
     <v-footer app height="36">
-      <v-spacer />
+      <div class="spacer"></div>
       <span>&copy; sa2taka</span>
     </v-footer>
   </v-app>
@@ -235,5 +235,9 @@ a.title-link {
 
 .navigation-links {
   margin-right: 40px;
+}
+
+.spacer {
+  flex-grow: 1 !important;
 }
 </style>
