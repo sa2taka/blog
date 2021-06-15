@@ -1,5 +1,5 @@
 <template>
-  <v-layout column justify-center align-center class="guide">
+  <the-layout column justify-center align-center class="guide">
     <v-container>
       <h1>当サイト利用について</h1>
       <p>
@@ -109,14 +109,19 @@
         また当サイトからリンクによって他のサイトに移動された場合、移動先サイトで提供される情報、サービス等について一切の責任も負いません。
       </p>
     </v-container>
-  </v-layout>
+  </the-layout>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator';
 import { BASE_URL } from '@/libs/const';
+import TheLayout from '@/components/Atom/theLayout.vue';
 
-@Component
+@Component({
+  components: {
+    TheLayout,
+  },
+})
 export default class PostSlug extends Vue {
   head() {
     return {

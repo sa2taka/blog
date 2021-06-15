@@ -1,5 +1,5 @@
 <template>
-  <v-layout column justify-center align-center>
+  <the-layout column justify-center align-center>
     <posts-with-pagenation
       :page="page"
       :limit="limit"
@@ -7,7 +7,7 @@
       base-url="/page/"
       :posts="posts"
     />
-  </v-layout>
+  </the-layout>
 </template>
 
 <script lang="ts">
@@ -19,10 +19,12 @@ import { Post, MultipleItem } from '@/types/entry';
 
 import PostsWithPagenation from '@/components/Organisms/postsWithPagenation.vue';
 import { POSTS_LIMIT } from '@/libs/const';
+import TheLayout from '@/components/Atom/theLayout.vue';
 
 @Component({
   components: {
     PostsWithPagenation,
+    TheLayout,
   },
 })
 export default class PageSettedPage extends Vue {

@@ -1,5 +1,5 @@
 <template>
-  <v-layout column justify-center align-center>
+  <the-layout column justify-center align-center>
     <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
     <article class="post post-width">
       <div class="post-title d-flex align-center flex-column">
@@ -28,7 +28,7 @@
         <share-buttons :title="post.fields.title" />
       </footer>
     </article>
-  </v-layout>
+  </the-layout>
 </template>
 
 <script lang="ts">
@@ -45,6 +45,7 @@ import PostBody from '@/components/Organisms/postBody.vue';
 import PostIndex from '@/components/Molecules/postIndex.vue';
 import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
 import ShareButtons from '@/components/Molecules/shareButtons.vue';
+import TheLayout from '@/components/Atom/theLayout.vue';
 
 import '@/libs/prism-theme.css';
 
@@ -54,6 +55,7 @@ import '@/libs/prism-theme.css';
     PostIndex,
     Breadcrumbs,
     ShareButtons,
+    TheLayout,
   },
 })
 export default class PostSlug extends Vue {
@@ -256,8 +258,7 @@ export default class PostSlug extends Vue {
       link.push({
         rel: 'preload',
         as: 'font',
-        href:
-          'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/fonts/KaTeX_Main-Regular.woff2',
+        href: 'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/fonts/KaTeX_Main-Regular.woff2',
       });
     }
 

@@ -1,5 +1,5 @@
 <template>
-  <v-layout column justify-center align-center>
+  <the-layout column justify-center align-center>
     <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
     <h2 class="center-title">カテゴリ</h2>
     <nav>
@@ -17,7 +17,7 @@
         </li>
       </ul>
     </nav>
-  </v-layout>
+  </the-layout>
 </template>
 
 <script lang="ts">
@@ -27,6 +27,7 @@ import { Category as ICategory } from '@/types/entry';
 import { generateCategoriesBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 
 import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
+import TheLayout from '@/components/Atom/theLayout.vue';
 
 interface CategoryWithCount {
   category: ICategory;
@@ -36,6 +37,7 @@ interface CategoryWithCount {
 @Component({
   components: {
     Breadcrumbs,
+    TheLayout,
   },
 })
 export default class Category extends Vue {
