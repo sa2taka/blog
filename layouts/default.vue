@@ -34,7 +34,7 @@
     </v-app-bar>
 
     <v-main>
-      <v-container>
+      <the-container>
         <a
           v-if="!isRoute"
           class="back-button animation-link"
@@ -42,7 +42,7 @@
           >&lt;&lt; 戻る</a
         >
         <nuxt v-cloak />
-      </v-container>
+      </the-container>
     </v-main>
 
     <v-footer class="main-footer">
@@ -87,6 +87,7 @@ import { Vue, Component } from 'nuxt-property-decorator';
 import WebpImg from '@/components/Atom/webpImg.vue';
 import DarkThemeSwitch from '@/components/Molecules/darkThemeSwitch.vue';
 import { BLOG_TITLE, BASE_URL } from '@/libs/const';
+import TheContainer from '@/components/Atom/theContainer.vue';
 import TheIcon from '../components/Atom/theIcon.vue';
 
 @Component({
@@ -94,6 +95,7 @@ import TheIcon from '../components/Atom/theIcon.vue';
     WebpImg,
     DarkThemeSwitch,
     TheIcon,
+    TheContainer,
   },
 })
 export default class Default extends Vue {
