@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar hide-on-scroll app absolute>
+    <header class="app-bar sheet">
       <nuxt-link class="d-flex title-link" :to="'/'">
         <webp-img
           webp-name="/icon.webp"
@@ -31,7 +31,7 @@
       </nav>
 
       <dark-theme-switch />
-    </v-app-bar>
+    </header>
 
     <main class="padding-for-header main-content">
       <the-container>
@@ -45,7 +45,7 @@
       </the-container>
     </main>
 
-    <footer class="main-footer footer">
+    <footer class="main-footer footer sheet">
       <div class="d-flex flex-column align-center mx-auto">
         <nuxt-link
           class="d-flex footer-link align-center animation-link"
@@ -75,7 +75,7 @@
       </div>
     </footer>
 
-    <footer class="copyright-footer footer">
+    <footer class="copyright-footer footer sheet">
       <div class="spacer"></div>
       <span>&copy; sa2taka</span>
     </footer>
@@ -263,18 +263,6 @@ a.title-link {
   transition-duration: 0.2s;
   transition-property: background-color, left, right;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 0 0 rgb(0 0 0 / 20%), 0 0 0 0 rgb(0 0 0 / 14%),
-    0 0 0 0 rgb(0 0 0 / 12%);
-}
-
-.theme--dark .footer {
-  background-color: #272727;
-  color: #fff;
-}
-
-.theme--light .footer {
-  background-color: #f5f5f5;
-  color: rgba(0, 0, 0, 0.87);
 }
 
 .copyright-footer {
@@ -284,5 +272,33 @@ a.title-link {
   bottom: 0;
   position: fixed;
   z-index: 3;
+}
+
+.sheet {
+  box-shadow: 0 0 0 0 rgb(0 0 0 / 20%), 0 0 0 0 rgb(0 0 0 / 14%),
+    0 0 0 0 rgb(0 0 0 / 12%);
+}
+
+.theme--dark .sheet {
+  background-color: #272727;
+  color: #fff;
+}
+
+.theme--light .sheet {
+  background-color: #f5f5f5;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.app-bar {
+  height: 64px;
+  margin-top: 0px;
+  transform: translateY(0px);
+  left: 0px;
+  right: 0px;
+  position: absolute;
+  align-items: center;
+  display: flex;
+  z-index: 0;
+  padding: 4px 16px;
 }
 </style>
