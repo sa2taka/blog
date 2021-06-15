@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-tooltip bottom>
+    <the-tooltip bottom>
       <template #activator="{ on }">
         <v-btn
           v-if="isDark"
@@ -21,18 +21,20 @@
           <the-icon icon="icon-sun-o" />
         </v-btn>
       </template>
-      <span>Dark/Light Switch</span>
-    </v-tooltip>
+      <span class="tooltip-item">Dark/Light Switch</span>
+    </the-tooltip>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
 import TheIcon from '../Atom/theIcon.vue';
+import TheTooltip from '../Atom/theTooltip.vue';
 
 @Component({
   components: {
     TheIcon,
+    TheTooltip,
   },
 })
 export default class DarkThemeSwitch extends Vue {
@@ -51,3 +53,10 @@ export default class DarkThemeSwitch extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.tooltip-item {
+  width: 100%;
+  white-space: nowrap;
+}
+</style>
