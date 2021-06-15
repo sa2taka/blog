@@ -1,12 +1,12 @@
 <template>
-  <v-container v-if="posts.length !== 0" class="posts" tag="ul">
+  <ul v-if="posts.length !== 0" class="posts">
     <card-post
       v-for="post in posts"
       :key="post.id"
       :post="post"
       class="post-margin"
     />
-  </v-container>
+  </ul>
   <div v-else>投稿が見つかりません</div>
 </template>
 
