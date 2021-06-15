@@ -79,7 +79,6 @@ ul {
 }
 
 .category-slug-button {
-  margin-left: 8px;
-  margin-right: 8px;
+  margin: 0.5em 8px;
 }
 </style>
