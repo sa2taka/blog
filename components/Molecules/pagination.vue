@@ -37,7 +37,7 @@
           nuxt
           fab
           x-small
-          ><v-icon x-small>icon-chevron-right</v-icon>
+          ><the-icon x-small>icon-chevron-right</the-icon>
         </v-btn>
         <div v-else class="paging-padding"></div>
       </li>
