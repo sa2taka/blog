@@ -45,7 +45,7 @@
       </the-container>
     </main>
 
-    <v-footer class="main-footer">
+    <footer class="main-footer footer">
       <div class="d-flex flex-column align-center mx-auto">
         <nuxt-link
           class="d-flex footer-link align-center animation-link"
@@ -73,12 +73,12 @@
           >
         </div>
       </div>
-    </v-footer>
+    </footer>
 
-    <v-footer app height="36">
+    <footer class="copyright-footer footer">
       <div class="spacer"></div>
       <span>&copy; sa2taka</span>
-    </v-footer>
+    </footer>
   </v-app>
 </template>
 
@@ -204,7 +204,7 @@ a.title-link {
 
 .main-footer {
   position: relative;
-  top: -36px;
+  top: -32px;
 }
 
 .footer-link {
@@ -247,8 +247,42 @@ a.title-link {
   max-width: 100%;
   transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .padding-for-header {
   padding-top: 64px;
   padding-bottom: 64px;
+}
+
+.footer {
+  align-items: center;
+  display: flex;
+  flex: 0 1 auto !important;
+  flex-wrap: wrap;
+  padding: 6px 16px;
+  position: relative;
+  transition-duration: 0.2s;
+  transition-property: background-color, left, right;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 0 0 rgb(0 0 0 / 20%), 0 0 0 0 rgb(0 0 0 / 14%),
+    0 0 0 0 rgb(0 0 0 / 12%);
+}
+
+.theme--dark .footer {
+  background-color: #272727;
+  color: #fff;
+}
+
+.theme--light .footer {
+  background-color: #f5f5f5;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.copyright-footer {
+  height: 32px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 3;
 }
 </style>
