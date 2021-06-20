@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div id="the-app" :class="isDark ? 'theme--dark' : 'theme--light'">
     <header class="app-bar sheet">
       <nuxt-link class="d-flex title-link" :to="'/'">
         <webp-img
@@ -79,7 +79,7 @@
       <div class="spacer"></div>
       <span>&copy; sa2taka</span>
     </footer>
-  </v-app>
+  </div>
 </template>
 
 <script lang="ts">
@@ -100,6 +100,13 @@ import TheIcon from '../components/Atom/theIcon.vue';
 })
 export default class Default extends Vue {
   title: string = BLOG_TITLE;
+  isDark: boolean = true;
+
+  created() {
+    if (process.client) {
+      this.isDark = localStorage.getItem('theme') === 'dark';
+    }
+  }
 
   get isRoute() {
     return this.$route.name === 'index';
@@ -135,6 +142,23 @@ export default class Default extends Vue {
 <style>
 html {
   overflow-y: auto !important;
+}
+
+#the-app {
+  margin: 0;
+  font-family: Helvetica Neue, Arial, Hiragino Kaku Gothic ProN, Hiragino Sans,
+    BIZ UDPGothic, Meiryo, sans-serif;
+  font-weight: 400;
+}
+
+.theme--dark {
+  background: #121212;
+  color: #ddd;
+}
+
+.theme--light {
+  background: #fff;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .title-icon-margin {

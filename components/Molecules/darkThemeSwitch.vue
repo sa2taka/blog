@@ -50,8 +50,15 @@ export default class DarkThemeSwitch extends Vue {
 
   changeTheme(isDark: boolean) {
     this.isDark = isDark;
-    this.$vuetify.theme.dark = isDark;
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    const appDoc = document.getElementById('the-app');
+    if (this.isDark) {
+      appDoc?.classList.remove('theme--light');
+      appDoc?.classList.add('theme--dark');
+    } else {
+      appDoc?.classList.remove('theme--dark');
+      appDoc?.classList.add('theme--light');
+    }
   }
 }
 </script>
