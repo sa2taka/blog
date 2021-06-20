@@ -39,6 +39,6 @@ export default class Posts extends Vue {
 }
 
 .post-margin {
-  margin-top: 16px;
+  margin-top: 32px;
 }
 </style>
