@@ -12,6 +12,7 @@
             }"
             class="category-slug-button"
             outlined
+            nuxt
             >{{ category.element.fields.name }}({{
               category.count
             }})</the-button

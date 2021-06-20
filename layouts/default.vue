@@ -286,6 +286,10 @@ a.title-link {
   flex-grow: 1 !important;
 }
 
+.footer.main-footer {
+  padding: 1em 0;
+}
+
 .main-content {
   display: flex;
   flex: 1 0 auto;

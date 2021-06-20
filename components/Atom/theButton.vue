@@ -155,6 +155,20 @@ export default class TheButton extends Vue {
   background: transparent;
 }
 
+.theme--dark a.the-button.the-button_icon,
+.theme--dark a.the-button.the-button_outlined {
+  color: white;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.theme--light a.the-button.the-button_icon,
+.theme--light a.the-button.the-button_outlined {
+  color: black;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .the-button_icon {
   border-radius: 50%;
   height: 48px;
