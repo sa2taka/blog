@@ -222,7 +222,7 @@ export default class PostBody extends Vue {
 .post-body .message .message__icon {
   position: absolute;
   top: 1.2rem;
-  left: -20px;
+  left: -16px;
   width: 28px;
   height: 28px;
   padding: 4px;
