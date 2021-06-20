@@ -152,6 +152,7 @@ export default class Default extends Vue {
   min-height: 100vh;
   width: 100%;
   position: relative;
+  overflow-x: hidden !important;
 }
 
 .app-wrapper {
