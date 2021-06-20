@@ -1,10 +1,61 @@
-body .v-application {
-  margin: 0;
-  font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN',
-    'Hiragino Sans', 'BIZ UDPGothic', Meiryo, sans-serif;
-  font-weight: 400;
+html {
+  overflow-y: auto !important;
+  font-size: 16px;
+  overflow-x: hidden !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-body .v-application.theme--dark {
-  color: #ddd;
+body {
+  margin: 0;
+  width: 100%;
+}
+
+:root {
+  --primary-color: #009688;
+  --secondary-color: #ff5722;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+/* flex */
+.d-flex {
+  display: flex !important;
+}
+
+.flex-column {
+  flex-direction: column !important;
+}
+
+.justify-center {
+  justify-content: center !important;
+}
+
+.align-center {
+  align-items: center !important;
+}
+
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
+
+.column {
+  flex-direction: column;
+}
+
+/* theme */
+
+/* color */
+
+.secondary--text {
+  color: var(--secondary-color) !important;
+  caret-color: var(--secondary-color) !important;
 }

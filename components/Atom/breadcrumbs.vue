@@ -13,7 +13,11 @@
           :key="`${index}-divider`"
           class="breadcrumbs_divider"
         >
-          <v-icon small class="mx-3 mb-1">icon-chevron-circle-right</v-icon>
+          <the-icon
+            small
+            class="arrow-margin"
+            icon="icon-chevron-circle-right"
+          />
         </li>
       </template>
     </ul>
@@ -24,8 +28,13 @@
 import { Vue, Prop, Component } from 'nuxt-property-decorator';
 import { BreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 import { BASE_URL } from '@/libs/const';
+import TheIcon from './theIcon.vue';
 
-@Component
+@Component({
+  components: {
+    TheIcon,
+  },
+})
 export default class Breadcrumbs extends Vue {
   @Prop({ required: true })
   list!: BreadcrumbsList;
@@ -112,20 +121,11 @@ export default class Breadcrumbs extends Vue {
   color: #444;
 }
 
-/* HACK */
-.breadcrumbs li {
-  font-size: 14px;
+.arrow-margin {
+  margin: 0 12px 4px;
 }
 
-.v-application li.v-breadcrumbs__divider {
-  margin-bottom: 2px;
-}
-
-.v-application .theme--light a.v-breadcrumbs__item {
-  color: #444;
-}
-
-.v-application .theme--dark a.v-breadcrumbs__item {
-  color: #ccc;
+.breadcrumbs_divider > i {
+  margin-top: 4px;
 }
 </style>

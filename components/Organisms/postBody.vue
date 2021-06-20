@@ -14,7 +14,7 @@ export default class PostBody extends Vue {
 
 <style>
 /*! purgecss start ignore */
-.v-application .post-body * {
+#the-app .post-body * {
   word-wrap: break-word;
 }
 .padding-for-filename {
@@ -128,14 +128,14 @@ export default class PostBody extends Vue {
   margin-bottom: 16px;
 }
 
-.v-application .post-body code {
+#the-app .post-body code {
   margin: auto auto 1.5em;
   word-wrap: normal;
   white-space: pre;
   padding: 0.8em 0.6em;
 }
 
-.v-application .post-body code .token.prompt {
+#the-app .post-body code .token.prompt {
   user-select: none;
   color: #777;
 }
@@ -145,7 +145,7 @@ export default class PostBody extends Vue {
 }
 
 /* HACK */
-.v-application code {
+#the-app code {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
@@ -159,7 +159,7 @@ export default class PostBody extends Vue {
   margin-bottom: 0px !important;
 }
 
-.v-application .post-body code.hljsspan {
+#the-app .post-body code.hljsspan {
   display: inline;
   overflow-x: initial;
   overflow-wrap: break-word;
@@ -171,12 +171,12 @@ export default class PostBody extends Vue {
   white-space: normal;
 }
 
-.v-application code::before,
-.v-application code::after {
+#the-app code::before,
+#the-app code::after {
   content: none;
 }
 
-.v-application code .hljs-comment {
+#the-app code .hljs-comment {
   color: #acb3c0;
 }
 
@@ -222,7 +222,7 @@ export default class PostBody extends Vue {
 .post-body .message .message__icon {
   position: absolute;
   top: 1.2rem;
-  left: -16px;
+  left: -20px;
   width: 28px;
   height: 28px;
   padding: 4px;

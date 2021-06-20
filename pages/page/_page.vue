@@ -1,5 +1,5 @@
 <template>
-  <v-layout column justify-center align-center>
+  <the-layout column justify-center align-center>
     <posts-with-pagenation
       :page="page"
       :limit="limit"
@@ -7,28 +7,30 @@
       base-url="/page/"
       :posts="posts"
     />
-  </v-layout>
+  </the-layout>
 </template>
 
 <script lang="ts">
 import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
-import { fetchPosts } from '@/libs/contentful';
-import { postsCountStore } from '@/libs/storeAccessor';
+import { fetchPosts, fetchPostsCount } from '@/libs/contentful';
 import { Post, MultipleItem } from '@/types/entry';
 
 import PostsWithPagenation from '@/components/Organisms/postsWithPagenation.vue';
 import { POSTS_LIMIT } from '@/libs/const';
+import TheLayout from '@/components/Atom/theLayout.vue';
 
 @Component({
   components: {
     PostsWithPagenation,
+    TheLayout,
   },
 })
 export default class PageSettedPage extends Vue {
   page!: number;
   limit = POSTS_LIMIT;
   posts!: Post[];
+  count!: number;
   isLoading = false;
 
   async asyncData(context: Context) {
@@ -43,14 +45,13 @@ export default class PageSettedPage extends Vue {
         })
     );
 
+    const count = await fetchPostsCount();
+
     return {
       page,
       posts,
+      count,
     };
-  }
-
-  get count() {
-    return postsCountStore.count;
   }
 
   head() {

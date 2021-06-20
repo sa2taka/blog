@@ -1,86 +1,89 @@
 <template>
-  <v-app>
-    <v-app-bar hide-on-scroll app absolute>
-      <nuxt-link class="d-flex title-link" :to="'/'">
-        <webp-img
-          webp-name="/icon.webp"
-          img-name="/icon.png"
-          width="auto"
-          height="36"
-          class="title-icon-margin mr-3"
-          alt="logo"
-        />
-        <h1 class="navbar-blog-title">
-          {{ title }}
-        </h1>
-      </nuxt-link>
-
-      <v-spacer />
-
-      <nav class="mr-10 d-flex">
-        <div class="title-link animation-link ml-4" @click="$router.push('/')">
-          Home
-        </div>
-
-        <div
-          class="title-link animation-link ml-4"
-          @click="$router.push('/category')"
-        >
-          Category
-        </div>
-      </nav>
-
-      <dark-theme-switch class="mr-3" />
-    </v-app-bar>
-
-    <v-main>
-      <v-container>
-        <a
-          v-if="!isRoute"
-          class="back-button animation-link"
-          href="javascript:history.back();"
-          >&lt;&lt; 戻る</a
-        >
-        <nuxt v-cloak />
-      </v-container>
-    </v-main>
-
-    <v-footer class="main-footer">
-      <div class="d-flex flex-column align-center mx-auto">
-        <nuxt-link
-          class="d-flex footer-link align-center animation-link"
-          :to="'/'"
-        >
-          <v-icon>icon-home</v-icon>
-          <span class="ml-2 mt-1">Home</span>
+  <div id="app" :class="isDark ? 'theme--dark' : 'theme--light'">
+    <div class="app-wrapper">
+      <header class="app-bar sheet">
+        <nuxt-link class="d-flex title-link align-center" :to="'/'">
+          <webp-img
+            webp-name="/icon.webp"
+            img-name="/icon.png"
+            width="auto"
+            height="36"
+            class="title-icon-margin"
+            alt="logo"
+          />
+          <h1 class="navbar-blog-title">
+            {{ title }}
+          </h1>
         </nuxt-link>
-        <div class="d-flex justify-center flex-wrap mt-4">
-          <div class="mb-2 animation-link">
-            <v-icon
-              class="mt-n1"
-              color="#1DA1F2"
-              v-html="$vuetify.icons.values.twitter"
-            ></v-icon>
-            <a href="https://twitter.com/t0p_l1ght" class="footer-link mt-2"
-              >筆者Twitterアカウント</a
-            >
+
+        <div class="spacer"></div>
+
+        <nav class="d-flex navigation-links">
+          <div class="title-link animation-link" @click="$router.push('/')">
+            Home
           </div>
-          <div class="ml-4">
+
+          <div
+            class="title-link animation-link"
+            @click="$router.push('/category')"
+          >
+            Category
+          </div>
+        </nav>
+
+        <dark-theme-switch />
+      </header>
+
+      <main class="padding-for-header main-content">
+        <div class="main-wrapper">
+          <the-container>
+            <a
+              v-if="!isRoute"
+              class="back-button animation-link"
+              href="javascript:history.back();"
+              >&lt;&lt; 戻る</a
+            >
+            <nuxt v-cloak />
+          </the-container>
+        </div>
+      </main>
+
+      <footer class="main-footer footer sheet">
+        <div class="d-flex flex-column align-center mx-auto">
+          <nuxt-link
+            class="d-flex footer-link align-center animation-link"
+            :to="'/'"
+          >
+            <the-icon icon="icon-home" />
+            <span>Home</span>
+          </nuxt-link>
+          <div class="d-flex justify-center flex-wrap">
+            <a
+              href="https://twitter.com/t0p_l1ght"
+              class="animation-link footer-link footer-between-margin"
+            >
+              <the-icon
+                class="author-twitter-margin-adjust"
+                color="#1DA1F2"
+                icon="icon-twitter"
+              />
+              <span>筆者Twitterアカウント</span>
+            </a>
             <nuxt-link
               :to="{ name: 'guide' }"
-              class="animation-link footer-link ml-2 mt-2"
+              class="
+                animation-link
+                footer-link
+                guide-link
+                footer-between-margin
+              "
               >当サイト利用について</nuxt-link
             >
           </div>
         </div>
-      </div>
-    </v-footer>
-
-    <v-footer app height="36">
-      <v-spacer />
-      <span>&copy; sa2taka</span>
-    </v-footer>
-  </v-app>
+      </footer>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -88,15 +91,26 @@ import { Vue, Component } from 'nuxt-property-decorator';
 import WebpImg from '@/components/Atom/webpImg.vue';
 import DarkThemeSwitch from '@/components/Molecules/darkThemeSwitch.vue';
 import { BLOG_TITLE, BASE_URL } from '@/libs/const';
+import TheContainer from '@/components/Atom/theContainer.vue';
+import TheIcon from '../components/Atom/theIcon.vue';
 
 @Component({
   components: {
     WebpImg,
     DarkThemeSwitch,
+    TheIcon,
+    TheContainer,
   },
 })
 export default class Default extends Vue {
   title: string = BLOG_TITLE;
+  isDark: boolean = true;
+
+  created() {
+    if (process.client) {
+      this.isDark = localStorage.getItem('theme') === 'dark';
+    }
+  }
 
   get isRoute() {
     return this.$route.name === 'index';
@@ -130,19 +144,51 @@ export default class Default extends Vue {
 </script>
 
 <style>
-html {
-  overflow-y: auto !important;
+#app {
+  margin: 0;
+  font-family: Helvetica Neue, Arial, Hiragino Kaku Gothic ProN, Hiragino Sans,
+    BIZ UDPGothic, Meiryo, sans-serif;
+  font-weight: 400;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+.app-wrapper {
+  flex: 1 1 auto;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 100%;
+  position: relative;
+}
+
+a {
+  color: var(--primary-color);
+}
+
+.theme--dark {
+  background: #121212;
+  color: #ddd;
+}
+
+.theme--light {
+  background: #fff;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .title-icon-margin {
   margin-left: 4%;
   height: 36px;
+  margin-right: 16px;
 }
 
 .navbar-blog-title {
   font-size: 1.2em;
   width: 200px;
-  margin-top: 4px;
+  color: white;
 }
 
 @media screen and (max-width: 768px) {
@@ -153,6 +199,7 @@ html {
 
 .title-link {
   cursor: pointer;
+  margin-left: 16px;
 }
 
 a.title-link {
@@ -197,12 +244,14 @@ a.title-link {
   opacity: 0;
 }
 
-.main-footer {
+.footer.main-footer {
   position: relative;
-  top: -36px;
+  padding: 1em 0;
 }
 
 .footer-link {
+  margin-top: 8px;
+  margin-left: 8px;
   text-decoration: none;
 }
 
@@ -212,5 +261,92 @@ a.title-link {
 
 .theme--light .footer-link {
   color: black !important;
+}
+
+.author-twitter-margin-adjust {
+  margin-top: -4px;
+}
+
+.footer-between-margin {
+  margin-top: 16px;
+}
+
+.guide-link {
+  margin-left: 16px;
+}
+
+.navigation-links {
+  margin-right: 40px;
+}
+
+.spacer {
+  flex-grow: 1 !important;
+}
+
+.main-content {
+  display: flex;
+  flex: 1 0 auto;
+  max-width: 100%;
+  transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-wrapper {
+  flex: 1 1 auto;
+  max-width: 100%;
+  position: relative;
+}
+
+.padding-for-header {
+  padding-top: 72px;
+}
+
+.footer {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex: 0 1 auto !important;
+  flex-wrap: wrap;
+  padding: 6px 16px;
+  position: relative;
+  transition-duration: 0.2s;
+  transition-property: background-color, left, right;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.copyright-footer {
+  position: fixed;
+  height: 32px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+}
+
+.sheet {
+  box-shadow: 0 0 0 0 rgb(0 0 0 / 20%), 0 0 0 0 rgb(0 0 0 / 14%),
+    0 0 0 0 rgb(0 0 0 / 12%);
+}
+
+.theme--dark .sheet {
+  background-color: #272727;
+  color: #fff;
+}
+
+.theme--light .sheet {
+  background-color: #f5f5f5;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.app-bar {
+  height: 64px;
+  margin-top: 0px;
+  transform: translateY(0px);
+  left: 0px;
+  right: 0px;
+  position: absolute;
+  align-items: center;
+  display: flex;
+  z-index: 0;
+  padding: 4px 16px;
 }
 </style>

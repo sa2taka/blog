@@ -5,7 +5,7 @@
     </div>
 
     <ol
-      :class="['my-4', 'post-index_content']"
+      class="post-index_content"
       :style="{
         height: contentHeight ? (isOpen ? `${contentHeight}px` : '0') : null,
       }"
@@ -22,7 +22,7 @@
           >{{ indexNest1.title }}</a
         >
 
-        <ul v-if="indexNest1.child.length !== 0" class="ml-5">
+        <ul v-if="indexNest1.child.length !== 0" class="second-index-list">
           <li
             v-for="(indexNest2, level2Index) in indexNest1.child"
             :key="indexNest2.title + indexNest2.level.toString()"
@@ -42,14 +42,14 @@
       <span
         :class="['post-index_close-button', { 'post-index_move': !isOpen }]"
       >
-        <v-btn
+        <the-button
           icon
           :class="[{ 'post-index_turn': !isOpen }]"
           aria-label="index close"
           @click="isOpen = !isOpen"
         >
-          <v-icon>icon-chevron-up</v-icon>
-        </v-btn>
+          <the-icon icon="icon-chevron-up" />
+        </the-button>
       </span>
     </div>
   </nav>
@@ -59,6 +59,8 @@
 import { Vue, Prop, Component } from 'nuxt-property-decorator';
 
 import { PostIndex as IPostIndex } from '@/types/postIndex';
+import TheIcon from '../Atom/theIcon.vue';
+import TheButton from '~/components/Atom/theButton.vue';
 
 interface FormatedPostIndex {
   title?: string;
@@ -66,7 +68,12 @@ interface FormatedPostIndex {
   level: number;
 }
 
-@Component
+@Component({
+  components: {
+    TheIcon,
+    TheButton,
+  },
+})
 export default class PostIndex extends Vue {
   @Prop({ required: true })
   index!: IPostIndex[];
@@ -209,6 +216,8 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
 .post-index_content {
   transition: height 0.3s ease-in-out;
   overflow-y: hidden;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .post-index_close-button:before,
@@ -244,21 +253,21 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
 .post-index ol > li:before {
   counter-increment: number;
   content: counter(number);
-  color: var(--v-primary-base);
+  color: var(--primary-color);
   font-weight: 600;
 }
 
 .post-index ol > li:after {
   position: absolute;
   content: '' !important;
-  top: 0;
+  top: -4px;
   right: auto;
   left: 18px;
   bottom: auto;
   height: 1.5em;
   width: 2px;
   border-radius: 1px;
-  background-color: var(--v-primary-base);
+  background-color: var(--primary-color);
 }
 
 .post-index ul > li:before {
@@ -267,7 +276,7 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
   position: absolute;
   top: 0.5em;
   content: '';
-  background-color: var(--v-primary-base);
+  background-color: var(--primary-color);
   border-radius: 50%;
   left: -12px;
   margin: auto auto;
@@ -287,8 +296,8 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
 }
 
 .second-index {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
 }
 
 .index-link:hover {
@@ -305,5 +314,9 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
 
 .theme--light li > .index-link {
   color: black;
+}
+
+.second-index {
+  margin-left: 2.5em;
 }
 </style>

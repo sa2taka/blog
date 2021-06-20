@@ -1,12 +1,16 @@
 <template>
   <picture onload="handleLoad()">
-    <source :srcset="webpName" type="image/webp" class="full-width my-auto" />
+    <source
+      :srcset="webpName"
+      type="image/webp"
+      class="full-width vertial-center"
+    />
     <img
       :src="imgName"
       :width="width"
       :height="height"
       :alt="alt"
-      class="full-width my-auto"
+      class="full-width vertial-center"
       loading="lazy"
     />
   </picture>
@@ -62,5 +66,10 @@ img {
 
 .full-width {
   width: 100%;
+}
+
+.vertial-center {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 </style>

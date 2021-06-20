@@ -1,9 +1,9 @@
 <template>
-  <v-app>
+  <div id="the-app">
     <h1 v-if="error && error.statusCode === 404">{{ pageNotFound }}</h1>
     <h1 v-else>{{ otherError }}</h1>
     <NuxtLink to="/">Home</NuxtLink>
-  </v-app>
+  </div>
 </template>
 
 <script lang="ts">

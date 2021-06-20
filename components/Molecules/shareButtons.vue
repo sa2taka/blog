@@ -1,8 +1,11 @@
 <template>
   <div class="d-flex justify-center flex-wrap share-buttons">
-    <twitter-share-button :href="twitterShareLink" class="mx-3 my-3" />
-    <facebook-share-button :href="facebookShareLink" class="mx-3 my-3" />
-    <get-pocket-button :href="getPocketLink" class="mx-3 my-3" />
+    <twitter-share-button :href="twitterShareLink" class="sharebutton-margin" />
+    <facebook-share-button
+      :href="facebookShareLink"
+      class="sharebutton-margin"
+    />
+    <get-pocket-button :href="getPocketLink" class="sharebutton-margin" />
   </div>
 </template>
 
@@ -54,4 +57,12 @@ export default class ShareButtons extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.sharebutton-margin {
+  margin: 12px;
+}
+
+.share-buttons a {
+  color: black;
+}
+</style>

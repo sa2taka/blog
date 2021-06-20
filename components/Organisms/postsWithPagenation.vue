@@ -29,9 +29,6 @@ export default class postsWithPagenation extends Vue {
   page!: number;
 
   @Prop({ required: true })
-  count!: number;
-
-  @Prop({ required: true })
   limit!: number;
 
   @Prop({ required: true })
@@ -39,6 +36,9 @@ export default class postsWithPagenation extends Vue {
 
   @Prop({ required: true })
   posts!: Post[];
+
+  @Prop({ required: true })
+  count!: number;
 
   @Watch('page')
   onChangePage() {

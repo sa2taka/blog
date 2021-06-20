@@ -1,40 +1,42 @@
 <template>
-  <v-layout column justify-center align-center>
+  <the-layout column justify-center align-center>
     <posts-with-pagenation
       :page="page"
       :limit="limit"
-      :count="count"
       :base-url="'/page/'"
-      :posts="posts"
+      :count="count"
+      :posts="posts.slice(0, limit)"
     />
-  </v-layout>
+  </the-layout>
 </template>
 
 <script lang="ts">
 import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
-import { fetchPosts } from '@/libs/contentful';
-import { postsCountStore } from '@/libs/storeAccessor';
+import { fetchPosts, fetchPostsCount } from '@/libs/contentful';
 import { Post, MultipleItem } from '@/types/entry';
 
 import PostsWithPagenation from '@/components/Organisms/postsWithPagenation.vue';
 import { POSTS_LIMIT } from '@/libs/const';
+import TheLayout from '@/components/Atom/theLayout.vue';
 
 @Component({
   components: {
     PostsWithPagenation,
+    TheLayout,
   },
 })
 export default class IndexPage extends Vue {
   page!: number;
   limit = POSTS_LIMIT;
   posts!: Post[];
+  count!: number;
 
   async asyncData(_context: Context) {
     const page = 1;
     const limit = POSTS_LIMIT;
 
-    const posts: Post[] = await fetchPosts(page - 1, limit).then(
+    const posts: Post[] = await fetchPosts(page - 1, limit + 1).then(
       (posts: MultipleItem<Post>) =>
         posts.items.map((item) => {
           item.fields.body = '';
@@ -42,14 +44,13 @@ export default class IndexPage extends Vue {
         })
     );
 
+    const count = await fetchPostsCount();
+
     return {
       page,
       posts,
+      count,
     };
-  }
-
-  get count() {
-    return postsCountStore.count;
   }
 }
 </script>

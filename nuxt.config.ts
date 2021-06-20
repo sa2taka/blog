@@ -1,8 +1,5 @@
 import { BASE_URL } from './libs/const';
 
-const nodeExternals = require('webpack-node-externals');
-const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
-
 const config = {
   CTF_MAIN_AUTHOR_ID: process.env.CTF_MAIN_AUTHOR_ID,
   CTF_SPACE_ID: process.env.CTF_SPACE_ID,
@@ -182,15 +179,13 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   loading: { color: '#fff' },
-  css: ['@/assets/css/layout.css'],
-  plugins: ['@/plugins/vuetify'],
+  css: ['@/assets/css/layout.css', '@/assets/icomoon/style.css'],
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     'nuxt-purgecss',
     '@nuxtjs/eslint-module',
     '@nuxt/typescript-build',
   ],
-  vuetify: {},
   modules: [
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
@@ -200,8 +195,6 @@ export default {
     '@nuxtjs/google-gtag',
   ],
   build: {
-    transpile: [/^vuetify/],
-    plugins: [new VuetifyLoaderPlugin()],
     extractCSS: true,
     useForkTsChecker: true,
     loaders: {
@@ -215,11 +208,7 @@ export default {
 
     extend(config: any, _ctx: any) {
       if (process.server) {
-        config.externals = [
-          nodeExternals({
-            x: [/^vuetify/],
-          }),
-        ];
+        config.externals = [];
       }
       config.node = {
         fs: 'empty',
@@ -358,7 +347,6 @@ export default {
       'pages/**/*.vue',
       'plugins/**/*.js',
       'plugins/**/*.ts',
-      'node_modules/vuetify/dist/vuetify.js',
     ],
     styleExtensions: ['.css'],
     whitelist: ['body', 'html', 'nuxt-progress'].concat(katexCss),
