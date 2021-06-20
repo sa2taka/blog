@@ -136,6 +136,7 @@ const formatDateForDateTag = (date: Date) => {
 .list-post-title {
   font-size: 1.1em;
   font-weight: 600;
+  word-break: break-all;
 }
 
 .theme--dark .list-post-title {

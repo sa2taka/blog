@@ -58,5 +58,6 @@ export default class IndexPage extends Vue {
 <style scoped>
 .blog-title {
   font-size: 1.6em;
+  word-break: break-all;
 }
 </style>
