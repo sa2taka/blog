@@ -16,7 +16,6 @@ export default class PostBody extends Vue {
 /*! purgecss start ignore */
 #app .post-body * {
   word-wrap: break-word;
-  overflow-y: hidden !important;
 }
 .padding-for-filename {
   padding-top: 2.6em !important;
@@ -258,6 +257,10 @@ export default class PostBody extends Vue {
 #app .post-body ul,
 #app .post-body ol {
   margin-left: 1.2em;
+}
+
+#app .post-body .katex-block {
+  overflow-x: scroll;
 }
 /*! purgecss end ignore */
 </style>
