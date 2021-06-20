@@ -1,5 +1,5 @@
 <template>
-  <the-layout column justify-center align-center class="guide">
+  <div class="guide">
     <h1>当サイト利用について</h1>
     <p>
       本ページはサイト利用にあたって必要となる情報が記載されています。お決まりの文言が多いですが、ご一読をお願いいたします。
@@ -107,7 +107,7 @@
       当サイトに掲載された内容によって生じた損害等の一切の責任を負いかねますので、ご了承ください。<br />
       また当サイトからリンクによって他のサイトに移動された場合、移動先サイトで提供される情報、サービス等について一切の責任も負いません。
     </p>
-  </the-layout>
+  </div>
 </template>
 
 <script lang="ts">
@@ -152,8 +152,12 @@ export default class PostSlug extends Vue {
 </script>
 
 <style scoped>
+.guide p {
+  text-align: left;
+}
 .guide h1,
 .guide h2 {
+  text-align: center;
   margin-top: 48px;
   margin-bottom: 24px;
 }
@@ -171,5 +175,13 @@ export default class PostSlug extends Vue {
 
 .guide table {
   margin: auto auto;
+}
+
+.guide caption {
+  margin: 1em auto;
+}
+
+.guide ul {
+  margin: 1em auto;
 }
 </style>

@@ -61,4 +61,8 @@ export default class ShareButtons extends Vue {
 .sharebutton-margin {
   margin: 12px;
 }
+
+.share-buttons a {
+  color: black;
+}
 </style>

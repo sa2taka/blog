@@ -1,7 +1,7 @@
 <template>
   <div id="the-app" :class="isDark ? 'theme--dark' : 'theme--light'">
     <header class="app-bar sheet">
-      <nuxt-link class="d-flex title-link" :to="'/'">
+      <nuxt-link class="d-flex title-link align-center" :to="'/'">
         <webp-img
           webp-name="/icon.webp"
           img-name="/icon.png"
@@ -144,11 +144,28 @@ html {
   overflow-y: auto !important;
 }
 
+:root {
+  --primary-color: #009688;
+  --secondary-color: #ff5722;
+}
+
 #the-app {
   margin: 0;
   font-family: Helvetica Neue, Arial, Hiragino Kaku Gothic ProN, Hiragino Sans,
     BIZ UDPGothic, Meiryo, sans-serif;
   font-weight: 400;
+  flex: 1 1 auto;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 100%;
+  position: relative;
+}
+
+a {
+  color: var(--primary-color);
 }
 
 .theme--dark {
@@ -171,6 +188,7 @@ html {
   font-size: 1.2em;
   width: 200px;
   margin-top: 4px;
+  color: white;
 }
 
 @media screen and (max-width: 768px) {
@@ -270,6 +288,7 @@ a.title-link {
   flex: 1 0 auto;
   max-width: 100%;
   transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: auto;
 }
 
 .padding-for-header {
@@ -279,6 +298,7 @@ a.title-link {
 
 .footer {
   align-items: center;
+  justify-content: center;
   display: flex;
   flex: 0 1 auto !important;
   flex-wrap: wrap;

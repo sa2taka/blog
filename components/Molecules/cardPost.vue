@@ -12,7 +12,7 @@
           {{ post.fields.category.fields.name }}
         </nuxt-link></span
       >
-      <span>
+      <span class="list-post-title-margin">
         <nuxt-link
           :to="{ name: 'post-slug', params: { slug: post.fields.slug } }"
           class="list-post-title animation-title-link"
@@ -117,6 +117,10 @@ const formatDateForDateTag = (date: Date) => {
 </script>
 
 <style scoped>
+.secondary--text {
+  color: var(--secondary-color);
+}
+
 .post-list-element {
   list-style: none;
 }
@@ -130,6 +134,9 @@ const formatDateForDateTag = (date: Date) => {
   font-weight: 600;
 }
 
+.list-post-title-margin {
+  margin: 0.2em 0;
+}
 .list-post-title {
   font-size: 1.1em;
   font-weight: 600;

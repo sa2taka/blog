@@ -22,7 +22,7 @@
           >{{ indexNest1.title }}</a
         >
 
-        <ul v-if="indexNest1.child.length !== 0" class="ml-5">
+        <ul v-if="indexNest1.child.length !== 0" class="second-index-list">
           <li
             v-for="(indexNest2, level2Index) in indexNest1.child"
             :key="indexNest2.title + indexNest2.level.toString()"
@@ -260,7 +260,7 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
 .post-index ol > li:after {
   position: absolute;
   content: '' !important;
-  top: 0;
+  top: -4px;
   right: auto;
   left: 18px;
   bottom: auto;
@@ -296,8 +296,8 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
 }
 
 .second-index {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
 }
 
 .index-link:hover {
@@ -314,5 +314,9 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
 
 .theme--light li > .index-link {
   color: black;
+}
+
+.second-index-list {
+  margin-left: 2.5em;
 }
 </style>

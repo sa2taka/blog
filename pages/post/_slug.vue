@@ -406,6 +406,7 @@ const formatDate = (date: Date) => {
 .post-title-name {
   font-size: 2em;
   text-align: center;
+  margin: 0.4em auto;
 }
 
 @media (max-width: 600px) {
