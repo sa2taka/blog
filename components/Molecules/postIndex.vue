@@ -315,4 +315,8 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
 .theme--light li > .index-link {
   color: black;
 }
+
+.second-index {
+  margin-left: 2.5em;
+}
 </style>

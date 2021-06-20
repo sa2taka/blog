@@ -1,84 +1,88 @@
 <template>
-  <div id="the-app" :class="isDark ? 'theme--dark' : 'theme--light'">
-    <header class="app-bar sheet">
-      <nuxt-link class="d-flex title-link align-center" :to="'/'">
-        <webp-img
-          webp-name="/icon.webp"
-          img-name="/icon.png"
-          width="auto"
-          height="36"
-          class="title-icon-margin"
-          alt="logo"
-        />
-        <h1 class="navbar-blog-title">
-          {{ title }}
-        </h1>
-      </nuxt-link>
-
-      <div class="spacer"></div>
-
-      <nav class="d-flex navigation-links">
-        <div class="title-link animation-link" @click="$router.push('/')">
-          Home
-        </div>
-
-        <div
-          class="title-link animation-link"
-          @click="$router.push('/category')"
-        >
-          Category
-        </div>
-      </nav>
-
-      <dark-theme-switch />
-    </header>
-
-    <main class="padding-for-header main-content">
-      <the-container>
-        <a
-          v-if="!isRoute"
-          class="back-button animation-link"
-          href="javascript:history.back();"
-          >&lt;&lt; 戻る</a
-        >
-        <nuxt v-cloak />
-      </the-container>
-    </main>
-
-    <footer class="main-footer footer sheet">
-      <div class="d-flex flex-column align-center mx-auto">
-        <nuxt-link
-          class="d-flex footer-link align-center animation-link"
-          :to="'/'"
-        >
-          <the-icon icon="icon-home" />
-          <span>Home</span>
+  <div id="app" :class="isDark ? 'theme--dark' : 'theme--light'">
+    <div class="app-wrapper">
+      <header class="app-bar sheet">
+        <nuxt-link class="d-flex title-link align-center" :to="'/'">
+          <webp-img
+            webp-name="/icon.webp"
+            img-name="/icon.png"
+            width="auto"
+            height="36"
+            class="title-icon-margin"
+            alt="logo"
+          />
+          <h1 class="navbar-blog-title">
+            {{ title }}
+          </h1>
         </nuxt-link>
-        <div class="d-flex justify-center flex-wrap footer-between-margin">
-          <a
-            href="https://twitter.com/t0p_l1ght"
-            class="animation-link footer-link"
-          >
-            <the-icon
-              class="author-twitter-margin-adjust"
-              color="#1DA1F2"
-              icon="icon-twitter"
-            />
-            <span>筆者Twitterアカウント</span>
-          </a>
-          <nuxt-link
-            :to="{ name: 'guide' }"
-            class="animation-link footer-link guide-link"
-            >当サイト利用について</nuxt-link
-          >
-        </div>
-      </div>
-    </footer>
 
-    <footer class="copyright-footer footer sheet">
-      <div class="spacer"></div>
-      <span>&copy; sa2taka</span>
-    </footer>
+        <div class="spacer"></div>
+
+        <nav class="d-flex navigation-links">
+          <div class="title-link animation-link" @click="$router.push('/')">
+            Home
+          </div>
+
+          <div
+            class="title-link animation-link"
+            @click="$router.push('/category')"
+          >
+            Category
+          </div>
+        </nav>
+
+        <dark-theme-switch />
+      </header>
+
+      <main class="padding-for-header main-content">
+        <div class="main-wrapper">
+          <the-container>
+            <a
+              v-if="!isRoute"
+              class="back-button animation-link"
+              href="javascript:history.back();"
+              >&lt;&lt; 戻る</a
+            >
+            <nuxt v-cloak />
+          </the-container>
+        </div>
+      </main>
+
+      <footer class="main-footer footer sheet">
+        <div class="d-flex flex-column align-center mx-auto">
+          <nuxt-link
+            class="d-flex footer-link align-center animation-link"
+            :to="'/'"
+          >
+            <the-icon icon="icon-home" />
+            <span>Home</span>
+          </nuxt-link>
+          <div class="d-flex justify-center flex-wrap">
+            <a
+              href="https://twitter.com/t0p_l1ght"
+              class="animation-link footer-link footer-between-margin"
+            >
+              <the-icon
+                class="author-twitter-margin-adjust"
+                color="#1DA1F2"
+                icon="icon-twitter"
+              />
+              <span>筆者Twitterアカウント</span>
+            </a>
+            <nuxt-link
+              :to="{ name: 'guide' }"
+              class="
+                animation-link
+                footer-link
+                guide-link
+                footer-between-margin
+              "
+              >当サイト利用について</nuxt-link
+            >
+          </div>
+        </div>
+      </footer>
+    </div>
   </div>
 </template>
 
@@ -140,24 +144,17 @@ export default class Default extends Vue {
 </script>
 
 <style>
-html {
-  overflow-y: auto !important;
-}
-
-body {
-  margin: 0;
-}
-
-:root {
-  --primary-color: #009688;
-  --secondary-color: #ff5722;
-}
-
-#the-app {
+#app {
   margin: 0;
   font-family: Helvetica Neue, Arial, Hiragino Kaku Gothic ProN, Hiragino Sans,
     BIZ UDPGothic, Meiryo, sans-serif;
   font-weight: 400;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+.app-wrapper {
   flex: 1 1 auto;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -247,9 +244,9 @@ a.title-link {
   opacity: 0;
 }
 
-.main-footer {
+.footer.main-footer {
   position: relative;
-  top: -32px;
+  padding: 1em 0;
 }
 
 .footer-link {
@@ -286,21 +283,21 @@ a.title-link {
   flex-grow: 1 !important;
 }
 
-.footer.main-footer {
-  padding: 1em 0;
-}
-
 .main-content {
   display: flex;
   flex: 1 0 auto;
   max-width: 100%;
   transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  margin: auto;
+}
+
+.main-wrapper {
+  flex: 1 1 auto;
+  max-width: 100%;
+  position: relative;
 }
 
 .padding-for-header {
-  padding-top: 64px;
-  padding-bottom: 64px;
+  padding-top: 72px;
 }
 
 .footer {
@@ -317,11 +314,11 @@ a.title-link {
 }
 
 .copyright-footer {
+  position: fixed;
   height: 32px;
   left: 0;
   right: 0;
   bottom: 0;
-  position: fixed;
   z-index: 3;
 }
 
