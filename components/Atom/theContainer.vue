@@ -17,6 +17,7 @@ export default class TheLayout extends Vue {}
   padding: 12px;
   margin-right: auto;
   margin-left: auto;
+  margin: 12px;
 }
 
 @media (min-width: 960px) {

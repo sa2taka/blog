@@ -144,6 +144,10 @@ html {
   overflow-y: auto !important;
 }
 
+body {
+  margin: 0;
+}
+
 :root {
   --primary-color: #009688;
   --secondary-color: #ff5722;
@@ -187,7 +191,6 @@ a {
 .navbar-blog-title {
   font-size: 1.2em;
   width: 200px;
-  margin-top: 4px;
   color: white;
 }
 

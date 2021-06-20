@@ -117,10 +117,6 @@ const formatDateForDateTag = (date: Date) => {
 </script>
 
 <style scoped>
-.secondary--text {
-  color: var(--secondary-color);
-}
-
 .post-list-element {
   list-style: none;
 }

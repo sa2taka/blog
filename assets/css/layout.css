@@ -9,6 +9,9 @@ body .v-application.theme--dark {
   color: #ddd;
 }
 
+.secondary--text {
+}
+
 /* flex */
 .d-flex {
   display: flex !important;
@@ -30,16 +33,20 @@ body .v-application.theme--dark {
   flex-wrap: wrap !important;
 }
 
+.column {
+  flex-direction: column;
+}
+
 /* theme */
 
 /* color */
 
 :root {
-  --v-primary-base: #009688;
+  --primary-color: #009688;
   --secondary-color: #ff5722;
 }
 
 .secondary--text {
-  color: var(--v-secondary-base) !important;
-  caret-color: var(--v-secondary-base) !important;
+  color: var(--secondary-color) !important;
+  caret-color: var(--secondary-color) !important;
 }

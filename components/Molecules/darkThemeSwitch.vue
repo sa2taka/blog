@@ -44,7 +44,7 @@ export default class DarkThemeSwitch extends Vue {
 
   created() {
     if (process.client) {
-      this.isDark = this.$vuetify.theme.dark;
+      this.isDark = localStorage.getItem('theme') === 'dark';
     }
   }
 

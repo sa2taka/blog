@@ -30,7 +30,6 @@
     "@nuxtjs/google-gtag": "^1.0.4",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "@nuxtjs/sitemap": "^2.2.0",
-    "@nuxtjs/vuetify": "^1.11.3",
     "contentful": "^8.2.1",
     "global": "^4.4.0",
     "markdown-it": "^12.0.4",

@@ -253,7 +253,7 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
 .post-index ol > li:before {
   counter-increment: number;
   content: counter(number);
-  color: var(--v-primary-base);
+  color: var(--primary-color);
   font-weight: 600;
 }
 
@@ -267,7 +267,7 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
   height: 1.5em;
   width: 2px;
   border-radius: 1px;
-  background-color: var(--v-primary-base);
+  background-color: var(--primary-color);
 }
 
 .post-index ul > li:before {
@@ -276,7 +276,7 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
   position: absolute;
   top: 0.5em;
   content: '';
-  background-color: var(--v-primary-base);
+  background-color: var(--primary-color);
   border-radius: 50%;
   left: -12px;
   margin: auto auto;
@@ -314,9 +314,5 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
 
 .theme--light li > .index-link {
   color: black;
-}
-
-.second-index-list {
-  margin-left: 2.5em;
 }
 </style>

@@ -26,7 +26,7 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
 
 @Component
-export default class TheIcon extends Vue {
+export default class TheButton extends Vue {
   @Prop({ default: false, type: [Boolean] })
   disabled!: boolean;
 
@@ -115,8 +115,9 @@ export default class TheIcon extends Vue {
   vertical-align: middle;
   white-space: nowrap;
   border-radius: 4px;
-
   height: 48px;
+
+  border: none;
 }
 
 .the-button.the-button_default-color:before,
@@ -149,6 +150,11 @@ export default class TheIcon extends Vue {
   opacity: 0.08;
 }
 
+.the-button_icon,
+.the-button_outlined {
+  background: transparent;
+}
+
 .the-button_icon {
   border-radius: 50%;
   height: 48px;
@@ -172,8 +178,12 @@ export default class TheIcon extends Vue {
   padding: 8px 12px;
 }
 
-.the-button_outlined {
-  border: thin solid currentColor;
+.theme--dark .the-button_outlined {
+  border: thin solid white;
+}
+
+.theme--light .the-button_outlined {
+  border: thin solid black;
 }
 
 .the-button_icon .the-button_content {
@@ -197,6 +207,16 @@ export default class TheIcon extends Vue {
   align-items: center;
   font-size: 0.9em;
   letter-spacing: 0.5px;
+}
+
+.theme--dark .the-button_icon .the-button_content,
+.theme--dark .the-button_outlined .the-button_content {
+  color: white;
+}
+
+.theme--light .the-button_icon .the-button_content,
+.theme--light .the-button_outlined .the-button_content {
+  color: black;
 }
 
 .the-button_xsmall {

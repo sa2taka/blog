@@ -124,4 +124,8 @@ export default class Breadcrumbs extends Vue {
 .arrow-margin {
   margin: 0 12px 4px;
 }
+
+.breadcrumbs_divider > i {
+  margin-top: 4px;
+}
 </style>
