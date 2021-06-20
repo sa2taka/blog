@@ -349,4 +349,7 @@ a.title-link {
   z-index: 0;
   padding: 4px 16px;
 }
+.app-bar * {
+  overflow-y: hidden !important;
+}
 </style>

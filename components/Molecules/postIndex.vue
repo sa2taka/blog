@@ -179,6 +179,9 @@ const generateFirstIndex = (first: IPostIndex): FormatedPostIndex => {
 </script>
 
 <style scoped>
+.post-index * {
+  overflow-y: hidden !important;
+}
 .post-index_title,
 .post-index_close-button {
   display: flex;

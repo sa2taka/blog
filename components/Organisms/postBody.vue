@@ -16,6 +16,7 @@ export default class PostBody extends Vue {
 /*! purgecss start ignore */
 #app .post-body * {
   word-wrap: break-word;
+  overflow-y: hidden !important;
 }
 .padding-for-filename {
   padding-top: 2.6em !important;
