@@ -13,8 +13,7 @@
 <script lang="ts">
 import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
-import { fetchPosts } from '@/libs/contentful';
-import { postsCountStore } from '@/libs/storeAccessor';
+import { fetchPosts, fetchPostsCount } from '@/libs/contentful';
 import { Post, MultipleItem } from '@/types/entry';
 
 import PostsWithPagenation from '@/components/Organisms/postsWithPagenation.vue';
@@ -31,6 +30,7 @@ export default class PageSettedPage extends Vue {
   page!: number;
   limit = POSTS_LIMIT;
   posts!: Post[];
+  count!: number;
   isLoading = false;
 
   async asyncData(context: Context) {
@@ -45,14 +45,13 @@ export default class PageSettedPage extends Vue {
         })
     );
 
+    const count = await fetchPostsCount();
+
     return {
       page,
       posts,
+      count,
     };
-  }
-
-  get count() {
-    return postsCountStore.count;
   }
 
   head() {

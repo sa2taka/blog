@@ -5,14 +5,16 @@
     <nav>
       <ul class="categories">
         <li v-for="category in categories" :key="category.element.sys.id">
-          <v-btn
+          <the-button
             :to="{
               name: 'category-slug',
               params: { slug: category.element.fields.slug },
             }"
             class="category-slug-button"
             outlined
-            >{{ category.element.fields.name }}({{ category.count }})</v-btn
+            >{{ category.element.fields.name }}({{
+              category.count
+            }})</the-button
           >
         </li>
       </ul>
@@ -28,6 +30,7 @@ import { generateCategoriesBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 
 import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
 import TheLayout from '@/components/Atom/theLayout.vue';
+import TheButton from '@/components/Atom/theButton.vue';
 
 interface CategoryWithCount {
   category: ICategory;
@@ -38,6 +41,7 @@ interface CategoryWithCount {
   components: {
     Breadcrumbs,
     TheLayout,
+    TheButton,
   },
 })
 export default class Category extends Vue {

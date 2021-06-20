@@ -1,5 +1,5 @@
 <template>
-  <v-btn
+  <the-button
     large
     :href="href"
     color="white"
@@ -10,16 +10,18 @@
   >
     <the-icon color="#1DA1F2" icon="icon-twitter" />
     <span class="black--text twitter-btn-label">ツイートする</span>
-  </v-btn>
+  </the-button>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
 import TheIcon from './theIcon.vue';
+import TheButton from '~/components/Atom/theButton.vue';
 
 @Component({
   components: {
     TheIcon,
+    TheButton,
   },
 })
 export default class TwitterShareButton extends Vue {

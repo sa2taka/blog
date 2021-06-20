@@ -42,14 +42,14 @@
       <span
         :class="['post-index_close-button', { 'post-index_move': !isOpen }]"
       >
-        <v-btn
+        <the-button
           icon
           :class="[{ 'post-index_turn': !isOpen }]"
           aria-label="index close"
           @click="isOpen = !isOpen"
         >
           <the-icon icon="icon-chevron-up" />
-        </v-btn>
+        </the-button>
       </span>
     </div>
   </nav>
@@ -60,6 +60,7 @@ import { Vue, Prop, Component } from 'nuxt-property-decorator';
 
 import { PostIndex as IPostIndex } from '@/types/postIndex';
 import TheIcon from '../Atom/theIcon.vue';
+import TheButton from '~/components/Atom/theButton.vue';
 
 interface FormatedPostIndex {
   title?: string;
@@ -70,6 +71,7 @@ interface FormatedPostIndex {
 @Component({
   components: {
     TheIcon,
+    TheButton,
   },
 })
 export default class PostIndex extends Vue {

@@ -2,7 +2,7 @@
   <div>
     <the-tooltip bottom>
       <template #activator="{ on }">
-        <v-btn
+        <the-button
           v-if="isDark"
           icon
           aria-label="ライトモードへ"
@@ -10,8 +10,8 @@
           @click="changeTheme(false)"
         >
           <the-icon icon="icon-moon-o" />
-        </v-btn>
-        <v-btn
+        </the-button>
+        <the-button
           v-else
           icon
           aria-label="ダークモードへ"
@@ -19,7 +19,7 @@
           @click="changeTheme(true)"
         >
           <the-icon icon="icon-sun-o" />
-        </v-btn>
+        </the-button>
       </template>
       <span class="tooltip-item">Dark/Light Switch</span>
     </the-tooltip>
@@ -30,11 +30,13 @@
 import { Component, Vue } from 'nuxt-property-decorator';
 import TheIcon from '../Atom/theIcon.vue';
 import TheTooltip from '../Atom/theTooltip.vue';
+import TheButton from '../Atom/theButton.vue';
 
 @Component({
   components: {
     TheIcon,
     TheTooltip,
+    TheButton,
   },
 })
 export default class DarkThemeSwitch extends Vue {

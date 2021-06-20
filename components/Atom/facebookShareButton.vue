@@ -1,5 +1,5 @@
 <template>
-  <v-btn
+  <the-button
     large
     :href="href"
     color="white"
@@ -14,16 +14,18 @@
       icon="icon-facebook-square"
     />
     <span class="black--text facebook-btn-label">シェアする</span>
-  </v-btn>
+  </the-button>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
 import TheIcon from '~/components/Atom/theIcon.vue';
+import TheButton from '~/components/Atom/theButton.vue';
 
 @Component({
   components: {
     TheIcon,
+    TheButton,
   },
 })
 export default class FacebookShareButton extends Vue {

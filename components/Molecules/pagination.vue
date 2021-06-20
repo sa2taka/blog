@@ -2,43 +2,45 @@
   <nav aria-label="ページネーションナビゲーション">
     <ul class="pagenation">
       <li>
-        <v-btn
+        <the-button
           v-if="!isFirstPage(page)"
           aria-label="前のページ"
           :to="generatePageLink(page - 1)"
           nuxt
-          fab
-          x-small
+          icon
+          small
         >
-          <the-icon x-small icon="icon-chevron-left" />
-        </v-btn>
+          <the-icon small icon="icon-chevron-left" />
+        </the-button>
         <div v-else class="paging-padding"></div>
       </li>
       <li v-for="i in maxPage" :key="i">
-        <v-btn
+        <the-button
           :aria-label="
             i === page ? `現在のページ ${i}ページ目` : `${i}ページへ移動する`
           "
           :disabled="i === page"
           :to="generatePageLink(i)"
           nuxt
-          fab
-          x-small
+          icon
+          outlined
+          small
           class="page-number-button"
         >
           {{ i }}
-        </v-btn>
+        </the-button>
       </li>
       <li>
-        <v-btn
+        <the-button
           v-if="!isLastPage(page)"
           aria-label="後ろのページ"
           :to="generatePageLink(page + 1)"
           nuxt
-          fab
-          x-small
-          ><the-icon x-small>icon-chevron-right</the-icon>
-        </v-btn>
+          icon
+          small
+        >
+          <the-icon small icon="icon-chevron-right" />
+        </the-button>
         <div v-else class="paging-padding"></div>
       </li>
     </ul>
@@ -47,11 +49,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
+import TheButton from '@/components/Atom/theButton.vue';
 import TheIcon from '../Atom/theIcon.vue';
 
 @Component({
   components: {
     TheIcon,
+    TheButton,
   },
 })
 export default class Pagination extends Vue {
