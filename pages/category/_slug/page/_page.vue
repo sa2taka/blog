@@ -1,5 +1,5 @@
 <template>
-  <v-layout column justify-center align-center>
+  <the-layout column justify-center align-center>
     <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
     <div class="category-title">{{ category.element.fields.name }}</div>
 
@@ -10,7 +10,7 @@
       :base-url="`/category/${slug}/page/`"
       :posts="posts"
     />
-  </v-layout>
+  </the-layout>
 </template>
 
 <script lang="ts">
@@ -24,11 +24,13 @@ import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
 import PostsWithPagenation from '@/components/Organisms/postsWithPagenation.vue';
 import { CategoryWithCount } from '@/store/categories';
 import { POSTS_LIMIT } from '@/libs/const';
+import TheLayout from '@/components/Atom/theLayout.vue';
 
 @Component({
   components: {
     Breadcrumbs,
     PostsWithPagenation,
+    TheLayout,
   },
 })
 export default class CategorySlug extends Vue {

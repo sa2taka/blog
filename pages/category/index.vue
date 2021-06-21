@@ -1,23 +1,26 @@
 <template>
-  <v-layout column justify-center align-center>
+  <the-layout column justify-center align-center>
     <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
     <h2 class="center-title">カテゴリ</h2>
     <nav>
       <ul class="categories">
         <li v-for="category in categories" :key="category.element.sys.id">
-          <v-btn
+          <the-button
             :to="{
               name: 'category-slug',
               params: { slug: category.element.fields.slug },
             }"
+            class="category-slug-button"
             outlined
-            class="ml-2 mt-2"
-            >{{ category.element.fields.name }}({{ category.count }})</v-btn
+            nuxt
+            >{{ category.element.fields.name }}({{
+              category.count
+            }})</the-button
           >
         </li>
       </ul>
     </nav>
-  </v-layout>
+  </the-layout>
 </template>
 
 <script lang="ts">
@@ -27,6 +30,8 @@ import { Category as ICategory } from '@/types/entry';
 import { generateCategoriesBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 
 import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
+import TheLayout from '@/components/Atom/theLayout.vue';
+import TheButton from '@/components/Atom/theButton.vue';
 
 interface CategoryWithCount {
   category: ICategory;
@@ -36,6 +41,8 @@ interface CategoryWithCount {
 @Component({
   components: {
     Breadcrumbs,
+    TheLayout,
+    TheButton,
   },
 })
 export default class Category extends Vue {
@@ -74,5 +81,9 @@ ul {
 .categories {
   display: flex;
   flex-wrap: wrap;
+}
+
+.category-slug-button {
+  margin: 0.5em 8px;
 }
 </style>

@@ -1,7 +1,12 @@
 <template>
-  <v-container v-if="posts.length !== 0" class="posts" tag="ul">
-    <card-post v-for="post in posts" :key="post.id" :post="post" class="mt-4" />
-  </v-container>
+  <ul v-if="posts.length !== 0" class="posts">
+    <card-post
+      v-for="post in posts"
+      :key="post.id"
+      :post="post"
+      class="post-margin"
+    />
+  </ul>
   <div v-else>投稿が見つかりません</div>
 </template>
 
@@ -31,5 +36,9 @@ export default class Posts extends Vue {
   position: relative;
   justify-content: space-between;
   margin-bottom: 48px;
+}
+
+.post-margin {
+  margin-top: 32px;
 }
 </style>

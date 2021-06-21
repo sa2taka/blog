@@ -1,5 +1,5 @@
 <template>
-  <v-layout column justify-center align-center>
+  <the-layout column justify-center align-center>
     <breadcrumbs :list="breadcrumbsList"></breadcrumbs>
     <article class="post post-width">
       <div class="post-title d-flex align-center flex-column">
@@ -12,23 +12,23 @@
           >{{ post.fields.category.fields.name }}</nuxt-link
         >
         <h1 class="post-title-name">{{ post.fields.title }}</h1>
-        <p class="mb-0 post-date">
+        <p class="post-date">
           作成日:
           <time :datetime="postDateForDateTag">{{ postDate }}</time>
         </p>
-        <p class="mb-0 post-date">
+        <p class="post-date">
           更新日:
           <time :datetime="updateDateForDateTag">{{ updateDate }}</time>
         </p>
       </div>
 
-      <post-index :index="postIndex" class="mt-10" />
-      <post-body class="mt-8" :raw-body-html="rawBodyHtml" />
-      <footer class="my-6">
+      <post-index :index="postIndex" class="post-index-margin" />
+      <post-body class="post-body-margin" :raw-body-html="rawBodyHtml" />
+      <footer class="post-footer-margin">
         <share-buttons :title="post.fields.title" />
       </footer>
     </article>
-  </v-layout>
+  </the-layout>
 </template>
 
 <script lang="ts">
@@ -45,6 +45,7 @@ import PostBody from '@/components/Organisms/postBody.vue';
 import PostIndex from '@/components/Molecules/postIndex.vue';
 import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
 import ShareButtons from '@/components/Molecules/shareButtons.vue';
+import TheLayout from '@/components/Atom/theLayout.vue';
 
 import '@/libs/prism-theme.css';
 
@@ -54,6 +55,7 @@ import '@/libs/prism-theme.css';
     PostIndex,
     Breadcrumbs,
     ShareButtons,
+    TheLayout,
   },
 })
 export default class PostSlug extends Vue {
@@ -381,6 +383,8 @@ const formatDate = (date: Date) => {
 
 .post-date {
   font-size: 0.9em !important;
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
 }
 
 .theme--dark .post-date {
@@ -402,6 +406,7 @@ const formatDate = (date: Date) => {
 .post-title-name {
   font-size: 2em;
   text-align: center;
+  margin: 0.4em auto;
 }
 
 @media (max-width: 600px) {
@@ -435,5 +440,17 @@ const formatDate = (date: Date) => {
   display: flex;
   border-radius: 12px;
   background-position: center;
+}
+
+.post-index-margin {
+  margin-top: 40px;
+}
+
+.post-body-margin {
+  margin-top: 32px;
+}
+
+.post-footer-margin {
+  margin-top: 24px;
 }
 </style>
