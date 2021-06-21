@@ -31,7 +31,6 @@ import { generateCategoriesBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
 import TheLayout from '@/components/Atom/theLayout.vue';
 import TheButton from '@/components/Atom/theButton.vue';
-import { fetchCategories, fetchPostsCountInCategory } from '~/libs/contentful';
 
 interface CategoryWithCount {
   element: ICategory;
@@ -49,6 +48,9 @@ export default class Category extends Vue {
   categories!: CategoryWithCount[];
 
   async asyncData() {
+    const { fetchCategories, fetchPostsCountInCategory } = await import(
+      '@/libs/contentful'
+    );
     return {
       categories: await fetchCategories().then(
         async (categories: MultipleItem<ICategory>) => {

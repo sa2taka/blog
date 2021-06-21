@@ -16,11 +16,6 @@
 <script lang="ts">
 import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
-import {
-  fetchCategories,
-  fetchPostInCategory,
-  fetchPostsCountInCategory,
-} from '@/libs/contentful';
 import { Post, MultipleItem, Category } from '@/types/entry';
 import { generateCategoryBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 
@@ -49,6 +44,9 @@ export default class CategorySlug extends Vue {
   limit = POSTS_LIMIT;
 
   async asyncData(context: Context) {
+    const { fetchCategories, fetchPostInCategory, fetchPostsCountInCategory } =
+      await import('@/libs/contentful');
+
     const page = decidePage(context);
     const limit = POSTS_LIMIT;
     const rawCategory: Category = await fetchCategories().then(
