@@ -108,7 +108,7 @@ export default class Default extends Vue {
 
   created() {
     if (process.client) {
-      this.isDark = localStorage.getItem('theme') === 'dark';
+      this.isDark = localStorage.getItem('theme') !== 'light';
     }
   }
 
@@ -189,7 +189,6 @@ a {
 .navbar-blog-title {
   font-size: 1.2em;
   width: 200px;
-  color: white;
 }
 
 @media screen and (max-width: 768px) {
