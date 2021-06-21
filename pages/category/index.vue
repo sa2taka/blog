@@ -24,17 +24,17 @@
 </template>
 
 <script lang="ts">
-import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
-import { Category as ICategory } from '@/types/entry';
+import { Category as ICategory, MultipleItem } from '@/types/entry';
 import { generateCategoriesBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 
 import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
 import TheLayout from '@/components/Atom/theLayout.vue';
 import TheButton from '@/components/Atom/theButton.vue';
+import { fetchCategories, fetchPostsCountInCategory } from '~/libs/contentful';
 
 interface CategoryWithCount {
-  category: ICategory;
+  element: ICategory;
   count: number;
 }
 
@@ -48,10 +48,23 @@ interface CategoryWithCount {
 export default class Category extends Vue {
   categories!: CategoryWithCount[];
 
-  asyncData(context: Context) {
+  async asyncData() {
     return {
-      categories: context.store.state.categories.categories.filter(
-        (categoryWithCount: any) => categoryWithCount.count > 0
+      categories: await fetchCategories().then(
+        async (categories: MultipleItem<ICategory>) => {
+          return await Promise.all(
+            categories.items.map(async (category) => {
+              return {
+                element: category,
+                count: await fetchPostsCountInCategory(category.sys.id),
+              };
+            })
+          ).then((categoriesWithCount: CategoryWithCount[]) =>
+            categoriesWithCount.filter(
+              (categoryWithCount) => categoryWithCount.count > 0
+            )
+          );
+        }
       ),
     };
   }
