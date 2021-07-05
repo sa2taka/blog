@@ -34,8 +34,6 @@
 <script lang="ts">
 import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
-
-import { fetchPost } from '@/libs/contentful';
 import { Post } from '@/types/entry';
 import { BASE_URL } from '@/libs/const';
 import { generateIndexies } from '@/libs/generateIndexies';
@@ -65,6 +63,7 @@ export default class PostSlug extends Vue {
   prevHash = '';
 
   async asyncData(context: Context) {
+    const { fetchPost } = await import('@/libs/contentful');
     if (!context.params.slug || context.params.slug === '') {
       return context.error({
         statusCode: 404,
