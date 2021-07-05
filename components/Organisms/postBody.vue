@@ -39,12 +39,12 @@ export default class PostBody extends Vue {
 
 .theme--dark .post-body strong {
   /* color: white; */
-  background: linear-gradient(transparent 75%, var(--v-secondary-base) 0%);
+  background: linear-gradient(transparent 80%, var(--secondary-color) 0%);
 }
 
 .theme--light .post-body strong {
   /* color: black; */
-  background: linear-gradient(transparent 75%, var(--v-secondary-lighten1) 0%);
+  background: linear-gradient(transparent 80%, var(--secondary-color) 0%);
 }
 
 .post-body blockquote {
