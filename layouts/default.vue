@@ -112,6 +112,15 @@ export default class Default extends Vue {
     }
   }
 
+  mounted() {
+    const removed = this.isDark ? 'theme--light' : 'theme--dark';
+    const appended = this.isDark ? 'theme--dark' : 'theme--light';
+    if (this.$el.classList.contains(removed)) {
+      this.$el.classList.remove(removed);
+      this.$el.classList.add(appended);
+    }
+  }
+
   get isRoute() {
     return this.$route.name === 'index';
   }
