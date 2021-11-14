@@ -283,22 +283,6 @@ export default {
     swDest: 'static/sw.js',
     runtimeCaching: [
       {
-        utlPattern: '^https://blog.sa2taka.com/?$',
-        handler: 'networkFirst',
-        method: 'GET',
-      },
-      {
-        urlPattern:
-          '^https://cdn.contentful.com/spaces/xw0ljpdch9v4/environments/master/.*',
-        handler: 'networkFirst',
-        method: 'GET',
-      },
-      {
-        urlPattern: '^https://blog.sa2taka.com/post/.*',
-        handler: 'staleWhileRevalidate',
-        method: 'GET',
-      },
-      {
         urlPattern:
           '^https?://images.ctfassets.net/xw0ljpdch9v4/.*.(gif|png|jpg|webp)$',
         handler: 'cacheFirst',
