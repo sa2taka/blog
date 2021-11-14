@@ -16,13 +16,16 @@
 <script lang="ts">
 import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
-import { fetchPostInCategory } from '@/libs/contentful';
+import {
+  fetchCategoriesWithCounts,
+  fetchPostInCategory,
+  CategoryWithCount,
+} from '@/libs/contentful';
 import { Post, MultipleItem } from '@/types/entry';
 import { generateCategoryBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 
 import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
 import PostsWithPagenation from '@/components/Organisms/postsWithPagenation.vue';
-import { CategoryWithCount } from '@/store/categories';
 import { POSTS_LIMIT } from '@/libs/const';
 import TheLayout from '@/components/Atom/theLayout.vue';
 
@@ -43,7 +46,7 @@ export default class CategorySlug extends Vue {
   async asyncData(context: Context) {
     const page = 1;
     const limit = POSTS_LIMIT;
-    const category = context.store.state.categories.categories.find(
+    const category = await fetchCategoriesWithCounts().find(
       (category: CategoryWithCount) =>
         category.element.fields.slug === context.route.params.slug
     );

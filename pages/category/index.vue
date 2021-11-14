@@ -24,19 +24,16 @@
 </template>
 
 <script lang="ts">
-import { Context } from '@nuxt/types';
 import { Vue, Component } from 'nuxt-property-decorator';
-import { Category as ICategory } from '@/types/entry';
 import { generateCategoriesBreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 
 import Breadcrumbs from '@/components/Atom/breadcrumbs.vue';
 import TheLayout from '@/components/Atom/theLayout.vue';
 import TheButton from '@/components/Atom/theButton.vue';
-
-interface CategoryWithCount {
-  category: ICategory;
-  count: number;
-}
+import {
+  CategoryWithCount,
+  fetchCategoriesWithCounts,
+} from '~/libs/contentful';
 
 @Component({
   components: {
@@ -48,10 +45,10 @@ interface CategoryWithCount {
 export default class Category extends Vue {
   categories!: CategoryWithCount[];
 
-  asyncData(context: Context) {
+  async asyncData() {
     return {
-      categories: context.store.state.categories.categories.filter(
-        (categoryWithCount: any) => categoryWithCount.count > 0
+      categories: await fetchCategoriesWithCounts().filter(
+        (categoryWithCount: CategoryWithCount) => categoryWithCount.count > 0
       ),
     };
   }

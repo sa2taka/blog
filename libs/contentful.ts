@@ -1,7 +1,9 @@
 import createClient from '@/plugins/contentful';
-import { MultipleItem, Post } from '@/types/entry';
+import { Category, MultipleItem, Post } from '@/types/entry';
 
 import { CTF_CATEGORY_ID, CTF_POST_ID } from '@/libs/const';
+
+export type CategoryWithCount = { element: Category; count: number };
 
 const client = createClient();
 const isProdcution = process.env.NODE_ENV === 'production';
@@ -62,6 +64,19 @@ export async function fetchPostsCountInCategory(categoryId: string) {
     .getEntries(queries)
     .then((posts: MultipleItem<Post>) => posts.items.length);
   return count;
+}
+
+export function fetchCategoriesWithCounts(): CategoryWithCount[] {
+  return fetchCategories().then((entries: MultipleItem<Category>) => {
+    return Promise.all(
+      entries.items.map((e) => {
+        return fetchPostsCountInCategory(e.sys.id).then((count) => ({
+          element: e,
+          count,
+        }));
+      })
+    );
+  });
 }
 
 export function fetchPostInCategory(
