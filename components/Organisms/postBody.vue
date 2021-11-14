@@ -171,6 +171,11 @@ export default class PostBody extends Vue {
   white-space: normal;
 }
 
+#app.theme--light .post-body code.hljsspan {
+  color: #222;
+  background: #e0e0e4;
+}
+
 #app code::before,
 #app code::after {
   content: none;
