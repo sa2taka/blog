@@ -258,9 +258,5 @@ export default class PostBody extends Vue {
 #app .post-body ol {
   margin-left: 1.2em;
 }
-
-#app .post-body .katex-block {
-  overflow-x: scroll;
-}
 /*! purgecss end ignore */
 </style>
