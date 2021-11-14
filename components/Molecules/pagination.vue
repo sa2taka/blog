@@ -49,8 +49,8 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
-import TheButton from '@/components/Atom/theButton.vue';
 import TheIcon from '../Atom/theIcon.vue';
+import TheButton from '@/components/Atom/theButton.vue';
 
 @Component({
   components: {

@@ -26,9 +26,10 @@
 
 <script lang="ts">
 import { Vue, Prop, Component } from 'nuxt-property-decorator';
+import TheIcon from './theIcon.vue';
+
 import { BreadcrumbsList } from '@/libs/breadcrumbsGenerator';
 import { BASE_URL } from '@/libs/const';
-import TheIcon from './theIcon.vue';
 
 @Component({
   components: {

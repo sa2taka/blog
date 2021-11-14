@@ -88,11 +88,11 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator';
+import TheIcon from '../components/Atom/theIcon.vue';
 import WebpImg from '@/components/Atom/webpImg.vue';
 import DarkThemeSwitch from '@/components/Molecules/darkThemeSwitch.vue';
 import { BLOG_TITLE, BASE_URL } from '@/libs/const';
 import TheContainer from '@/components/Atom/theContainer.vue';
-import TheIcon from '../components/Atom/theIcon.vue';
 
 @Component({
   components: {
@@ -109,6 +109,15 @@ export default class Default extends Vue {
   created() {
     if (process.client) {
       this.isDark = localStorage.getItem('theme') !== 'light';
+    }
+  }
+
+  mounted() {
+    const removed = this.isDark ? 'theme--light' : 'theme--dark';
+    const appended = this.isDark ? 'theme--dark' : 'theme--light';
+    if (this.$el.classList.contains(removed)) {
+      this.$el.classList.remove(removed);
+      this.$el.classList.add(appended);
     }
   }
 
