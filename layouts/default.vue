@@ -88,11 +88,11 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator';
+import TheIcon from '../components/Atom/theIcon.vue';
 import WebpImg from '@/components/Atom/webpImg.vue';
 import DarkThemeSwitch from '@/components/Molecules/darkThemeSwitch.vue';
 import { BLOG_TITLE, BASE_URL } from '@/libs/const';
 import TheContainer from '@/components/Atom/theContainer.vue';
-import TheIcon from '../components/Atom/theIcon.vue';
 
 @Component({
   components: {

@@ -58,8 +58,8 @@
 <script lang="ts">
 import { Vue, Prop, Component } from 'nuxt-property-decorator';
 
-import { PostIndex as IPostIndex } from '@/types/postIndex';
 import TheIcon from '../Atom/theIcon.vue';
+import { PostIndex as IPostIndex } from '@/types/postIndex';
 import TheButton from '~/components/Atom/theButton.vue';
 
 interface FormatedPostIndex {
