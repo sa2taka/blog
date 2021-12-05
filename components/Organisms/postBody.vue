@@ -33,7 +33,7 @@ export default class PostBody extends Vue {
 }
 
 .post-body {
-  line-height: 1.5;
+  line-height: 1.65;
   letter-spacing: 0.025em;
 }
 
@@ -199,7 +199,7 @@ export default class PostBody extends Vue {
 
 .post-body .message.message__success {
   background: #f4f8fa;
-  border-left: 4px solid #2196f3;
+  border-left: 4px solid #4caf50;
 }
 
 .theme--dark .post-body .message.message__success {
