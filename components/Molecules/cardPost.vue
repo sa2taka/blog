@@ -131,8 +131,9 @@ const formatDateForDateTag = (date: Date) => {
 }
 
 .list-post-title-margin {
-  margin: 0.8em 0;
+  margin: 0.3em 0;
 }
+
 .list-post-title {
   font-size: 1.1em;
   font-weight: 600;
