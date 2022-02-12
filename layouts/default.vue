@@ -71,12 +71,7 @@
             </a>
             <nuxt-link
               :to="{ name: 'guide' }"
-              class="
-                animation-link
-                footer-link
-                guide-link
-                footer-between-margin
-              "
+              class="animation-link footer-link guide-link footer-between-margin"
               >当サイト利用について</nuxt-link
             >
           </div>

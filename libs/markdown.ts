@@ -8,6 +8,7 @@ import katex from '@iktakahiro/markdown-it-katex';
 // @ts-ignore
 import markdownItContainer from 'markdown-it-container';
 
+import { GrammarValue } from 'prismjs';
 import prism from '@/libs/prism';
 
 const myHeaderPlugin = (md: MarkdownIt) => {
@@ -60,7 +61,7 @@ const myCodePlugin = (md: MarkdownIt) => {
       lang = 'plaintext';
     }
 
-    prism.languages.bash.prompt = /^[$#] /m;
+    (prism.languages.bash as Record<string, GrammarValue>).prompt = /^[$#] /m;
 
     let value: string;
 
