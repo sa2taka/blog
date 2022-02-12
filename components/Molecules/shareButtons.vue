@@ -31,7 +31,7 @@ export default class ShareButtons extends Vue {
       url: `${BASE_URL}${this.$route.path}`,
       text: this.title,
       // ハードコード
-      via: 'sa2taka',
+      via: 't0p_l1ght',
     });
 
     return `${base}?${query}`;
