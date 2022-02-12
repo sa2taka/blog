@@ -33,7 +33,7 @@ export default class PostBody extends Vue {
 }
 
 .post-body {
-  line-height: 1.65;
+  line-height: 1.75;
   letter-spacing: 0.025em;
 }
 
