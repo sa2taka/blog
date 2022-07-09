@@ -207,10 +207,6 @@ export default class PostSlug extends Vue {
     return this.post.sys.updatedAt.substring(0, 10);
   }
 
-  get ogImage() {
-    return this.post.fields.postImage.fields.file.url + '?w=1200';
-  }
-
   get breadcrumbsList() {
     return generatePostBreadcrumbsList(this.post);
   }
@@ -224,12 +220,11 @@ export default class PostSlug extends Vue {
         '@id': BASE_URL + this.$route.path,
       },
       headline: this.post.fields.title,
-      image: [this.ogImage],
       datePublished: this.post.sys.createdAt.toString(),
       dateModified: this.post.sys.updatedAt.toString(),
       author: {
         '@type': 'Person',
-        name: this.post.fields.author.fields.name,
+        name: 'sa2taka',
       },
       publisher: {
         '@type': 'Organization',
@@ -284,11 +279,6 @@ export default class PostSlug extends Vue {
           hid: 'og:description',
           name: 'og:description',
           content: this.post.fields.description,
-        },
-        {
-          hid: 'og:image',
-          name: 'og:image',
-          content: this.ogImage,
         },
         {
           hid: 'og:url',

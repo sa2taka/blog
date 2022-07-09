@@ -31,13 +31,6 @@ export interface Category extends SingleItem {
   };
 }
 
-export interface Author extends SingleItem {
-  fields: {
-    name: string;
-    icon: string;
-    at: string;
-  };
-}
 export interface File {
   url: string;
   detail: any;
@@ -45,23 +38,14 @@ export interface File {
   contentType: string;
 }
 
-export interface Image extends SingleItem {
-  fields: {
-    title: string;
-    file: File;
-  };
-}
-
 export interface Post extends SingleItem {
   fields: {
     title: string;
     description: string;
     body: string;
-    author: Author;
     category: Category;
     slug: string;
     tags: string[];
-    postImage: Image;
     public: boolean;
     releaseDate: string;
     latex: boolean;
